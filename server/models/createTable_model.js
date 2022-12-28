@@ -1,11 +1,18 @@
 const db = require('../data/database');
 const tables = require("../data/tables.json");
 
+function createSchema(schemaName) {
+  let target = `CREATE SCHEMA ${schemaName}`;
+  db.pool.query(target)
+}
+
 function createTable(tableName,columns) {
     let target = `CREATE TABLE ${tableName} (${columns})`;
     db.pool.query(target);
 };
 
+//創建購物DB
+createSchema('shopping_cart');
 //創建tables.json中的所有表單
 for (const key in tables) {
     createTable(tables[key].name,tables[key].columns);

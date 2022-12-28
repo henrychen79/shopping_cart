@@ -8,5 +8,3 @@ exports.pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0
 });
-
-// pool.query('CREATE TABLE customers2 (C_Id INT,Name varchar(50),Address varchar(255),Phone varchar(20))')
