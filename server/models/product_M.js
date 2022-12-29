@@ -1,12 +1,14 @@
-const db = require('../data/database');
-const table = require('../data/tables.json');
-const products = require('../data/fake_product.json');
+const db = require("../data/schema");
+const table = require("../data/tables.json");
+const products = require("../data/fake_product.json");
 const pageLimit = 6;
 
-
-function addProduct(tableColumns,values) {
+async function addProduct(tableColumns, values) {
+  try {
     let target = `INSERT INTO product ( ${tableColumns} ) VALUES (${values})`;
-    db.pool.query(target);
+    await db.pool.query(target);
+  } catch (error) {}
+}
 };
 
 //搜尋商品，按照頁數列出對應的資料筆數(測試OK)
@@ -19,12 +21,15 @@ async function getProduct(page) {
 //getProduct(2)
 
 //利用假資料新增進資料庫
-// for (const key in products) {
-//     addProduct(table.product.columnName,[
-//                 products[key].productNum,
-//                 products[key].catagory,
-//                 products[key].name,
-//                 products[key].thumbnail,
-//                 products[key].price
-//             ])
-// };
+function generateFakeData() {
+  for (const key in products) {
+    addProduct(table.product.columnName, [
+      products[key].productNum,
+      products[key].catagory,
+      products[key].name,
+      products[key].thumbnail,
+      products[key].price,
+    ]);
+  }
+}
+module.exports.generateFakeData = generateFakeData;
