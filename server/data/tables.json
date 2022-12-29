@@ -1,31 +1,38 @@
 {
     "user":{
         "name":"user",
-        "columns":"`user_id` INT NOT NULL AUTO_INCREMENT,`account` VARCHAR(50) NOT NULL,`password` VARCHAR(12) NOT NULL,`nickname` VARCHAR(50) NOT NULL,PRIMARY KEY (`user_id`),UNIQUE INDEX `account_UNIQUE` (`account` ASC) VISIBLE,UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE"
+        "columns":"`user_id` INT NOT NULL AUTO_INCREMENT,`role` VARCHAR(10) NOT NULL,`account` VARCHAR(50) NOT NULL,`password` VARCHAR(12) NOT NULL,`nickname` VARCHAR(50) NOT NULL,PRIMARY KEY (`user_id`),UNIQUE INDEX `account_UNIQUE` (`account` ASC) VISIBLE,UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE",
+        "columnName":""
     },
     "product":{
         "name":"product",
-        "columns":"`product_id` INT NOT NULL AUTO_INCREMENT,`productNum` INT NOT NULL,`catagory` VARCHAR(12) NOT NULL,`thumbnail` VARCHAR(50) NOT NULL,`price` INT NOT NULL,PRIMARY KEY (`product_id`),UNIQUE INDEX `account_UNIQUE` (`productNum` ASC) VISIBLE,UNIQUE INDEX `user_id_UNIQUE` (`product_id` ASC) VISIBLE,UNIQUE INDEX `thumbnail_UNIQUE` (`thumbnail` ASC) VISIBLE"
+        "columns":"`product_id` INT NOT NULL AUTO_INCREMENT,`productNum` INT NOT NULL,`catagory` VARCHAR(12) NOT NULL,`productName`VARCHAR(20) NOT NULL, `thumbnail` VARCHAR(50) NOT NULL,`price` INT NOT NULL,PRIMARY KEY (`product_id`),UNIQUE INDEX `user_id_UNIQUE` (`product_id` ASC) VISIBLE,UNIQUE INDEX `thumbnail_UNIQUE` (`thumbnail` ASC) VISIBLE",
+        "columnName":"productNum, catagory, productName, thumbnail, price"
     },
     "productDetail":{
         "name":"productDetail",
-        "columns":"`productNum` INT NOT NULL,`detail` VARCHAR(4000) NULL,`inventory` INT NOT NULL,`img` VARCHAR(50) NOT NULL,PRIMARY KEY (`productNum`),UNIQUE INDEX `account_UNIQUE` (`productNum` ASC) VISIBLE,UNIQUE INDEX `img_UNIQUE` (`img` ASC) VISIBLE"
+        "columns":"`productNum` INT NOT NULL,`detail` VARCHAR(4000) NULL,`inventory` INT NOT NULL,`img` VARCHAR(50) NOT NULL,PRIMARY KEY (`productNum`),UNIQUE INDEX `account_UNIQUE` (`productNum` ASC) VISIBLE,UNIQUE INDEX `img_UNIQUE` (`img` ASC) VISIBLE",
+        "columnName":""
     },
     "cart":{
         "name":"cart",
-        "columns":"`cart_id` INT NOT NULL AUTO_INCREMENT,`account` VARCHAR(50) NOT NULL,`item` VARCHAR(50) NOT NULL,PRIMARY KEY (`cart_id`),UNIQUE INDEX `account_UNIQUE` (`account` ASC) VISIBLE"
+        "columns":"`cart_id` INT NOT NULL AUTO_INCREMENT,`account` VARCHAR(50) NOT NULL,`item` VARCHAR(50) NOT NULL,PRIMARY KEY (`cart_id`),UNIQUE INDEX `account_UNIQUE` (`account` ASC) VISIBLE",
+        "columnName":""
     },
     "cart_item":{
         "name":"cart_item",
-        "columns":"`id` INT NOT NULL AUTO_INCREMENT,`cart_id` INT NOT NULL,`productNum` INT NOT NULL,PRIMARY KEY (`id`),UNIQUE INDEX `account_UNIQUE` (`id` ASC) VISIBLE,UNIQUE INDEX `productNum_UNIQUE` (`productNum` ASC) VISIBLE"
+        "columns":"`id` INT NOT NULL AUTO_INCREMENT,`cart_id` INT NOT NULL,`productNum` INT NOT NULL,PRIMARY KEY (`id`),UNIQUE INDEX `account_UNIQUE` (`id` ASC) VISIBLE,UNIQUE INDEX `productNum_UNIQUE` (`productNum` ASC) VISIBLE",
+        "columnName":""
     },
     "orderDetail":{
         "name":"orderDetail",
-        "columns":"`id` INT NOT NULL AUTO_INCREMENT,`orderNum` INT NOT NULL,`productNum` INT NOT NULL,PRIMARY KEY (`id`),UNIQUE INDEX `account_UNIQUE` (`productNum` ASC) VISIBLE"
+        "columns":"`id` INT NOT NULL AUTO_INCREMENT,`orderNum` INT NOT NULL,`productNum` INT NOT NULL,PRIMARY KEY (`id`),UNIQUE INDEX `account_UNIQUE` (`productNum` ASC) VISIBLE",
+        "columnName":""
     },
     "orderList":{
         "name":"orderList",
-        "columns":"`orderNum` INT NOT NULL,`account` VARCHAR(50) NOT NULL,`orderTime` DATETIME NOT NULL,`pay_status` VARCHAR(45) NOT NULL,`deliver_status` VARCHAR(45) NOT NULL,`order_amount` INT NOT NULL DEFAULT 1,`sendName` VARCHAR(45) NOT NULL,`sendAdd` VARCHAR(100) NOT NULL,`payWay` VARCHAR(45) NOT NULL,`totalPrice` INT NOT NULL,UNIQUE INDEX `account_UNIQUE` (`orderNum` ASC) VISIBLE,PRIMARY KEY (`orderNum`)"
+        "columns":"`orderNum` INT NOT NULL,`account` VARCHAR(50) NOT NULL,`orderTime` DATETIME NOT NULL,`pay_status` VARCHAR(45) NOT NULL,`deliver_status` VARCHAR(45) NOT NULL,`order_amount` INT NOT NULL DEFAULT 1,`sendName` VARCHAR(45) NOT NULL,`sendAdd` VARCHAR(100) NOT NULL,`payWay` VARCHAR(45) NOT NULL,`totalPrice` INT NOT NULL,UNIQUE INDEX `account_UNIQUE` (`orderNum` ASC) VISIBLE,PRIMARY KEY (`orderNum`)",
+        "columnName":""
     }
 }
 

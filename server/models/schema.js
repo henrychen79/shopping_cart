@@ -1,18 +1,15 @@
 const db = require('../data/database');
 const tables = require("../data/tables.json");
 
-function createSchema(schemaName) {
-  let target = `CREATE SCHEMA ${schemaName}`;
-  db.pool.query(target)
-}
 
 function createTable(tableName,columns) {
     let target = `CREATE TABLE ${tableName} (${columns})`;
     db.pool.query(target);
 };
 
-//創建購物DB
-createSchema('shopping_cart');
+// 更新表單欄位
+
+
 //創建tables.json中的所有表單
 for (const key in tables) {
     createTable(tables[key].name,tables[key].columns);
@@ -21,6 +18,7 @@ for (const key in tables) {
 /* 創建表單內容(SQL語法)
 user:
   `user_id` INT NOT NULL AUTO_INCREMENT,
+  `role` VARCHAR(10) NOT NULL
   `account` VARCHAR(50) NOT NULL,
   `password` VARCHAR(12) NOT NULL,
   `nickname` VARCHAR(50) NOT NULL,
