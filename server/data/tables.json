@@ -2,7 +2,7 @@
     "user":{
         "name":"user",
         "columns":"`user_id` INT NOT NULL AUTO_INCREMENT,`role` VARCHAR(10) NOT NULL,`account` VARCHAR(50) NOT NULL,`password` VARCHAR(12) NOT NULL,`nickname` VARCHAR(50) NOT NULL,PRIMARY KEY (`user_id`),UNIQUE INDEX `account_UNIQUE` (`account` ASC) VISIBLE,UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE",
-        "columnName":""
+        "columnName":"role, account, password, nickname"
     },
     "product":{
         "name":"product",

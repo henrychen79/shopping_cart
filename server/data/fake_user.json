@@ -1,0 +1,32 @@
+{
+    "user1":{
+        "role":"'admin'",
+        "account":"'admin@shoppingcart.com'",
+        "password":"'imboss8877'",
+        "nickname":"'管理員'"
+    },
+    "user2":{
+        "role":"'member'",
+        "account":"'rec27@gmail.com'",
+        "password":"'rrr9876'",
+        "nickname":"'長方形'"
+    },
+    "user3":{
+        "role":"'member'",
+        "account":"'oreobaby@gmail.com'",
+        "password":"'sosweet456'",
+        "nickname":"'OREO'"
+    },
+    "user4":{
+        "role":"'member'",
+        "account":"'redfrenchfries@gmail.com'",
+        "password":"'salty2468'",
+        "nickname":"'薯條好吃'"
+    },
+    "user5":{
+        "role":"'member'",
+        "account":"'goseesea444@gmail.com'",
+        "password":"'seesea1357'",
+        "nickname":"'與海無關'"
+    }
+}
