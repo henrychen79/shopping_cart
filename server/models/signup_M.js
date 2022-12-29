@@ -15,6 +15,7 @@ function creatFakeData() {
 };
 // creatFakeData()
 
+
 //確認帳號是否已經存在（測試OK）
 async function check_account(accountName) {
     let target = `SELECT account FROM user WHERE account = ${accountName}`;
@@ -25,4 +26,11 @@ async function check_account(accountName) {
 // check_account("'rec27@gmail.com'");
 
 
-//成功註冊到會員表單DB
+//成功註冊到會員表單DB（測試OK）
+async function signup(values) {
+    let target = `INSERT INTO user ( ${table.user.columnName} ) VALUES (${values})`;
+    const [result,fields] = await db.pool.query(target);
+    console.log(result);
+    return result;
+}
+// signup(["'member'","'emma@gmail.com'", "'aaaa1111'", "'EMMA'"]);
