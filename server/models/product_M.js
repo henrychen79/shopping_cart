@@ -9,16 +9,14 @@ async function addProduct(tableColumns, values) {
     await db.pool.query(target);
   } catch (error) {}
 }
-};
 
 //搜尋商品，按照頁數列出對應的資料筆數(測試OK)
 async function getProduct(page) {
     let target = `SELECT ${table.product.columnName} FROM product WHERE productNum BETWEEN ${(page-1)*pageLimit+1} AND ${page*pageLimit}`;
     const [result,fields] = await db.pool.query(target);
-    // console.log(result);
+    console.log(result);
     return result
 };
-//getProduct(2)
 
 //利用假資料新增進資料庫
 function generateFakeData() {
@@ -33,3 +31,4 @@ function generateFakeData() {
   }
 }
 module.exports.generateFakeData = generateFakeData;
+module.exports.getProduct = getProduct;

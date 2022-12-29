@@ -10,7 +10,7 @@ async function createDB() {
     //console.log("connection", connection);
     await connection.query(`CREATE DATABASE ${schemaName}`);
   } catch (error) {
-    console.log("error", error);
+    //console.log("error", error);
   }
 }
 async function createPooL() {
@@ -30,10 +30,9 @@ const tables = require("./tables.json");
 async function createTable(tableName, columns) {
   try {
     let target = `CREATE TABLE ${tableName} (${columns})`;
-    console.log("create table:", target);
     await exports.pool.query(target);
   } catch (error) {
-    console.log("create table error:", error);
+    //console.log("create table error:", error);
   }
 }
 
@@ -42,7 +41,7 @@ async function createTable(tableName, columns) {
 //創建tables.json中的所有表單
 async function initSchema() {
   await createDB();
-  exports.pool = await createPooL();
+  module.exports.pool = await createPooL();
   for (const key in tables) {
     await createTable(tables[key].name, tables[key].columns);
   }
