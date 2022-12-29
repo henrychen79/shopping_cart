@@ -26,7 +26,7 @@ function column({tableName,action,old_columnName,new_columnName,options}={}) {
   */
   let target = `ALTER TABLE ${tableName} ${action} ${old_columnName} ${new_columnName} ${options}`;
   db.pool.query(target);
-}
+};
 
 
 
