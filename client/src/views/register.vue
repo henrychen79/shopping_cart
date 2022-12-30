@@ -1,8 +1,10 @@
 <script setup>
+import Header from '../components/Header.vue'
 import registerComponents from '../components/registerComponents.vue'
 </script>
 
 <template>
+    <Header />
     <div class="regist_main">
         <registerComponents/>
     </div>

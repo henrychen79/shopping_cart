@@ -44,12 +44,15 @@ import { ref,reactive ,computed} from 'vue';
 <style lang="scss" scoped>
 @media screen and (min-width: 320px){
     .container{
-    border: 2px solid black;
+    // border: 2px solid black;
     width: 100%;
     height: 100%;
     >h2{
-        margin:auto;
-        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 0px;
+        padding-left:45px ;
+        font-weight:bold;
+        text-shadow: 1px 1px rgb(122, 121, 121)
     }
     >.login_form{
         padding-top: 50px;
