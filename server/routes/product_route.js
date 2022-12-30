@@ -17,6 +17,7 @@ router.get("/testAPI", (req, res) => {
 
 //進入商品頁面的API
 router.get("/", (req, res) => {
+<<<<<<< Updated upstream
   try {
     let category_id = req.query.category_id;
     let product_num = req.query.product_num;
@@ -43,6 +44,15 @@ router.get("/category/:category_id", (req, res) => {
   let category_id = req.params.category_id;
   let page = req.query.page;
   console.log(category_id,page,);
+=======
+  console.log(product_M.getProduct(2));
+  return res.json(msgObj);
+});
+router.post("/category/:category_id", (req, res) => {
+  console.log(req.query, req.params);
+  let page = req.query.page;
+  let category_id = req.params.category_id;
+>>>>>>> Stashed changes
   product_M.getProduct(category_id, page).then((data) => {
     return res.json(data);
   });

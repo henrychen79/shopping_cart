@@ -1,6 +1,7 @@
 <script setup>
 import Header from '../components/Header.vue'
 import Article from '../components/HomeView/Article.vue'
+import Aside from '../components/HomeView/Aside.vue'
 
 
 </script>
@@ -10,16 +11,16 @@ import Article from '../components/HomeView/Article.vue'
   <Header />
 
   <main class="main">
-    <!-- <aside class="aside"></aside> -->
+
+    <Aside />
     <Article />
+
   </main>
 
 </template>
 <style scoped>
 .main {
-  /* display: flex; */
-  max-width: 1240px;
-  margin: auto;
+  display: flex;
   /* background-color: aquamarine; */
 }
 </style>

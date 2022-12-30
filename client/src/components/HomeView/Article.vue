@@ -1,18 +1,27 @@
 <script setup>
 import Product from './Article/Product.vue'
 import Pagebar from './Article/Pagebar.vue'
+import { productStore } from '../../stores/productStore'
+import { ref } from '@vue/reactivity';
 
-const item = [1, 2, 3, 4, 5, 6, 7, 8]
+const ps = productStore();
+
+
 
 </script>
 
 <template>
-
     <article class="article">
+        <div class="productSort">
+            <p>商品排序</p>
+            <span>價格</span>
+            <input type="radio" name='price'> <span>由高到低</span>
+            <input type="radio" name='price'> <span>由低到高</span>
+        </div>
         <div class="cards">
-            <Product v-for="i in item">
-                <template #name>商品名稱</template>
-                <template #price>$價錢</template>
+            <Product v-for="item in ps.productData">
+                <template #name>{{ item.productName }}</template>
+                <template #price>${{ item.price }}</template>
             </Product>
         </div>
 
@@ -22,13 +31,25 @@ const item = [1, 2, 3, 4, 5, 6, 7, 8]
 
 </template>
 <style scoped>
+.productSort {
+    align-self: flex-start;
+    padding: 0 18px;
+    display: flex;
+    gap: 2px;
+}
+
+.productSort>p,
+.productSort>span {
+    margin-right: 8px;
+}
+
 .article {
     /* max-width: 1200px; */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    flex: 5;
 }
 
 .cards {
