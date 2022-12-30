@@ -121,17 +121,7 @@ orderDetail:
 */
 
 // CRUD表單欄位
-<<<<<<< Updated upstream
-function column({
-  tableName,
-  action,
-  old_columnName,
-  new_columnName,
-  options,
-} = {}) {
-=======
 function column({ tableName, action, old_columnName, new_columnName, options } = {}) {
->>>>>>> Stashed changes
   // action = ADD新增、CHANGE更改（舊欄位名 新欄位名）、MODIFY更改資料種類、DROP刪除
   // options = INT整數、VARCHAR(50)文字、DATETIME時間
   /* 使用範例：
