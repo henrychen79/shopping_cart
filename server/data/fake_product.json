@@ -1,105 +1,105 @@
 {
     "p00001":{
         "productNum":"'001'",
-        "catagory":"'001'",
+        "category":"'001'",
         "name":"'機能優酪乳'",
         "thumbnail":"'img001'",
         "price":"'48'"
     },
     "p00002":{
         "productNum":"'002'",
-        "catagory":"'001'",
+        "category":"'001'",
         "name":"'大象杯'",
         "thumbnail":"'img002'",
         "price":"'998'"
     },
     "p00003":{
         "productNum":"'003'",
-        "catagory":"'001'",
+        "category":"'001'",
         "name":"'早餐店奶茶'",
         "thumbnail":"'img003'",
         "price":"'25'"
     },
     "p00004":{
         "productNum":"'004'",
-        "catagory":"'001'",
+        "category":"'001'",
         "name":"'口罩'",
         "thumbnail":"'img004'",
         "price":"'200'"
     },
     "p00005":{
         "productNum":"'005'",
-        "catagory":"'001'",
+        "category":"'001'",
         "name":"'耳機'",
         "thumbnail":"'img005'",
         "price":"'3000'"
     },
     "p00006":{
         "productNum":"'006'",
-        "catagory":"'001'",
+        "category":"'001'",
         "name":"'亨利捲頭髮'",
         "thumbnail":"'img006'",
         "price":"'10000'"
     },
     "p00007":{
         "productNum":"'007'",
-        "catagory":"'001'",
+        "category":"'001'",
         "name":"'妹妹刻板好厲害'",
         "thumbnail":"'img007'",
         "price":"'50000'"
     },
     "p00008":{
         "productNum":"'008'",
-        "catagory":"'001'",
+        "category":"'001'",
         "name":"'菘不吃午餐是很ROCK的事'",
         "thumbnail":"'img008'",
         "price":"'5566'"
     },
     "p00009":{
         "productNum":"'009'",
-        "catagory":"'001'",
+        "category":"'001'",
         "name":"'七賢鴨肉飯'",
         "thumbnail":"'img009'",
         "price":"'100'"
     },
     "p00010":{
         "productNum":"'010'",
-        "catagory":"'001'",
+        "category":"'001'",
         "name":"'之梃是袁惟仁'",
         "thumbnail":"'img010'",
         "price":"'5999'"
     },
     "p00011":{
         "productNum":"'011'",
-        "catagory":"'001'",
+        "category":"'001'",
         "name":"'菘也是大象杯'",
         "thumbnail":"'img011'",
         "price":"'585'"
     },
     "p00012":{
         "productNum":"'012'",
-        "catagory":"'001'",
+        "category":"'001'",
         "name":"'阿義要滿三百才會外送'",
         "thumbnail":"'img012'",
         "price":"'300'"
     },
     "p00013":{
         "productNum":"'013'",
-        "catagory":"'001'",
+        "category":"'001'",
         "name":"'JUJU也要喝阿義'",
         "thumbnail":"'img013'",
         "price":"'60'"
     },
     "p00014":{
         "productNum":"'014'",
-        "catagory":"'001'",
+        "category":"'001'",
         "name":"'充電線要記得帶回家'",
         "thumbnail":"'img014'",
         "price":"'9999'"
     },
     "p00015":{
         "productNum":"'015'",
-        "catagory":"'001'",
+        "category":"'001'",
         "name":"'之梃新外套'",
         "thumbnail":"'img015'",
         "price":"'1490'"

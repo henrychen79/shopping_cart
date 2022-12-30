@@ -1,5 +1,5 @@
 const mysql = require("mysql2/promise");
-const schemaName = "shopping_cart12345";
+const schemaName = "shopping_cart1111";
 const tables = require("./tables.json");
 
 //創建DB，檢測時請注意user名稱和密碼
@@ -64,7 +64,7 @@ user:
 product:
   `product_id` INT NOT NULL AUTO_INCREMENT,
   `productNum` INT NOT NULL,
-  `catagory` VARCHAR(12) NOT NULL,
+  `category` VARCHAR(12) NOT NULL,
   `thumbnail` VARCHAR(50) NOT NULL,
   `price` INT NOT NULL,
   PRIMARY KEY (`product_id`),

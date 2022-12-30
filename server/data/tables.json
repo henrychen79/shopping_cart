@@ -6,8 +6,8 @@
     },
     "product":{
         "name":"product",
-        "columns":"`product_id` INT NOT NULL AUTO_INCREMENT,`productNum` INT NOT NULL,`catagory` VARCHAR(12) NOT NULL,`productName`VARCHAR(20) NOT NULL, `thumbnail` VARCHAR(50) NOT NULL,`price` INT NOT NULL,PRIMARY KEY (`product_id`),UNIQUE INDEX `user_id_UNIQUE` (`product_id` ASC) VISIBLE,UNIQUE INDEX `thumbnail_UNIQUE` (`thumbnail` ASC) VISIBLE",
-        "columnName":"productNum, catagory, productName, thumbnail, price"
+        "columns":"`product_id` INT NOT NULL AUTO_INCREMENT,`productNum` INT NOT NULL,`category` VARCHAR(12) NOT NULL,`productName`VARCHAR(20) NOT NULL, `thumbnail` VARCHAR(50) NOT NULL,`price` INT NOT NULL,PRIMARY KEY (`product_id`),UNIQUE INDEX `user_id_UNIQUE` (`product_id` ASC) VISIBLE,UNIQUE INDEX `thumbnail_UNIQUE` (`thumbnail` ASC) VISIBLE",
+        "columnName":"productNum, category, productName, thumbnail, price"
     },
     "productDetail":{
         "name":"productDetail",
