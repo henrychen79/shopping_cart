@@ -1,9 +1,11 @@
 <script setup>
+import Header from '../components/Header.vue'
 import loginComponents from '../components/loginComponents.vue'
 
 </script>
 
 <template>
+    <Header />
     <div class="login_main">
         <loginComponents/>
     </div>

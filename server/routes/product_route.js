@@ -15,24 +15,47 @@ router.get("/testAPI", (req, res) => {
 });
 /**********************************以上為假資料**********************************************/
 
-//連接主頁時的API
+//進入商品頁面的API
 router.get("/", (req, res) => {
-  let category_id = req.query.category_id;
-  let product_num = req.query.product_num;
-  product_M
-    .getSpecificiProduct(category_id, product_num)
-    .then((data) => res.json(data))
-    .catch((err) => res.status(500).send(err));
+<<<<<<< Updated upstream
+  try {
+    let category_id = req.query.category_id;
+    let product_num = req.query.product_num;
+    product_M.getSpecificiProduct(category_id, product_num).then((data) => {
+      return res.json(data);
+    });
+  } catch (error) {
+    console.log('/ ERR' + error);
+    return res.status(404);
+  }
 });
 
-//按下頁數後，收到類型跟頁數，回應六筆資料的API
+
+//取得商品類型和總量（測試OK）
+router.get("/allCategory",(req,res) =>{
+  product_M.product_amount().then((data) => {
+    return res.json(data);
+  });
+})
+
+//按下頁數後，收到類型跟頁數，回應六筆資料的API（測試OK）
 router.get("/category/:category_id", (req, res) => {
+  // console.log(req);
+  let category_id = req.params.category_id;
+  let page = req.query.page;
+  console.log(category_id,page,);
+=======
+  console.log(product_M.getProduct(2));
+  return res.json(msgObj);
+});
+router.post("/category/:category_id", (req, res) => {
+  console.log(req.query, req.params);
   let page = req.query.page;
   let category_id = req.params.category_id;
-  product_M
-    .getProduct(category_id, page)
-    .then((data) => res.json(data))
-    .catch((err) => res.status(500).send(err));
+>>>>>>> Stashed changes
+  product_M.getProduct(category_id, page).then((data) => {
+    return res.json(data);
+  });
 });
 
 module.exports = router;

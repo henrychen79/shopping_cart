@@ -11,13 +11,6 @@ const registerStore = useRegisterStore()
         <h2>註冊會員</h2>
         <div class="regist_form">
             <div class="group">
-                <label for="user_name">你的暱稱:</label>
-                <input type="text" name="" id="user_name" 
-                    v-model="registerStore.data.name" 
-                    v-on:keyup="registerStore.doubleCheckPassword" 
-                />
-            </div>
-            <div class="group">
                 <label for="user_account">創建帳號:</label>
                 <input type="text" name="" id="user_account" placeholder="請輸入電子信箱" 
                     v-model="registerStore.data.account" 
@@ -42,6 +35,13 @@ const registerStore = useRegisterStore()
                 v-on:keyup="registerStore.doubleCheckPassword"  
                 v-model="registerStore.data.doublePassword">
             </div>
+            <div class="group">
+                <label for="user_name">你的暱稱:</label>
+                <input type="text" name="" id="user_name" 
+                    v-model="registerStore.data.name" 
+                    v-on:keyup="registerStore.doubleCheckPassword" 
+                />
+            </div>
             <div class="btn-group">
                 <button class="btn" :disabled='registerStore.isDisabled' v-on:click="registerStore.registerButton">註冊</button>
                 <button class="btn" v-on:click="registerStore.checkAccount" >取消</button>
@@ -54,12 +54,15 @@ const registerStore = useRegisterStore()
 <style lang="scss" scoped>
 @media screen and (min-width: 320px){
     .container{
-    border: 2px solid black;
+    // border: 2px solid black;
     width: 100%;
     height: 100%;
     >h2{
         margin:auto;
-        text-align: center;
+        padding-left:30px ;
+        font-weight:bold;
+        text-shadow: 1px 1px rgb(122, 121, 121)
+        // text-align: center;
     }
     >.regist_form{
         padding-top: 20px;

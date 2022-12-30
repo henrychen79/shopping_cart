@@ -5,11 +5,17 @@
 <template>
     <div class="cards_item">
         <div class="card">
-            <div class="card_image"><img src="" alt=""></div>
+
+            <div class="card_image">
+                <RouterLink to="/"><img src="" alt="" style="height:100%;width:100%"></RouterLink>
+            </div>
             <div class="card_content">
-                <h3>
-                    <slot name="name"></slot>
-                </h3>
+                <RouterLink to="/">
+                    <h3>
+                        <slot name="name"></slot>
+                    </h3>
+                </RouterLink>
+
                 <p>
                     <slot name="price"></slot>
                 </p>
@@ -46,7 +52,7 @@
 
 .card {
     height: 18rem;
-    width: 15rem;
+    width: 20rem;
     background-color: rgb(239, 236, 233);
     border: 1px solid brown;
     display: flex;
@@ -60,6 +66,7 @@
     background-color: aliceblue;
     flex: 3;
 }
+
 
 .card_content {
     width: 90%;
