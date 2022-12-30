@@ -1,11 +1,15 @@
 const mysql = require("mysql2/promise");
 const schemaName = "shopping_cart12345";
+const tables = require("./tables.json");
+
+
+//創建DB，檢測時請注意user名稱和密碼
 async function createDB() {
   try {
     const connection = await mysql.createConnection({
       host: "localhost",
-      user: "henrychen",
-      password: "3345678",
+      user: "root",
+      // password: "3345678",
     });
     //console.log("connection", connection);
     await connection.query(`CREATE DATABASE ${schemaName}`);
@@ -13,11 +17,13 @@ async function createDB() {
     //console.log("error", error);
   }
 }
+
+//創建連接池
 async function createPooL() {
   const pool = await mysql.createPool({
     host: "localhost",
-    user: "henrychen",
-    password: "3345678",
+    user: "root",
+    // password: "3345678",
     database: schemaName,
     waitForConnections: true,
     connectionLimit: 10,
@@ -25,8 +31,8 @@ async function createPooL() {
   });
   return pool;
 }
-const tables = require("./tables.json");
 
+//創建表單
 async function createTable(tableName, columns) {
   try {
     let target = `CREATE TABLE ${tableName} (${columns})`;
@@ -35,8 +41,6 @@ async function createTable(tableName, columns) {
     //console.log("create table error:", error);
   }
 }
-
-// 更新表單欄位
 
 //創建tables.json中的所有表單
 async function initSchema() {
@@ -114,6 +118,7 @@ orderDetail:
   UNIQUE INDEX `account_UNIQUE` (`productNum` ASC) VISIBLE;
 
 */
+
 // CRUD表單欄位
 function column({tableName,action,old_columnName,new_columnName,options}={}) {
   // action = ADD新增、CHANGE更改（舊欄位名 新欄位名）、MODIFY更改資料種類、DROP刪除
