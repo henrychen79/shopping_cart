@@ -13,6 +13,7 @@ const ps = productStore();
 <template>
     <article class="article">
         <div class="productSort">
+            {{ ps.totalCategoryList }}
             <p>商品排序</p>
             <span>價格</span>
             <input type="radio" name='price'> <span>由高到低</span>

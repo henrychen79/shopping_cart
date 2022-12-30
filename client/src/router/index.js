@@ -27,6 +27,7 @@ const router = createRouter({
       component: () => import('../views/register.vue')
     },
     {
+<<<<<<< Updated upstream
       path: '/retrieve',
       name: 'retrieve',
       // route level code-splitting
@@ -35,11 +36,16 @@ const router = createRouter({
       component: () => import('../views/retrievePassword.vue')
     },
     {
+=======
+>>>>>>> Stashed changes
       path: '/product',
       name: 'product',
       component: ProductView
     },
+<<<<<<< Updated upstream
     
+=======
+>>>>>>> Stashed changes
 
   ]
 })

@@ -1,4 +1,8 @@
 <script setup>
+import { productStore } from '../../stores/productStore'
+
+const ps = productStore();
+
 
 </script>
 
@@ -7,9 +11,9 @@
     <aside class="aside">
         <ul class="productBar">
             <p>商品分類</p>
-            <li><a href="#">類別1</a></li>
-            <li><a href="#">類別2</a></li>
-            <li><a href="#">類別3</a></li>
+            {{ ps.currentCategory }}
+            <li v-for="item in ps.totalCategoryList" @click="ps.currentCategory = item"><a href="#">{{ item
+                    }}</a></li>
         </ul>
     </aside>
 
