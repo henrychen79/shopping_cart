@@ -12,10 +12,21 @@ async function addProduct(tableColumns, values) {
 
 //搜尋商品，按照頁數列出對應的資料筆數(測試OK)
 async function getProduct(catagory, page) {
-    let target = `SELECT ${table.product.columnName} FROM product WHERE catagory=${catagory} AND productNum BETWEEN ${(page-1)*pageLimit+1} AND ${page*pageLimit}`;
-    const [result, fields] = await db.pool.query(target);
-    return result
-};
+  let target = `SELECT ${
+    table.product.columnName
+  } FROM product WHERE catagory=${catagory} AND productNum BETWEEN ${
+    (page - 1) * pageLimit + 1
+  } AND ${page * pageLimit}`;
+  const [result, fields] = await db.pool.query(target);
+  return result;
+}
+
+//搜尋商品，按照頁數列出對應的資料筆數(測試OK)
+async function getSpecificiProduct(catagory, productNum) {
+  let target = `SELECT ${table.product.columnName} FROM product WHERE catagory=${catagory} AND productNum=${productNum}`;
+  const [result, fields] = await db.pool.query(target);
+  return result;
+}
 
 //利用假資料新增進資料庫
 function generateFakeData() {
@@ -31,3 +42,4 @@ function generateFakeData() {
 }
 module.exports.generateFakeData = generateFakeData;
 module.exports.getProduct = getProduct;
+module.exports.getSpecificiProduct = getSpecificiProduct;

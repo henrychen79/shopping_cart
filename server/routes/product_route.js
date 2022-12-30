@@ -12,14 +12,16 @@ router.get("/testAPI", (req, res) => {
   return res.json(msgObj);
 });
 router.get("/", (req, res) => {
-    console.log(product_M.getProduct(2));
-  return res.json(msgObj);
+  let category_id = req.query.category_id;
+  let product_num = req.query.product_num;
+  product_M.getSpecificiProduct(category_id, product_num).then((data) => {
+    return res.json(data);
+  });
 });
 router.get("/category/:category_id", (req, res) => {
-  console.log(req.query, req.params);
   let page = req.query.page;
   let category_id = req.params.category_id;
-  product_M.getProduct(category_id,page).then((data)=>{
+  product_M.getProduct(category_id, page).then((data) => {
     return res.json(data);
   });
 });
