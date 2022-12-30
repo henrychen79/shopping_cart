@@ -103,6 +103,34 @@
         "name":"'之梃新外套'",
         "thumbnail":"'img015'",
         "price":"'1490'"
+    },
+    "p00016":{
+        "productNum":"'001'",
+        "category":"'002'",
+        "name":"'安安安'",
+        "thumbnail":"'img016'",
+        "price":"'48'"
+    },
+    "p00017":{
+        "productNum":"'002'",
+        "category":"'002'",
+        "name":"'嗯嗯嗯'",
+        "thumbnail":"'img017'",
+        "price":"'998'"
+    },
+    "p00018":{
+        "productNum":"'003'",
+        "category":"'002'",
+        "name":"'不見了'",
+        "thumbnail":"'img018'",
+        "price":"'25'"
+    },
+    "p00019":{
+        "productNum":"'004'",
+        "category":"'002'",
+        "name":"'一直重打好討厭'",
+        "thumbnail":"'img019'",
+        "price":"'99999'"
     }
 
 }
