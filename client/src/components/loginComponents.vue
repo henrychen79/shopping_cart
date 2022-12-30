@@ -1,0 +1,132 @@
+<script setup>
+import { ref,reactive ,computed} from 'vue';
+// import {usedataStore} from "../stores/datastore"
+
+// const dataStore = usedataStore()
+
+
+    // const userAccount =reactive({name:''})
+    // const userPassword =reactive({password:''})
+    // function clickFn(){
+    //     console.log('測試')
+    //     let data={}
+    //     data.account = userAccount.name;
+    //     data.password = userPassword.password;
+    //     console.log(data)
+    // }
+</script>
+
+<template>
+    <div class="container">
+        <h2>會員登入</h2>
+        <div class="login_form">
+            <div class="group">
+                <label for="user_id">帳號:</label>
+                <input type="text" name="" id="user_id" >
+            </div>
+            <div class="group">
+                <label for="user_password">密碼:</label>
+                <input type="text" name="" id="user_password" >
+            </div>
+            <div class="special_req">
+                <RouterLink to="/register" class="test">點我註冊</RouterLink>
+                <RouterLink to="/register" class="test">忘記密碼</RouterLink>
+            </div>
+            <div class="btn-group">
+                <button class="btn" @click="dataStore.login">登入</button>
+                <button class="btn">取消</button>
+            </div>
+        </div>
+    </div>
+
+</template>
+
+<style lang="scss" scoped>
+@media screen and (min-width: 320px){
+    .container{
+    border: 2px solid black;
+    width: 100%;
+    height: 100%;
+    >h2{
+        margin:auto;
+        text-align: center;
+    }
+    >.login_form{
+        padding-top: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        
+        >.group{
+            margin-bottom: 20px;
+            >input{
+                margin-left: 10px;
+            }
+        }
+        >.special_req{
+            >.test{
+                margin: 10px;
+                font-size: 12px;
+            }
+        }
+        >.btn-group{
+           >.btn{
+            width: 100px;
+            margin: 20px;
+           }
+        }
+    }
+}
+}
+
+
+@media screen and (max-width: 320px) {
+    .container{
+    border: 1px solid black;
+    width: 100%;
+    height: 100%;
+    >h2{
+        margin:auto;
+        text-align: center;
+    }
+    >.login_form{
+        padding-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        
+        >.group{
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-end;
+            // align-items: center;
+            flex-direction: column;
+            >input{
+                border:none;
+                outline: none;
+                border-bottom: 1px solid #000
+            }
+        }
+        >.special_req{
+            >.test{
+                margin: 10px;
+                font-size: 12px;
+            }
+        }
+        >.btn-group{
+           >.btn{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            width: 200px;
+            margin: 20px;
+           }
+        }
+    }
+}
+}
+
+</style>
