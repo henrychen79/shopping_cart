@@ -1,9 +1,10 @@
 const express = require("express");
 const app = express();
+const cors = require('cors');
 const bodyParser = require("body-parser");
 require("./models").initDatabase();
 const productRoute = require("./routes").product;
-console.log(require("./models").initDatabase);
+app.use(cors());
 // 解析 application/x-www-form-urlencoded
 app.use(
   bodyParser.urlencoded({
