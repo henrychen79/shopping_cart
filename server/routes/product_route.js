@@ -16,8 +16,12 @@ router.get("/", (req, res) => {
   return res.json(msgObj);
 });
 router.get("/category/:category_id", (req, res) => {
-  //console.log(product_M.getProduct(2));
-  return res.json(product_M.getProduct(2));
+  console.log(req.query, req.params);
+  let page = req.query.page;
+  let category_id = req.params.category_id;
+  product_M.getProduct(category_id,page).then((data)=>{
+    return res.json(data);
+  });
 });
 
 module.exports = router;

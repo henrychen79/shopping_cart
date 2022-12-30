@@ -11,10 +11,9 @@ async function addProduct(tableColumns, values) {
 }
 
 //搜尋商品，按照頁數列出對應的資料筆數(測試OK)
-async function getProduct(page) {
-    let target = `SELECT ${table.product.columnName} FROM product WHERE productNum BETWEEN ${(page-1)*pageLimit+1} AND ${page*pageLimit}`;
-    const [result,fields] = await db.pool.query(target);
-    console.log(result);
+async function getProduct(catagory, page) {
+    let target = `SELECT ${table.product.columnName} FROM product WHERE catagory=${catagory} AND productNum BETWEEN ${(page-1)*pageLimit+1} AND ${page*pageLimit}`;
+    const [result, fields] = await db.pool.query(target);
     return result
 };
 
