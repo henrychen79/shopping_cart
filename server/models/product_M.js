@@ -42,9 +42,7 @@ function generateFakeData() {
 }
 module.exports.generateFakeData = generateFakeData;
 module.exports.getProduct = getProduct;
-<<<<<<< Updated upstream
 module.exports.getSpecificiProduct = getSpecificiProduct;
-=======
 
 /**********************************以下為假資料**********************************************/
 function addProduct(tableColumns,values) {
@@ -73,4 +71,3 @@ async function getProduct(page) {
     return result
 };
 //getProduct(2)
->>>>>>> Stashed changes
