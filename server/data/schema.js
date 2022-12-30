@@ -2,14 +2,13 @@ const mysql = require("mysql2/promise");
 const schemaName = "shopping_cart12345";
 const tables = require("./tables.json");
 
-
 //創建DB，檢測時請注意user名稱和密碼
 async function createDB() {
   try {
     const connection = await mysql.createConnection({
       host: "localhost",
-      user: "root",
-      // password: "3345678",
+      user: "henrychen",
+      password: "3345678",
     });
     //console.log("connection", connection);
     await connection.query(`CREATE DATABASE ${schemaName}`);
@@ -22,8 +21,8 @@ async function createDB() {
 async function createPooL() {
   const pool = await mysql.createPool({
     host: "localhost",
-    user: "root",
-    // password: "3345678",
+    user: "henrychen",
+    password: "3345678",
     database: schemaName,
     waitForConnections: true,
     connectionLimit: 10,
@@ -120,7 +119,13 @@ orderDetail:
 */
 
 // CRUD表單欄位
-function column({tableName,action,old_columnName,new_columnName,options}={}) {
+function column({
+  tableName,
+  action,
+  old_columnName,
+  new_columnName,
+  options,
+} = {}) {
   // action = ADD新增、CHANGE更改（舊欄位名 新欄位名）、MODIFY更改資料種類、DROP刪除
   // options = INT整數、VARCHAR(50)文字、DATETIME時間
   /* 使用範例：
@@ -138,5 +143,5 @@ function column({tableName,action,old_columnName,new_columnName,options}={}) {
   */
   let target = `ALTER TABLE ${tableName} ${action} ${old_columnName} ${new_columnName} ${options}`;
   db.pool.query(target);
-};
+}
 module.exports.initSchema = initSchema;
