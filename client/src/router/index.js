@@ -11,7 +11,6 @@ const router = createRouter({
       component: HomeView
     },
     {
-<<<<<<< Updated upstream
       path: '/login',
       name: 'login',
       // route level code-splitting
@@ -26,13 +25,21 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/register.vue')
-    }
-=======
+    },
+    {
+      path: '/retrieve',
+      name: 'retrieve',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/retrievePassword.vue')
+    },
+    {
       path: '/product',
       name: 'product',
       component: ProductView
     },
->>>>>>> Stashed changes
+    
 
   ]
 })
