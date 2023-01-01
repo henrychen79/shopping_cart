@@ -8,7 +8,7 @@ async function createDB() {
     const connection = await mysql.createConnection({
       host: "localhost",
       user: "root",
-      password: "0000",
+      password: "3345678",
     });
     //console.log("connection", connection);
     await connection.query(`CREATE DATABASE ${schemaName}`);
@@ -22,7 +22,7 @@ async function createPooL() {
   const pool = await mysql.createPool({
     host: "localhost",
     user: "root",
-    password: "0000",
+    password: "3345678",
     database: schemaName,
     waitForConnections: true,
     connectionLimit: 10,
@@ -38,7 +38,7 @@ async function createTable(tableName, columns) {
     // console.log(target)
     await exports.pool.query(target);
   } catch (error) {
-    console.log("create table error:", error);
+    //console.log("create table error:", error);
   }
 }
 
@@ -46,7 +46,7 @@ async function createTable(tableName, columns) {
 async function initSchema() {
   await createDB();
   module.exports.pool = await createPooL();
-  console.log('here');
+  console.log("here");
   for (const key in tables) {
     await createTable(tables[key].name, tables[key].columns);
   }
@@ -121,7 +121,13 @@ orderDetail:
 */
 
 // CRUD表單欄位
-function column({ tableName, action, old_columnName, new_columnName, options } = {}) {
+function column({
+  tableName,
+  action,
+  old_columnName,
+  new_columnName,
+  options,
+} = {}) {
   // action = ADD新增、CHANGE更改（舊欄位名 新欄位名）、MODIFY更改資料種類、DROP刪除
   // options = INT整數、VARCHAR(50)文字、DATETIME時間
   /* 使用範例：

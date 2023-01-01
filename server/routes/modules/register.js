@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const signup_M = require("../models/signup_M");
+const signup_M = require("../../models/register");
 router.use((req, res, next) => {
-  console.log("A request is coming in to register_route.js");
+  console.log("A request is coming in to register route.js");
   next();
 });
 router.get("/checkAccountExist", (req, res) => {

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const product_M = require("../models/product_M");
+const product_M = require("../../models/product");
 
 router.use((req, res, next) => {
   console.log("A request is coming in to product_route.js");
@@ -24,25 +24,24 @@ router.get("/", (req, res) => {
       return res.json(data);
     });
   } catch (error) {
-    console.log('/ ERR' + error);
+    console.log("/ ERR" + error);
     return res.status(404);
   }
 });
 
-
 //取得商品類型和總量（測試OK）
-router.get("/allCategory",(req,res) =>{
+router.get("/allCategory", (req, res) => {
   product_M.product_amount().then((data) => {
     return res.json(data);
   });
-})
+});
 
 //按下頁數後，收到類型跟頁數，回應六筆資料的API（測試OK）
 router.get("/category/:category_id", (req, res) => {
   // console.log(req);
   let category_id = req.params.category_id;
   let page = req.query.page;
-  console.log(category_id,page,);
+  console.log(category_id, page);
   product_M.getProduct(category_id, page).then((data) => {
     return res.json(data);
   });
