@@ -35,7 +35,7 @@ async function check_account(accountName) {
 // check_account("'rec@gmail.com'");//存在回傳[{account:'帳號名稱'}]  不存在回傳[]
 
 //成功註冊到會員表單DB（測試OK）
-async function signup(values, resolve, reject) {
+async function register(values, resolve, reject) {
   try {
     let target = `INSERT INTO user ( ${table.user.columnName} ) VALUES (${values})`;
     const [result, fields] = await db.pool.query(target);
@@ -46,5 +46,16 @@ async function signup(values, resolve, reject) {
   }
 }
 // signup(["'member'","'emma@gmail.com'", "'aaaa1111'", "'EMMA'"]);
-module.exports.signup = signup;
+async function login(accountName, password) {
+  try {
+    let target = `SELECT account FROM user WHERE account = ${accountName} AND password = ${password}`;
+    const [result, fields] = await db.pool.query(target);
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.log("signin ERR :" + error);
+  }
+}
+module.exports.login = login;
+module.exports.register = register;
 module.exports.check_account = check_account;
