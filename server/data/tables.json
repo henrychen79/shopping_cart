@@ -4,6 +4,11 @@
         "columns":"`user_id` INT NOT NULL AUTO_INCREMENT,`role` VARCHAR(10) NOT NULL,`account` VARCHAR(50) NOT NULL,`password` VARCHAR(12) NOT NULL,`nickname` VARCHAR(50) NOT NULL,PRIMARY KEY (`user_id`),UNIQUE INDEX `account_UNIQUE` (`account` ASC) VISIBLE,UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE",
         "columnName":"role, account, password, nickname"
     },
+    "tempInfo":{
+        "name":"tempInfo",
+        "columns":"`account` VARCHAR(50) NOT NULL, `tempPassword` VARCHAR(6) NOT NULL, `applyTime` DATETIME NOT NULL",
+        "lolumnName":"account, tempPassword, applyTime"
+        },
     "product":{
         "name":"product",
         "columns":"`product_id` INT NOT NULL AUTO_INCREMENT,`productNum` INT NOT NULL,`category` VARCHAR(12) NOT NULL,`productName`VARCHAR(20) NOT NULL, `thumbnail` VARCHAR(50) NOT NULL,`price` INT NOT NULL,PRIMARY KEY (`product_id`),UNIQUE INDEX `user_id_UNIQUE` (`product_id` ASC) VISIBLE,UNIQUE INDEX `thumbnail_UNIQUE` (`thumbnail` ASC) VISIBLE",
