@@ -1,4 +1,5 @@
-const db = require("../data/schema");
+// const db = require("../data/schema");
+const db = require("../data/testDatabase");//測試單頁js用
 const table = require("../data/tables.json");
 const products = require("../data/fake_product.json");
 const pageLimit = 6;
@@ -40,12 +41,24 @@ async function getProduct(category, page) {
 
 //搜尋商品，按照頁數列出對應的資料筆數
 async function getSpecificiProduct(category_id, product_num) {
-  let target = `SELECT ${table.productDetail.columnName} FROM productDetail WHERE category = '${category_id}' AND productNum = '${product_num}'`;
-  // console.log(target);
-  const [result, fields] = await db.pool.query(target);
-  console.log(result);
-  return result;
+  try {
+    let target = `
+    SELECT pD.productNum, pD.detail, pD.inventory, pD.img ,
+      p.category,p.productName, p.thumbnail, p.price
+    FROM productDetail AS pD ,product AS p
+    WHERE pD.category = p.category  
+      AND p.category = '${category_id}'
+      AND pD.productNum = p.productNum
+      AND p.productNum = '${product_num}'`
+    // console.log(target);
+    const [result, fields] = await db.pool.query(target);
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.log("getSpecificiProduct ERR:" + error);
+  }
 }
+// getSpecificiProduct('001','2');//測試用ＯＫ
 
 //利用假資料新增進資料庫
 function generateFakeData() {

@@ -1,6 +1,5 @@
-// const db = require("../data/schema");
-require("dotenv").config();
-const db = require("../data/testDatabase");//測試單頁js用
+const db = require("../data/schema");
+// const db = require("../data/testDatabase");//測試單頁js用
 const table = require("../data/tables.json");
 const users = require("../data/fake_user.json");
 const { rejects } = require("assert");
@@ -24,6 +23,8 @@ function creatFakeData() {
 // creatFakeData()
 /**********************************以上為假資料**********************************************/
 
+
+/**********************************以下為串接ＯＫ**********************************************/
 //確認帳號是否已經存在（測試OK）
 async function check_account(accountName) {
   console.log("check_account測試", accountName);
@@ -58,7 +59,7 @@ async function register(values, resolve, reject) {
 }
 // signup(["'member'","'emma@gmail.com'", "'aaaa1111'", "'EMMA'"]);
 
-//登入會員
+//登入會員（測試ＯＫ）
 async function login(accountName, password) {
   try {
     let target = `SELECT account FROM user WHERE account = '${accountName}' AND password = '${password}'`;
@@ -70,6 +71,10 @@ async function login(accountName, password) {
   }
 }
 
+/**********************************以上為串接ＯＫ**********************************************/
+
+
+/**********************************以下後端postman測試ＯＫ，尚未串接成功**********************************************/
 //STEP1：忘記密碼核對帳號，正確回傳帳號（測試過ＯＫ），讓他可以寄送電子信件
 async function forgetPassword(accountName) {
   try {
@@ -83,11 +88,9 @@ async function forgetPassword(accountName) {
 }
 // forgetPassword('rec27@gmail.com');
 
-
 //STEP2：隨機不重複的臨時密碼，進去DB檢查是否重複，不重複寫進去DB（測試ＯＫ）
 //STEP3：若不重複就新增臨時密碼進去DB(測試ＯＫ)
 //STEP4：寄送暫時密碼信件（./utils/sendMail.js）
-
 async function createTempPassword(accountName) {
   let tempPassword = `${Math.floor(Math.random()*10)}${Math.floor(
     Math.random()*10
@@ -108,8 +111,7 @@ async function createTempPassword(accountName) {
     return tempPassword;
   }
 };
-createTempPassword('cindy81121116@gmail.com');
-
+// createTempPassword('cindy81121116@gmail.com');//測試用
 async function insertTempPassword(values, resolve, reject) {
   try {
     let target = `INSERT INTO tempInfo ( ${table.tempInfo.columnName} ) VALUES (${values})`;
@@ -120,15 +122,60 @@ async function insertTempPassword(values, resolve, reject) {
   }
 };
 
+//驗證舊(暫時)密碼（測試ＯＫ）
+async function check_password(tableName,accountName,password) {
+  try {
+    let target = `SELECT account FROM ${tableName} 
+    WHERE account = '${accountName}' AND
+    password = '${password}'`;
+    const [result, feild] = await db.pool.query(target);
+    console.log(result);
+    if (result.length === 0) {
+      return false
+    }return true
+  } catch (error) {
+    console.log('check_password ERR:' + error);
+  }
+};
+// check_password('tempInfo','cindy81121116@gmail.com','319806');//驗證暫時密碼（測試ＯＫ）
+// check_password('user','rec27@gmail.com','rrr9876')//修改密碼時驗證舊密碼（測試ＯＫ）
 
-//驗證舊(暫時)密碼
-//如果舊（暫時）密碼驗證成功，更新新密碼至會員表單DB
+//如果舊（暫時）密碼驗證成功，更新新密碼至會員表單DB(測試ＯＫ)
+async function updatePassword(accountName,newPassword) {
+  try {
+    let target = `UPDATE user SET password = '${newPassword}' WHERE account = '${accountName}'`;
+    await db.pool.query(target);
+    return "update password success";//更新密碼成功
+  } catch (error) {
+    console.log("updatePassword ERR: " + error);
+  }
+}
+// updatePassword('rec27@gmail.com','rrr1234');//測試用
+/**********************************以上後端postman測試ＯＫ，尚未串接成功**********************************************/
 
-//時間內不能重複寄送信件
-//時間到過期
+
+
+/**********************************以下尚未完成**********************************************/
+//時間到刪除臨時密碼（測試ＯＫ）尚未export
+async function dropTempPassword(accountName) {
+  try {
+    let target = `DELETE FROM tempInfo WHERE account = '${accountName}'`;
+    await db.pool.query(target);
+    return "tempPassword expired";//臨時密碼過期了
+  } catch (error) {
+    console.log("dropTempPassword ERR:" + error);
+  }
+}
+// dropTempPassword("rec27@gmail.com")//測試用
+
+//時間內不能重複寄送信件，時間到過期（@Henry~~~~~這個給你）
+/**********************************以上尚未完成**********************************************/
+
 
 module.exports.login = login;
 module.exports.register = register;
 module.exports.check_account = check_account;
 module.exports.createTempPassword = createTempPassword;
+module.exports.check_password = check_password;
+module.exports.updatePassword = updatePassword;
 // module.exports.creatFakeData = creatFakeData;

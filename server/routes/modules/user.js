@@ -8,5 +8,6 @@ router.get("/checkAccountExist", userController.checkAccountExist);
 router.post("/registerAccount", userController.registerAccount);
 router.post("/login", userController.login);
 router.post("/forgetPassword", userController.forgetPassword);
+router.post("/updatePassword",userController.updatePassword);
 
 module.exports = router;
