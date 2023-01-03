@@ -1,11 +1,20 @@
+const fs = require("fs");
 const sharp = require("sharp");
+const THUMBNAIL_SIZE = process.env.THUMBNAIL_SIZE.split(",");
+const dir = "./public/images/thumbnail/";
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir, { recursive: true });
+}
 const adminController = {
   uploadImage: async (req, res, next) => {
     try {
-      console.log(req.file);
-      const buffer = await sharp(req.file.path)
-        .resize({ width: 60, height: 60, fit: "fill" })
-        .toFile(__dirname + "/grayscale_robo3.jpg");
+      await sharp(req.file.path)
+        .resize({
+          width: parseInt(THUMBNAIL_SIZE[0]),
+          height: parseInt(THUMBNAIL_SIZE[1]),
+          fit: "fill",
+        })
+        .toFile(dir + req.query.account + ".jpg");
       res.send({
         status: "success",
         message: "File uploaded successfully",
