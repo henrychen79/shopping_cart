@@ -34,15 +34,16 @@ async function getProduct(category, page) {
   } FROM product WHERE category=${category} AND productNum BETWEEN ${
     (page - 1) * pageLimit + 1
   } AND ${page * pageLimit}`;
-  console.log(target);
   const [result, fields] = await db.pool.query(target);
   return result;
 };
 
-//搜尋商品，按照頁數列出對應的資料筆數(測試OK)
-async function getSpecificiProduct(category, productNum) {
-  let target = `SELECT ${table.productDetail.columnName} FROM productDetail WHERE productNum=${productNum}`;
+//搜尋商品，按照頁數列出對應的資料筆數
+async function getSpecificiProduct(category_id, product_num) {
+  let target = `SELECT ${table.productDetail.columnName} FROM productDetail WHERE category = '${category_id}' AND productNum = '${product_num}'`;
+  // console.log(target);
   const [result, fields] = await db.pool.query(target);
+  console.log(result);
   return result;
 }
 
@@ -58,6 +59,8 @@ function generateFakeData() {
     ]);
   }
 }
+
+//新增假資料DETAIL進去資料庫還沒做
 module.exports.generateFakeData = generateFakeData;
 module.exports.getProduct = getProduct;
 module.exports.getSpecificiProduct = getSpecificiProduct;

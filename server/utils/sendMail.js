@@ -15,6 +15,7 @@ function sendMail(email, subject, html) {
     subject,
     html,
   };
+  console.log(mailOptions);
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) {
       console.log(err);
@@ -24,10 +25,10 @@ function sendMail(email, subject, html) {
   });
 }
 
-function registerMail(captcha) {
+function forgetPasswordMail(captcha) {
   return `
-    <h3>請於設設購物註冊頁輸入您的驗證碼</h3>
+    <h3>請於忘記密碼頁輸入您的驗證碼</h3>
     <h1>${captcha}</h1>
   `;
 }
-module.exports = { sendMail, registerMail };
+module.exports = { sendMail, forgetPasswordMail };

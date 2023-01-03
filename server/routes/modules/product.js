@@ -15,4 +15,5 @@ router.get("/allCategory", productController.allCategory);
 //取得特定商品總類中所有商品
 router.get("/category/:category_id", productController.getProducts);
 
+
 module.exports = router;

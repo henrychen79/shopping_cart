@@ -22,8 +22,11 @@ const productController = {
   },
   getSpecificiProduct: async (req, res, next) => {
     try {
+      console.log(req);
       let category_id = req.query.category_id;
       let product_num = req.query.product_num;
+      console.log('種類編號'+ category_id);
+      console.log('商品編號'+ product_num);
       product_M.getSpecificiProduct(category_id, product_num).then((data) => {
         return res.json(data);
       });
