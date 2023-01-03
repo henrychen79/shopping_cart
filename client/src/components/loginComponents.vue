@@ -1,19 +1,10 @@
 <script setup>
 import { ref,reactive ,computed} from 'vue';
-// import {usedataStore} from "../stores/datastore"
+import {useloginStore} from "../stores/loginStore"
 
-// const dataStore = usedataStore()
+const loginStore = useloginStore()
 
 
-    // const userAccount =reactive({name:''})
-    // const userPassword =reactive({password:''})
-    // function clickFn(){
-    //     console.log('測試')
-    //     let data={}
-    //     data.account = userAccount.name;
-    //     data.password = userPassword.password;
-    //     console.log(data)
-    // }
 </script>
 
 <template>
@@ -21,19 +12,19 @@ import { ref,reactive ,computed} from 'vue';
         <h2>會員登入</h2>
         <div class="login_form">
             <div class="group">
-                <label for="user_id">帳號:</label>
-                <input type="text" name="" id="user_id" >
+                <label for="user_account">帳號:</label>
+                <input type="text" name="user_account" id="user_account" v-model="loginStore.userData.account" >
             </div>
             <div class="group">
                 <label for="user_password">密碼:</label>
-                <input type="text" name="" id="user_password" >
+                <input type="text" name="user_password" id="user_password" v-model="loginStore.userData.password" >
             </div>
             <div class="special_req">
                 <RouterLink to="/register" class="test">點我註冊</RouterLink>
                 <RouterLink to="/register" class="test">忘記密碼</RouterLink>
             </div>
             <div class="btn-group">
-                <button class="btn" @click="dataStore.login">登入</button>
+                <button class="btn" @click="loginStore.login">登入</button>
                 <button class="btn">取消</button>
             </div>
         </div>
