@@ -1,4 +1,3 @@
-
 async function createDB() {
   try {
     const connection = await mysql.createConnection({

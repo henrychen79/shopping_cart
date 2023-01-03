@@ -1,18 +1,19 @@
 const multer = require("multer");
-var fs = require("fs");
+const fs = require("fs");
 
-var dir = "./public/images";
+const dir = "./public/images/product/";
 if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log(file);
+    //console.log(file);
     cb(null, dir);
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname);
+    console.log("req");
+    cb(null, req.query.account + ".jpg");
   },
 });
 

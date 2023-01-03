@@ -1,4 +1,5 @@
 const user_M = require("../models/user");
+const jwt = require("jsonwebtoken");
 const userController = {
   registerAccount: async (req, res, next) => {
     try {
@@ -23,18 +24,36 @@ const userController = {
     try {
       let account = req.query.account;
       // let account = req.params.account
-     
+
       user_M.check_account(account).then((ret) => {
         // if (ret.status === "ok") {
         //   res.json(account);
         // } else res.status(400).json({ message: "這個Email被註冊過了!" });
         if (ret.status === "false") {
-          res.json({message:false});
-        }else{
-          res.json({message:true});
+          res.json({ message: false });
+        } else {
+          res.json({ message: true });
         }
       });
     } catch (e) {
+      return next(e);
+    }
+  },
+  login: async (req, res, next) => {
+    try {
+      const { account, password } = req.body;
+      const result = await user_M.login(account, password);
+      if (result.length != 0) {
+        let expires_in = parseInt(process.env.JWT_EXPIRES_IN);
+        const token = jwt.sign(result[0], process.env.JWT_SECRET, {
+          expiresIn: expires_in,
+        });
+        res.json({ accout: result[0].account, token: token });
+      } else {
+        res.json({ accout: [] });
+      }
+    } catch (e) {
+      console.log("login err::", e);
       return next(e);
     }
   },
