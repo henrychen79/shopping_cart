@@ -8,7 +8,7 @@ async function createDB() {
     const connection = await mysql.createConnection({
       host: "localhost",
       user: "root",
-      password: "3345678",
+      // password: "3345678",
     });
     //console.log("connection", connection);
     await connection.query(`CREATE DATABASE ${schemaName}`);
@@ -22,7 +22,7 @@ async function createPooL() {
   const pool = await mysql.createPool({
     host: "localhost",
     user: "root",
-    password: "3345678",
+    // password: "3345678",
     database: schemaName,
     waitForConnections: true,
     connectionLimit: 10,
