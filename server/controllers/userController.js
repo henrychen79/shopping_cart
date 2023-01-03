@@ -9,16 +9,11 @@ const userController = {
       result[2] = `'${password}'`;
       result[3] = `'${name}'`;
       console.log(result);
-      user_M
-        .register(result)
-        .then((ret) => {
-          if (ret.status === "ok") {
-            res.json(req.body);
-          } else res.status(500).json(ret);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      user_M.register(result).then((ret) => {
+        if (ret.status === "ok") {
+          res.json(req.body);
+        } else res.status(500).json(ret);
+      });
     } catch (e) {
       return next(e);
     }
