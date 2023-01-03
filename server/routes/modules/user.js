@@ -7,5 +7,6 @@ router.use((req, res, next) => {
 router.get("/checkAccountExist", userController.checkAccountExist);
 router.post("/registerAccount", userController.registerAccount);
 router.post("/login", userController.login);
+router.post("/forgetPassword", userController.forgetPassword);
 
 module.exports = router;

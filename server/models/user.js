@@ -1,4 +1,5 @@
 // const db = require("../data/schema");
+require("dotenv").config();
 const db = require("../data/testDatabase");//測試單頁js用
 const table = require("../data/tables.json");
 const users = require("../data/fake_user.json");
@@ -84,12 +85,16 @@ async function forgetPassword(accountName) {
 
 
 //STEP2：隨機不重複的臨時密碼，進去DB檢查是否重複，不重複寫進去DB（測試ＯＫ）
+//STEP3：若不重複就新增臨時密碼進去DB(測試ＯＫ)
+//STEP4：寄送暫時密碼信件（./utils/sendMail.js）
+
 async function createTempPassword(accountName) {
   let tempPassword = `${Math.floor(Math.random()*10)}${Math.floor(
     Math.random()*10
   )}${Math.floor(Math.random()*10)}${Math.floor(
       Math.random()*10
   )}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}`;
+  
   let target = `SELECT tempPassword FROM tempInfo WHERE tempPassword = '${tempPassword}'`;
   const [result, fields] = await db.pool.query(target);
   console.log(result);//沒有重複會回傳[]，有重複會會傳重複的臨時密碼
@@ -100,12 +105,11 @@ async function createTempPassword(accountName) {
     let time = new Date().toISOString().slice(0, 19).replace('T', ' ');
     console.log(time);
     insertTempPassword(`'${accountName}','${tempPassword}','${time}'`);  //沒有重複，新增臨時密碼進入DB
-    return true;
+    return tempPassword;
   }
 };
-// createTempPassword('rec27@gmail.com')
+createTempPassword('cindy81121116@gmail.com');
 
-//STEP3：若不重複就新增臨時密碼進去DB
 async function insertTempPassword(values, resolve, reject) {
   try {
     let target = `INSERT INTO tempInfo ( ${table.tempInfo.columnName} ) VALUES (${values})`;
@@ -116,7 +120,6 @@ async function insertTempPassword(values, resolve, reject) {
   }
 };
 
-//STEP4：寄送暫時密碼信件（./utils/sendMail.js）
 
 //驗證舊(暫時)密碼
 //如果舊（暫時）密碼驗證成功，更新新密碼至會員表單DB
@@ -127,4 +130,5 @@ async function insertTempPassword(values, resolve, reject) {
 module.exports.login = login;
 module.exports.register = register;
 module.exports.check_account = check_account;
+module.exports.createTempPassword = createTempPassword;
 // module.exports.creatFakeData = creatFakeData;

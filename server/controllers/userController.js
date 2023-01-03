@@ -1,5 +1,6 @@
 const user_M = require("../models/user");
 const jwt = require("jsonwebtoken");
+const { sendMail, forgetPasswordMail } = require("../utils/sendMail");
 const userController = {
   registerAccount: async (req, res, next) => {
     try {
@@ -57,6 +58,21 @@ const userController = {
       return next(e);
     }
   },
+  forgetPassword: async (req,res,next) => {
+    try {
+      const { account } = req.body;
+      const result = await user_M.createTempPassword(account);
+      console.log(result);
+      sendMail(account,'忘記密碼驗證信',forgetPasswordMail(result));
+      res.json({meg:'success'});
+    } catch (e) {
+      console.log("forgetPassword err::", e);
+      return next(e);
+    }
+  }
 };
+
+// 
+
 
 module.exports = userController;

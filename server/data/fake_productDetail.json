@@ -1,0 +1,44 @@
+{
+    "p001":{
+        "category": "001",
+        "productNum": "001",
+        "detail": "我是編號1號",
+        "inventory": "10",
+        "img": "img001"
+    },
+    "p002":{
+        "category": "001",
+        "productNum": "002",
+        "detail": "我是編號2號",
+        "inventory": "10",
+        "img": "img002"
+    },
+    "p003":{
+        "category": "001",
+        "productNum": "003",
+        "detail": "我是編號3號",
+        "inventory": "10",
+        "img": "img003"
+    },
+    "p004":{
+        "category": "001",
+        "productNum": "004",
+        "detail": "我是編號4號",
+        "inventory": "10",
+        "img": "img004"
+    },
+    "p005":{
+        "category": "005",
+        "productNum": "005",
+        "detail": "我是編號5號",
+        "inventory": "10",
+        "img": "img005"
+    },
+    "p006":{
+        "category": "001",
+        "productNum": "006",
+        "detail": "我是編號6號",
+        "inventory": "10",
+        "img": "img006"
+    }
+}
