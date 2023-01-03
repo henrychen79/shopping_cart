@@ -31,30 +31,35 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
     //正規表達(密碼判斷)
     const regex = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,12}$/);
 
-    const url = '../../account.json' //假資料
-    // const url = 'http://localhost:8000/data/dataread'
+    // const url = '../../account.json' //假資料
+    // const url = 
     //判斷帳號是否重複
     const checkAccount= async ()=>{
-        let a = await fetch(url, {
+        // console.log(data.account)
+        // console.log(url)
+        let a = await fetch(`http://localhost:8080/api/user/checkAccountExist?account=${data.account}`, {
                 method: 'GET', 
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json;charset=UTF-8',
                 },
                 })
-                .then(response => response.json())
                 .then(function(res){
-                   return res.userStore.some(function(item,index,array){
-                       return item.account ===data.account
-                    })
-                    
+                    return res.json()
+                })
+                .then(function(res){
+                    console.log('res',res)
+                    return res.message
                 })
                 .catch((error) => {
                 console.error('Error:', error);
             });
+        console.log(a)    
         if(a){
             accountError.value = true//有重複
+            console.log('重複',accountError.value)
         }else{
             accountError.value = false//沒有重複
+            console.log('不重複',accountError.value)
         }
         AccountText()
         AccountRe()
@@ -71,7 +76,7 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
     }
     //有重複顯示 重複 沒重複顯示''
     const AccountRe=()=>{
-        console.log(accountError.value)
+        // console.log(accountError.value)
         if(accountError.value){
             accountWarn.value='帳號已存在，請重新檢查'
             accountColor.value='red'
@@ -139,10 +144,27 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
     //點擊按鈕
     const registerButton=()=>{
         console.log(data)
+        fetch('http://localhost:8080/api/user/registerAccount', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            })
+            .then(function(res){
+                console.log(res)
+                return res.json()
+            })
+            .then(function(res){
+                console.log('Success:', res);
+            })
+            .catch(function(error){
+                console.error('Error:', error);
+            });
     }
 
     return{
         checkPassword,checkPasswordWarn,passwordText,registerButton,doubleCheckPassword,checkAccount,AccountText,AccountRe,
-        data,regex,passControl,passwordError,passwordWarn,isDisabled,fontColor,accountControl,accountError,accountColor,accountWarn,url
+        data,regex,passControl,passwordError,passwordWarn,isDisabled,fontColor,accountControl,accountError,accountColor,accountWarn
     }
 })

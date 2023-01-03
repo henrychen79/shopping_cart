@@ -24,12 +24,20 @@ const userController = {
     }
   },
   checkAccountExist: async (req, res, next) => {
+    // console.log(req.params.account)
     try {
       let account = req.query.account;
+      // let account = req.params.account
+     
       user_M.check_account(account).then((ret) => {
-        if (ret.status === "ok") {
-          res.json(account);
-        } else res.status(400).json({ message: "這個Email被註冊過了!" });
+        // if (ret.status === "ok") {
+        //   res.json(account);
+        // } else res.status(400).json({ message: "這個Email被註冊過了!" });
+        if (ret.status === "false") {
+          res.json({message:false});
+        }else{
+          res.json({message:true});
+        }
       });
     } catch (e) {
       return next(e);

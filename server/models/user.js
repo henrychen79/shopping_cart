@@ -23,12 +23,20 @@ function creatFakeData() {
 
 //確認帳號是否已經存在（測試OK）
 async function check_account(accountName) {
+  console.log('check_account測試',accountName)
   try {
-    let target = `SELECT account FROM user WHERE account = ${accountName}`;
+    let target = `SELECT account FROM user WHERE account = '${accountName}'`;
     const [result, fields] = await db.pool.query(target);
-    console.log(result);
-    return { status: "ok", result: result };
+    // console.log('result',result);
+    // return { status: "ok", result: result };
+    console.log(result)
+    if(result.length===0){
+      return { status: "false", result: result };
+    }else{
+      return { status: "true", result: result };
+    }
   } catch (error) {
+    console.log('fail',error)
     return { status: "fail", result: error };
   }
 }
@@ -40,7 +48,7 @@ async function register(values, resolve, reject) {
     let target = `INSERT INTO user ( ${table.user.columnName} ) VALUES (${values})`;
     const [result, fields] = await db.pool.query(target);
     console.log(result, fields);
-    return { status: "ok", result: result };
+    return { "status": "ok", "result": result };
   } catch (error) {
     return { status: "fail", result: error };
   }

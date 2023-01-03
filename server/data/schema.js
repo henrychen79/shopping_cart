@@ -6,9 +6,12 @@ const tables = require("./tables.json");
 async function createDB() {
   try {
     const connection = await mysql.createConnection({
+      // host: "localhost",
+      // user: "root",
+      // password: "3345678",
       host: "localhost",
       user: "root",
-      password: "3345678",
+      password: "h6760903",
     });
     //console.log("connection", connection);
     await connection.query(`CREATE DATABASE ${schemaName}`);
@@ -20,9 +23,12 @@ async function createDB() {
 //創建連接池
 async function createPooL() {
   const pool = await mysql.createPool({
+    // host: "localhost",
+    // user: "root",
+    // password: "3345678",
     host: "localhost",
     user: "root",
-    password: "3345678",
+    password: "h6760903",
     database: schemaName,
     waitForConnections: true,
     connectionLimit: 10,
