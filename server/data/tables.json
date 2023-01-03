@@ -7,7 +7,7 @@
     "tempInfo":{
         "name":"tempInfo",
         "columns":"`account` VARCHAR(50) NOT NULL, `tempPassword` VARCHAR(6) NOT NULL, `applyTime` DATETIME NOT NULL",
-        "lolumnName":"account, tempPassword, applyTime"
+        "columnName":"account, tempPassword, applyTime"
         },
     "product":{
         "name":"product",
@@ -17,7 +17,7 @@
     "productDetail":{
         "name":"productDetail",
         "columns":"`productNum` INT NOT NULL,`detail` VARCHAR(4000) NULL,`inventory` INT NOT NULL,`img` VARCHAR(50) NOT NULL,PRIMARY KEY (`productNum`),UNIQUE INDEX `account_UNIQUE` (`productNum` ASC) VISIBLE,UNIQUE INDEX `img_UNIQUE` (`img` ASC) VISIBLE",
-        "columnName":""
+        "columnName":"category, productNum, detail, inventory, img"
     },
     "cart":{
         "name":"cart",

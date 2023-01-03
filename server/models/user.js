@@ -1,7 +1,9 @@
-const db = require("../data/schema");
+// const db = require("../data/schema");
+const db = require("../data/testDatabase");//測試單頁js用
 const table = require("../data/tables.json");
 const users = require("../data/fake_user.json");
 const { rejects } = require("assert");
+const { log } = require("console");
 /**********************************以下為假資料**********************************************/
 //（測試用OK）將假的用戶資料創建進去表單中
 function insertFakeUser(tableColumns, values) {
@@ -57,17 +59,20 @@ async function register(values, resolve, reject) {
 
 //登入會員
 async function login(accountName, password) {
-  let target = `SELECT account FROM user WHERE account = '${accountName}' AND password = '${password}'`;
-  console.log(target);
-  const [result, fields] = await db.pool.query(target);
-  console.log(result);
-  return result;
+  try {
+    let target = `SELECT account FROM user WHERE account = '${accountName}' AND password = '${password}'`;
+    const [result, fields] = await db.pool.query(target);
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.log("login ERR :" + error);
+  }
 }
 
-//STEP1：忘記密碼核對帳號，正確回傳帳號，讓他可以寄送電子信件
+//STEP1：忘記密碼核對帳號，正確回傳帳號（測試過ＯＫ），讓他可以寄送電子信件
 async function forgetPassword(accountName) {
   try {
-    let target = `SELECT account FROM user WHERE account = ${accountName}`;
+    let target = `SELECT account FROM user WHERE account = '${accountName}'`;
     const [result, fields] = await db.pool.query(target);
     console.log(result);
     return result;
@@ -75,24 +80,41 @@ async function forgetPassword(accountName) {
     console.log("forgetPassword ERR:" + error);
   }
 }
-//STEP2：隨機不重複的臨時密碼，進去DB檢查是否重複
-async function createTempPassword() {
-  let tempPassword = `${Math.floor(Math.random() * 10)}${Math.floor(
-    Math.random() * 10
-  )}${Math.floor(Math.random() * 10)}${Math.floor(
-    Math.random() * 10
-  )}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`;
-  let target = `SELECT tempPassword FROM tempInfo WHERE tempPassword = ${tempPassword}`;
+// forgetPassword('rec27@gmail.com');
+
+
+//STEP2：隨機不重複的臨時密碼，進去DB檢查是否重複，不重複寫進去DB（測試ＯＫ）
+async function createTempPassword(accountName) {
+  let tempPassword = `${Math.floor(Math.random()*10)}${Math.floor(
+    Math.random()*10
+  )}${Math.floor(Math.random()*10)}${Math.floor(
+      Math.random()*10
+  )}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}`;
+  let target = `SELECT tempPassword FROM tempInfo WHERE tempPassword = '${tempPassword}'`;
   const [result, fields] = await db.pool.query(target);
-  console.log(result); //沒有重複會回傳[]，有重複會會傳重複的臨時密碼
-  if (result.length === 0) {
-    insertTempPassword(accountName, tempPassword); //沒有重複，新增臨時密碼進入DB
+  console.log(result);//沒有重複會回傳[]，有重複會會傳重複的臨時密碼
+  if (result.length !== 0) {
+    createTempPassword(accountName);    
   }
-  return false; //表示重複了
-}
+  if (result.length === 0) {
+    let time = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    console.log(time);
+    insertTempPassword(`'${accountName}','${tempPassword}','${time}'`);  //沒有重複，新增臨時密碼進入DB
+    return true;
+  }
+};
+// createTempPassword('rec27@gmail.com')
 
 //STEP3：若不重複就新增臨時密碼進去DB
-async function insertTempPassword(params) {}
+async function insertTempPassword(values, resolve, reject) {
+  try {
+    let target = `INSERT INTO tempInfo ( ${table.tempInfo.columnName} ) VALUES (${values})`;
+    console.log(target);
+    await db.pool.query(target);
+  } catch (error) {
+    console.log('insertTempPassword ERR:' + error);
+  }
+};
 
 //STEP4：寄送暫時密碼信件（./utils/sendMail.js）
 
