@@ -1,10 +1,6 @@
 const fs = require("fs");
 const sharp = require("sharp");
 const THUMBNAIL_SIZE = process.env.THUMBNAIL_SIZE.split(",");
-const dir = "./public/images/thumbnail/";
-if (!fs.existsSync(dir)) {
-  fs.mkdirSync(dir, { recursive: true });
-}
 const adminController = {
   uploadImage: async (req, res, next) => {
     try {
@@ -14,7 +10,7 @@ const adminController = {
           height: parseInt(THUMBNAIL_SIZE[1]),
           fit: "fill",
         })
-        .toFile(dir + req.query.account + ".jpg");
+        .toFile(req.imgPath + "/" + "thumbnail.jpg");
       res.send({
         status: "success",
         message: "File uploaded successfully",

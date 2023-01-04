@@ -9,11 +9,17 @@ if (!fs.existsSync(dir)) {
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
     //console.log(file);
-    cb(null, dir);
+    let { category_id, product_id } = req.query;
+    let imgPath = dir + category_id + "/" + product_id;
+    req.imgPath = imgPath;
+    console.log("destination ", imgPath);
+    if (!fs.existsSync(imgPath)) {
+      fs.mkdirSync(imgPath, { recursive: true });
+    }
+    cb(null, imgPath);
   },
   filename: (req, file, cb) => {
-    console.log("req");
-    cb(null, req.query.account + ".jpg");
+    cb(null, "original.jpg");
   },
 });
 
