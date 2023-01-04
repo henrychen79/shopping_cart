@@ -15,5 +15,7 @@ router.get("/allCategory", productController.allCategory);
 //取得特定商品總類中所有商品
 router.get("/category/:category_id", productController.getProducts);
 
+//取得特定商品圖片
+router.get("/image", productController.getProductImg);
 
 module.exports = router;

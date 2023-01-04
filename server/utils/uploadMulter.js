@@ -1,7 +1,7 @@
 const multer = require("multer");
 const fs = require("fs");
 
-const dir = "./public/images/product/";
+const dir = process.env.PRODUCT_IMAGE_PATH;
 if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir, { recursive: true });
 }
