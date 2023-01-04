@@ -65,8 +65,24 @@ const userController = {
       console.log(result);
       sendMail(account,'忘記密碼驗證信',forgetPasswordMail(result));
       res.json({meg:'success'});
+      return;
     } catch (e) {
       console.log("forgetPassword err::", e);
+      return next(e);
+    }
+  },
+  updatePassword: async (req,res,next) =>{
+    try {
+      const { tableName,accountName,password,newPassword } = req.body;
+      const result = await user_M.check_password(tableName,accountName,password);
+      console.log(result);
+      if (result) {
+        let update_result = await user_M.updatePassword(accountName,newPassword);
+        console.log(update_result);
+        return;
+      }
+    } catch (error) {
+      console.log("updatePassword err::", e);
       return next(e);
     }
   }

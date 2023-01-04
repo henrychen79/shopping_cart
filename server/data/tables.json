@@ -6,8 +6,8 @@
     },
     "tempInfo":{
         "name":"tempInfo",
-        "columns":"`account` VARCHAR(50) NOT NULL, `tempPassword` VARCHAR(6) NOT NULL, `applyTime` DATETIME NOT NULL",
-        "columnName":"account, tempPassword, applyTime"
+        "columns":"`account` VARCHAR(50) NOT NULL, `password` VARCHAR(6) NOT NULL, `applyTime` DATETIME NOT NULL",
+        "columnName":"account, password, applyTime"
         },
     "product":{
         "name":"product",
