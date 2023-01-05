@@ -43,6 +43,7 @@ const router = createRouter({
       path: '/:category/:productInfoID',
       name: 'product',
       component: ProductView
+<<<<<<< Updated upstream
     },
     {
       path: '/shoppingCart',
@@ -63,6 +64,10 @@ const router = createRouter({
         path: 'order',
         component: () => import('../components/shoppingCart/order.vue')
       }]
+=======
+    }
+    
+>>>>>>> Stashed changes
 
     },
   ],
