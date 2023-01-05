@@ -77,7 +77,7 @@ const userController = {
       const result = await user_M.check_password(tableName,accountName,password);
       console.log(result);
       if (result) {
-        let update_result = await user_M.updatePassword(accountName,newPassword);
+        let update_result = await user_M.update_password(accountName,newPassword);
         console.log(update_result);
         return;
       }
