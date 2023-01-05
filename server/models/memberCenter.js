@@ -23,6 +23,7 @@ async function update_nickname(accountName,newNickname) {
     try {
         let target = `UPDATE user SET nickname = '${newNickname}' WHERE account = '${accountName}'`;
         await db.pool.query(target);
+        console.log('修改暱稱成功');
         return "update nickname success";//更新暱稱成功
       } catch (error) {
         console.log("update_nickname ERR: " + error);
@@ -44,6 +45,7 @@ async function allOrders(accountName) {
                 AND oD.productNum = p.productNum`;
         const [result, field] = await db.pool.query(target);
         console.log(result);
+        return result;
     } catch (error) {
         console.log("allOrders ERR:" + error);
     }
@@ -53,3 +55,6 @@ async function allOrders(accountName) {
 //按下訂單編號顯示訂單內的所有資訊order.js???
 
 /**********************************以上尚未完成**********************************************/
+
+module.exports.update_nickname = update_nickname;
+module.exports.allOrders = allOrders;

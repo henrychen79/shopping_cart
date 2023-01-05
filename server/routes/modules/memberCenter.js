@@ -5,7 +5,7 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get("/update_nickname", memberCenterController.update_nickname);
+router.post("/update_nickname", memberCenterController.update_nickname);
 router.get("/getAllOrders", memberCenterController.allOrders);
 
 module.exports = router;
