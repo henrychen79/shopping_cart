@@ -141,7 +141,7 @@ async function check_password(tableName,accountName,password) {
 // check_password('user','rec27@gmail.com','rrr9876')//修改密碼時驗證舊密碼（測試ＯＫ）
 
 //如果舊（暫時）密碼驗證成功，更新新密碼至會員表單DB(測試ＯＫ)
-async function updatePassword(accountName,newPassword) {
+async function update_password(accountName,newPassword) {
   try {
     let target = `UPDATE user SET password = '${newPassword}' WHERE account = '${accountName}'`;
     await db.pool.query(target);
@@ -150,7 +150,7 @@ async function updatePassword(accountName,newPassword) {
     console.log("updatePassword ERR: " + error);
   }
 }
-// updatePassword('rec27@gmail.com','rrr1234');//測試用
+// update_password('rec27@gmail.com','rrr1234');//測試用
 /**********************************以上後端postman測試ＯＫ，尚未串接成功**********************************************/
 
 
@@ -177,5 +177,5 @@ module.exports.register = register;
 module.exports.check_account = check_account;
 module.exports.createTempPassword = createTempPassword;
 module.exports.check_password = check_password;
-module.exports.updatePassword = updatePassword;
+module.exports.update_password = update_password;
 // module.exports.creatFakeData = creatFakeData;

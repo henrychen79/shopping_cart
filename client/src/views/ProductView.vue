@@ -1,6 +1,6 @@
 <script setup>
 import Header from '../components/Header.vue'
-import ProductInfo from '../components/ProductView/ProductInfo.vue'
+import ProductInfo from '../components/ProductView/productInfo.vue'
 import Aside from '../components/HomeView/Aside.vue'
 
 
@@ -17,10 +17,13 @@ import Aside from '../components/HomeView/Aside.vue'
 
     </main>
 
+    <Footer />
 </template>
 <style scoped>
 .main {
     display: flex;
-    /* background-color: aquamarine; */
+    height: 100%;
+    flex-grow: 1;
+
 }
 </style>

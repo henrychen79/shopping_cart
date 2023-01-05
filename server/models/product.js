@@ -39,7 +39,7 @@ async function getProduct(category, page) {
   return result;
 };
 
-//搜尋商品，按照頁數列出對應的資料筆數
+//搜尋商品，按照頁數列出對應的資料筆數（測試ＯＫ）
 async function getSpecificiProduct(category_id, product_num) {
   try {
     let target = `

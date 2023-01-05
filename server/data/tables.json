@@ -33,12 +33,12 @@
     "orderDetail":{
         "name":"orderDetail",
         "columns":"`id` INT NOT NULL AUTO_INCREMENT,`orderNum` INT NOT NULL,`productNum` INT NOT NULL,PRIMARY KEY (`id`),UNIQUE INDEX `account_UNIQUE` (`productNum` ASC) VISIBLE",
-        "columnName":""
+        "columnName":"orderNum, productNum"
     },
     "orderList":{
         "name":"orderList",
         "columns":"`orderNum` INT NOT NULL,`account` VARCHAR(50) NOT NULL,`orderTime` DATETIME NOT NULL,`pay_status` VARCHAR(45) NOT NULL,`deliver_status` VARCHAR(45) NOT NULL,`order_amount` INT NOT NULL DEFAULT 1,`sendName` VARCHAR(45) NOT NULL,`sendAdd` VARCHAR(100) NOT NULL,`payWay` VARCHAR(45) NOT NULL,`totalPrice` INT NOT NULL,UNIQUE INDEX `account_UNIQUE` (`orderNum` ASC) VISIBLE,PRIMARY KEY (`orderNum`)",
-        "columnName":""
+        "columnName":"orderNum, account, orderTime, pay_status, deliver_status, order_amount, sendName, sendAdd, payWay, totalPrice"
     }
 }
 

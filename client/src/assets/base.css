@@ -7,6 +7,13 @@
   --black-soft: #222222;
   --black-mute: #282828;
 
+  --grey: #dedede;
+
+  --text-xs: 0.5rem;
+  --text-s: 0.8rem;
+  --text-m: 1rem;
+  --text-l: 1.2rem;
+  --text-xl: 1.5rem;
 }
 
 :root {
@@ -23,6 +30,7 @@
   font-weight: normal;
 }
 
+html,
 body {
   min-height: 100vh;
   background: var(--color-background);
