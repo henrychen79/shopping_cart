@@ -2,10 +2,10 @@
 
 #app {
   max-width: 1280px;
+  min-height: 100vh;
   margin: 0 auto;
   /* padding: 2rem; */
-  background-color: rgb(243, 242, 242);
-
+  background-color: var(--white);
   display: flex;
   flex-direction: column;
 }

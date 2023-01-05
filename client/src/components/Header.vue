@@ -1,7 +1,5 @@
 <script setup>
 
-
-
 </script>
 
 <template>
@@ -11,41 +9,96 @@
             <img src="" alt="">
         </div>
         <ul class="headerBar">
-            <li><a href="#">你好!</a></li>
+
+            <li>你好!</li>
             <li><a href="#">登入</a></li>
             <li><a href="#">註冊</a></li>
             <li><a href="#">會員中心</a></li>
             <li><a href="#">訂單查詢</a></li>
-            <li><a href="#">購物車</a></li>
+            <li><router-link to="/shoppingCart">購物車</router-link></li>
+        </ul>
+
+        <ul class="headerBar-mobile">
+
+            <li>你好!</li>
+            <li><a href="#">登入</a></li>
+            <li><a href="#">註冊</a></li>
+            <li><a href="#"><font-awesome-icon icon="fas fa-user-alt" /></a></li>
+            <li><a href="#"><font-awesome-icon icon="fas fa-clipboard-list" /></a></li>
+            <li><router-link to="/shoppingCart"><font-awesome-icon icon="fas fa-shopping-cart" /></router-link></li>
         </ul>
     </header>
 
+
 </template>
-<style scoped>
+<style scoped lang="scss">
 header {
     display: flex;
     justify-content: space-between;
+    background-color: var(--grey);
+    max-height: 3rem;
+
+    ul.headerBar {
+        display: flex;
+        align-items: center;
+        font-size: var(--text-m);
+        /* gap: 1rem; */
+
+        li:not(:nth-child(1)) {
+            border-left: 1px solid rgb(25, 25, 25);
+        }
+
+        li {
+            margin: 1rem 0;
+            padding: 0 1rem;
+        }
+
+        li a {
+            text-decoration: none;
+            color: rgb(25, 25, 25);
+        }
+    }
 }
 
-ul.headerBar {
-    display: flex;
-    /* gap: 1rem; */
+
+header ul.headerBar-mobile {
+    display: none;
 }
 
-ul.headerBar li a {
-    text-decoration: none;
-    color: rgb(25, 25, 25);
-    font-size: 1.5rem;
-}
 
-ul.headerBar li {
-    margin: 1rem 0;
-    padding: 0 1rem;
-}
+@media only screen and (max-width: 452px) {
+    header ul.headerBar {
+        display: none;
+    }
 
-ul li:not(:nth-child(1)) {
-    /* background-color: aqua; */
-    border-left: 1px solid rgb(25, 25, 25);
-    ;
+    header ul.headerBar-mobile {
+        display: block;
+        display: flex;
+        justify-content: space-between;
+        background-color: var(--grey);
+        max-height: 3rem;
+    }
+
+    ul.headerBar-mobile {
+        display: flex;
+        align-items: center;
+        font-size: var(--text-s);
+        /* gap: 1rem; */
+
+        li:not(:nth-child(1)) {
+            border-left: 1px solid rgb(25, 25, 25);
+            ;
+        }
+
+        li {
+            margin: 0.5rem 0;
+            padding: 0 0.5rem;
+        }
+
+        li a {
+            text-decoration: none;
+            color: rgb(25, 25, 25);
+        }
+    }
 }
 </style>

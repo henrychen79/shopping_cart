@@ -17,10 +17,12 @@ import Aside from '../components/HomeView/Aside.vue'
 
   </main>
 
+  <Footer />
 </template>
 <style scoped>
 .main {
   display: flex;
-  /* background-color: aquamarine; */
+  min-height: 100%;
+  flex-grow: 1;
 }
 </style>

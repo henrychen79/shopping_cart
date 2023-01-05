@@ -8,8 +8,6 @@ const pd = productStore();
 </script>
 
 <template>
-    <!-- {{ pd.crrentPage }}
-    {{ pd.showPages }} -->
     <ul class="pagination">
         <li @click="pd.btnLeft"><a href="#">«</a></li>
         <li v-for="pageNumber in pd.showPages" @click="pd.crrentPage = pageNumber">
@@ -22,8 +20,9 @@ const pd = productStore();
 <style scoped >
 ul.pagination {
     display: inline-block;
-    padding: 0;
-    margin: 0;
+    /* margin-top: auto; */
+    margin-bottom: 1rem;
+    align-self: center;
 }
 
 ul.pagination li {
@@ -39,18 +38,18 @@ ul.pagination li a {
 }
 
 ul.pagination li a.active {
-    background-color: #6f76c9;
-    color: white;
+    background-color: var(--grey);
+    color: var(--black-soft);
     border-radius: 50%;
 }
 
 ul.pagination li:focus {
-    background-color: #9899ac;
-    color: white;
+    background-color: var(--grey);
+    color: var(--black-soft);
     border-radius: 50%;
 }
 
 ul.pagination li a:hover:not(.active) {
-    background-color: #ddd;
+    background-color: var(--grey);
 }
 </style>
