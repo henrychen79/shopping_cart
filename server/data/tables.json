@@ -21,14 +21,15 @@
     },
     "cart":{
         "name":"cart",
-        "columns":"`cart_id` INT NOT NULL AUTO_INCREMENT,`account` VARCHAR(50) NOT NULL,`item` VARCHAR(50) NOT NULL,PRIMARY KEY (`cart_id`),UNIQUE INDEX `account_UNIQUE` (`account` ASC) VISIBLE",
-        "columnName":""
+        "columns":"`id` INT NOT NULL AUTO_INCREMENT,`user_id` INT NOT NULL,`create_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY (`id`),INDEX `user_id_idx` (`user_id` ASC) VISIBLE,CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION",
+        "columnName":"user_id"
     },
     "cart_item":{
         "name":"cart_item",
-        "columns":"`id` INT NOT NULL AUTO_INCREMENT,`cart_id` INT NOT NULL,`productNum` INT NOT NULL,PRIMARY KEY (`id`),UNIQUE INDEX `account_UNIQUE` (`id` ASC) VISIBLE,UNIQUE INDEX `productNum_UNIQUE` (`productNum` ASC) VISIBLE",
-        "columnName":""
+        "columns":"`id` INT NOT NULL AUTO_INCREMENT,`cart_id` INT NOT NULL,`product_id` INT NOT NULL,`quantity` INT NOT NULL DEFAULT 1,`create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY (`id`),INDEX `cart_id_idx` (`cart_id` ASC) VISIBLE,INDEX `product_id_idx` (`product_id` ASC) VISIBLE, CONSTRAINT `cart_id` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION, CONSTRAINT `product_id` FOREIGN KEY (`product_id`) REFERENCES `productdetail` (`productNum`) ON DELETE NO ACTION ON UPDATE NO ACTION",
+        "columnName":"cart_id, product_id, quantity"
     },
+    
     "orderDetail":{
         "name":"orderDetail",
         "columns":"`id` INT NOT NULL AUTO_INCREMENT,`orderNum` INT NOT NULL,`productNum` INT NOT NULL,PRIMARY KEY (`id`),UNIQUE INDEX `account_UNIQUE` (`productNum` ASC) VISIBLE",
