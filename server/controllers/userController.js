@@ -1,4 +1,5 @@
 const user_M = require("../models/user");
+const cart_M = require("../models/cart");
 const jwt = require("jsonwebtoken");
 const { sendMail, forgetPasswordMail } = require("../utils/sendMail");
 const userController = {
@@ -11,12 +12,17 @@ const userController = {
       result[2] = `'${password}'`;
       result[3] = `'${name}'`;
       console.log(result);
-      user_M.register(result).then((ret) => {
-        if (ret.status === "ok") {
+      const ret = await user_M.register(result);
+      console.log("ret:: ", ret);
+      if (ret.status === "ok") {
+        console.log(ret.result.insertId);
+        if (ret.result.insertId) {
+          await cart_M.addToCart([ret.result.insertId]);
           res.json(req.body);
-        } else res.status(500).json(ret);
-      });
+        }
+      } else res.status(500).json(ret);
     } catch (e) {
+      console.log(e);
       return next(e);
     }
   },
@@ -58,26 +64,33 @@ const userController = {
       return next(e);
     }
   },
-  forgetPassword: async (req,res,next) => {
+  forgetPassword: async (req, res, next) => {
     try {
       const { account } = req.body;
       const result = await user_M.createTempPassword(account);
       console.log(result);
-      sendMail(account,'忘記密碼驗證信',forgetPasswordMail(result));
-      res.json({meg:'success'});
+      sendMail(account, "忘記密碼驗證信", forgetPasswordMail(result));
+      res.json({ meg: "success" });
       return;
     } catch (e) {
       console.log("forgetPassword err::", e);
       return next(e);
     }
   },
-  updatePassword: async (req,res,next) =>{
+  updatePassword: async (req, res, next) => {
     try {
-      const { tableName,accountName,password,newPassword } = req.body;
-      const result = await user_M.check_password(tableName,accountName,password);
+      const { tableName, accountName, password, newPassword } = req.body;
+      const result = await user_M.check_password(
+        tableName,
+        accountName,
+        password
+      );
       console.log(result);
       if (result) {
-        let update_result = await user_M.update_password(accountName,newPassword);
+        let update_result = await user_M.updatePassword(
+          accountName,
+          newPassword
+        );
         console.log(update_result);
         return;
       }
@@ -85,10 +98,9 @@ const userController = {
       console.log("updatePassword err::", e);
       return next(e);
     }
-  }
+  },
 };
 
-// 
-
+//
 
 module.exports = userController;
