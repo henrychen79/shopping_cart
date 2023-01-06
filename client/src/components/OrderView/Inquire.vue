@@ -12,12 +12,12 @@ console.log(orderStore.orderList)
     <!-- <h1>{{orderStore.testNum}}</h1> -->
     <div class="ordermain">
        <div class="orderInfo" >
-            <div class="Info" v-for="(item,index) in orderStore.orderList.order">
+            <div class="Info" v-for="(item,index) in orderStore.orderList">
                 <div class="content">
                     <p>訂單編號:{{item.orderNum}}</p>
-                    <p>訂單內容:{{item.priductNum}}</p>
+                    <p>訂單內容:{{item.productName}}</p>
                     <p>訂單時間:{{item.orderTime}}</p>
-                    <p>訂單金額:{{item.totalPrice}}</p>
+                    <p>訂單金額:${{item.totalPrice}}</p>
                 </div>
                 <div class="status">
                     <p>付款狀態:{{item.pay_status}}</p>

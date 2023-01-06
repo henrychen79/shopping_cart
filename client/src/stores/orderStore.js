@@ -7,6 +7,7 @@ export const userOrderStore = defineStore('orderStore',()=>{
 
     // const orederTest =async ()=>{
     //     const aaa = 'rec27@gmail.com'
+    //     console.log(url)
     //     const url = `http://172.20.10.4:8080/api/member/getAllOrders?account=${aaa}`
     //     let data = await fetch(url, {
     //         method: 'GET', 
@@ -54,60 +55,42 @@ export const userOrderStore = defineStore('orderStore',()=>{
 
     // }
     
-    const url = '../../orderTest.json'
+   
+
     let orderList = ref([])
     const orederTest =async ()=>{
-        let data =  await fetch(url, {
-            method: 'GET', 
-            headers: {
-                'Content-Type': 'application/json;charset=UTF-8',
-            },
-            })
-            .then(function(res){
-                return res.json()
-            })
-            .then(function(res){
-                return res
-            })
-            .catch((error) => {
-            console.error('Error:', error);
-        });
-        orderList.value = data
-   
-        
+        const url = '../../orderTest.json'
+        //以下 aaa url 連結資料庫用
+        // const aaa = 'rec27@gmail.com'
+        // const url = `http://172.20.10.4:8080/api/member/getAllOrders?account=${aaa}`
+        try {
+            let data =  await fetch(url, {
+                method: 'GET', 
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                },
+                })
+                .then(function(res){
+                    return res.json()
+                })
+                .then(function(res){
+                    console.log(res)
+                    return res
+                })
+                .catch((error) => {
+                console.error('Error:', error);
+            });
+                // orderList.value = data //要連資料庫開啟的(要用這個記得把下面那段註解起來)
+                orderList.value = data.order //假資料用
+            }catch (error) {   
+                console.log(error)
+        }
     }
     
 
-    let testNum = ref(0)
-    function promiseFn(value){
-        return new Promise((resolve,reject)=>{
-            setTimeout(()=>{
-                if(value>5){
-                    resolve(value);
-                }else{
-                    reject('沒有資料')
-                }
-            },4000)
-        })
-    }
-    async function asyncFn(value){
-        try {
-            let promiseOne =await promiseFn(value);
-            testNum.value = promiseOne
-            // return promiseOne
-        } catch (error) {
-            return error
-        }
-    }
-    // testNum = asyncFn(10)
-
     return{
-        promiseFn,
-        asyncFn,
-        testNum,
-        // test, 
         orederTest,
-        url,
+        // url,
         orderList,
         // aaa
     }
