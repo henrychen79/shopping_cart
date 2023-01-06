@@ -1,15 +1,21 @@
 <script setup>
+import modifyName from './modifyName.vue'
+import modifyPassWord from './modifyPw.vue'
+import {useMemberStore} from '../../stores/memberStore'
+const memberStore = useMemberStore();
+
 </script>
 
 <template>
+
 <h1>會員中心</h1>
 <div class="mainInfo">
     <div class="reviseInfo">
         <h2>修改會員資料</h2>
         <div class="test"></div>
         <ul>
-            <li><a href="#">修改密碼</a></li>
-            <li><a href="#">修改暱稱</a></li>
+            <li><a href="#" v-on:click="memberStore.OpenPwFn">修改密碼</a></li>
+            <li><a href="#" v-on:click="memberStore.OpenNameFn">修改暱稱</a></li>
         </ul>
     </div>
     <div class="orderInfo">
@@ -17,6 +23,8 @@
         <div class="test"></div>
     </div>
 </div>
+    <modifyName/>
+    <modifyPassWord/>
 </template>
 
 <style lang="scss" scoped>
