@@ -53,11 +53,62 @@ export const userOrderStore = defineStore('orderStore',()=>{
     //         });
 
     // }
+    
+    const url = '../../orderTest.json'
+    let orderList = ref([])
+    const orederTest =async ()=>{
+        let data =  await fetch(url, {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+            },
+            })
+            .then(function(res){
+                return res.json()
+            })
+            .then(function(res){
+                return res
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+        });
+        orderList.value = data
+   
+        
+    }
+    
+
+    let testNum = ref(0)
+    function promiseFn(value){
+        return new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                if(value>5){
+                    resolve(value);
+                }else{
+                    reject('沒有資料')
+                }
+            },4000)
+        })
+    }
+    async function asyncFn(value){
+        try {
+            let promiseOne =await promiseFn(value);
+            testNum.value = promiseOne
+            // return promiseOne
+        } catch (error) {
+            return error
+        }
+    }
+    // testNum = asyncFn(10)
 
     return{
-        // orederTest,
-        // test
-        // url,
+        promiseFn,
+        asyncFn,
+        testNum,
+        // test, 
+        orederTest,
+        url,
+        orderList,
         // aaa
     }
 })
