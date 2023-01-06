@@ -11,7 +11,7 @@ async function createDB() {
       // password: "3345678",
       host: "localhost",
       user: "root",
-      password: "h6760903",
+      // password: "h6760903",
     });
     //console.log("connection", connection);
     await connection.query(`CREATE DATABASE ${schemaName}`);
@@ -28,7 +28,7 @@ async function createPooL() {
     // password: "3345678",
     host: "localhost",
     user: "root",
-    password: "h6760903",
+    // password: "h6760903",
     database: schemaName,
     waitForConnections: true,
     connectionLimit: 10,
@@ -44,7 +44,7 @@ async function createTable(tableName, columns) {
     // console.log(target)
     await exports.pool.query(target);
   } catch (error) {
-    console.log("create table error:", error);
+    // console.log("create table error:", error);
   }
 }
 

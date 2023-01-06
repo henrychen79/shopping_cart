@@ -3,7 +3,7 @@ const cartController = {
   addToCartItem: async (req, res, next) => {
     try {
       const { user_id, product_id, quantity } = req.body;
-      console.log(req.body);
+      // console.log(req.body);
       console.log(user_id, product_id, quantity);
       const cart_id = await cart_M.getCart(user_id);
       console.log(cart_id);
@@ -14,7 +14,7 @@ const cartController = {
           1,
         ]);
       }
-      res.json({ status: "ok" });
+      res.json({ status: "加入購物車成功" });
     } catch (error) {
       console.log(error);
       next(error);
@@ -22,9 +22,11 @@ const cartController = {
   },
   getCartItem: async (req, res, next) => {
     try {
+      // console.log(req);
       const { user_id } = req.params;
       const cart_id = await cart_M.getCart(user_id);
       const result = await cart_M.getCartItem(cart_id[0].id);
+      console.log(result);//[搜尋結果，總金額]
       res.json(result);
     } catch (error) {
       console.log(error);
@@ -33,10 +35,9 @@ const cartController = {
   },
   delCartItem: async (req, res, next) => {
     try {
-      const { cart_item_id } = req.body;
-      console.log(cart_item_id);
+      const cart_item_id= req.body.id;
       const result = await cart_M.delCartItem(cart_item_id);
-      res.json(result);
+      res.json(result);//刪除商品成功
     } catch (error) {
       console.log(error);
       next(error);

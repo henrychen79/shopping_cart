@@ -68,8 +68,17 @@ const userController = {
   forgetPassword: async (req, res, next) => {
     try {
       const { account } = req.body;
-      const result = await user_M.createTempPassword(account);
-      console.log(result);
+      //檢查帳號是否存在
+      const result1 = await forgetPassword(account);
+      console.log(result1);
+      if (result1.length === 0) {
+        res.json({ meg: "account doesn't exist" });
+        return;
+      }
+
+      //如果帳號存在，則生成暫時密碼
+      const result2 = await user_M.createTempPassword(account);
+      console.log(result2);
       sendMail(account, "忘記密碼驗證信", forgetPasswordMail(result));
       res.json({ meg: "success" });
       return;
@@ -80,6 +89,7 @@ const userController = {
   },
   updatePassword: async (req, res, next) => {
     try {
+      //如果是臨時密碼，tableName = tempInfo；如果是修改密碼，tableName = user
       const { tableName, accountName, password, newPassword } = req.body;
       const result = await user_M.check_password(
         tableName,

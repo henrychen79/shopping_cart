@@ -11,7 +11,7 @@ async function insertFakeUser(tableColumns, values) {
     let target = `INSERT INTO user ( ${tableColumns} ) VALUES (${values}) `;
     await db.pool.query(target);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 function creatFakeData() {
@@ -187,3 +187,4 @@ module.exports.createTempPassword = createTempPassword;
 module.exports.check_password = check_password;
 module.exports.update_password = update_password;
 module.exports.creatFakeData = creatFakeData;
+module.exports.forgetPassword = forgetPassword;

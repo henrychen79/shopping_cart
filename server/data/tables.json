@@ -12,12 +12,12 @@
     "product":{
         "name":"product",
         "columns":"`product_id` INT NOT NULL AUTO_INCREMENT,`productNum` INT NOT NULL,`category` VARCHAR(12) NOT NULL,`productName`VARCHAR(20) NOT NULL, `thumbnail` VARCHAR(50) NOT NULL,`price` INT NOT NULL,PRIMARY KEY (`product_id`),UNIQUE INDEX `user_id_UNIQUE` (`product_id` ASC) VISIBLE,UNIQUE INDEX `thumbnail_UNIQUE` (`thumbnail` ASC) VISIBLE",
-        "columnName":"productNum, category, productName, thumbnail, price"
+        "columnName":"product_id, productNum, category, productName, thumbnail, price"
     },
     "productDetail":{
         "name":"productDetail",
         "columns":"`product_id` INT NOT NULL AUTO_INCREMENT,`productNum` INT NOT NULL,`category` VARCHAR(12) NOT NULL,`detail` VARCHAR(4000) NULL,`inventory` INT NOT NULL,`img` VARCHAR(50) NOT NULL,PRIMARY KEY (`product_id`),UNIQUE INDEX `account_UNIQUE` (`productNum` ASC) VISIBLE,UNIQUE INDEX `img_UNIQUE` (`img` ASC) VISIBLE",
-        "columnName":"category, productNum, detail, inventory, img"
+        "columnName":"product_id, detail, inventory, img"
     },
     "cart":{
         "name":"cart",

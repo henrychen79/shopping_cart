@@ -7,7 +7,9 @@ router.use((req, res, next) => {
 router.get("/checkAccountExist", userController.checkAccountExist);
 router.post("/registerAccount", userController.registerAccount);
 router.post("/login", userController.login);
+//忘記密碼＋寄送臨時密碼信函
 router.post("/forgetPassword", userController.forgetPassword);
+//修改密碼
 router.post("/updatePassword",userController.updatePassword);
 
 module.exports = router;

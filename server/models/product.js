@@ -28,24 +28,18 @@ async function product_amount() {
 
 //搜尋商品，按照頁數列出對應的資料筆數(測試OK)
 async function getProduct(category, page) {
-  let target = `SELECT ${
-    table.product.columnName
-  } FROM product WHERE category=${category} AND productNum BETWEEN ${
-    (page - 1) * pageLimit + 1
+  let target = `SELECT * FROM product WHERE category=${category} AND product_id BETWEEN ${
+    (page -1) * pageLimit + 1
   } AND ${page * pageLimit}`;
   const [result, fields] = await db.pool.query(target);
+  console.log(result);
   return result;
 }
 
 //搜尋商品，按照頁數列出對應的資料筆數（測試ＯＫ）********
-async function getSpecificiProduct(category_id, product_num) {
+async function getSpecificiProduct(product_id) {
   try {
-    let target = `SELECT pD.*,p.*
-      FROM productDetail AS pD ,product AS p
-      WHERE pD.category = p.category  
-      AND p.category = '${category_id}'
-      AND pD.productNum = p.productNum
-      AND p.productNum = '${product_num}'`;
+    let target = `SELECT * FROM productDetail LEFT JOIN product USING(product_id) WHERE productDetail.product_id = '${product_id}'`;
     console.log(target);
     const [result, fields] = await db.pool.query(target);
     console.log(result);
