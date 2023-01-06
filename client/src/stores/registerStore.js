@@ -31,13 +31,13 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
     //正規表達(密碼判斷)
     const regex = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,12}$/);
 
-    // const url = '../../account.json' //假資料
-    // const url = 
+    const url = '../../account.json' //假資料
+    // const url = `http://localhost:8080/api/user/checkAccountExist?account=${data.account}`
     //判斷帳號是否重複
     const checkAccount= async ()=>{
         // console.log(data.account)
         // console.log(url)
-        let a = await fetch(`http://localhost:8080/api/user/checkAccountExist?account=${data.account}`, {
+        let a = await fetch(url, {
                 method: 'GET', 
                 headers: {
                     'Content-Type': 'application/json;charset=UTF-8',
@@ -48,7 +48,8 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
                 })
                 .then(function(res){
                     console.log('res',res)
-                    return res.message
+                    return res //假資料用
+                    // return res.message
                 })
                 .catch((error) => {
                 console.error('Error:', error);

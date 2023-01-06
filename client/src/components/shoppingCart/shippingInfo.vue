@@ -1,6 +1,8 @@
 <script setup>
 import { computed, ref } from "vue"
+import { cartStore } from "../../stores/cartStore"
 
+const cs = cartStore();
 </script>
 
 <template>

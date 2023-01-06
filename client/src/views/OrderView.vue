@@ -8,7 +8,15 @@ import Inquireinfo from '../components/OrderView/Inquire.vue'
     <Header/>
     <div class="main">
         <h1>訂單查詢</h1>
-        <Inquireinfo/>
+        <!-- <Inquireinfo/> -->
+            <Suspense>
+                <template #fallback> 
+                    <h1>Loading</h1>
+                </template>
+                <template #default>
+                    <Inquireinfo/>
+                </template>
+            </Suspense>
     </div>
 
 </template>
@@ -18,7 +26,7 @@ h1{
     margin:10px 2rem;
 }
 .main{
-    border: 2px solid black;
+    // border: 2px solid black;
     width: 100%;
     height: 70%;
     position: absolute;

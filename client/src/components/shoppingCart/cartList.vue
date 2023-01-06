@@ -2,10 +2,14 @@
 import { computed, ref } from "vue"
 import router from "../../router";
 import cartItemVue from "./cartItem.vue";
+import { cartStore } from "../../stores/cartStore"
+
+const cs = cartStore();
 </script>
 
 <template>
     <table class="cartList">
+
         <thead>
             <tr>
                 <th>商品圖片</th>
@@ -26,7 +30,7 @@ import cartItemVue from "./cartItem.vue";
                 <td colspan="2">
                     <h3>總金額</h3>
                     <p>20000</p>
-                    <router-link to="/shoppingCart/shippingInfo" class="btn">結帳</router-link>
+                    <router-link to="/shoppingCart/shippingInfo" @click="addNum" class="btn">結帳</router-link>
                 </td>
             </tr>
         </tfoot>
