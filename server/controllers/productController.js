@@ -70,12 +70,14 @@ const productController = {
         product_id,
         type + ".jpg"
       );
+      // console.log(imagePath);
       if (!fs.existsSync(imagePath)) {
         return res.send("image is not found");
       }
       // 設定回傳 Header 的資料類型為 jpg 格式的圖片
       res.set("Content-Type", "image/jpg");
       // 讀取檔案，透過 pipe() 將檔案數據轉給回傳物件 res在瀏覽器中渲染
+      // console.log(res);
       fs.createReadStream(imagePath).pipe(res);
     } catch (error) {
       next(error);

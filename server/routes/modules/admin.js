@@ -11,4 +11,6 @@ router.post(
   adminController.uploadImage
 );
 
+router.post("/update_product",adminController.update_product)
+
 module.exports = router;

@@ -44,7 +44,7 @@ async function createTable(tableName, columns) {
     // console.log(target)
     await exports.pool.query(target);
   } catch (error) {
-    //console.log("create table error:", error);
+    console.log("create table error:", error);
   }
 }
 

@@ -11,7 +11,7 @@ async function addProduct(tableColumns, values) {
   } catch (error) {}
 }
 
-//查找商品種類類型、各類型的總量
+//查找商品種類類型、各類型的總量******
 async function product_amount() {
   try {
     let target = 
@@ -39,18 +39,16 @@ async function getProduct(category, page) {
   return result;
 };
 
-//搜尋商品，按照頁數列出對應的資料筆數（測試ＯＫ）
+//搜尋商品，按照頁數列出對應的資料筆數（測試ＯＫ）********
 async function getSpecificiProduct(category_id, product_num) {
   try {
-    let target = `
-    SELECT pD.productNum, pD.detail, pD.inventory, pD.img ,
-      p.category,p.productName, p.thumbnail, p.price
-    FROM productDetail AS pD ,product AS p
-    WHERE pD.category = p.category  
+    let target = `SELECT pD.*,p.*
+      FROM productDetail AS pD ,product AS p
+      WHERE pD.category = p.category  
       AND p.category = '${category_id}'
       AND pD.productNum = p.productNum
       AND p.productNum = '${product_num}'`
-    // console.log(target);
+    console.log(target);
     const [result, fields] = await db.pool.query(target);
     console.log(result);
     return result;
@@ -77,6 +75,9 @@ async function getProduct_order(category, page, order) {
   }
 }
 // getProduct_order('001','2','DESC')
+
+
+/**********************************以下為假資料**********************************************/
 //利用假資料新增進資料庫
 function generateFakeData() {
   for (const key in products) {
@@ -91,6 +92,10 @@ function generateFakeData() {
 }
 
 //新增假資料DETAIL進去資料庫還沒做
+/**********************************以上為假資料**********************************************/
+
+
+
 module.exports.generateFakeData = generateFakeData;
 module.exports.getProduct = getProduct;
 module.exports.getSpecificiProduct = getSpecificiProduct;
@@ -98,20 +103,4 @@ module.exports.product_amount = product_amount;
 module.exports.getProduct_order = getProduct_order;
 
 
-/**********************************以下為假資料**********************************************/
-// function addProduct(tableColumns,values) {
-//     let target = `INSERT INTO product ( ${tableColumns} ) VALUES (${values})`;
-//     db.pool.query(target);
-// };
-//利用假資料新增進資料庫
-// for (const key in products) {
-//     addProduct(table.product.columnName,[
-//                 products[key].productNum,
-//                 products[key].category,
-//                 products[key].name,
-//                 products[key].thumbnail,
-//                 products[key].price
-//             ])
-// };
-/**********************************以上為假資料**********************************************/
 

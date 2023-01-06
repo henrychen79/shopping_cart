@@ -24,7 +24,7 @@ async function getCart(user_id) {
   return result;
 }
 async function getCartItem(cart_id) {
-  let target = `SELECT a.id as cart_item_id, a.quantity, a.create_at, b.inventory, b.img FROM (select * from cart_item where cart_id=${cart_id}) as a LEFT JOIN productdetail as b ON a.product_id = b.productNum`;
+  let target = `SELECT a.id as cart_item_id, a.quantity, a.create_at, b.inventory, b.img FROM (select * from cart_item where cart_id=${cart_id}) as a LEFT JOIN productDetail as b ON a.product_id = b.product_id`;
   const [result, fields] = await db.pool.query(target);
   console.log(result);
   return result;

@@ -6,18 +6,27 @@ const { rejects } = require("assert");
 const { log } = require("console");
 /**********************************以下為假資料**********************************************/
 //（測試用OK）將假的用戶資料創建進去表單中
-function insertFakeUser(tableColumns, values) {
-  let target = `INSERT INTO user ( ${tableColumns} ) VALUES (${values}) `;
-  db.pool.query(target);
+async function insertFakeUser(tableColumns, values) {
+  try {
+    let target = `INSERT INTO user ( ${tableColumns} ) VALUES (${values}) `;
+    await db.pool.query(target);
+  } catch (error) {
+    console.log(error);
+  }
 }
 function creatFakeData() {
-  for (const key in users) {
-    insertFakeUser(table.user.columnName, [
-      users[key].role,
-      users[key].account,
-      users[key].password,
-      users[key].nickname,
-    ]);
+  try {
+    
+    for (const key in users) {
+      insertFakeUser(table.user.columnName, [
+        users[key].role,
+        users[key].account,
+        users[key].password,
+        users[key].nickname,
+      ]);
+    }
+  } catch (error) {
+    
   }
 }
 // creatFakeData()
@@ -178,4 +187,4 @@ module.exports.check_account = check_account;
 module.exports.createTempPassword = createTempPassword;
 module.exports.check_password = check_password;
 module.exports.update_password = update_password;
-// module.exports.creatFakeData = creatFakeData;
+module.exports.creatFakeData = creatFakeData;
