@@ -27,6 +27,17 @@ const cartController = {
       next(error);
     }
   },
+  delCartItem: async (req, res, next) => {
+    try {
+      const { cart_item_id } = req.body;
+      console.log(cart_item_id);
+      const result = await cart_M.delCartItem(cart_item_id);
+      res.json(result);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  },
 };
 
 module.exports = cartController;
