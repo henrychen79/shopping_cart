@@ -8,10 +8,10 @@ const memberStore = useMemberStore();
     <div :class="['modify_name_main',{modifyOpen:memberStore.modifyNameOpen}]">
         <div class="modify_txt">
             <label>請輸入新的暱稱:</label>
-            <input/>
+            <input v-model="memberStore.modifyNamedata.newNickname" />
         </div>
         <div class="modify_name_btn">
-            <button>確認</button>
+            <button v-on:click="memberStore.modifyNickName">確認</button>
             <button v-on:click="memberStore.OpenNameFn">取消</button>
         </div>
     </div>
