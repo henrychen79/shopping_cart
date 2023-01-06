@@ -13,24 +13,19 @@ const ps = productStore();
         <div class="productSort">
             <p>商品排序</p>
             <span>價格</span>
-            <input type="radio" name='price'> <span>由高到低</span>
-            <input type="radio" name='price'> <span>由低到高</span>
+            <input type="radio" name='price' value="" checked v-model="ps.sortValue"> <span>預設</span>
+            <input type="radio" name='price' value="up" v-model="ps.sortValue"> <span>由低到高</span>
+            <input type="radio" name='price' value="down" v-model="ps.sortValue"> <span>由高到低</span>
         </div>
         <div class="cards">
-            <Product v-for="item in ps.productData">
-                <template #img>
-                    {{ item.productNum }}
-                    <RouterLink
-                        :to="{ name: 'product', params: { category: `${ps.currentCategory}`, productInfoID: `${item.productNum}` } }">
-                        <img src="" alt="" style="height:100%;width:100%">
-                    </RouterLink>
-                </template>
+            <Product v-for="item in ps.productData"
+                :imgData="{ category: `${ps.currentCategory}`, productInfoID: `${item.productNum}` }">
                 <template #name>{{ item.productName }}</template>
                 <template #price>${{ item.price }}</template>
             </Product>
         </div>
 
-        <pagebar v-if="productData" />
+        <pagebar />
     </article>
 
 

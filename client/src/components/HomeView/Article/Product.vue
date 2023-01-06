@@ -1,4 +1,30 @@
 <script setup>
+import { ref, defineProps, watch } from "vue";
+
+const paramData = defineProps({
+    imgData: Object
+});
+const fetchURL = 'http://172.20.10.4:8080'
+
+const imgURL = ref('')
+
+watch(() => {
+    const productInfo = async () => {
+        let data = await fetch(`${fetchURL}/api/product/image?category_id=${paramData.imgData.category}&product_id=${paramData.imgData.productInfoID}&type=thumbnail`, {
+            method: 'GET',
+        })
+            .then(response => response.blob())
+            .then(function (res) {
+                // 將 blog 物件轉為 url
+                imgURL.value = URL.createObjectURL(res)
+                return res
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+    productInfo();
+})
 
 </script>
 
@@ -6,14 +32,14 @@
     <div class="cards_item">
         <div class="card">
             <div class="card_image">
-                <slot name="img"></slot>
+                <RouterLink :to="{ name: 'product', params: paramData.imgData }">
+                    <img :src="imgURL" alt="" style="height:100%;width:100%">
+                </RouterLink>
             </div>
             <div class="card_content">
-                <!-- <RouterLink to="/123s"> -->
                 <h3>
                     <slot name="name"></slot>
                 </h3>
-                <!-- </RouterLink> -->
                 <p>
                     <slot name="price"></slot>
                 </p>
@@ -56,7 +82,6 @@
 .card {
     height: 15rem;
     width: 12rem;
-    /* background-color: rgb(239, 236, 233); */
     border: 1px solid var(--black-mute);
     display: flex;
     flex-direction: column;
@@ -75,8 +100,6 @@
 .card_content {
     width: 90%;
     height: 40%;
-    /* flex: 2; */
-    /* background-color: rgb(75, 101, 101); */
 }
 
 h3 {

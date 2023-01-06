@@ -3,7 +3,9 @@ import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import { reactive, ref } from '@vue/reactivity'
 import { RouterLink, RouterView } from 'vue-router'
+import { cartStore } from "../stores/cartStore"
 
+const cs = cartStore();
 
 </script>
 
@@ -12,6 +14,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <Header />
 
     <main class="main">
+
         <div class="progressBar">
             <div>購物車</div>
             <div>-</div>
