@@ -16,7 +16,7 @@
     },
     "productDetail":{
         "name":"productDetail",
-        "columns":"`product_id` INT NOT NULL AUTO_INCREMENT,`productNum` INT NOT NULL,`detail` VARCHAR(4000) NULL,`inventory` INT NOT NULL,`img` VARCHAR(50) NOT NULL,PRIMARY KEY (`product_id`),UNIQUE INDEX `account_UNIQUE` (`productNum` ASC) VISIBLE,UNIQUE INDEX `img_UNIQUE` (`img` ASC) VISIBLE",
+        "columns":"`product_id` INT NOT NULL AUTO_INCREMENT,`productNum` INT NOT NULL,`category` VARCHAR(12) NOT NULL,`detail` VARCHAR(4000) NULL,`inventory` INT NOT NULL,`img` VARCHAR(50) NOT NULL,PRIMARY KEY (`product_id`),UNIQUE INDEX `account_UNIQUE` (`productNum` ASC) VISIBLE,UNIQUE INDEX `img_UNIQUE` (`img` ASC) VISIBLE",
         "columnName":"category, productNum, detail, inventory, img"
     },
     "cart":{
