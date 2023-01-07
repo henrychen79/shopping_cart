@@ -11,6 +11,7 @@ export const useMemberStore = defineStore('memberStore',()=>{
             modifyNameOpen.value = true
         }else{
             modifyNameOpen.value = false
+            modifyPwOpen.value = true
         }
     }
     const OpenPwFn = ()=>{
@@ -18,6 +19,7 @@ export const useMemberStore = defineStore('memberStore',()=>{
             modifyPwOpen.value = true
         }else{
             modifyPwOpen.value = false
+            modifyNameOpen.value = true
         }
     }
 

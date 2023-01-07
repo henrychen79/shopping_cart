@@ -1,5 +1,6 @@
 <script setup>
 import { ref,reactive ,computed} from 'vue';
+import loginWarm from '../components/loginWarm.vue'
 import {useloginStore} from "../stores/loginStore"
 
 const loginStore = useloginStore()
@@ -29,7 +30,7 @@ const loginStore = useloginStore()
             </div>
         </div>
     </div>
-
+<loginWarm/>
 </template>
 
 <style lang="scss" scoped>

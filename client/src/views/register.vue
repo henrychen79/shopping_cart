@@ -1,11 +1,13 @@
 <script setup>
 import Header from '../components/Header.vue'
 import registerComponents from '../components/registerComponents.vue'
+import registerWarm from '../components/registerWarm.vue'
 </script>
 
 <template>
     <Header />
     <div class="regist_main">
+        <registerWarm/>
         <registerComponents/>
     </div>
 </template>

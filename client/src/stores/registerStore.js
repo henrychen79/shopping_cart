@@ -19,7 +19,7 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
 
 
     //按鈕可以點擊 開關
-    let isDisabled = ref(true)
+    let registOpen = ref(false)
 
     //存取user輸入的資料
     let data=reactive({
@@ -28,43 +28,19 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
         password:'',
         doublePassword:null
     })
+
+    let warmText = ref('')
+    let warmTextBtn = ref(true)
+
+//===================================================以下為各種function
+
+
     //正規表達(密碼判斷)
     const regex = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,12}$/);
 
-    const url = '../../account.json' //假資料
-    // const url = `http://localhost:8080/api/user/checkAccountExist?account=${data.account}`
-    //判斷帳號是否重複
-    const checkAccount= async ()=>{
-        // console.log(data.account)
-        // console.log(url)
-        let a = await fetch(url, {
-                method: 'GET', 
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                },
-                })
-                .then(function(res){
-                    return res.json()
-                })
-                .then(function(res){
-                    console.log('res',res)
-                    return res //假資料用
-                    // return res.message
-                })
-                .catch((error) => {
-                console.error('Error:', error);
-            });
-        console.log(a)    
-        if(a){
-            accountError.value = true//有重複
-            console.log('重複',accountError.value)
-        }else{
-            accountError.value = false//沒有重複
-            console.log('不重複',accountError.value)
-        }
-        AccountText()
-        AccountRe()
-        doubleCheckPassword()
+    //每次input帳號欄位 將registOpen.value鎖住，user必須點檢查重複才會開啟
+    const registControl=()=>{
+        registOpen.value=false
     }
 
     //帳號input 有輸入文字 就開啟提示顯示
@@ -82,8 +58,13 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
             accountWarn.value='帳號已存在，請重新檢查'
             accountColor.value='red'
         }else{
-            accountWarn.value=''
+            accountWarn.value='可以註冊'
+            accountColor.value='green'
         }
+    }
+    //每次輸入後先清空 Account的警示文字
+    const AccountP=()=>{
+        accountWarn.value=''
     }
 
     //判斷密碼是否符合規範 
@@ -96,7 +77,6 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
         }
         passwordText()
         checkPasswordWarn()
-        doubleCheckPassword()
     }
     //開啟和關閉密碼警示文字
     const passwordText=()=>{
@@ -121,28 +101,62 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
         }
     }
 
-    //確認密碼監聽，核對整個資料，若都正確將註冊按鈕打開(先初步設定)
-    const doubleCheckPassword=()=>{
-        if(data.doublePassword!=data.password){
-            isDisabled.value=true
-            // console.log('密碼輸入錯誤')
-            return
+    //點選註冊後，所顯示的各種警告視窗文字
+    const warmTextFn=()=>{
+        if(warmTextBtn.value){
+            warmTextBtn.value = false
+        }else{
+            warmTextBtn.value = true
         }
-        console.log(passwordWarn.value,accountError.value)
-        if(data.password===data.doublePassword){
-            if(data.name!=''&&data.account!=''&&data.password!=''&&passwordError.value===false&&accountError.value===false){
-                console.log('格式都正確')
-                isDisabled.value=false
-            }else{
-                isDisabled.value=true
-            }
-        }
-       
-
     }
 
+    const url = '../../account.json' //假資料
+    const checkAccount= async ()=>{
+        if(data.account===''){
+            accountWarn.value='不能為空'
+            accountColor.value='red'
+            return
+        }
+        //連資料庫用
+        // const url = `http://localhost:8080/api/user/checkAccountExist?account=${data.account}`
+        let a = await fetch(url, {
+                method: 'GET', 
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                },
+                })
+                .then(function(res){
+                    return res.json()
+                })
+                .then(function(res){
+                    //假資料用
+                    return res.userStore.some(function(item,index,array){
+                        console.log(item.account,data.account)
+                        return item.account === data.account
+                     })
 
-    //點擊按鈕
+                    //連資料庫用
+                    // console.log('res.repeat',res.repeat)
+                    // return res.repeat
+                })
+                .catch((error) => {
+                console.error('Error:', error);
+            });
+        console.log(a)    
+        if(a){
+            accountError.value = true//有重複
+            registOpen.value=false
+            console.log('重複',accountError.value)
+        }else{
+            accountError.value = false//沒有重複
+            registOpen.value=true
+            console.log('不重複',accountError.value)
+        }
+        AccountText()
+        AccountRe()
+    }
+ 
+    //將資料打進去後台server
     const registerButton=()=>{
         console.log(data)
         fetch('http://localhost:8080/api/user/registerAccount', {
@@ -158,14 +172,49 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
             })
             .then(function(res){
                 console.log('Success:', res);
+                //此次會再有個判斷 ，當註冊成功會跳轉到登入頁面，請user自己登入
+                window.location.href = '/login'
             })
             .catch(function(error){
                 console.error('Error:', error);
             });
     }
 
+    //使用者點擊 註冊 執行
+    const checkRegisterInfo=()=>{
+        if(data.name!=''&&data.account!=''&&data.password!=''){
+            if(data.doublePassword===data.password){
+                if(registOpen.value){
+                    // registerButton(data)
+                    console.log('執行註冊fetch registerButton(data)')
+                }else{
+                    console.log('尚未點選確認帳號，或該帳號已被註冊請重新檢查')
+                    warmText.value='尚未點選確認帳號，或該帳號已被註冊請重新檢查'
+                    warmTextFn()
+                }
+            }else{
+                console.log('確認密碼不相符')
+                warmText.value='確認密碼不相符'
+                warmTextFn()
+            }
+        }else{
+            console.log('欄位不能為空')
+            warmText.value='欄位不能為空'
+            warmTextFn()
+        }
+        
+    }
+
+
+
+    // return{
+    //     checkPassword,checkPasswordWarn,passwordText,registerButton,checkAccount,AccountText,AccountRe,AccountP,checkRegisterInfo,test2,warmTextFn,
+    //     data,regex,passControl,passwordError,passwordWarn,fontColor,accountControl,accountError,accountColor,accountWarn,registOpen,warmText,warmTextBtn
+    // }
+
     return{
-        checkPassword,checkPasswordWarn,passwordText,registerButton,doubleCheckPassword,checkAccount,AccountText,AccountRe,
-        data,regex,passControl,passwordError,passwordWarn,isDisabled,fontColor,accountControl,accountError,accountColor,accountWarn
+        checkRegisterInfo,checkPassword,checkAccount,AccountP,registControl,warmTextFn,
+        data,regex,passControl,passwordError,passwordWarn,fontColor,accountControl,
+        accountError,accountColor,accountWarn,registOpen,warmText,warmTextBtn
     }
 })
