@@ -80,7 +80,6 @@ export const userOrderStore = defineStore('orderStore',()=>{
                 },
                 })
                 .then(function(res){
-                    console.log(res)
                     return res.json()
                 })
                 .then(function(res){
