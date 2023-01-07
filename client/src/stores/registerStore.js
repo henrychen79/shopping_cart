@@ -159,6 +159,8 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
             })
             .then(function(res){
                 console.log('Success:', res);
+                //此次會再有個判斷 ，當註冊成功會跳轉到登入頁面，請user自己登入
+                window.location.href = '/login'
             })
             .catch(function(error){
                 console.error('Error:', error);
@@ -170,21 +172,24 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
         if(data.name!=''&&data.account!=''&&data.password!=''){
             if(data.doublePassword===data.password){
                 if(registOpen.value){
-                    registerButton(data)
+                    // registerButton(data)
                     console.log('執行註冊fetch')
                 }else{
                     console.log('尚未點選確認帳號，或該帳號已被註冊請重新檢查')
                     warmText.value='尚未點選確認帳號，或該帳號已被註冊請重新檢查'
+                    warmTextFn()
                 }
             }else{
                 console.log('確認密碼不相符')
-                warmText.value='確認密碼不相符查'
+                warmText.value='確認密碼不相符'
+                warmTextFn()
             }
         }else{
             console.log('欄位不能為空')
             warmText.value='欄位不能為空'
+            warmTextFn()
         }
-        warmTextFn()
+        
     }
 
     const warmTextFn=()=>{

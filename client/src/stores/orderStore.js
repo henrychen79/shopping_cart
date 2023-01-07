@@ -59,7 +59,9 @@ export const userOrderStore = defineStore('orderStore',()=>{
 
     let orderList = ref([])
     const orederTest =async ()=>{
-        const url = '../../orderTest.json'
+        // const url = '../../orderTest.json'
+        // const url =`http://172.20.10.5:8080/api/order/list/${1}`
+        const url = `../../newOrderTest.json`
         //以下 aaa url 連結資料庫用
         // const aaa = 'rec27@gmail.com'
         // const url = `http://172.20.10.4:8080/api/member/getAllOrders?account=${aaa}`
@@ -71,6 +73,7 @@ export const userOrderStore = defineStore('orderStore',()=>{
                 },
                 })
                 .then(function(res){
+                    console.log(res)
                     return res.json()
                 })
                 .then(function(res){
@@ -80,8 +83,8 @@ export const userOrderStore = defineStore('orderStore',()=>{
                 .catch((error) => {
                 console.error('Error:', error);
             });
-                // orderList.value = data //要連資料庫開啟的(要用這個記得把下面那段註解起來)
-                orderList.value = data.order //假資料用
+            
+                orderList.value = data //假資料用
             }catch (error) {   
                 console.log(error)
         }

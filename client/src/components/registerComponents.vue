@@ -134,6 +134,11 @@ const registerStore = useRegisterStore()
                 outline: none;
                 border-bottom: 1px solid #000
             }
+            >.check{
+                border: 1px solid black;
+                position: absolute;
+                left:70%
+            }
             >.pw_error{
                 display: block;
                 font-size: 12px;
