@@ -31,58 +31,16 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
 
     let warmText = ref('')
     let warmTextBtn = ref(true)
+
+//===================================================以下為各種function
+
+
     //正規表達(密碼判斷)
     const regex = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,12}$/);
 
-    const url = '../../account.json' //假資料
-    
     //每次input帳號欄位 將registOpen.value鎖住，user必須點檢查重複才會開啟
-    const test2=()=>{
+    const registControl=()=>{
         registOpen.value=false
-    }
-    const checkAccount= async ()=>{
-        if(data.account===''){
-            accountWarn.value='不能為空'
-            accountColor.value='red'
-            return
-        }
-        //連資料庫用
-        // const url = `http://localhost:8080/api/user/checkAccountExist?account=${data.account}`
-        let a = await fetch(url, {
-                method: 'GET', 
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                },
-                })
-                .then(function(res){
-                    return res.json()
-                })
-                .then(function(res){
-                    //假資料用
-                    return res.userStore.some(function(item,index,array){
-                        console.log(item.account,data.account)
-                        return item.account === data.account
-                     })
-
-                    //連資料庫用
-                    // console.log('res.repeat',res.repeat)
-                    // return res.repeat
-                })
-                .catch((error) => {
-                console.error('Error:', error);
-            });
-        console.log(a)    
-        if(a){
-            accountError.value = true//有重複
-            registOpen.value=false
-            console.log('重複',accountError.value)
-        }else{
-            accountError.value = false//沒有重複
-            registOpen.value=true
-            console.log('不重複',accountError.value)
-        }
-        AccountText()
-        AccountRe()
     }
 
     //帳號input 有輸入文字 就開啟提示顯示
@@ -142,6 +100,61 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
             passwordWarn.value=''
         }
     }
+
+    //點選註冊後，所顯示的各種警告視窗文字
+    const warmTextFn=()=>{
+        if(warmTextBtn.value){
+            warmTextBtn.value = false
+        }else{
+            warmTextBtn.value = true
+        }
+    }
+
+    const url = '../../account.json' //假資料
+    const checkAccount= async ()=>{
+        if(data.account===''){
+            accountWarn.value='不能為空'
+            accountColor.value='red'
+            return
+        }
+        //連資料庫用
+        // const url = `http://localhost:8080/api/user/checkAccountExist?account=${data.account}`
+        let a = await fetch(url, {
+                method: 'GET', 
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                },
+                })
+                .then(function(res){
+                    return res.json()
+                })
+                .then(function(res){
+                    //假資料用
+                    return res.userStore.some(function(item,index,array){
+                        console.log(item.account,data.account)
+                        return item.account === data.account
+                     })
+
+                    //連資料庫用
+                    // console.log('res.repeat',res.repeat)
+                    // return res.repeat
+                })
+                .catch((error) => {
+                console.error('Error:', error);
+            });
+        console.log(a)    
+        if(a){
+            accountError.value = true//有重複
+            registOpen.value=false
+            console.log('重複',accountError.value)
+        }else{
+            accountError.value = false//沒有重複
+            registOpen.value=true
+            console.log('不重複',accountError.value)
+        }
+        AccountText()
+        AccountRe()
+    }
  
     //將資料打進去後台server
     const registerButton=()=>{
@@ -173,7 +186,7 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
             if(data.doublePassword===data.password){
                 if(registOpen.value){
                     // registerButton(data)
-                    console.log('執行註冊fetch')
+                    console.log('執行註冊fetch registerButton(data)')
                 }else{
                     console.log('尚未點選確認帳號，或該帳號已被註冊請重新檢查')
                     warmText.value='尚未點選確認帳號，或該帳號已被註冊請重新檢查'
@@ -192,16 +205,16 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
         
     }
 
-    const warmTextFn=()=>{
-        if(warmTextBtn.value){
-            warmTextBtn.value = false
-        }else{
-            warmTextBtn.value = true
-        }
-    }
+
+
+    // return{
+    //     checkPassword,checkPasswordWarn,passwordText,registerButton,checkAccount,AccountText,AccountRe,AccountP,checkRegisterInfo,test2,warmTextFn,
+    //     data,regex,passControl,passwordError,passwordWarn,fontColor,accountControl,accountError,accountColor,accountWarn,registOpen,warmText,warmTextBtn
+    // }
 
     return{
-        checkPassword,checkPasswordWarn,passwordText,registerButton,checkAccount,AccountText,AccountRe,AccountP,checkRegisterInfo,test2,warmTextFn,
-        data,regex,passControl,passwordError,passwordWarn,fontColor,accountControl,accountError,accountColor,accountWarn,registOpen,warmText,warmTextBtn
+        checkRegisterInfo,checkPassword,checkAccount,AccountP,registControl,warmTextFn,
+        data,regex,passControl,passwordError,passwordWarn,fontColor,accountControl,
+        accountError,accountColor,accountWarn,registOpen,warmText,warmTextBtn
     }
 })

@@ -14,10 +14,10 @@ const registerStore = useRegisterStore()
                 <label for="user_account">創建帳號:</label>
                 <input type="email" name="" id="user_account" placeholder="請輸入電子信箱" 
                     v-model="registerStore.data.account" 
-                    v-on:keyup="registerStore.AccountP();registerStore.test2();" 
+                    v-on:keyup="registerStore.AccountP();registerStore.registControl();" 
                 />
                 <p :class="['ac_error',{open:registerStore.accountControl}]" :style="{color:registerStore.accountColor}" v-text="registerStore.accountWarn"></p>
-                <button class='check' v-on:click="registerStore.checkAccount()">確認</button>
+                <button class='check' v-on:click="registerStore.checkAccount">確認</button>
             </div>
             <div class="group">
                 <label for="user_password">創建密碼:</label>
@@ -33,7 +33,8 @@ const registerStore = useRegisterStore()
             <div class="group">
                 <label for="check_password">確認密碼:</label>
                 <input type="text" name="" id="check_password"
-                v-model="registerStore.data.doublePassword">
+                v-model="registerStore.data.doublePassword"
+                />
             </div>
             <div class="group">
                 <label for="user_name">你的暱稱:</label>

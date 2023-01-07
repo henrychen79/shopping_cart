@@ -58,6 +58,13 @@ export const userOrderStore = defineStore('orderStore',()=>{
    
 
     let orderList = ref([])
+    const changeTime=(dateTime)=>{
+        let ISOSChangeJson = new Date(dateTime).toJSON();
+        let time = new Date(+new Date(ISOSChangeJson)+8*3600*1000).toISOString()
+                    .replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
+        return time
+    }
+
     const orederTest =async ()=>{
         // const url = '../../orderTest.json'
         // const url =`http://172.20.10.5:8080/api/order/list/${1}`
@@ -78,13 +85,16 @@ export const userOrderStore = defineStore('orderStore',()=>{
                 })
                 .then(function(res){
                     console.log(res)
+                    res.filter(function(item){
+                        item.order_time = changeTime(item.order_time)
+                    })
                     return res
                 })
                 .catch((error) => {
                 console.error('Error:', error);
             });
-            
-                orderList.value = data //假資料用
+
+                // orderList.value = data //假資料用
             }catch (error) {   
                 console.log(error)
         }
