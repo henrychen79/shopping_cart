@@ -40,21 +40,10 @@ async function getCart(user_id) {
   }
 }
 async function getCartItem(cart_id) {
-<<<<<<< HEAD
   let target = `SELECT a.id as cart_item_id, a.quantity, a.create_at, b.inventory, b.img FROM (select * from cart_item where cart_id=${cart_id}) as a LEFT JOIN productDetail as b ON a.product_id = b.product_id`;
   const [result, fields] = await db.pool.query(target);
   console.log(result);
   return result;
-=======
-  try {
-    let target = `SELECT a.id as cart_item_id, a.quantity, a.create_at, b.inventory, b.img FROM (select * from cart_item where cart_id=${cart_id}) as a LEFT JOIN productdetail as b ON a.product_id = b.productNum`;
-    const [result, fields] = await db.pool.query(target);
-    console.log(result);
-    return result;
-  } catch (error) {
-    return error;
-  }
->>>>>>> 8d2f7c887eccaaefa716f8c4b96a847f09cb6655
 }
 // db.initSchema().then(() => {
 //   console.log(table.cart.columnName);

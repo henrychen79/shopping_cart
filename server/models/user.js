@@ -40,9 +40,8 @@ async function check_account(accountName) {
   try {
     let target = `SELECT account FROM user WHERE account = '${accountName}'`;
     const [result, fields] = await db.pool.query(target);
-    // console.log('result',result);
+    console.log('result',result);
     // return { status: "ok", result: result };
-    console.log(result);
     if (result.length === 0) {
       return { status: "false", result: result };
     } else {

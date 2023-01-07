@@ -12,11 +12,12 @@ const registerStore = useRegisterStore()
         <div class="regist_form">
             <div class="group">
                 <label for="user_account">創建帳號:</label>
-                <input type="text" name="" id="user_account" placeholder="請輸入電子信箱" 
+                <input type="email" name="" id="user_account" placeholder="請輸入電子信箱" 
                     v-model="registerStore.data.account" 
-                    v-on:keyup="registerStore.checkAccount();" 
+                    v-on:keyup="registerStore.AccountP();registerStore.test2();" 
                 />
                 <p :class="['ac_error',{open:registerStore.accountControl}]" :style="{color:registerStore.accountColor}" v-text="registerStore.accountWarn"></p>
+                <button class='check' v-on:click="registerStore.checkAccount()">確認</button>
             </div>
             <div class="group">
                 <label for="user_password">創建密碼:</label>
@@ -32,19 +33,18 @@ const registerStore = useRegisterStore()
             <div class="group">
                 <label for="check_password">確認密碼:</label>
                 <input type="text" name="" id="check_password"
-                v-on:keyup="registerStore.doubleCheckPassword"  
                 v-model="registerStore.data.doublePassword">
             </div>
             <div class="group">
                 <label for="user_name">你的暱稱:</label>
                 <input type="text" name="" id="user_name" 
                     v-model="registerStore.data.name" 
-                    v-on:keyup="registerStore.doubleCheckPassword" 
                 />
             </div>
             <div class="btn-group">
-                <button class="btn" :disabled='registerStore.isDisabled' v-on:click="registerStore.registerButton">註冊</button>
-                <button class="btn" v-on:click="registerStore.checkAccount" >取消</button>
+                <!-- <button class="btn" :disabled='registerStore.isDisabled' v-on:click="registerStore.registerButton">註冊</button> -->
+                <button class="btn"  v-on:click="registerStore.checkRegisterInfo">註冊</button>
+                <button class="btn">取消</button>
             </div>
         </div>
     </div>
@@ -75,6 +75,12 @@ const registerStore = useRegisterStore()
             margin-bottom: 10px;
             >input{
                 margin-left: 10px;
+            }
+            >.check{
+                border: 1px solid black;
+                position: absolute;
+                top:20%;
+                left:90%;
             }
             >.pw_error{
                 font-size: 12px;
