@@ -6,7 +6,7 @@ const registerStore = useRegisterStore()
 </script>
 
 <template>
-    <div :class="['warmMain',{warmOpen:registerStore.warmTextBtn}]">
+    <div class='warmMain'>
         <div class="warmText">
             <p v-text="registerStore.warmText"></p>
         </div>
@@ -18,23 +18,23 @@ const registerStore = useRegisterStore()
 
 <style lang="scss" scoped>
 .warmMain{
-    position: absolute;
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: white;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    // position: absolute;
+    // border: 1px solid black;
+    // border-radius: 5px;
+    // background-color: white;
+    // top:50%;
+    // left: 50%;
+    // transform: translate(-50%,-50%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 400px;
-    height: 200px;
-    z-index: 1;
+    // width: 400px;
+    // height: 200px;
+    // z-index: 1;
 }
-.warmOpen{
-    display:none;
-}
+// .warmOpen{
+//     display:none;
+// }
 
 </style>
