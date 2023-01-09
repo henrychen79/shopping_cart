@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const upload = require("../../utils/uploadMulter");
+const upload = require("../../middleware/uploadMulter");
 const adminController = require("../../controllers/adminController");
 router.use((req, res, next) => {
   console.log("A request is coming in to admin route.js");
@@ -11,6 +11,6 @@ router.post(
   adminController.uploadImage
 );
 
-router.post("/update_product",adminController.update_product)
+router.post("/update_product", adminController.update_product);
 
 module.exports = router;

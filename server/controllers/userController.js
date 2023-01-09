@@ -1,7 +1,7 @@
 const user_M = require("../models/user");
 const cart_M = require("../models/cart");
 const jwt = require("jsonwebtoken");
-const { sendMail, forgetPasswordMail } = require("../utils/sendMail");
+const { sendMail, forgetPasswordMail } = require("../middleware/sendMail");
 const userController = {
   registerAccount: async (req, res, next) => {
     try {
@@ -36,7 +36,7 @@ const userController = {
         // if (ret.status === "ok") {
         //   res.json(account);
         // } else res.status(400).json({ message: "這個Email被註冊過了!" });
-        console.log('ret',ret)
+        console.log("ret", ret);
         if (ret.status === "false") {
           res.json({ repeat: false });
         } else {

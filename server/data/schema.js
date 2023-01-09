@@ -8,9 +8,9 @@ async function createDB() {
     const connection = await mysql.createConnection({
       // host: "localhost",
       // user: "root",
-      // password: "3345678",
+      password: "3345678",
       host: "localhost",
-      user: "root",
+      user: "henrychen",
       // password: "h6760903",
     });
     //console.log("connection", connection);
@@ -26,8 +26,9 @@ async function createPooL() {
     // host: "localhost",
     // user: "root",
     // password: "3345678",
+    password: "3345678",
     host: "localhost",
-    user: "root",
+    user: "henrychen",
     // password: "h6760903",
     database: schemaName,
     waitForConnections: true,
@@ -41,10 +42,10 @@ async function createPooL() {
 async function createTable(tableName, columns) {
   try {
     let target = `CREATE TABLE ${tableName} (${columns})`;
-    // console.log(target)
+    //console.log(target);
     await exports.pool.query(target);
   } catch (error) {
-    // console.log("create table error:", error);
+    //console.log("create table error:", error);
   }
 }
 
