@@ -7,35 +7,25 @@ const loginStore = useloginStore()
 </script>
 
 <template>
-    <div :class="['warmMain',{warmOpen:loginStore.warmView}]">
+    <div class='warmMain'>
         <div class="warmText">
             <p v-text="loginStore.loginwarmText"></p>
         </div>
         <div class="warmBtn">
-            <button v-on:click="loginStore.warmBtn">確定</button>
+            <button v-on:click="loginStore.warmView">確定</button>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
 .warmMain{
-    position: absolute;
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: white;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    // border: 2px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 400px;
-    height: 250px;
-    z-index: 1;
+ 
 }
-.warmOpen{
-    display:none;
-}
+
 
 </style>

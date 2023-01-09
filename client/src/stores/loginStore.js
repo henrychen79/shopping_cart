@@ -6,14 +6,13 @@ export const useloginStore = defineStore('loginStore',()=>{
         password:'',
     })
     let loginwarmText = ref('')
-    let warmView = ref(true)
+    let show=ref(false)
 
-
-    const warmBtn =()=>{
-        if(warmView.value){
-            warmView.value=false
+    const warmView=()=>{
+        if(show.value){
+            show.value=false
         }else{
-            warmView.value=true
+            show.value=true
         }
     }
 
@@ -41,16 +40,22 @@ export const useloginStore = defineStore('loginStore',()=>{
         //回傳內容，
         if(resdata.accout.length!=0){
             console.log('登入成功')
+            console.log(resdata)
+            document.cookie=`tokenStore=${resdata.token};`
+
+            const token = document.cookie.replace(/(?:(?:^|.*;\s*)tokenStore\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+            console.log('取得token測試',token)
+
             // window.location.href='/'
         }else{
             console.log('登入失敗')
             loginwarmText.value = '登入失敗'
-            warmView.value = false
+            warmView()  
         }
     }
 
     return{
-        login,warmBtn,
-        userData,warmView,loginwarmText
+        login,warmView,
+        userData,loginwarmText,show
     }
 })

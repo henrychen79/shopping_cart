@@ -9,6 +9,11 @@ const loginStore = useloginStore()
 </script>
 
 <template>
+    <Transition name="bounce" >
+        <p v-if="loginStore.show" class="warmView">
+            <loginWarm/>
+        </p>
+    </Transition>
     <div class="container">
         <h2>會員登入</h2>
         <div class="login_form">
@@ -30,7 +35,7 @@ const loginStore = useloginStore()
             </div>
         </div>
     </div>
-<loginWarm/>
+<!-- <loginWarm/> -->
 </template>
 
 <style lang="scss" scoped>
@@ -123,5 +128,45 @@ const loginStore = useloginStore()
     }
 }
 }
+
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+  
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0) 
+  }
+  50% {
+    transform: scale(1.25)  
+  }
+  100% {
+    transform: scale(1)  
+  }
+}
+.warmView{
+    border: 2px solid black;
+    position: absolute;
+    margin: auto;
+    // border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    // top:50%;
+    // left: 50%;
+    // transform: translate(-50%,-50%);
+    width: 300px;
+    height: 300px;
+    z-index: 1;
+}
+
+
 
 </style>
