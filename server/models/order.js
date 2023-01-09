@@ -63,6 +63,16 @@ async function getOrderList(user_id) {
     return error;
   }
 }
+
+async function updateOrderList(order_id, type, state) {
+  try {
+    let target = `UPDATE orderlist SET ${type} = '${state}' WHERE id = ${order_id}`;
+    return await db.pool.query(target);
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}
 const test_obj = {
   user_id: 1,
   recipient: "陳韋廷",
@@ -81,3 +91,4 @@ db.initSchema().then(() => {
 module.exports.addToOrder = addToOrder;
 module.exports.addToOrderDetail = addToOrderDetail;
 module.exports.getOrderList = getOrderList;
+module.exports.updateOrderList = updateOrderList;
