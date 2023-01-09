@@ -26,15 +26,15 @@ const order_M = require("../models/order");
 const cart_M = require("../models/cart");
 const product_M = require("../models/product");
 function checkInventory(cart_items) {
-  let inventory_check = {};
-  let result = cart_items.filter((val, idx) => {
+  let inventory_cal = {};
+  let check_result = cart_items.filter((val, idx) => {
     let inventory = 0;
-    if (inventory_check[val.product_id])
-      inventory = inventory_check[val.product_id];
-    inventory[val.product_id] = inventory + val.quantity;
-    return inventory[val.product_id] > val.inventory;
+    if (inventory_cal[val.product_id])
+      inventory = inventory_cal[val.product_id];
+    inventory_cal[val.product_id] = inventory + val.quantity;
+    return inventory_cal[val.product_id] > val.inventory;
   });
-  return result;
+  return { check_result, inventory_cal };
 }
 const orderController = {
   createOrder: async (req, res, next) => {
@@ -44,13 +44,13 @@ const orderController = {
       const cart_id = await cart_M.getCart(data_obj.user_id);
       const cart_items = await cart_M.getCartItem(cart_id[0].id);
       console.log("cart_items ", cart_items);
-      const check_result = checkInventory(cart_items);
+      const { check_result, inventory_cal } = checkInventory(cart_items);
       if (check_result.length != 0) {
-        return res.json({ message: "庫存不足", list: check_result });
+        //res.json({ message: "庫存不足", list: check_result });
+        throw { message: "庫存不足", list: check_result };
       }
       data_obj.order_number = randomNumber();
       const order_ret = await order_M.addToOrder(data_obj);
-      console.log(order_ret);
       for (let index = 0; index < cart_items.length; index++) {
         let item = cart_items[index];
         let product_detail = await product_M.getSpecificiProduct(
@@ -63,9 +63,10 @@ const orderController = {
           product_detail[0].price,
           item.quantity,
         ];
-        console.log(product_detail[0]);
         const result2 = await order_M.addToOrderDetail(inser_values);
-        console.log(result2);
+      }
+      for (const [key, value] of Object.entries(inventory_cal)) {
+        await product_M.updateInventory(key, value);
       }
       const delCart = await cart_M.delAllCartItem(cart_id[0].id);
       console.log(delCart);

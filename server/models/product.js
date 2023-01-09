@@ -74,6 +74,18 @@ async function getProduct_order(category, page, order) {
 }
 // getProduct_order('001','2','DESC')
 
+async function updateInventory(product_id, quantity) {
+  try {
+    let target = `UPDATE productDetail SET inventory = inventory - ${quantity} WHERE product_id=${product_id} `;
+    const ret = await db.pool.query(target);
+    console.log("updateInventory", ret);
+    return ret;
+  } catch (error) {
+    console.log("updateInventory", error);
+    return error;
+  }
+}
+
 /**********************************以下為假資料**********************************************/
 //利用假資料新增進資料庫
 function generateFakeData() {
@@ -96,3 +108,4 @@ module.exports.getProduct = getProduct;
 module.exports.getSpecificiProduct = getSpecificiProduct;
 module.exports.product_amount = product_amount;
 module.exports.getProduct_order = getProduct_order;
+module.exports.updateInventory = updateInventory;
