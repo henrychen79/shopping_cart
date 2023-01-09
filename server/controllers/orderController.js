@@ -39,18 +39,25 @@ function checkInventory(cart_items) {
 const orderController = {
   createOrder: async (req, res, next) => {
     try {
+      let state = "initialize";
       const { data } = req.body;
       const data_obj = JSON.parse(data);
+      // 取得使用者對應的購物車ID
       const cart_id = await cart_M.getCart(data_obj.user_id);
+      // 取得上述購物車ID下所有的購物車內容物
       const cart_items = await cart_M.getCartItem(cart_id[0].id);
-      console.log("cart_items ", cart_items);
+      // 確認各項內容物庫存
       const { check_result, inventory_cal } = checkInventory(cart_items);
       if (check_result.length != 0) {
-        //res.json({ message: "庫存不足", list: check_result });
-        throw { message: "庫存不足", list: check_result };
+        // 如果庫存不足回傳error code:500及相關資訊
+        throw { message: "庫存不足", data: check_result };
       }
+      // 產生訂單編號
       data_obj.order_number = randomNumber();
+      // 產生訂單
       const order_ret = await order_M.addToOrder(data_obj);
+      state = "create_order_done";
+      // 產生訂單細項資訊
       for (let index = 0; index < cart_items.length; index++) {
         let item = cart_items[index];
         let product_detail = await product_M.getSpecificiProduct(
@@ -63,13 +70,17 @@ const orderController = {
           product_detail[0].price,
           item.quantity,
         ];
-        const result2 = await order_M.addToOrderDetail(inser_values);
+        await order_M.addToOrderDetail(inser_values);
       }
+      state = "create_order_detail_done";
+      // 更新庫存資訊
       for (const [key, value] of Object.entries(inventory_cal)) {
         await product_M.updateInventory(key, value);
       }
+      state = "update_inventory_done";
+      // 清空購物車
       const delCart = await cart_M.delAllCartItem(cart_id[0].id);
-      console.log(delCart);
+      state = "delete_all_cart_item_done";
       res.json({ message: "創建訂單成功", data: data });
     } catch (error) {
       next(error);

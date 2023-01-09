@@ -22,7 +22,7 @@ require("./routes")(app);
 app.use((err, req, res, next) => {
   if (err) {
     console.log("500 error: ", err);
-    return res.status(500).json({ message: err.message });
+    return res.status(500).json({ err });
   }
 });
 app.listen(8080, () => {
