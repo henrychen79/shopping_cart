@@ -2,8 +2,9 @@ import { defineStore } from 'pinia'
 import{ref,reactive,computed} from "vue"
 export const useRegisterStore = defineStore('RegisterStore',()=>{
     //密碼警示 顯示開關
-   let passControl = ref(false)
+    let passControl = ref(false)
     
+
     //密碼警示文字
     let passwordError = ref(false);
     let passwordWarn=ref('')
@@ -29,8 +30,9 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
         doublePassword:null
     })
 
+    let show=ref(false)
     let warmText = ref('')
-    let warmTextBtn = ref(true)
+    // let warmTextBtn = ref(true)
 
 //===================================================以下為各種function
 
@@ -103,10 +105,13 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
 
     //點選註冊後，所顯示的各種警告視窗文字
     const warmTextFn=()=>{
-        if(warmTextBtn.value){
-            warmTextBtn.value = false
+        console.log(show.value)
+        if(show.value){
+            show.value=false
+            // warmTextBtn.value = false
         }else{
-            warmTextBtn.value = true
+            // warmTextBtn.value = true
+            show.value=true
         }
     }
 
@@ -131,7 +136,6 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
                 .then(function(res){
                     //假資料用
                     return res.userStore.some(function(item,index,array){
-                        console.log(item.account,data.account)
                         return item.account === data.account
                      })
 
@@ -215,6 +219,6 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
     return{
         checkRegisterInfo,checkPassword,checkAccount,AccountP,registControl,warmTextFn,
         data,regex,passControl,passwordError,passwordWarn,fontColor,accountControl,
-        accountError,accountColor,accountWarn,registOpen,warmText,warmTextBtn
+        accountError,accountColor,accountWarn,registOpen,warmText,show
     }
 })

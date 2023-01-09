@@ -6,21 +6,30 @@ export const useMemberStore = defineStore('memberStore',()=>{
     let modifyNameOpen = ref(true)
     let modifyPwOpen = ref(true)
 
+    let show = ref(false)
+
     const OpenNameFn = ()=>{
+        show.value = true
         if(!modifyNameOpen.value){
             modifyNameOpen.value = true
+            closeShowView ()
         }else{
             modifyNameOpen.value = false
             modifyPwOpen.value = true
         }
     }
     const OpenPwFn = ()=>{
+        show.value = true
         if(!modifyPwOpen.value){
             modifyPwOpen.value = true
+            closeShowView ()
         }else{
             modifyPwOpen.value = false
-            modifyNameOpen.value = true
+            modifyNameOpen.value = true  
         }
+    }
+    const closeShowView =()=>{
+        show.value = false
     }
 
     //修改暱稱fetch串接
@@ -54,7 +63,7 @@ export const useMemberStore = defineStore('memberStore',()=>{
 
 
     return{
-        modifyNameOpen,modifyPwOpen,modifyNamedata,
-        OpenNameFn,OpenPwFn,modifyNickName
+        modifyNameOpen,modifyPwOpen,modifyNamedata,show,
+        OpenNameFn,OpenPwFn,modifyNickName,closeShowView
     }
 })

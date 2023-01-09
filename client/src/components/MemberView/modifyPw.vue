@@ -20,7 +20,7 @@ const memberStore = useMemberStore();
         </div>
         <div class="modify_pw_btn">
             <button>確認</button>
-            <button v-on:click="memberStore.OpenPwFn">取消</button>
+            <button v-on:click="memberStore.OpenPwFn(),memberStore.closeShowView()">取消</button>
         </div>
     </div>
 </template>

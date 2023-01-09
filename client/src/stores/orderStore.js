@@ -93,7 +93,7 @@ export const userOrderStore = defineStore('orderStore',()=>{
                 console.error('Error:', error);
             });
 
-                // orderList.value = data //假資料用
+                orderList.value = data //假資料用
             }catch (error) {   
                 console.log(error)
         }

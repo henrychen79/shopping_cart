@@ -12,7 +12,7 @@ const memberStore = useMemberStore();
         </div>
         <div class="modify_name_btn">
             <button v-on:click="memberStore.modifyNickName">確認</button>
-            <button v-on:click="memberStore.OpenNameFn">取消</button>
+            <button v-on:click="memberStore.OpenNameFn(),memberStore.closeShowView()">取消</button>
         </div>
     </div>
 </template>

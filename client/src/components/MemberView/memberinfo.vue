@@ -8,7 +8,15 @@ const memberStore = useMemberStore();
 
 <template>
 
+
+
 <h1>會員中心</h1>
+    <Transition name="bounce" >
+        <p v-if="memberStore.show" class="textView">
+            <modifyName/>
+            <modifyPassWord/>
+        </p>
+    </Transition>
 <div class="mainInfo">
     <div class="reviseInfo">
         <h2>修改會員資料</h2>
@@ -23,8 +31,10 @@ const memberStore = useMemberStore();
         <div class="test"></div>
     </div>
 </div>
-    <modifyName/>
-    <modifyPassWord/>
+
+
+    <!-- <modifyName/>
+    <modifyPassWord/> -->
 </template>
 
 <style lang="scss" scoped>
@@ -63,4 +73,42 @@ h1{
         }
     }
 }
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+  
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+    
+  0% {
+    transform: scale(0) 
+  }
+  50% {
+    transform: scale(1.25) 
+  }
+  100% {
+    transform: scale(1) 
+  }
+}
+.textView{
+    border: 2px solid black;
+    position: absolute;
+    // border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    // top:50%;
+    // left: 50%;
+    // transform: translate(-50%,-50%);
+    width: 400px;
+    height: 300px;
+    z-index: 1;
+}
+
 </style>

@@ -14,6 +14,8 @@ import memberinfo from '../components/MemberView/memberinfo.vue'
 
 <style lang="scss" scoped>
 
+
+
 .main{
     border: 2px solid black;
     width: 100%;
