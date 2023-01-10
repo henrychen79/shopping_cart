@@ -25,9 +25,10 @@ const cartController = {
       // console.log(req);
       const { user_id } = req.params;
       const cart_id = await cart_M.getCart(user_id);
-      const result = await cart_M.getCartItem(cart_id[0].id);
-      console.log(result);//[搜尋結果，總金額]
-      res.json(result);
+      const result1 = await cart_M.getCartItem(cart_id[0].id);
+      const result2 = await cart_M.getCartTotalPrice(cart_id[0].id);
+      console.log([result1, result2]); //[搜尋結果，總金額]
+      res.json([result1, result2]);
     } catch (error) {
       console.log(error);
       next(error);
@@ -35,9 +36,9 @@ const cartController = {
   },
   delCartItem: async (req, res, next) => {
     try {
-      const cart_item_id= req.body.id;
+      const cart_item_id = req.body.id;
       const result = await cart_M.delCartItem(cart_item_id);
-      res.json(result);//刪除商品成功
+      res.json(result); //刪除商品成功
     } catch (error) {
       console.log(error);
       next(error);
