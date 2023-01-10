@@ -11,9 +11,9 @@
         <ul class="headerBar">
 
             <li>你好!</li>
-            <li><a href="#">登入</a></li>
-            <li><a href="#">註冊</a></li>
-            <li><a href="#">會員中心</a></li>
+            <li><router-link to="/login">登入</router-link></li>
+            <li><router-link to="/register">註冊</router-link></li>
+            <li><router-link to="/member">會員中心</router-link></li>
             <li><a href="#">訂單查詢</a></li>
             <li><router-link to="/shoppingCart">購物車</router-link></li>
         </ul>
