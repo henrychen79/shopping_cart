@@ -9,8 +9,8 @@ const Retrievepw = useRetrievepwStore()
         <h2>忘記密碼</h2>
         <div class="login_form">
             <div class="group">
-                <label for="user_id">請輸入您的註冊帳號(email)，我們將寄暫時密碼給您:</label>
-                <input type="text" name="" id="user_id" >
+                <label for="user_id" >請輸入您的註冊帳號(email)，我們將寄暫時密碼給您:</label>
+                <input type="text" name="" id="user_id" v-model="Retrievepw.retrieveData.account">
             </div>
             <div class="btn-group">
                 <button class="btn" @click="Retrievepw.test">寄送</button>
@@ -24,7 +24,7 @@ const Retrievepw = useRetrievepwStore()
 <style lang="scss" scoped>
 @media screen and (min-width: 320px){
     .container{
-    // border: 2px solid black;
+    border: 2px solid black;
     width: 100%;
     height: 100%;
     >h2{
