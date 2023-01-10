@@ -5,7 +5,11 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+// 設定跨網域
 app.use(cors());
+// 解析 cookie
+app.use(cookieParser());
 // 解析 application/x-www-form-urlencoded
 app.use(
   bodyParser.urlencoded({
