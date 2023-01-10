@@ -17,7 +17,7 @@ export const useloginStore = defineStore('loginStore',()=>{
     }
 
     const login = async ()=>{
-        const url = `http://localhost:8080/api/user/login`
+        const url = `http://172.20.10.7:8080/api/user/login`
         let resdata = await fetch(url, {
             method: 'POST', // or 'PUT'
             headers: {
@@ -41,9 +41,9 @@ export const useloginStore = defineStore('loginStore',()=>{
         if(resdata.accout.length!=0){
             console.log('登入成功')
             console.log(resdata)
-            document.cookie=`tokenStore=${resdata.token};`
+            document.cookie=`access_token=${resdata.token};`
 
-            const token = document.cookie.replace(/(?:(?:^|.*;\s*)tokenStore\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+            const token = document.cookie.replace(/(?:(?:^|.*;\s*)access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
             console.log('取得token測試',token)
 
             // window.location.href='/'
@@ -54,8 +54,33 @@ export const useloginStore = defineStore('loginStore',()=>{
         }
     }
 
+
+    const test = async ()=>{
+        // const url = `http://172.20.10.7:8080/api/user/login`
+        //  fetch(url, {
+        //     method: 'POST', // or 'PUT'
+        //     headers: {
+        //         'Content-Type': 'application/json;charset=UTF-8',
+        //         'Authorization':'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1"),
+                
+        //     },
+        //     body: JSON.stringify(userData),
+        //     })
+        //     .then(function(res){
+        //         return res.json()
+        //     })
+        //     .then(function(res){
+        //         // console.log('Success:', res);
+        //         return res
+        //     })
+        //     .catch(function(error){
+        //         console.error('Error:', error);
+        //     });
+      
+    }
+
     return{
-        login,warmView,
+        login,warmView,test,
         userData,loginwarmText,show
     }
 })

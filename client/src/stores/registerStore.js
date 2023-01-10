@@ -124,6 +124,7 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
         }
         //連資料庫用
         // const url = `http://localhost:8080/api/user/checkAccountExist?account=${data.account}`
+        // const url = `http://172.20.10.7:8080/api/user/checkAccountExist?account=${data.account}`
         let a = await fetch(url, {
                 method: 'GET', 
                 headers: {
@@ -135,13 +136,13 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
                 })
                 .then(function(res){
                     //假資料用
-                    return res.userStore.some(function(item,index,array){
-                        return item.account === data.account
-                     })
+                    // return res.userStore.some(function(item,index,array){
+                    //     return item.account === data.account
+                    //  })
 
                     //連資料庫用
-                    // console.log('res.repeat',res.repeat)
-                    // return res.repeat
+                    console.log('res.repeat',res.repeat)
+                    return res.repeat
                 })
                 .catch((error) => {
                 console.error('Error:', error);
@@ -163,7 +164,7 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
     //將資料打進去後台server
     const registerButton=()=>{
         console.log(data)
-        fetch('http://localhost:8080/api/user/registerAccount', {
+        fetch('http://172.20.10.7:8080/api/user/registerAccount', {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
@@ -189,7 +190,7 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
         if(data.name!=''&&data.account!=''&&data.password!=''){
             if(data.doublePassword===data.password){
                 if(registOpen.value){
-                    // registerButton(data)
+                    registerButton(data)
                     console.log('執行註冊fetch registerButton(data)')
                 }else{
                     console.log('尚未點選確認帳號，或該帳號已被註冊請重新檢查')
