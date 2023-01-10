@@ -1,4 +1,6 @@
 <script setup>
+import {useRetrievepwStore} from "../stores/retrievepw"
+const Retrievepw = useRetrievepwStore()
 
 </script>
 
@@ -11,7 +13,7 @@
                 <input type="text" name="" id="user_id" >
             </div>
             <div class="btn-group">
-                <button class="btn">寄送</button>
+                <button class="btn" @click="Retrievepw.test">寄送</button>
                 <button class="btn">取消</button>
             </div>
         </div>
