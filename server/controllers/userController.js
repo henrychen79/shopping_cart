@@ -51,12 +51,15 @@ const userController = {
     try {
       const { account, password } = req.body;
       const result = await user_M.login(account, password);
+      //const result = [{ account: "ggggg" }];
       if (result.length != 0) {
         let expires_in = parseInt(process.env.JWT_EXPIRES_IN);
         const token = jwt.sign(result[0], process.env.JWT_SECRET, {
           expiresIn: expires_in,
         });
-        res.json({ accout: result[0].account, token: token });
+        res
+          .cookie("access_token", token)
+          .json({ accout: result[0].account, token: token });
       } else {
         res.json({ accout: [] });
       }
@@ -68,8 +71,9 @@ const userController = {
   forgetPassword: async (req, res, next) => {
     try {
       const { account } = req.body;
+      console.log(account);
       //檢查帳號是否存在
-      const result1 = await forgetPassword(account);
+      const result1 = await user_M.check_account(account);
       console.log(result1);
       if (result1.length === 0) {
         res.json({ meg: "account doesn't exist" });
@@ -79,7 +83,7 @@ const userController = {
       //如果帳號存在，則生成暫時密碼
       const result2 = await user_M.createTempPassword(account);
       console.log(result2);
-      sendMail(account, "忘記密碼驗證信", forgetPasswordMail(result));
+      sendMail(account, "忘記密碼驗證信", forgetPasswordMail(result2));
       res.json({ meg: "success" });
       return;
     } catch (e) {
@@ -90,24 +94,19 @@ const userController = {
   updatePassword: async (req, res, next) => {
     try {
       //如果是臨時密碼，tableName = tempInfo；如果是修改密碼，tableName = user
-      const { tableName, accountName, password, newPassword } = req.body;
-      const result = await user_M.check_password(
-        tableName,
-        accountName,
-        password
-      );
+      const { account, password, newPassword } = req.body;
+      console.log(account, password, newPassword);
+      const tableName = "tempInfo";
+      const result = await user_M.check_password(tableName, account, password);
       console.log(result);
       if (result) {
-        let update_result = await user_M.updatePassword(
-          accountName,
-          newPassword
-        );
+        let update_result = await user_M.update_password(account, newPassword);
         console.log(update_result);
         return;
       }
     } catch (error) {
-      console.log("updatePassword err::", e);
-      return next(e);
+      console.log("updatePassword err::", error);
+      return next(error);
     }
   },
 };

@@ -114,7 +114,7 @@ async function createTempPassword(accountName) {
     Math.random() * 10
   )}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`;
 
-  let target = `SELECT tempPassword FROM tempInfo WHERE tempPassword = '${tempPassword}'`;
+  let target = `SELECT password FROM tempInfo WHERE password = '${tempPassword}'`;
   const [result, fields] = await db.pool.query(target);
   console.log(result); //沒有重複會回傳[]，有重複會會傳重複的臨時密碼
   if (result.length !== 0) {
