@@ -5,15 +5,15 @@ export const useRetrievepwStore = defineStore('Retrievepw',()=>{
         account:''
     })
     let verify = reactive({
-        // account:'s1990050479@gmail.com',//信箱
-        account:retrieveData.account,
+        account:'s1990050479@gmail.com',//信箱
+        // account:retrieveData.account,
         password:'',//驗證碼
         newPassword:'',//新密碼
         checkPassword:''
         // verifyCode:''
     })
     const test=()=>{
-        fetch('http://172.20.10.7:8080/api/user/updatePassword', {
+        fetch('http://172.20.10.7:8080/api/user/forgetPassword', {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
@@ -35,7 +35,8 @@ export const useRetrievepwStore = defineStore('Retrievepw',()=>{
     }
 
     const test2=()=>{
-        fetch('http://172.20.10.7:8080/api/user/forgetPassword', {
+        
+        fetch('http://172.20.10.7:8080/api/user/updatePassword', {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
