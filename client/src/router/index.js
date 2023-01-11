@@ -1,7 +1,10 @@
-import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import ProductView from "../views/ProductView.vue";
-import shoppingCart from "../views/shoppingCart.vue";
+import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '../views/HomeView.vue'
+import ProductView from '../views/ProductView.vue'
+import admin from '../views/admin.vue'
+import addproduct from  '../views/adminAddProduct.vue'
+import shoppingCart from '../views/shoppingCart.vue'
+import editproduct from '../views/editProduct.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -46,41 +49,20 @@ const router = createRouter({
       component: () => import("../views/OrderView.vue"),
     },
     {
-<<<<<<< Updated upstream
+
       path: "/:category/:productInfoID",
       name: "product",
       component: ProductView,
-=======
+
       path: '/:category/:productInfoNum/:productInfoID',
       name: 'product',
       component: ProductView
->>>>>>> Stashed changes
+
+
     },
     {
       path: "/shoppingCart",
       component: shoppingCart,
-<<<<<<< Updated upstream
-      children: [
-        {
-          path: "",
-          name: "shoppingCart",
-          component: () => import("../components/shoppingCart/cartList.vue"),
-        },
-        {
-          path: "shippingInfo",
-          component: () =>
-            import("../components/shoppingCart/shippingInfo.vue"),
-        },
-        {
-          path: "paymentInfo",
-          component: () => import("../components/shoppingCart/paymentInfo.vue"),
-        },
-        {
-          path: "order",
-          component: () => import("../components/shoppingCart/order.vue"),
-        },
-      ],
-=======
       children: [{
         path: '/shoppingCart',
         name: 'shoppingCart',
@@ -98,9 +80,27 @@ const router = createRouter({
         component: () => import('../components/shoppingCart/orderInfo.vue')
       }]
 
->>>>>>> Stashed changes
     },
-  ],
-});
+    {
+      path: '/admin',
+      name: 'admin',
+      component: admin
+    },
+    {
+      path: '/admin/addproduct',
+      name: 'addproduct',
+      component: addproduct
+    },
+
+    {
+      path: '/admin/editproduct',
+      name: 'editproduct',
+      component: editproduct
+
+    }
+    
+
+    ]},
+  )
 
 export default router;

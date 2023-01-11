@@ -3,7 +3,7 @@ async function createDB() {
     const connection = await mysql.createConnection({
       host: "localhost",
       user: "root",
-      password: "0000",
+      password: "Aa3982145",
     });
     //console.log("connection", connection);
     await connection.query(`CREATE DATABASE ${schemaName}`);

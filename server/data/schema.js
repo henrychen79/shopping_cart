@@ -10,7 +10,7 @@ async function createDB() {
       user: "root",
       // password: "3345678",
       host: "localhost",
-      // user: "henrychen",
+      user: "root",
       // password: "h6760903",
     });
     //console.log("connection", connection);
@@ -28,7 +28,7 @@ async function createPooL() {
     // password: "3345678",
     // password: "3345678",
     host: "localhost",
-    // user: "henrychen",
+    user: "root",
     // password: "h6760903",
     database: schemaName,
     waitForConnections: true,
