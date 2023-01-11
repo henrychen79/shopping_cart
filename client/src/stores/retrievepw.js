@@ -3,6 +3,7 @@ import{ref,reactive,computed} from "vue"
 import router from '../router'
 export const useRetrievepwStore = defineStore('Retrievepw',()=>{
 
+    let show =ref(false)
 
     //輸入信箱所存的資訊
     let retrieveData =reactive({
@@ -18,7 +19,7 @@ export const useRetrievepwStore = defineStore('Retrievepw',()=>{
     //     checkPassword:''
     // })
     const url='../../account.json'
-    const test=async()=>{
+    const sendEmail=async()=>{
         // const url = 'http://172.20.10.7:8080/api/user/forgetPassword'
         let control = await fetch(url, {
             method: 'POST', // or 'PUT'
@@ -31,8 +32,8 @@ export const useRetrievepwStore = defineStore('Retrievepw',()=>{
                 return res.json()
             })
             .then(function(res){
-                //會在新增
-                // return res
+
+                // return res.status
                 return true
      
             })
@@ -48,40 +49,15 @@ export const useRetrievepwStore = defineStore('Retrievepw',()=>{
                 query: { account:retrieveData.account }
             })
         }else{
-
+            show.value=true
+            console.log('寄送失敗，請重新確認')
         }
 
     }
 
-    // const test2=()=>{
-    //     // const url = 'http://172.20.10.7:8080/api/user/updatePassword'
-    //     fetch(url, {
-    //         method: 'POST', // or 'PUT'
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(verify),
-    //         })
-    //         .then(function(res){
-    //             console.log(res)
-    //             return res.json()
-    //         })
-    //         .then(function(res){
-    //             //會在新增
-    //             console.log(res);
-     
-    //         })
-    //         .catch(function(error){
-    //             console.error('Error:', error);
-    //         });
-    //         // verify.account  = a
-    //     console.log(verify)
-    // }
-
-
     return{
-        test,
-        retrieveData,
+        sendEmail,
+        retrieveData,show,
         // regOpen,retOpen,
         url//這個假資料用的
     }

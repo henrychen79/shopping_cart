@@ -13,11 +13,12 @@ export const useVerifyStore = defineStore('VerifyStore',()=>{
         newPassword:'',//新密碼
         checkPassword:''
     })
+    let warmText = ref('')
     const url='../../account.json'
 
-    const test2=()=>{
+    const verifySend=async()=>{
         // const url = 'http://172.20.10.7:8080/api/user/updatePassword'
-        fetch(url, {
+        let checkData = await fetch(url, {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
@@ -25,25 +26,34 @@ export const useVerifyStore = defineStore('VerifyStore',()=>{
             body: JSON.stringify(verify),
             })
             .then(function(res){
-                console.log(res)
+                // console.log(res)
                 return res.json()
             })
             .then(function(res){
-                //會在新增
-                console.log(res);
-     
+                // console.log(res.status);
+                // return res.status
+                return false
             })
             .catch(function(error){
                 console.error('Error:', error);
             });
-            // verify.account  = a
-        console.log(verify)
+            
+        // console.log(verify)
+        if(checkData===true){
+            warmText.value='修改成功'
+            console.log('修改成功')
+        }else{
+            warmText.value='修改失敗'
+            console.log('修改失敗')
+        }
+
+
     }
 
 
     return{
-        test2,
-        verify,
+        verifySend,
+        verify,warmText,
         // regOpen,retOpen,
         url//這個假資料用的
     }

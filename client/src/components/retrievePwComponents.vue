@@ -13,11 +13,22 @@ const Retrievepw = useRetrievepwStore()
                 <input type="text" name="" id="user_id" v-model="Retrievepw.retrieveData.account">
             </div>
             <div class="btn-group">
-                <button class="btn" @click="Retrievepw.test">寄送</button>
+                <button class="btn" @click="Retrievepw.sendEmail">寄送</button>
                 <button class="btn">取消</button>
             </div>
         </div>
     </div>
+
+    <!-- <div class="warmView">
+        
+    </div> -->
+
+    <Transition name="bounce" >
+        <p v-if="Retrievepw.show" class="warmView">
+            <h2>寄送失敗，請重新確認</h2>
+            <button @click="Retrievepw.show=false">取消</button>
+        </p>
+    </Transition>
 
 </template>
 
@@ -56,6 +67,46 @@ const Retrievepw = useRetrievepwStore()
         }
     }
 }
+}
+
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+  
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0) 
+  }
+  50% {
+    transform: scale(1.25)  
+  }
+  100% {
+    transform: scale(1)  
+  }
+}
+.warmView{
+    border: 2px solid black;
+    position: absolute;
+    margin: auto;
+    border-radius: 5px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+
+    width: 400px;
+    height: 300px;
+    z-index: 1;
 }
 
 

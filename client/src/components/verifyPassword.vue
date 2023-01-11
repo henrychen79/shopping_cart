@@ -33,7 +33,7 @@ router.currentRoute.value.query={}
                 <input v-model="VerifyStore.verify.checkPassword"/>
             </div>
             <div>
-                <button @click="VerifyStore.test2()">傳送</button>
+                <button @click="VerifyStore.verifySend">傳送</button>
                 <button @click="">取消</button>
             </div>
         </div>
