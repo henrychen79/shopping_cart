@@ -18,10 +18,13 @@ app.use(
 );
 // 解析 application/json
 app.use(bodyParser.json());
-
+var path = require("path");
 // 設置路由
 require("./routes")(app);
-
+app.use("/assets", express.static(__dirname + "/dist/assets"));
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 // 設置錯誤處理
 app.use((err, req, res, next) => {
   if (err) {
