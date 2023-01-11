@@ -1,3 +1,5 @@
+const { sendMail, orderMail } = require("../middleware/sendMail");
+const validator = require("../utils/validation");
 function setTimeDateFmt(s) {
   return s < 10 ? "0" + s : s;
 }
@@ -42,6 +44,10 @@ const orderController = {
       let state = "initialize";
       const { data } = req.body;
       const data_obj = JSON.parse(data);
+      const { error } = validator.createOrderValidation(data_obj);
+      if (error) {
+        throw { message: error.details[0].message };
+      }
       // 取得使用者對應的購物車ID
       const cart_id = await cart_M.getCart(data_obj.user_id);
       // 取得上述購物車ID下所有的購物車內容物
@@ -59,10 +65,10 @@ const orderController = {
       state = "create_order_done";
       // 產生訂單細項資訊
       for (let index = 0; index < cart_items.length; index++) {
-        let item = cart_items[index];
+        let item = cart_items[0][index];
+        console.log("item", item);
         let product_detail = await product_M.getSpecificiProduct(
-          item.category,
-          item.productNum
+          item.product_id
         );
         let inser_values = [
           order_ret[0].insertId,
@@ -81,6 +87,11 @@ const orderController = {
       // 清空購物車
       const delCart = await cart_M.delAllCartItem(cart_id[0].id);
       state = "delete_all_cart_item_done";
+      const email = "cindy81121116@gmail.com";
+      const subject = `[TEST]射射購物 訂單號碼:${data_obj.order_number} 成立 請把握時間付款`;
+      const status = "未出貨 / 未付款";
+      const msg = "請點擊付款連結並使用測試信用卡付款! 感謝配合!";
+      sendMail(email, subject, orderMail(data_obj, status, msg));
       res.json({ message: "創建訂單成功", data: data });
     } catch (error) {
       next(error);
