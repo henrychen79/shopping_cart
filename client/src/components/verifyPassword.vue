@@ -1,30 +1,40 @@
 <script setup>
 import {useRetrievepwStore} from "../stores/retrievepw"
+import{useVerifyStore}from "../stores/verifyStore"
+import router from '../router'
 const Retrievepw = useRetrievepwStore()
+const VerifyStore = useVerifyStore()
+
+let data = router.currentRoute.value.query.account
+VerifyStore.verify.account = data
+router.currentRoute.value.query={}
+
+
 
 </script>
 
 <template>
-     <div class="container">
+     <div class='container'>
         <h2>輸入新密碼</h2>
         <div class="login_form">
             <div>
-                <h2>帳號:{{Retrievepw.account}}</h2>
+                <p>帳號:{{data}}</p>
             </div>
             <div>
                 <label>驗證碼:</label>
-                <input v-model="Retrievepw.verify.password"/>
+                <input v-model="VerifyStore.verify.password"/>
             </div>
             <div>
                 <label>新密碼:</label>
-                <input v-model="Retrievepw.verify.newPassword"/>
+                <input v-model="VerifyStore.verify.newPassword"/>
             </div>
             <div>
                 <label>確認密碼:</label>
-                <input v-model="Retrievepw.verify.checkPassword"/>
+                <input v-model="VerifyStore.verify.checkPassword"/>
             </div>
             <div>
-                <button @click="Retrievepw.test2">傳送</button>
+                <button @click="VerifyStore.test2()">傳送</button>
+                <button @click="">取消</button>
             </div>
         </div>
     </div>
@@ -34,6 +44,10 @@ const Retrievepw = useRetrievepwStore()
 <style lang="scss" scoped>
 @media screen and (min-width: 320px){
     .container{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
     border: 2px solid black;
     width: 100%;
     height: 100%;

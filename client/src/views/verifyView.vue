@@ -1,14 +1,12 @@
 <script setup>
 import Header from '../components/Header.vue'
-import retrieve from '../components/retrievePwComponents.vue'
 import verify from '../components/verifyPassword.vue'
 
 </script>
 <template>
     <Header/>
     <div class="main">
-        <retrieve/>
-        <!-- <verify/> -->
+        <verify/>
     </div>
 </template>
 

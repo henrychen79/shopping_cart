@@ -1,10 +1,10 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import ProductView from "../views/ProductView.vue";
 import shoppingCart from "../views/shoppingCart.vue";
 
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
@@ -28,6 +28,12 @@ const router = createRouter({
       name: "retrieve",
 
       component: () => import("../views/retrievePassword.vue"),
+    },
+    {
+      path: '/verify',
+      name: 'verify',
+
+      component: () => import('../views/verifyView.vue')
     },
     {
       path: "/member",
