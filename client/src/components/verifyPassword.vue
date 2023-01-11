@@ -39,18 +39,23 @@ router.currentRoute.value.query={}
         </div>
     </div>
 
+
+    <Transition name="bounce" >
+        <p v-if="VerifyStore.show" class="warmView">
+            <p>{{VerifyStore.warmText}}</p>
+            <button @click="VerifyStore.checkSend">確認</button>
+            <button @click="VerifyStore.checkSend">取消</button>
+        </p>
+    </Transition>
+
 </template>
 
 <style lang="scss" scoped>
 @media screen and (min-width: 320px){
     .container{
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    border: 2px solid black;
-    width: 100%;
-    height: 100%;
+        border: 2px solid black;
+        width: 100%;
+        height: 100%;
     >h2{
         margin:auto;
         padding-left:30px ;
@@ -80,6 +85,46 @@ router.currentRoute.value.query={}
         }
     }
 }
+}
+
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+  
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0) 
+  }
+  50% {
+    transform: scale(1.25)  
+  }
+  100% {
+    transform: scale(1)  
+  }
+}
+.warmView{
+    border: 2px solid black;
+    position: absolute;
+    margin: auto;
+    border-radius: 5px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+
+    width: 400px;
+    height: 300px;
+    z-index: 1;
 }
 
 

@@ -3,8 +3,6 @@ import{ref,reactive,computed} from "vue"
 import router from '../router'
 export const useVerifyStore = defineStore('VerifyStore',()=>{
 
-
-
     //驗證碼 所存資訊
     let verify = reactive({
         // account:'s1990050479@gmail.com',//信箱
@@ -13,7 +11,10 @@ export const useVerifyStore = defineStore('VerifyStore',()=>{
         newPassword:'',//新密碼
         checkPassword:''
     })
+    let show = ref(false)
     let warmText = ref('')
+    let checkNum = ref(false);
+    
     const url='../../account.json'
 
     const verifySend=async()=>{
@@ -32,7 +33,7 @@ export const useVerifyStore = defineStore('VerifyStore',()=>{
             .then(function(res){
                 // console.log(res.status);
                 // return res.status
-                return false
+                return true
             })
             .catch(function(error){
                 console.error('Error:', error);
@@ -41,19 +42,29 @@ export const useVerifyStore = defineStore('VerifyStore',()=>{
         // console.log(verify)
         if(checkData===true){
             warmText.value='修改成功'
+            checkNum.value = true
             console.log('修改成功')
         }else{
             warmText.value='修改失敗'
+            checkNum.value = false
             console.log('修改失敗')
         }
+        show.value=true
 
-
+    }
+    const checkSend =()=>{
+        if(checkNum.value){
+            console.log('導回login頁面')
+        }else{
+            show.value=false
+            console.log('關掉通知畫面')
+        }
     }
 
 
     return{
-        verifySend,
-        verify,warmText,
+        verifySend,checkSend,
+        verify,warmText,show,
         // regOpen,retOpen,
         url//這個假資料用的
     }
