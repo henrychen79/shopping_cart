@@ -1,97 +1,135 @@
 {
     "p001":{
-        "detail": "我是編號1號",
-        "inventory": "10",
-        "img": "img001"
+        "category":"'001'",
+        "productNum":"'1'",
+        "detail": "'我是編號1號'",
+        "inventory": "'10'",
+        "img": "'img001'"
     },
     "p002":{
-        "detail": "我是編號2號",
-        "inventory": "10",
-        "img": "img002"
+        "category":"'001'",
+        "productNum":"'2'",
+        "detail": "'我是編號2號'",
+        "inventory": "'10'",
+        "img": "'img002'"
     },
     "p003":{
-        "detail": "我是編號3號",
-        "inventory": "10",
-        "img": "img003"
+        "category":"'001'",
+        "productNum":"'3'",
+        "detail": "'我是編號3號'",
+        "inventory": "'10'",
+        "img": "'img003'"
     },
     "p004":{
-        "detail": "我是編號4號",
-        "inventory": "10",
-        "img": "img004"
+        "category":"'001'",
+        "productNum":"'4'",
+        "detail": "'我是編號4號'",
+        "inventory": "'10'",
+        "img": "'img004'"
     },
     "p005":{
-        "detail": "我是編號5號",
-        "inventory": "10",
-        "img": "img005"
+        "category":"'001'",
+        "productNum":"'5'",
+        "detail": "'我是編號5號'",
+        "inventory": "'10'",
+        "img": "'img005'"
     },
     "p006":{
-        "detail": "我是編號6號",
-        "inventory": "10",
-        "img": "img006"
+        "category":"'001'",
+        "productNum":"'6'",
+        "detail": "'我是編號6號'",
+        "inventory": "'10'",
+        "img": "'img006'"
     },
     "p007":{
-        "detail": "我是編號7號",
-        "inventory": "10",
-        "img": "img007"
+        "category":"'001'",
+        "productNum":"'7'",
+        "detail": "'我是編號7號'",
+        "inventory": "'10'",
+        "img": "'img007'"
     },
     "p008":{
-        "detail": "我是編號8號",
-        "inventory": "10",
-        "img": "img008"
+        "category":"'001'",
+        "productNum":"'8'",
+        "detail": "'我是編號8號'",
+        "inventory": "'10'",
+        "img": "'img008'"
     },
     "p009":{
-        "detail": "我是編號9號",
-        "inventory": "10",
-        "img": "img009"
+        "category":"'001'",
+        "productNum":"'9'",
+        "detail": "'我是編號9號'",
+        "inventory": "'10'",
+        "img": "'img009'"
     },
     "p010":{
-        "detail": "我是編號10號",
-        "inventory": "10",
-        "img": "img010"
+        "category":"'001'",
+        "productNum":"'10'",
+        "detail": "'我是編號10號'",
+        "inventory": "'10'",
+        "img": "'img010'"
     },
     "p011":{
-        "detail": "我是編號11號",
-        "inventory": "10",
-        "img": "img011"
+        "category":"'001'",
+        "productNum":"'11'",
+        "detail": "'我是編號11號'",
+        "inventory": "'10'",
+        "img": "'img011'"
     },
     "p012":{
-        "detail": "我是編號12號",
-        "inventory": "10",
-        "img": "img012"
+        "category":"'001'",
+        "productNum":"'12'",
+        "detail": "'我是編號12號'",
+        "inventory": "'10'",
+        "img": "'img012'"
     },
     "p013":{
-        "detail": "我是編號13號",
-        "inventory": "10",
-        "img": "img013"
+        "category":"'001'",
+        "productNum":"'13'",
+        "detail": "'我是編號13號'",
+        "inventory": "'10'",
+        "img": "'img013'"
     },
     "p014":{
-        "detail": "我是編號14號",
-        "inventory": "10",
-        "img": "img014"
+        "category":"'001'",
+        "productNum":"'14'",
+        "detail": "'我是編號14號'",
+        "inventory": "'10'",
+        "img": "'img014'"
     },
     "p015":{
-        "detail": "我是編號15號",
-        "inventory": "10",
-        "img": "img015"
+        "category":"'001'",
+        "productNum":"'15'",
+        "detail": "'我是編號15號'",
+        "inventory": "'10'",
+        "img": "'img015'"
     },
     "p016":{
-        "detail": "我是第002種類的編號1號",
-        "inventory": "10",
-        "img": "img001"
+        "category":"'002'",
+        "productNum":"'1'",
+        "detail": "'我是第002種類的編號1號'",
+        "inventory": "'10'",
+        "img": "'img001'"
     },
     "p017":{
-        "detail": "我是第002種類的編號2號",
-        "inventory": "10",
-        "img": "img002"
+        "category":"'002'",
+        "productNum":"'2'",
+        "detail": "'我是第002種類的編號2號'",
+        "inventory": "'10'",
+        "img": "'img002'"
     },
     "p018":{
-        "detail": "我是第002種類的編號3號",
-        "inventory": "10",
-        "img": "img003"
+        "category":"'002'",
+        "productNum":"'3'",
+        "detail": "'我是第002種類的編號3號'",
+        "inventory": "'10'",
+        "img": "'img003'"
     },
     "p019":{
-        "detail": "我是第002種類的編號4號",
-        "inventory": "10",
-        "img": "img004"
+        "category":"'002'",
+        "productNum":"'4'",
+        "detail": "'我是第002種類的編號4號'",
+        "inventory": "'10'",
+        "img": "'img004'"
     }
 }

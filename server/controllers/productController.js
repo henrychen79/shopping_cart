@@ -47,6 +47,8 @@ const productController = {
   },
   getSpecificiProduct: async (req, res, next) => {
     try {
+      console.log('有收到');
+      console.log(req.query);
       let product_id = req.query.product_id;
       console.log("商品ID" + product_id);
       product_M.getSpecificiProduct(product_id).then((data) => {

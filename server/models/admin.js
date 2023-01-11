@@ -1,28 +1,49 @@
-const db = require("../data/schema");
-// const db = require("../data/testDatabase");//測試單頁js用
+// const db = require("../data/schema");
+const db = require("../data/testDatabase");//測試單頁js用
 const table = require("../data/tables.json");
 
+//根據種類查找所有商品ＯＫ
+async function getProducts(category){
+    try {
+        //查找該種類的所有商品
+            let target = `SELECT * FROM product LEFT JOIN productDetail USING(category,productNum) WHERE product.category = '${category}'`;
+            console.log(target);
+            const [result, field] = await db.pool.query(target);
+            console.log(result);
+            return result;
+    } catch (error) {}
+};
 
+//根據種類和商品編號查找特定商品ＯＫ
+async function getProduct(category,productNum){
+    try {
+        let target = `SELECT * FROM product LEFT JOIN productDetail USING(category,productNum) WHERE product.category = '${category}' AND product.productNum = '${productNum}'`;
+        console.log(target);
+        const [result, field] = await db.pool.query(target);
+        console.log(result);
+        return result;
+    } catch (error) {}
+};
+//新增商品ＯＫ
+async function addProduct(data){
+    try {
+        let target1 = `INSERT INTO productDetail ( category, productNum, detail, inventory, img) VALUES ('${
+            data.category}','${data.productNum}','${
+            data.detail}','${data.inventory}','${data.img}')`;
 
-/************編輯＆新增商品*************/
-
-//先拿到(前端送出個別商品類別跟編號)去查找出下面的aaa
-//後端查找商品的資料送出（沒有的話就不顯示）
-// let data = {
-//     "category": "001",
-//     "productNum": "4",
-//     "detail": "編號4號",
-//     "inventory": "10",
-//     "img": "img004",
-//     "product_id": "5",
-//     "productName": "口罩",
-//     "thumbnail": "img004",
-//     "price": "20"
-// }
-//查找商品用/models/product.j裡面的getSpecificiProduct(category_id, product_num)，將結果顯示在輸入欄位上，
-
-
-//更新DB（類別，名稱，圖片，價格，庫存，描述）
+        let target2 = `INSERT INTO product ( productNum, category, productName, price) VALUES ('${
+            data.productNum}','${data.category}','${data.productName}','${
+                data.price}')`;
+        
+        await db.pool.query(target1);
+        await db.pool.query(target2);
+        return '新增商品成功';
+        
+    } catch (error) {
+        return 'ERR:新增商品失敗'
+    }
+};
+//更新商品ＯＫ
 async function update_product(data) {
     try {
         //根據舊的種類和商品編號更新productDetail
@@ -31,8 +52,9 @@ async function update_product(data) {
             data.productNum}',pD.detail = '${
             data.detail}',pD.inventory = '${
             data.inventory}',pD.img = '${
-            data.img}' WHERE pD.category IN (SELECT category FROM product WHERE product_id = '${
-                data.product_id}') AND pD.productNum IN (SELECT productNum FROM product WHERE product_id = '${data.product_id}')`;
+            data.img}' WHERE pD.category = '${
+                data.category}' AND pD.productNum = '${
+                data.productNum}'`;
 
         //根據收到的『編輯後的資訊』更新product
         let target2 = `UPDATE product AS p
@@ -41,38 +63,109 @@ async function update_product(data) {
                 p.productName = '${data.productName}', 
                 p.thumbnail = '${data.thumbnail}', 
                 p.price = '${data.price}'
-            WHERE p.product_id = '${data.product_id}'`;
+            WHERE p.category = '${
+                data.category}' AND p.productNum = '${
+                data.productNum}'`;
 
-        console.log(target1);
         await db.pool.query(target1);
-
-        console.log(target2);
         await db.pool.query(target2);
-        //修改照片資料夾的名稱
-
-        console.log('修改商品成功');
-        return "update product success";//更新商品成功
+        return '修改商品成功';
     } catch (error) {
-        console.log(error);
-        return error
+        console.log('db錯了'+error);
+        return '修改商品失敗';
     }
-}
+};
+//單純修改價格ＯＫ
+async function update_price(product_id, newPrice) {
+    try {
+        let target = `UPDATE product SET price = '${newPrice}' WHERE product_id = '${product_id}'`;
+        await db.pool.query(target);
+        return "更新價格成功"
+    } catch (error) {
+        return "更新價格失敗"
+    }
+};
+//單純修改庫存量OK
+async function update_inventory(product_id, newInventory) {
+    try {
+        let target = `UPDATE productDetail AS pD SET pD.inventory = '${
+            newInventory}' WHERE pD.category = (SELECT category FROM product WHERE product_id = ${
+                product_id}) AND pD.productNum = (SELECT productNum FROM product WHERE product_id = ${
+                    product_id})`;
+        console.log(target);
+        await db.pool.query(target);
+        return "更新庫存量成功";
+    } catch (error) {
+        return "更新庫存量失敗";
+    }
+};
 
 
 
-//商品編號如果重複請告知商品編號重複
+//刪除商品(product,productDetail)
+async function delete_product(product_id){
+    try {
+        let target = `DELETE p,pD FROM product p LEFT JOIN productDetail pD on pD.category = p.category AND pD.productNum = p.productNum WHERE p.product_id = '${product_id}'`;
+        console.log(target);
+        await db.pool.query(target);
+        return "刪除商品成功";
+    } catch (error) {
+        return error + "刪除失敗";
+    }
+};
 
 
-//單純修改價格
-//單純修改庫存量
+//查找所有訂單(未測試)
+async function getAllOrders() {
+    try {
+        //少給全部訂單總量，讓前端可以產生頁數
+        let target = `SELECT *, COUNT(*) AS total FROM orderList LEFT JOIN orderDetail USING(orderNum)`;
+        const [result,feild] = await db.pool.query(target);
+        console.log(result);
+        return result;
+    } catch (error) {}
+};
 
-//搜尋個別商品
-//搜尋類別
-
-
-
-//查找所有訂單
+//編輯訂單出貨狀態
+async function update_deliver(orderNum, deliver_status) {
+    try {
+        let target = `UPDATE orderList SET deliver_status = '${deliver_status}' WHERE orderNum = '${orderNum}'`;
+        await db.pool.query(target);
+        return "更新出貨狀態成功";
+    } catch (error) {
+        return "更新出貨狀態失敗";
+    }
+};
+//編輯訂單付款狀態
+async function update_pay(orderNum, pay_status) {
+    try {
+        let target = `UPDATE orderList SET pay_status = '${pay_status}' WHERE orderNum = '${orderNum}'`;
+        await db.pool.query(target);
+        return "更新付款狀態成功";
+    } catch (error) {
+        return "更新付款狀態失敗";
+    }
+};
 
 //查找所有用戶
+async function getAllUsers() {
+    try {
+        //少給全部會員總量，讓前端可以產生頁數
+        let target = `SELECT * FROM user`;
+        const [result,feild] = await db.pool.query(target);
+        console.log(result);
+        return result;
+    } catch (error) {}
+};
 
 module.exports.update_product = update_product;
+module.exports.getProducts = getProducts;
+module.exports.getProduct = getProduct;
+module.exports.addProduct = addProduct;
+module.exports.update_price = update_price;
+module.exports.update_inventory = update_inventory;
+module.exports.update_deliver = update_deliver;
+module.exports.update_pay = update_pay;
+module.exports.getAllOrders = getAllOrders;
+module.exports.getAllUsers = getAllUsers;
+module.exports.delete_product = delete_product;

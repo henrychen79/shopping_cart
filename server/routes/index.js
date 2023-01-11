@@ -5,7 +5,7 @@ const admin = require("./modules/admin");
 const member = require("./modules/memberCenter");
 const cart = require("./modules/cart");
 const order = require("./modules/order");
-console.log(order);
+// console.log(order);
 module.exports = (app) => {
   app.use("/api/product", product);
   app.use("/api/user", user);

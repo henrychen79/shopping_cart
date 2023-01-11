@@ -25,9 +25,228 @@ const adminController = {
   update_product: async (req, res, next) => {
     try {
       //前端給data
-      const { data } = req.body;
-      console.log(JSON.parse(data));
-      const result = await admin_M.update_product(JSON.parse(data));
+      // const { data } = req.body;
+      // console.log(JSON.parse(data));
+      // const result = await admin_M.update_product(JSON.parse(data));
+      const data = req.body;
+      console.log(data);
+      const result = await admin_M.update_product(data);
+      // console.log(res.json(result));
+<<<<<<< Updated upstream
+=======
+      return res.json(result);
+
+    } catch (e) {
+      return next(e);
+    }
+  },
+  getProducts: async (req, res, next) => {
+    try {
+      const category = req.query.category;
+      console.log(category);
+      console.log('種類：' + category);
+      const result = await admin_M.getProducts(category);
+      console.log(result);
+      return res.json(result);
+
+    } catch (error) {
+      return next(e);
+    }
+  },
+  getProduct: async (req, res, next) => {
+    try {
+      const category = req.query.category;
+      const productNum = req.query.productNum;
+      console.log(category);
+      console.log(productNum);
+      console.log('種類：' + category);
+      const result = await admin_M.getProduct(category,productNum);
+      console.log(result);
+      return res.json(result);
+
+    } catch (error) {
+      return next(e);
+    }
+  },
+  addProduct: async (req, res, next) => {
+    try {
+      //前端給data
+      console.log(req.body);
+      const data = req.body;
+      // console.log(JSON.parse(data));
+      const result = await admin_M.addProduct(data);
+      return res.json(result);
+
+    } catch (e) {
+      return next(e);
+    }
+  },
+  update_price: async (req, res, next) => {
+    try {
+      const product_id = req.params.product_id;
+      const newPrice = req.body;
+      const result = await admin_M.update_price(product_id,newPrice);
+      return res.json(result);
+
+    } catch (e) {
+      return next(e);
+    }
+  },
+  update_inventory: async (req, res, next) => {
+    try {
+      const product_id = req.params.product_id;
+      const newInventory = req.body;
+      const result = await admin_M.update_inventory(product_id,newInventory);
+      return res.json(result);
+
+    } catch (e) {
+      return next(e);
+    }
+  },
+  update_deliver:async (req, res, next) => {
+    try {
+      const  data = req.body;
+      console.log(data);
+      const result = await admin_M.update_inventory(data);
+      return res.json(result);
+
+    } catch (e) {
+      return next(e);
+    }
+  },
+  update_pay:async (req, res, next) => {
+    try {
+      const  data = req.body;
+      console.log(data);
+      const result = await admin_M.update_inventory(data);
+      return res.json(result);
+
+    } catch (e) {
+      return next(e);
+    }
+  },
+  getAllOrders: async (req, res, next) => {
+    try {
+      const result = await admin_M.getAllOrders();
+      console.log(result);
+      return res.json(result);
+
+    } catch (error) {
+      return next(e);
+    }
+  },
+  getAllUsers: async (req, res, next) => {
+    try {
+      const result = await admin_M.getAllUsers();
+      console.log(result);
+>>>>>>> Stashed changes
+      return res.json(result);
+
+    } catch (e) {
+      return next(e);
+    }
+  },
+  getProducts: async (req, res, next) => {
+    try {
+      const category = req.query.category;
+      console.log(category);
+      console.log('種類：' + category);
+      const result = await admin_M.getProducts(category);
+      console.log(result);
+      return res.json(result);
+
+    } catch (error) {
+      return next(e);
+    }
+  },
+  getProduct: async (req, res, next) => {
+    try {
+      const category = req.query.category;
+      const productNum = req.query.productNum;
+      console.log(category);
+      console.log(productNum);
+      console.log('種類：' + category);
+      const result = await admin_M.getProduct(category,productNum);
+      console.log(result);
+      return res.json(result);
+
+    } catch (error) {
+      return next(e);
+    }
+  },
+  addProduct: async (req, res, next) => {
+    try {
+      //前端給data
+      console.log(req.body);
+      const data = req.body;
+      // console.log(JSON.parse(data));
+      const result = await admin_M.addProduct(data);
+      return res.json(result);
+
+    } catch (e) {
+      return next(e);
+    }
+  },
+  update_price: async (req, res, next) => {
+    try {
+      const product_id = req.query.product_id;
+      const newPrice= req.body.price;
+      const result = await admin_M.update_price(product_id,newPrice);
+      return res.json(result);
+
+    } catch (e) {
+      return next(e);
+    }
+  },
+  update_inventory: async (req, res, next) => {
+    try {
+      const product_id = req.query.product_id;
+      const newInventory = req.body.inventory;
+      console.log('ID:'+product_id);
+      console.log('新庫存:'+newInventory);
+      const result = await admin_M.update_inventory(product_id,newInventory);
+      return res.json(result);
+
+    } catch (e) {
+      return next(e);
+    }
+  },
+  update_deliver:async (req, res, next) => {
+    try {
+      const  data = req.body;
+      console.log(data);
+      const result = await admin_M.update_inventory(data);
+      return res.json(result);
+
+    } catch (e) {
+      return next(e);
+    }
+  },
+  update_pay:async (req, res, next) => {
+    try {
+      const  data = req.body;
+      console.log(data);
+      const result = await admin_M.update_inventory(data);
+      return res.json(result);
+
+    } catch (e) {
+      return next(e);
+    }
+  },
+  getAllOrders: async (req, res, next) => {
+    try {
+      const result = await admin_M.getAllOrders();
+      console.log(result);
+      return res.json(result);
+
+    } catch (error) {
+      return next(e);
+    }
+  },
+  getAllUsers: async (req, res, next) => {
+    try {
+      const result = await admin_M.getAllUsers();
+      console.log(result);
       return res.json(result);
     } catch (error) {
       return next(e);
@@ -42,5 +261,14 @@ const adminController = {
       return next(e);
     }
   },
+  delete_product: async (req, res, next) => {
+    try {
+      const product_id = req.query.product_id;
+      const result = await admin_M.delete_product(product_id);
+      return res.json(result);
+    } catch (error) {
+      return next(e);
+    }
+  }
 };
 module.exports = adminController;
