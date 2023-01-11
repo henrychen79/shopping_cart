@@ -84,7 +84,7 @@ const userController = {
       const result2 = await user_M.createTempPassword(account);
       console.log(result2);
       sendMail(account, "忘記密碼驗證信", forgetPasswordMail(result2));
-      res.json({ meg: "success" });
+      res.json({ status: true });
       return;
     } catch (e) {
       console.log("forgetPassword err::", e);
@@ -102,7 +102,7 @@ const userController = {
       if (result) {
         let update_result = await user_M.update_password(account, newPassword);
         console.log(update_result);
-        return;
+        return res.json({ status: true });
       }
     } catch (error) {
       console.log("updatePassword err::", error);
