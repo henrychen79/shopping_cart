@@ -46,13 +46,20 @@ const router = createRouter({
       component: () => import("../views/OrderView.vue"),
     },
     {
+<<<<<<< Updated upstream
       path: "/:category/:productInfoID",
       name: "product",
       component: ProductView,
+=======
+      path: '/:category/:productInfoNum/:productInfoID',
+      name: 'product',
+      component: ProductView
+>>>>>>> Stashed changes
     },
     {
       path: "/shoppingCart",
       component: shoppingCart,
+<<<<<<< Updated upstream
       children: [
         {
           path: "",
@@ -73,6 +80,25 @@ const router = createRouter({
           component: () => import("../components/shoppingCart/order.vue"),
         },
       ],
+=======
+      children: [{
+        path: '/shoppingCart',
+        name: 'shoppingCart',
+        component: () => import('../components/shoppingCart/cartList.vue')
+      }, {
+        path: 'shippingInfo',
+        component: () => import('../components/shoppingCart/shippingInfo.vue')
+      },
+      {
+        path: 'paymentInfo',
+        component: () => import('../components/shoppingCart/paymentInfo.vue')
+      },
+      {
+        path: 'orderInfo',
+        component: () => import('../components/shoppingCart/orderInfo.vue')
+      }]
+
+>>>>>>> Stashed changes
     },
   ],
 });

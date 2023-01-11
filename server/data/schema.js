@@ -41,6 +41,7 @@ async function createPooL() {
 //創建表單
 async function createTable(tableName, columns) {
   try {
+    // console.log(tableName, columns);
     let target = `CREATE TABLE ${tableName} (${columns})`;
     //console.log(target);
     await exports.pool.query(target);

@@ -3,11 +3,12 @@ import { computed, ref } from "vue"
 import { productStore } from '../../../stores/productStore'
 
 const pd = productStore();
-
+console.log('page here', pd.crrentPage);
 
 </script>
 
 <template>
+    {{ pd }}
     <ul class="pagination">
         <li @click="pd.btnLeft"><a href="#">«</a></li>
         <li v-for="pageNumber in pd.showPages" @click="pd.crrentPage = pageNumber">

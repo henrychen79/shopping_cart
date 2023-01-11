@@ -16,13 +16,13 @@ const cs = cartStore();
     <main class="main">
 
         <div class="progressBar">
-            <div>購物車</div>
-            <div>-</div>
-            <div>寄送資訊</div>
-            <div>-</div>
-            <div>付款資訊</div>
-            <div>-</div>
-            <div>訂單成立</div>
+            <div class="box"><router-link to="/shoppingCart">購物車</router-link></div>
+            <div class="line"></div>
+            <div class="box"><router-link to="/shoppingCart/shippingInfo">寄送<br>資訊</router-link></div>
+            <div class="line"></div>
+            <div class="box"><router-link to="/shoppingCart/paymentInfo">付款<br>資訊</router-link></div>
+            <div class="line"></div>
+            <div class="box"><router-link to="/shoppingCart/orderInfo">訂單<br>成立</router-link></div>
         </div>
 
         <RouterView />
@@ -32,8 +32,44 @@ const cs = cartStore();
     <Footer />
 </template>
 <style scoped lang="scss">
-a:active {
-    color: aqua;
+.box {
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--black);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a {
+        font-size: 0.8rem;
+        color: var(--white);
+    }
+
+    &:has(.router-link-exact-active) {
+        background-color: var(--black);
+    }
+
+    &:has(.router-link-exact-active)~.box {
+        background-color: var(--grey);
+
+        a {
+            color: var(--black);
+        }
+    }
+
+    &:has(.router-link-exact-active)~.line {
+        border-top: 5px solid var(--grey);
+    }
+
+    .router-link-exact-active {
+        color: var(--white);
+    }
+}
+
+.line {
+    width: 2rem;
+    border-top: 5px solid var(--black);
 }
 
 .main {
@@ -46,10 +82,12 @@ a:active {
 
     div.progressBar {
         display: flex;
+        align-items: center;
 
+        div a {
+            cursor: default;
+            pointer-events: none;
+        }
     }
-
-
-
 }
 </style>

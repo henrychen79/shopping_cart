@@ -1,16 +1,18 @@
 <script setup>
-import { ref, defineProps, watch } from "vue";
+import { ref, defineProps, watchEffect } from "vue";
 
 const paramData = defineProps({
-    imgData: Object
+    imgData: Object,
+    urlData: Object
 });
+
 const fetchURL = 'http://172.20.10.4:8080'
 
-const imgURL = ref('')
+const imgURL = ref('');
 
-watch(() => {
+watchEffect(() => {
     const productInfo = async () => {
-        let data = await fetch(`${fetchURL}/api/product/image?category_id=${paramData.imgData.category}&product_id=${paramData.imgData.productInfoID}&type=thumbnail`, {
+        let data = await fetch(`${fetchURL}/api/product/image?category_id=${paramData.imgData.category}&product_id=${paramData.imgData.productInfoNum}&type=thumbnail`, {
             method: 'GET',
         })
             .then(response => response.blob())
@@ -32,7 +34,8 @@ watch(() => {
     <div class="cards_item">
         <div class="card">
             <div class="card_image">
-                <RouterLink :to="{ name: 'product', params: paramData.imgData }">
+                <slot name="img"></slot>
+                <RouterLink :to="{ name: 'product', params: paramData.urlData }">
                     <img :src="imgURL" alt="" style="height:100%;width:100%">
                 </RouterLink>
             </div>
@@ -107,7 +110,7 @@ h3 {
 }
 
 p {
-    font-size: 1.2rem;
+    font-size: 0.2rem;
     color: rgb(186, 54, 54);
     font-weight: bold;
 }

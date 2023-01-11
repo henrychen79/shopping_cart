@@ -9,15 +9,15 @@ const cs = cartStore();
     <form class="shippingInfo-form">
         <div class="form-group box">
             <label>收件人姓名</label>
-            <input type="text" />
+            <input type="text" v-model="cs.data.recipient" />
         </div>
         <div class="form-group box">
             <label>收件人電話</label>
-            <input type="tel" />
+            <input type="tel" v-model="cs.data.phone" />
         </div>
         <div class="form-group lbox">
             <label>收件人地址</label>
-            <input type="text" />
+            <input type="text" v-model="cs.data.address" />
         </div>
         <div>
             <router-link to="/shoppingCart" class="btn">回前頁</router-link>
@@ -28,6 +28,7 @@ const cs = cartStore();
 
 <style scoped lang="scss">
 form.shippingInfo-form {
+    border: 1px solid var(--black);
     width: 90%;
     display: flex;
     flex-direction: row;
@@ -38,6 +39,9 @@ form.shippingInfo-form {
         padding: 1rem 2rem;
         display: flex;
         flex-wrap: wrap;
+        align-items: center;
+
+        gap: 0.1rem;
 
         label {
             margin-right: 1rem;
@@ -45,7 +49,7 @@ form.shippingInfo-form {
 
         input {
             flex: 1;
-            max-width: 100%
+            max-width: 100%;
         }
     }
 
@@ -69,6 +73,20 @@ form.shippingInfo-form {
         border-radius: 5px;
         background-color: var(--grey);
     }
+
+}
+
+
+@media only screen and (max-width: 452px) {
+    form.shippingInfo-form {
+
+        .box {
+            width: 100%;
+        }
+
+
+    }
+
 
 }
 </style>

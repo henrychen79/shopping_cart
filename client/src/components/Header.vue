@@ -1,9 +1,10 @@
 <script setup>
+import { ref, watch } from "@vue/runtime-core";
 
 </script>
 
 <template>
-
+    {{ items }}
     <header>
         <div id="logo">
             <img src="" alt="">
@@ -15,7 +16,9 @@
             <li><router-link to="/register">註冊</router-link></li>
             <li><router-link to="/member">會員中心</router-link></li>
             <li><a href="#">訂單查詢</a></li>
-            <li><router-link to="/shoppingCart">購物車</router-link></li>
+            <li>
+                <router-link to="/shoppingCart">購物車</router-link>
+            </li>
         </ul>
 
         <ul class="headerBar-mobile">

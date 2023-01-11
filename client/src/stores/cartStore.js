@@ -4,31 +4,39 @@ import { fetchData } from '../stores/fetchData'
 
 export const cartStore = defineStore('cart', () => {
 
-    const testData = ref(0);
+    const data = reactive({
+        'user_id': 1,
+        'recipient': ref(''),
+        'phone': ref(''),
+        'pay_way': '轉帳',
+        'dliver_way': '宅配',
+        'address': ref(''),
+    })
+    const fetchURL = 'http://172.20.10.4:8080'
+    const orderDoneUrl = `${fetchURL}/api/order/createOrder`
+    //完成訂單
+    const orderDone = async () => {
+        console.log('完成購物');
 
+        let P = await fetch(orderDoneUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(function (res) {
 
-    function addNum() {
-        return testData.value++
+                return res
+            })
+            .catch((error) => {
+                console.error('orderDoneError:', error);
+            });
     }
 
-
-
-    const userid = ref('');
-
-    const shoppingCartAPI = fetchData(`http://172.20.10.4:8080/api/cart/松:userid`);
-
-    shoppingCartAPI.then(res => {
-
-        //監聽點擊類別
-        watchEffect(() => {
-
-            let cartList = res.find((obj) => obj.category === currentCategory.value);
-            totalPageNum.value = Math.ceil(+category.categoryPage)
-
-        })
-
-
-    });
-
-    return { testData, addNum }
+    return {
+        data,
+        orderDone
+    }
 })

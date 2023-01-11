@@ -1,6 +1,8 @@
 <script setup>
 import { computed, ref } from "vue"
+import { cartStore } from "../../stores/cartStore"
 
+const cs = cartStore();
 </script>
 
 <template>
@@ -11,7 +13,7 @@ import { computed, ref } from "vue"
         <h3>帳號 : 709XXXXXXXXX</h3>
         <div>
             <router-link to="/shoppingCart/shippingInfo" class="btn">回前頁</router-link>
-            <router-link to="/shoppingCart/order" class="btn">下一頁</router-link>
+            <router-link to="/shoppingCart/orderInfo" @click="cs.orderDone()" class="btn">確認訂單</router-link>
         </div>
 
     </div>
@@ -19,6 +21,7 @@ import { computed, ref } from "vue"
 
 <style scoped lang="scss">
 div.payment-info {
+    border: 1px solid var(--black);
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -42,4 +45,6 @@ div.payment-info {
         background-color: var(--grey);
     }
 }
+
+@media only screen and (max-width: 452px) {}
 </style>

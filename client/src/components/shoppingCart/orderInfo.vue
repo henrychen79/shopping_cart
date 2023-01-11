@@ -24,6 +24,7 @@ div.order {
     flex-direction: column;
     flex-wrap: wrap;
     align-items: flex-start;
+    border: 1px solid var(--black);
 
     .order-massage {
         padding: 1rem 2rem;

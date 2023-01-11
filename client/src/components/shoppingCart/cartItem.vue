@@ -1,20 +1,81 @@
 <script setup>
-import { computed, ref } from "vue"
+
+import { ref, defineProps, watch, reactive, defineEmits } from "vue";
+
+const emit = defineEmits(['delbtn'])
+const paramData = defineProps({
+    imgData: Object,
+    itemId: Number,
+    indexId: Number
+});
+const fetchURL = 'http://172.20.10.4:8080'
+const delCatUrl = `${fetchURL}/api/cart/delCartItem`
+
+const imgURL = ref('')
+
+watch(() => {
+    const productImg = async () => {
+        console.log(`${fetchURL}/api/product/image?category_id=${paramData.imgData.category}&product_id=${paramData.imgData.productInfoID}&type=thumbnail`);
+        let data = await fetch(`${fetchURL}/api/product/image?category_id=${paramData.imgData.category}&product_id=${paramData.imgData.productInfoID}&type=thumbnail`, {
+            method: 'GET',
+        })
+            .then(response => response.blob())
+            .then(function (res) {
+                // 將 blog 物件轉為 url
+                imgURL.value = URL.createObjectURL(res)
+                return res
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+    productImg();
+})
+
+const delData = reactive({
+    'id': paramData.itemId
+})
+
+//移除購物車
+const delCart = async () => {
+    console.log('移除購物車');
+
+    let data = await fetch(delCatUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(delData)
+    })
+        .then(response => response.json())
+        .then(function (res) {
+
+            return res
+        })
+        .catch((error) => {
+            console.error('delCartError:', error);
+        });
+    emit('delbtn')
+}
 
 </script>
 
 <template>
 
     <tr>
-        <td><img src="" alt=""></td>
+        <td><img :src="imgURL" alt="Loading..."></td>
         <td>
             <slot name="itemName"></slot>
+        </td>
+        <td>
+            <slot name="itemQuantity"></slot>
         </td>
         <td>
             <slot name="itemPrice"></slot>
         </td>
         <td>
-            <button>移除</button>
+            <!-- 找找更好的刷新方法 -->
+            <button @click="delCart">{{ delData.id }}移除</button>
         </td>
     </tr>
 
@@ -23,13 +84,14 @@ import { computed, ref } from "vue"
 
 <style scoped lang="scss">
 tr td {
-    padding: 3rem;
-    // background-color: rgb(241, 241, 235);
+    width: 20%;
+    height: 6rem;
 }
 
 tr td img {
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    max-width: 5rem;
+    height: 90%;
     background-color: rgb(86, 124, 157);
 }
 </style>
