@@ -9,14 +9,7 @@ export default defineConfig({
   base: "./",
   resolve: {
     alias: {
-<<<<<<< Updated upstream
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
 });
-=======
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  },
-})
->>>>>>> Stashed changes
