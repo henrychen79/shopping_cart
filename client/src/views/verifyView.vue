@@ -11,6 +11,11 @@ import verify from '../components/verifyPassword.vue'
 </template>
 
 <style lang="scss" scoped>
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
 body{
     width: 100%;
     height: 100%;

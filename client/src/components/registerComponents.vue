@@ -104,7 +104,6 @@ const registerStore = useRegisterStore()
         }
         >.btn-group{
            >.btn{
-            
             width: 100px;
             margin: 20px;
            }
