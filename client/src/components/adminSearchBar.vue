@@ -2,7 +2,7 @@
 import { ref, defineProps, defineEmits} from 'vue'
 import {adminProductStore} from "../stores/adminProductStore"
 const aps = adminProductStore()
-let catvalue = ref('aps.fetchCategory1')
+
 
 </script>
 
@@ -18,7 +18,7 @@ let catvalue = ref('aps.fetchCategory1')
                     <option>001</option>
                     <option>002</option>
                  </select>
-                 <button @click="aps.getDetail" :cat="catvalue">搜尋</button>
+                 <button @click="aps.getDetail">搜尋</button>
              </div>
              <div class="searchRow">
                  <p>搜尋商品種類&編號:</p>

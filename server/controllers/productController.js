@@ -7,23 +7,23 @@ const productController = {
       let category_id = req.params.category_id;
       let page = req.query.page;
       let order = req.query.order;
-      console.log('種類：' + category_id);
-      console.log('頁數：' + page);
-      console.log('排序類型：' + order);
+      console.log("種類：" + category_id);
+      console.log("頁數：" + page);
+      console.log("排序類型：" + order);
 
       //價格由小到大排序
       if (order === "up") {
-        product_M.getProduct_order(category_id, page, '').then((data) => {
+        product_M.getProduct_order(category_id, page, "").then((data) => {
           return res.json(data);
         });
-      };
+      }
 
       //價格由大到小排序
       if (order === "down") {
-        product_M.getProduct_order(category_id, page,'DESC').then((data) => {
+        product_M.getProduct_order(category_id, page, "DESC").then((data) => {
           return res.json(data);
         });
-      };
+      }
 
       //按照商品編號排序
       if (order === "") {
@@ -31,7 +31,6 @@ const productController = {
           return res.json(data);
         });
       }
-
     } catch (e) {
       return next(e);
     }
@@ -47,11 +46,24 @@ const productController = {
   },
   getSpecificiProduct: async (req, res, next) => {
     try {
-      console.log('有收到');
+      console.log("有收到");
       console.log(req.query);
       let product_id = req.query.product_id;
       console.log("商品ID" + product_id);
       product_M.getSpecificiProduct(product_id).then((data) => {
+        return res.json(data);
+      });
+    } catch (e) {
+      return next(e);
+    }
+  },
+  getProductDetail: async (req, res, next) => {
+    try {
+      console.log("有收到");
+      console.log(req.query);
+      let product_id = req.query.product_id;
+      console.log("商品ID" + product_id);
+      product_M.getProductDetail(product_id).then((data) => {
         return res.json(data);
       });
     } catch (e) {
@@ -83,7 +95,7 @@ const productController = {
       next(error);
     }
   },
-  getProduct_order:async (req, res, next) => {
+  getProduct_order: async (req, res, next) => {
     try {
       let category_id = req.params.category_id;
       let page = req.query.page;
@@ -93,7 +105,7 @@ const productController = {
     } catch (e) {
       return next(e);
     }
-  }
+  },
 };
 
 module.exports = productController;

@@ -6,8 +6,10 @@ router.use((req, res, next) => {
   next();
 });
 
-//取得特定商品詳細資訊
+//取得特定商品詳細資訊 管理者
 router.get("/", productController.getSpecificiProduct);
+//取得特定商品詳細資訊 使用者
+router.get("/detail", productController.getProductDetail);
 
 //取得全部商品類型及其總量
 router.get("/allCategory", productController.allCategory);

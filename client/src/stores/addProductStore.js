@@ -18,7 +18,7 @@ export const addProductStore = defineStore('addProductStore',()=>{
     //點擊按鈕
     const add=()=>{
         console.log(data)
-        const url =`http://172.20.10.4:8080/api/admin/addProduct`
+        const url =`http://127.0.0.1:8080/api/admin/addProduct`
         fetch(url, {
             method: 'POST', // or 'PUT'
             headers: {
