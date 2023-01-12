@@ -10,7 +10,7 @@ async function createDB() {
       user: "root",
       // password: "3345678",
       host: "localhost",
-      user: "root",
+      // user: "henrychen",
       // password: "h6760903",
     });
     //console.log("connection", connection);
@@ -28,7 +28,7 @@ async function createPooL() {
     // password: "3345678",
     // password: "3345678",
     host: "localhost",
-    user: "root",
+    // user: "henrychen",
     // password: "h6760903",
     database: schemaName,
     waitForConnections: true,
@@ -41,7 +41,6 @@ async function createPooL() {
 //創建表單
 async function createTable(tableName, columns) {
   try {
-    // console.log(tableName, columns);
     let target = `CREATE TABLE ${tableName} (${columns})`;
     //console.log(target);
     await exports.pool.query(target);
