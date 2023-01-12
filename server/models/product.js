@@ -10,13 +10,13 @@ async function addProduct(tableColumns, values) {
     let target = `INSERT INTO product ( ${tableColumns} ) VALUES (${values})`;
     await db.pool.query(target);
   } catch (error) {}
-};
+}
 async function addProductDetail(tableColumns, values) {
   try {
     let target = `INSERT INTO productDetail ( ${tableColumns} ) VALUES (${values}) `;
     await db.pool.query(target);
   } catch (error) {}
-};
+}
 
 //查找商品種類類型、各類型的總量******
 //select_where_group
@@ -38,7 +38,7 @@ async function product_amount() {
 //select_where_order_limit
 async function getProduct(category, page) {
   let target = `SELECT * FROM product WHERE category='${category}' ORDER BY productNum LIMIT ${
-    (page -1) * pageLimit
+    (page - 1) * pageLimit
   } , ${pageLimit}`;
   console.log(target);
   const [result, fields] = await db.pool.query(target);
@@ -49,6 +49,18 @@ async function getProduct(category, page) {
 //搜尋特定商品（測試ＯＫ）********
 //select_where
 async function getSpecificiProduct(product_id) {
+  try {
+    let target = `SELECT * FROM product LEFT JOIN productDetail USING(category,productNum) WHERE product.product_id = '${product_id}'`;
+    console.log(target);
+    const [result, fields] = await db.pool.query(target);
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.log("getSpecificiProduct ERR:" + error);
+  }
+}
+
+async function getProductDetail(product_id) {
   try {
     let target = `SELECT * FROM product LEFT JOIN productDetail USING(category,productNum) WHERE product.product_id = '${product_id}'`;
     console.log(target);
@@ -101,14 +113,14 @@ function generateFakeData() {
       products[key].thumbnail,
       products[key].price,
     ]);
-  };
+  }
   for (const key in productsDetail) {
-    addProductDetail(table.productDetail.columnName,[
+    addProductDetail(table.productDetail.columnName, [
       productsDetail[key].category,
       productsDetail[key].productNum,
       productsDetail[key].detail,
       productsDetail[key].inventory,
-      productsDetail[key].img
+      productsDetail[key].img,
     ]);
   }
 }
@@ -119,6 +131,7 @@ function generateFakeData() {
 module.exports.generateFakeData = generateFakeData;
 module.exports.getProduct = getProduct;
 module.exports.getSpecificiProduct = getSpecificiProduct;
+module.exports.getProductDetail = getProductDetail;
 module.exports.product_amount = product_amount;
 module.exports.getProduct_order = getProduct_order;
 module.exports.updateInventory = updateInventory;
