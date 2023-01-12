@@ -7,8 +7,8 @@ const transporter = nodemailer.createTransport({
     pass: process.env.USER_PASSWORD,
   },
   tls: {
-    rejectUnauthorized: false
-   }
+    rejectUnauthorized: false,
+  },
 });
 
 function sendMail(email, subject, html) {

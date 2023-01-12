@@ -24,6 +24,8 @@ const createOrderValidation = (data) => {
   const schema = Joi.object({
     user_id: Joi.number().integer().required(),
     recipient: Joi.string().required(),
+    pay_way: Joi.string(),
+    dliver_way: Joi.string(),
     address: Joi.string().required(),
     phone: Joi.string().min(8).max(12).required(),
     order_prize: Joi.number().integer().required(),

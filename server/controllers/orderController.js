@@ -42,16 +42,19 @@ const orderController = {
   createOrder: async (req, res, next) => {
     try {
       let state = "initialize";
+      console.log(req.body);
       const { data } = req.body;
-      const data_obj = JSON.parse(data);
-      const { error } = validator.createOrderValidation(data_obj);
+      console.log(data);
+      //const data_obj = JSON.parse(data);
+      const { error } = validator.createOrderValidation(data);
       if (error) {
         throw { message: error.details[0].message };
       }
       // 取得使用者對應的購物車ID
-      const cart_id = await cart_M.getCart(data_obj.user_id);
+      const cart_id = await cart_M.getCart(data.user_id);
       // 取得上述購物車ID下所有的購物車內容物
       const cart_items = await cart_M.getCartItem(cart_id[0].id);
+      console.log("cart_items", cart_items);
       // 確認各項內容物庫存
       const { check_result, inventory_cal } = checkInventory(cart_items);
       if (check_result.length != 0) {
@@ -59,14 +62,14 @@ const orderController = {
         throw { message: "庫存不足", data: check_result };
       }
       // 產生訂單編號
-      data_obj.order_number = randomNumber();
+      data.order_number = randomNumber();
       // 產生訂單
-      const order_ret = await order_M.addToOrder(data_obj);
+      const order_ret = await order_M.addToOrder(data);
       state = "create_order_done";
       // 產生訂單細項資訊
 
       for (let index = 0; index < cart_items.length; index++) {
-        let item = cart_items[0][index];
+        let item = cart_items[index];
         console.log("item", item);
         let product_detail = await product_M.getSpecificiProduct(
           item.product_id
@@ -89,10 +92,10 @@ const orderController = {
       const delCart = await cart_M.delAllCartItem(cart_id[0].id);
       state = "delete_all_cart_item_done";
       const email = "cindy81121116@gmail.com";
-      const subject = `[TEST]射射購物 訂單號碼:${data_obj.order_number} 成立 請把握時間付款`;
+      const subject = `[TEST]射射購物 訂單號碼:${data.order_number} 成立 請把握時間付款`;
       const status = "未出貨 / 未付款";
       const msg = "請點擊付款連結並使用測試信用卡付款! 感謝配合!";
-      sendMail(email, subject, orderMail(data_obj, status, msg));
+      sendMail(email, subject, orderMail(data, status, msg));
       res.json({ message: "創建訂單成功", data: data });
     } catch (error) {
       next(error);
