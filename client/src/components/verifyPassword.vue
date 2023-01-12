@@ -17,31 +17,35 @@ router.currentRoute.value.query={}
      <div class='container'>
         <h2>輸入新密碼</h2>
         <div class="login_form">
-            <div>
-                <p>帳號:{{data}}</p>
+            <div class="group">
+                <!-- <p>帳號:{{data}}</p> -->
             </div>
-            <div>
+            <div class="group">
                 <label>驗證碼:</label>
                 <input v-model="VerifyStore.verify.password"/>
             </div>
-            <div>
+            <div class="group">
                 <label>新密碼:</label>
-                <input v-model="VerifyStore.verify.newPassword"/>
+                <input @keyup="VerifyStore.checkPassword" 
+                v-model="VerifyStore.verify.newPassword" 
+                placeholder="需輸入8~12英數混合"/>
+                <p :class="['pw_error',{open:false}]" :style="{color:VerifyStore.fontColor}" v-text="VerifyStore.passwordWarn"></p>
             </div>
-            <div>
+            <div class="group">
                 <label>確認密碼:</label>
                 <input v-model="VerifyStore.verify.checkPassword"/>
             </div>
-            <div>
-                <button @click="VerifyStore.verifySend">傳送</button>
-                <button @click="">取消</button>
+            <div class="btn-group">
+                <button class='btn' @click="VerifyStore.verifySend">傳送</button>
+                <button class='btn' @click="">取消</button>
             </div>
         </div>
     </div>
 
 
-    <Transition name="bounce" >
-        <p v-if="VerifyStore.show" class="warmView">
+    <Transition name="bounce"  >
+        <!-- VerifyStore.show -->
+        <p v-if="VerifyStore.show"  class="warmView">
             <p>{{VerifyStore.warmText}}</p>
             <button @click="VerifyStore.checkSend">確認</button>
             <button @click="VerifyStore.checkSend">取消</button>
@@ -51,8 +55,11 @@ router.currentRoute.value.query={}
 </template>
 
 <style lang="scss" scoped>
+@import '../assets/base.css';
+
 @media screen and (min-width: 320px){
     .container{
+        position: relative;
         border: 2px solid black;
         width: 100%;
         height: 100%;
@@ -63,22 +70,27 @@ router.currentRoute.value.query={}
         text-shadow: 1px 1px rgb(122, 121, 121)
         // text-align: center;
     }
-    >.regist_form{
+    >.login_form{
         padding-top: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        
         >.group{
             margin-bottom: 10px;
             >input{
                 margin-left: 10px;
             }
+            >.pw_error{
+                font-size: 14px;
+                margin: 0;
+            }
+            >.open{
+                display:none;
+            }
         }
         >.btn-group{
            >.btn{
-            
             width: 100px;
             margin: 20px;
            }
@@ -109,21 +121,24 @@ router.currentRoute.value.query={}
     border: 2px solid black;
     position: absolute;
     margin: auto;
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
     background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    // transform: translate(-50%,-50%);
+    // margin-left:-200px;
+    // margin-top:-150px;
 
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    margin: auto;
+    // margin: 0 auto;
 
-    width: 400px;
-    height: 300px;
     z-index: 1;
 }
 

@@ -41,7 +41,6 @@ function checkInventory(cart_items) {
 const orderController = {
   createOrder: async (req, res, next) => {
     try {
-<<<<<<< Updated upstream
       let state = "initialize";
       const { data } = req.body;
       const data_obj = JSON.parse(data);
@@ -52,14 +51,6 @@ const orderController = {
       // 取得使用者對應的購物車ID
       const cart_id = await cart_M.getCart(data_obj.user_id);
       // 取得上述購物車ID下所有的購物車內容物
-=======
-      // console.log(req.body);
-      const data = req.body;
-      // const data_obj = JSON.parse(data);
-      // console.log(data_obj);
-      console.log(data);
-      const cart_id = await cart_M.getCart(data.user_id);
->>>>>>> Stashed changes
       const cart_items = await cart_M.getCartItem(cart_id[0].id);
       // 確認各項內容物庫存
       const { check_result, inventory_cal } = checkInventory(cart_items);
@@ -67,7 +58,6 @@ const orderController = {
         // 如果庫存不足回傳error code:500及相關資訊
         throw { message: "庫存不足", data: check_result };
       }
-<<<<<<< Updated upstream
       // 產生訂單編號
       data_obj.order_number = randomNumber();
       // 產生訂單
@@ -75,10 +65,6 @@ const orderController = {
       state = "create_order_done";
       // 產生訂單細項資訊
 
-=======
-      data.order_number = randomNumber();
-      const order_ret = await order_M.addToOrder(data);
->>>>>>> Stashed changes
       for (let index = 0; index < cart_items.length; index++) {
         let item = cart_items[0][index];
         console.log("item", item);

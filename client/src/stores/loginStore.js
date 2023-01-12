@@ -17,7 +17,7 @@ export const useloginStore = defineStore('loginStore',()=>{
     }
 
     const login = async ()=>{
-        const url = `http://172.20.10.7:8080/api/user/login`
+        const url = `http://localhost:8080/api/user/login`
         let resdata = await fetch(url, {
             method: 'POST', // or 'PUT'
             headers: {
