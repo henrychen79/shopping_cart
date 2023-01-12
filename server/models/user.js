@@ -39,9 +39,9 @@ async function check_account(accountName) {
     console.log("result", result);
     // return { status: "ok", result: result };
     if (result.length === 0) {
-      return { status: "false", result: result };
+      return { status: false, result: result };
     } else {
-      return { status: "true", result: result };
+      return { status: true, result: result };
     }
   } catch (error) {
     console.log("fail", error);

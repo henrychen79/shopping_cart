@@ -37,7 +37,7 @@ const userController = {
         //   res.json(account);
         // } else res.status(400).json({ message: "這個Email被註冊過了!" });
         console.log("ret", ret);
-        if (ret.status === "false") {
+        if (ret.status === false) {
           res.json({ repeat: false });
         } else {
           res.json({ repeat: true });
@@ -71,18 +71,17 @@ const userController = {
   forgetPassword: async (req, res, next) => {
     try {
       const { account } = req.body;
-      console.log(account);
       //檢查帳號是否存在
       const result1 = await user_M.check_account(account);
-      console.log(result1);
-      if (result1.length === 0) {
-        res.json({ meg: "account doesn't exist" });
+      // console.log('result1',result1);
+      if (result1.status === false) {
+        res.json({ status: false });
         return;
       }
 
       //如果帳號存在，則生成暫時密碼
       const result2 = await user_M.createTempPassword(account);
-      console.log(result2);
+      console.log('result2',result2);
       sendMail(account, "忘記密碼驗證信", forgetPasswordMail(result2));
       res.json({ status: true });
       return;
@@ -98,11 +97,14 @@ const userController = {
       console.log(account, password, newPassword);
       const tableName = "tempInfo";
       const result = await user_M.check_password(tableName, account, password);
-      console.log(result);
+      console.log('result',result);
       if (result) {
         let update_result = await user_M.update_password(account, newPassword);
         console.log(update_result);
-        return res.json({ status: true });
+        res.json({ status: true });
+        return 
+      }else{
+        res.json({ status: false });
       }
     } catch (error) {
       console.log("updatePassword err::", error);

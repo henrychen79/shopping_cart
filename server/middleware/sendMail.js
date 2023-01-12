@@ -6,6 +6,9 @@ const transporter = nodemailer.createTransport({
     user: process.env.USER_MAIL,
     pass: process.env.USER_PASSWORD,
   },
+  tls: {
+    rejectUnauthorized: false
+   }
 });
 
 function sendMail(email, subject, html) {
@@ -15,7 +18,7 @@ function sendMail(email, subject, html) {
     subject,
     html,
   };
-  //console.log(mailOptions);
+  console.log(mailOptions);
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) {
       console.log(err);

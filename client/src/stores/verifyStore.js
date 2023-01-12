@@ -15,10 +15,12 @@ export const useVerifyStore = defineStore('VerifyStore',()=>{
     let warmText = ref('')
     let checkNum = ref(false);
     
-    const url='../../account.json'
+    // const url='../../account.json'
 
     const verifySend=async()=>{
+        console.log('有直行我嗎')
         // const url = 'http://172.20.10.7:8080/api/user/updatePassword'
+        let url = 'http://localhost:8080/api/user/updatePassword'
         let checkData = await fetch(url, {
             method: 'POST', // or 'PUT'
             headers: {
@@ -31,24 +33,24 @@ export const useVerifyStore = defineStore('VerifyStore',()=>{
                 return res.json()
             })
             .then(function(res){
-                // console.log(res.status);
-                // return res.status
-                return true
+                console.log(res);
+                return res.status
+                // return true
             })
             .catch(function(error){
                 console.error('Error:', error);
             });
             
-        // console.log(verify)
-        if(checkData===true){
-            warmText.value='修改成功'
-            checkNum.value = true
-            console.log('修改成功')
-        }else{
-            warmText.value='修改失敗'
-            checkNum.value = false
-            console.log('修改失敗')
-        }
+        console.log(checkData)
+        // if(checkData===true){
+        //     warmText.value='修改成功'
+        //     checkNum.value = true
+        //     console.log('修改成功')
+        // }else{
+        //     warmText.value='修改失敗'
+        //     checkNum.value = false
+        //     console.log('修改失敗')
+        // }
         show.value=true
 
     }
@@ -66,7 +68,7 @@ export const useVerifyStore = defineStore('VerifyStore',()=>{
         verifySend,checkSend,
         verify,warmText,show,
         // regOpen,retOpen,
-        url//這個假資料用的
+        // url//這個假資料用的
     }
 
 })

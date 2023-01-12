@@ -18,8 +18,11 @@ export const useRetrievepwStore = defineStore('Retrievepw',()=>{
     //     newPassword:'',//新密碼
     //     checkPassword:''
     // })
-    const url='../../account.json'
+
+    // const url='../../account.json'
+    
     const sendEmail=async()=>{
+        const url = 'http://localhost:8080/api/user/forgetPassword'
         // const url = 'http://172.20.10.7:8080/api/user/forgetPassword'
         let control = await fetch(url, {
             method: 'POST', // or 'PUT'
@@ -32,16 +35,18 @@ export const useRetrievepwStore = defineStore('Retrievepw',()=>{
                 return res.json()
             })
             .then(function(res){
-
-                // return res.status
-                return true
+     
+                // return res
+                return res.status
+                // return true
      
             })
             .catch(function(error){
                 console.error('Error:', error);
             });
 
-        //如果回傳成功，
+            // console.log(control)
+        // 如果回傳成功，
         if(control===true){
             // console.log(router.push())
             router.push({
@@ -59,7 +64,7 @@ export const useRetrievepwStore = defineStore('Retrievepw',()=>{
         sendEmail,
         retrieveData,show,
         // regOpen,retOpen,
-        url//這個假資料用的
+        // url//這個假資料用的
     }
 
 })
