@@ -9,10 +9,10 @@ const productInfoData = ref({});
 const showData = ref(false);
 const quentity = ref(1)
 const imgURL = ref('')
-const fetchURL = 'http://172.20.10.4:8080'
-// const fetchURL = 'http://127.0.0.1:8080'
+// const fetchURL = 'http://172.20.10.4:8080'
+const fetchURL = 'http://127.0.0.1:8080'
 
-const productInfoUrl = `${fetchURL}/api/product?product_id=${route.params.productInfoID}`
+const productInfoUrl = `${fetchURL}/api/product/detail?product_id=${route.params.productInfoID}`
 
 const productImgUrl = `${fetchURL}/api/product/image?category_id=${route.params.category}&product_id=${route.params.productInfoNum}&type=original`
 
@@ -43,12 +43,11 @@ const productInfo = async () => {
         .catch((error) => {
             console.error('productInfoUrlError:', error);
         });
-    productInfoData.value = data
+    productInfoData.value = data;
+    showData.value = true
 }
 
-watch(productInfoData, (curVal) => {
-    if (curVal) { showData.value = true }
-})
+
 
 const productImg = async () => {
     let data = await fetch(productImgUrl, { method: 'GET' })
@@ -67,6 +66,7 @@ const productImg = async () => {
 //加入購物車
 const addCart = async () => {
     console.log('送出購物車', postData.product_id);
+    postData.product_id = productInfoData.value[0].id;
     let data = await fetch(addCatUrl, {
         method: 'POST',
         headers: {
@@ -107,7 +107,9 @@ productImg();
     <article class="article">
         <div class="container">
             <div v-if="!showData">Loading</div>
+
             <div class="item" v-if="showData">
+                {{ productInfoData }}
                 <div class="itemImg"><img :src="imgURL" alt="Loading..."></div>
                 <div class="itemInfo">
                     <h1>{{ productInfoData[0].productName }}</h1>

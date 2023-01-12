@@ -6,7 +6,7 @@ const paramData = defineProps({
     urlData: Object
 });
 
-const fetchURL = 'http://172.20.10.4:8080'
+const fetchURL = 'http://127.0.0.1:8080'
 
 const imgURL = ref('');
 

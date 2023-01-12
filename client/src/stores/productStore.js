@@ -13,8 +13,8 @@ export const productStore = defineStore('product', () => {
 
   const productInfoData = ref({});
 
-  const fetchURL = 'http://172.20.10.4:8080'
-  // const fetchURL = 'http://127.0.0.1:8080'
+  // const fetchURL = 'http://172.20.10.4:8080'
+  const fetchURL = 'http://127.0.0.1:8080'
 
   // /* 測試成功--有頁數跟商品連動 ↓↓↓↓↓↓↓↓↓↓↓*/
   const allCategoryAPI = fetchData(`${fetchURL}/api/product/allCategory`);

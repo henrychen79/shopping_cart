@@ -43,6 +43,7 @@ const removeCartItem = function (index) {
 </script>
 
 <template>
+  {{productListData}}
   <!-- <div v-if="!showData">尚未加入商品到購物車</div> -->
   <table class="cartList" v-if="showData">
     <thead>
