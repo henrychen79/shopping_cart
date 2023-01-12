@@ -124,7 +124,7 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
             return
         }
         //連資料庫用
-        // const url = `http://localhost:8080/api/user/checkAccountExist?account=${data.account}`
+        const url = `http://localhost:8080/api/user/checkAccountExist?account=${data.account}`
         // const url = `http://172.20.10.7:8080/api/user/checkAccountExist?account=${data.account}`
         let a = await fetch(url, {
                 method: 'GET', 
@@ -165,7 +165,7 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
     //將資料打進去後台server
     const registerButton=()=>{
         console.log(data)
-        fetch('http://172.20.10.7:8080/api/user/registerAccount', {
+        fetch('http://localhost:8080/api/user/registerAccount', {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',

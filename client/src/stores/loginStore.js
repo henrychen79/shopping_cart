@@ -29,7 +29,7 @@ export const useloginStore = defineStore('loginStore',()=>{
                 return res.json()
             })
             .then(function(res){
-                // console.log('Success:', res);
+                console.log(res);
                 return res
             })
             .catch(function(error){
@@ -46,7 +46,7 @@ export const useloginStore = defineStore('loginStore',()=>{
             const token = document.cookie.replace(/(?:(?:^|.*;\s*)access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
             console.log('取得token測試',token)
 
-            // window.location.href='/'
+            window.location.href='/'
         }else{
             console.log('登入失敗')
             loginwarmText.value = '登入失敗'

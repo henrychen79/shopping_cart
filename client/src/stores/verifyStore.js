@@ -60,7 +60,7 @@ export const useVerifyStore = defineStore('VerifyStore',()=>{
         }
         console.log('1212412512623631')
         // const url = 'http://172.20.10.7:8080/api/user/updatePassword'
-        // let url = 'http://localhost:8080/api/user/updatePassword'
+        let url = 'http://localhost:8080/api/user/updatePassword'
         let checkData = await fetch(url, {
             method: 'POST', // or 'PUT'
             headers: {
@@ -74,8 +74,8 @@ export const useVerifyStore = defineStore('VerifyStore',()=>{
             })
             .then(function(res){
                 console.log(res);
-                // return res.status
-                return true
+                return res.status
+                // return true
             })
             .catch(function(error){
                 console.error('Error:', error);
@@ -97,6 +97,7 @@ export const useVerifyStore = defineStore('VerifyStore',()=>{
     const checkSend =()=>{
         if(checkNum.value===true){
             show.value=false
+            router.push('/login')
             console.log('導回login頁面')
         }else{
             show.value=false
