@@ -8,7 +8,7 @@ async function createDB() {
     const connection = await mysql.createConnection({
       // host: "localhost",
       user: "root",
-      // password: "3345678",
+      password: "Aa3982145",
       host: "localhost",
       // user: "henrychen",
       // password: "h6760903",
@@ -16,7 +16,7 @@ async function createDB() {
     //console.log("connection", connection);
     await connection.query(`CREATE DATABASE ${schemaName}`);
   } catch (error) {
-    //console.log("error", error);
+    console.log("error", error);
   }
 }
 
@@ -26,7 +26,7 @@ async function createPooL() {
     // host: "localhost",
     user: "root",
     // password: "3345678",
-    // password: "3345678",
+    password: "Aa3982145",
     host: "localhost",
     // user: "henrychen",
     // password: "h6760903",
@@ -45,7 +45,7 @@ async function createTable(tableName, columns) {
     //console.log(target);
     await exports.pool.query(target);
   } catch (error) {
-    //console.log("create table error:", error);
+    console.log("create table error:", error);
   }
 }
 
