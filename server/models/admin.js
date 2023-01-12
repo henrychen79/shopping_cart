@@ -1,5 +1,5 @@
-// const db = require("../data/schema");
-const db = require("../data/testDatabase");//測試單頁js用
+const db = require("../data/schema");
+//const db = require("../data/testDatabase");//測試單頁js用
 const table = require("../data/tables.json");
 
 //根據種類查找所有商品ＯＫ
@@ -40,6 +40,7 @@ async function addProduct(data){
         return '新增商品成功';
         
     } catch (error) {
+        console.log(error);
         return 'ERR:新增商品失敗'
     }
 };
@@ -105,7 +106,7 @@ async function update_inventory(product_id, newInventory) {
 //刪除商品(product,productDetail)
 async function delete_product(product_id){
     try {
-        let target = `DELETE p,pD FROM product p LEFT JOIN productDetail pD on pD.category = p.category AND pD.productNum = p.productNum WHERE p.product_id = '${product_id}'`;
+        let target = `DELETE p,pD FROM product p LEFT JOIN productDetail pD on pD.category = p.category AND pD.productNum = p.productNum WHERE pD.product_id = '${product_id}'`;
         console.log(target);
         await db.pool.query(target);
         return "刪除商品成功";

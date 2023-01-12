@@ -23,7 +23,7 @@ export const editProductStore = defineStore('editProductStore',()=>{
     //點擊按鈕
     const edit=(product_id)=>{
         console.log(data)
-        const url =`http://172.20.10.4:8080/api/admin/edit_product?product_id=${product_id}`
+        const url =`http://127.0.0.1:8080/api/admin/edit_product?product_id=${product_id}`
         fetch(url, {
             method: 'GET', // or 'PUT'
             headers: {
@@ -58,7 +58,7 @@ export const editProductStore = defineStore('editProductStore',()=>{
 
     const update=()=>{
         console.log(data)
-        const url =`http://172.20.10.4:8080/api/admin/update_product`
+        const url =`http://127.0.0.1:8080/api/admin/update_product`
         fetch(url, {
             method: 'POST', // or 'PUT'
             headers: {
@@ -80,7 +80,7 @@ export const editProductStore = defineStore('editProductStore',()=>{
 
     const updatePrice=(product_id)=>{
         // console.log(data)
-        const url =`http://172.20.10.4:8080/api/admin/update_price?product_id=${product_id}`
+        const url =`http://127.0.0.1:8080/api/admin/update_price?product_id=${product_id}`
         console.log(data.price);
         fetch(url, {
             method: 'POST', // or 'PUT'
@@ -103,7 +103,7 @@ export const editProductStore = defineStore('editProductStore',()=>{
 
     const updateInventory=(product_id)=>{
         console.log(data)
-        const url =`http://172.20.10.4:8080/api/admin/update_inventory?product_id=${product_id}`
+        const url =`http://127.0.0.1:8080/api/admin/update_inventory?product_id=${product_id}`
         fetch(url, {
             method: 'POST', // or 'PUT'
             headers: {

@@ -5,6 +5,7 @@ import admin from '../views/admin.vue'
 import addproduct from  '../views/adminAddProduct.vue'
 import shoppingCart from '../views/shoppingCart.vue'
 import editproduct from '../views/editProduct.vue'
+import ordermanage from '../views/adminOrderManage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -96,6 +97,13 @@ const router = createRouter({
       path: '/admin/editproduct',
       name: 'editproduct',
       component: editproduct
+
+    },
+
+    {
+      path: '/admin/ordermanage',
+      name: 'ordermanage',
+      component: ordermanage
 
     }
     
