@@ -1,4 +1,3 @@
-const db = global.db_pool;
 const table = require("../database/tables.json");
 //新增訂單資訊到order,orderDetail
 async function addToCart(values) {

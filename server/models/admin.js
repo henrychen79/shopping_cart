@@ -1,4 +1,3 @@
-const db = global.db_pool;
 //const db = require("../data/testDatabase");//測試單頁js用
 const table = require("../database/tables.json");
 

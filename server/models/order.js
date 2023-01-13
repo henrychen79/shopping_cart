@@ -1,4 +1,3 @@
-const db = global.db_pool;
 const table = require("../database/tables.json");
 const insert_order_key = [
   "user_id",
