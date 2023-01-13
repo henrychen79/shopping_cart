@@ -4,7 +4,7 @@ import router from "../../router";
 import cartItemVue from "./cartItem.vue";
 import { cartStore } from "../../stores/cartStore";
 import { userOrderStore } from "../../stores/orderStore";
-
+import { cartList } from "../../apis/cart_api";
 const productListData = ref({});
 const cs = cartStore();
 const showData = ref(false);
@@ -15,15 +15,7 @@ const fetchURL = "http://127.0.0.1:8080";
 const productListUrl = `${fetchURL}/api/cart/1`;
 
 const productList = async (test) => {
-  let data = await fetch(productListUrl, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => {
-      return response.json();
-    })
+  let data = await cartList(1)
     .then(function (res) {
       console.log(res);
       return res;
@@ -43,7 +35,7 @@ const removeCartItem = function (index) {
 </script>
 
 <template>
-  {{productListData}}
+  {{ productListData }}
   <!-- <div v-if="!showData">尚未加入商品到購物車</div> -->
   <table class="cartList" v-if="showData">
     <thead>

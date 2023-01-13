@@ -1,6 +1,7 @@
 import { ref, computed, reactive, watch, watchEffect } from "vue";
 import { defineStore } from "pinia";
 import { fetchData } from "../stores/fetchData";
+import { createOrder } from "../apis/order_api";
 
 export const cartStore = defineStore("cart", () => {
   const data = reactive({
@@ -26,14 +27,7 @@ export const cartStore = defineStore("cart", () => {
       { data: JSON.stringify(data) },
       cartToOrderData[0].length
     );
-    let P = await fetch(orderDoneUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ data: data }),
-    })
-      .then((response) => response.json())
+    let P = await createOrder(JSON.stringify({ data: data }))
       .then(function (res) {
         return res;
       })
