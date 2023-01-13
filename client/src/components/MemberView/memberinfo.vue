@@ -38,8 +38,8 @@ const memberStore = useMemberStore();
         <h2>修改會員資料</h2>
         <div class="test"></div>
         <ul>
-            <li><a href="#" v-on:click="memberStore.OpenPwFn">修改密碼</a></li>
-            <li><a href="#" v-on:click="memberStore.OpenNameFn">修改暱稱</a></li>
+            <li><a  v-on:click="memberStore.OpenPwFn">修改密碼</a></li>
+            <li><a  v-on:click="memberStore.OpenNameFn">修改暱稱</a></li>
         </ul>
     </div>
     <div class="orderInfo">
@@ -75,6 +75,12 @@ h1{
             border-bottom: 5px solid black;
             box-shadow:0px 4px 3px 0px rgb(207, 202, 202)
         }
+        >ul{
+            >li{
+                display: block;
+                cursor:pointer;
+            }
+            }
     }
     >.orderInfo{
         margin: auto 2rem;
@@ -85,7 +91,8 @@ h1{
             width: 10%;
             border: none;
             border-bottom: 5px solid black;
-            box-shadow:0px 4px 3px 0px rgb(207, 202, 202)
+            box-shadow:0px 4px 3px 0px rgb(207, 202, 202);
+         
         }
     }
 }
