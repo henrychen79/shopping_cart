@@ -1,117 +1,114 @@
 <script setup>
 import { ref, defineProps, watchEffect } from "vue";
-
+import { productImage } from "../../../apis/product_api";
 const paramData = defineProps({
-    imgData: Object,
-    urlData: Object
+  imgData: Object,
+  urlData: Object,
 });
 
-const fetchURL = 'http://127.0.0.1:8080'
+const fetchURL = "http://127.0.0.1:8080";
 
-const imgURL = ref('');
+const imgURL = ref("");
 
 watchEffect(() => {
-    const productInfo = async () => {
-        let data = await fetch(`${fetchURL}/api/product/image?category_id=${paramData.imgData.category}&product_id=${paramData.imgData.productInfoNum}&type=thumbnail`, {
-            method: 'GET',
-        })
-            .then(response => response.blob())
-            .then(function (res) {
-                // 將 blog 物件轉為 url
-                imgURL.value = URL.createObjectURL(res)
-                return res
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    }
-    productInfo();
-})
-
+  const productInfo = async () => {
+    productImage(
+      paramData.imgData.category,
+      paramData.imgData.productInfoNum,
+      "thumbnail"
+    )
+      .then(function (res) {
+        // 將 blog 物件轉為 url
+        imgURL.value = URL.createObjectURL(res);
+        return res;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+  productInfo();
+});
 </script>
 
 <template>
-    <div class="cards_item">
-        <div class="card">
-            <div class="card_image">
-                <slot name="img"></slot>
-                <RouterLink :to="{ name: 'product', params: paramData.urlData }">
-                    <img :src="imgURL" alt="" style="height:100%;width:100%">
-                </RouterLink>
-            </div>
-            <div class="card_content">
-                <h3>
-                    <slot name="name"></slot>
-                </h3>
-                <p>
-                    <slot name="price"></slot>
-                </p>
-            </div>
-        </div>
+  <div class="cards_item">
+    <div class="card">
+      <div class="card_image">
+        <slot name="img"></slot>
+        <RouterLink :to="{ name: 'product', params: paramData.urlData }">
+          <img :src="imgURL" alt="" style="height: 100%; width: 100%" />
+        </RouterLink>
+      </div>
+      <div class="card_content">
+        <h3>
+          <slot name="name"></slot>
+        </h3>
+        <p>
+          <slot name="price"></slot>
+        </p>
+      </div>
     </div>
+  </div>
 </template>
 
 <style scoped>
 .cards_item {
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
 }
 
 @media (min-width: 19rem) {
-    .cards_item {
-        width: 100%;
-    }
+  .cards_item {
+    width: 100%;
+  }
 }
 
 @media (min-width: 20rem) {
-    .cards_item {
-        width: 50%;
-    }
+  .cards_item {
+    width: 50%;
+  }
 }
 
 @media (min-width: 40rem) {
-    .cards_item {
-        width: 33.33333%;
-    }
+  .cards_item {
+    width: 33.33333%;
+  }
 }
 
 @media (min-width: 56rem) {
-    .cards_item {
-        width: 25%;
-    }
+  .cards_item {
+    width: 25%;
+  }
 }
 
 .card {
-    height: 15rem;
-    width: 12rem;
-    border: 1px solid var(--black-mute);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
+  height: 15rem;
+  width: 12rem;
+  border: 1px solid var(--black-mute);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .card_image {
-    width: 100%;
-    height: 60%;
-    background-color: aliceblue;
-
+  width: 100%;
+  height: 60%;
+  background-color: aliceblue;
 }
 
-
 .card_content {
-    width: 90%;
-    height: 40%;
+  width: 90%;
+  height: 40%;
 }
 
 h3 {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 p {
-    font-size: 0.2rem;
-    color: rgb(186, 54, 54);
-    font-weight: bold;
+  font-size: 0.2rem;
+  color: rgb(186, 54, 54);
+  font-weight: bold;
 }
 </style>
