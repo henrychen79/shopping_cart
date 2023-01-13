@@ -70,7 +70,7 @@ const removeProduct=(product_id)=>{
 
     <header>
         <div class="category">
-            <div class="product-item" v-for="(item, index) in aps.productDetail" :key="item.product_id" @delbtn="newList">
+            <div class="product-item" v-for="(item, index) in aps.productDetail" :key="item.product_id" >
                 <div class="product-cell-title">
                     <p>商品名稱:{{ item.productName }}</p>
                     <p>商品編號:{{ item.productNum }}</p>
