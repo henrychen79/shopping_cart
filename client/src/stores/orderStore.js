@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, reactive, computed } from "vue";
+import { orderList as listOrder } from "../apis/order_api";
 export const userOrderStore = defineStore("orderStore", () => {
   // const url = '../../account.json'
 
@@ -72,15 +73,7 @@ export const userOrderStore = defineStore("orderStore", () => {
     // const aaa = 'rec27@gmail.com'
     // const url = `http://172.20.10.4:8080/api/member/getAllOrders?account=${aaa}`
     try {
-      let data = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json;charset=UTF-8",
-        },
-      })
-        .then(function (res) {
-          return res.json();
-        })
+      let data = await listOrder(1)
         .then(function (res) {
           console.log(res);
           res.filter(function (item) {
