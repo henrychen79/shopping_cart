@@ -9,7 +9,7 @@ async function createDB(dataBaseConnection, database) {
     await connection.query(`CREATE DATABASE ${database}`);
     return connection;
   } catch (error) {
-    console.log("error", error);
+    //console.log("error", error);
     return connection;
   }
 }
