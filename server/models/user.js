@@ -1,15 +1,12 @@
-const db = require("../data/schema");
 // const db = require("../data/testDatabase");//測試單頁js用
-const table = require("../data/tables.json");
-const users = require("../data/fake_user.json");
-const { rejects } = require("assert");
-const { log } = require("console");
+const table = require("../database/tables.json");
+const users = require("../database/fake_user.json");
 /**********************************以下為假資料**********************************************/
 //（測試用OK）將假的用戶資料創建進去表單中
 async function insertFakeUser(tableColumns, values) {
   try {
     let target = `INSERT INTO user ( ${tableColumns} ) VALUES (${values}) `;
-    await db.pool.query(target);
+    await global.db_pool.query(target);
   } catch (error) {
     // console.log(error);
   }
@@ -35,7 +32,7 @@ async function check_account(accountName) {
   console.log("check_account測試", accountName);
   try {
     let target = `SELECT account FROM user WHERE account = '${accountName}'`;
-    const [result, fields] = await db.pool.query(target);
+    const [result, fields] = await global.db_pool.query(target);
     console.log("result", result);
     // return { status: "ok", result: result };
     if (result.length === 0) {
@@ -53,7 +50,7 @@ async function get_user(accountName) {
   console.log("get_user測試", accountName);
   try {
     let target = `SELECT * FROM user WHERE account = '${accountName}'`;
-    const [result, fields] = await db.pool.query(target);
+    const [result, fields] = await global.db_pool.query(target);
     console.log("result", result);
     return result;
   } catch (error) {
@@ -67,7 +64,7 @@ async function get_user(accountName) {
 async function register(values, resolve, reject) {
   try {
     let target = `INSERT INTO user ( ${table.user.columnName} ) VALUES (${values})`;
-    const [result, fields] = await db.pool.query(target);
+    const [result, fields] = await global.db_pool.query(target);
     console.log(result, fields);
     return { status: "ok", result: result };
   } catch (error) {
@@ -80,7 +77,7 @@ async function register(values, resolve, reject) {
 async function login(accountName, password) {
   try {
     let target = `SELECT account FROM user WHERE account = '${accountName}' AND password = '${password}'`;
-    const [result, fields] = await db.pool.query(target);
+    const [result, fields] = await global.db_pool.query(target);
     console.log(result);
     return result;
   } catch (error) {
@@ -95,7 +92,7 @@ async function login(accountName, password) {
 async function forgetPassword(accountName) {
   try {
     let target = `SELECT account FROM user WHERE account = '${accountName}'`;
-    const [result, fields] = await db.pool.query(target);
+    const [result, fields] = await global.db_pool.query(target);
     console.log(result);
     return result;
   } catch (error) {
@@ -115,7 +112,7 @@ async function createTempPassword(accountName) {
   )}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`;
 
   let target = `SELECT password FROM tempInfo WHERE password = '${tempPassword}'`;
-  const [result, fields] = await db.pool.query(target);
+  const [result, fields] = await global.db_pool.query(target);
   console.log(result); //沒有重複會回傳[]，有重複會會傳重複的臨時密碼
   if (result.length !== 0) {
     createTempPassword(accountName);
@@ -132,7 +129,7 @@ async function insertTempPassword(values, resolve, reject) {
   try {
     let target = `INSERT INTO tempInfo ( ${table.tempInfo.columnName} ) VALUES (${values})`;
     console.log(target);
-    await db.pool.query(target);
+    await global.db_pool.query(target);
   } catch (error) {
     console.log("insertTempPassword ERR:" + error);
   }
@@ -144,7 +141,7 @@ async function check_password(tableName, accountName, password) {
     let target = `SELECT account FROM ${tableName} 
     WHERE account = '${accountName}' AND
     password = '${password}'`;
-    const [result, feild] = await db.pool.query(target);
+    const [result, feild] = await global.db_pool.query(target);
     console.log(result);
     if (result.length === 0) {
       return false;
@@ -161,7 +158,7 @@ async function check_password(tableName, accountName, password) {
 async function update_password(accountName, newPassword) {
   try {
     let target = `UPDATE user SET password = '${newPassword}' WHERE account = '${accountName}'`;
-    await db.pool.query(target);
+    await global.db_pool.query(target);
     return "update password success"; //更新密碼成功
   } catch (error) {
     console.log("updatePassword ERR: " + error);
@@ -175,7 +172,7 @@ async function update_password(accountName, newPassword) {
 async function dropTempPassword(accountName) {
   try {
     let target = `DELETE FROM tempInfo WHERE account = '${accountName}'`;
-    await db.pool.query(target);
+    await global.db_pool.query(target);
     return "tempPassword expired"; //臨時密碼過期了
   } catch (error) {
     console.log("dropTempPassword ERR:" + error);

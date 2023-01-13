@@ -1,5 +1,5 @@
-const db = require("../data/schema");
-const table = require("../data/tables.json");
+const db = global.db_pool;
+const table = require("../database/tables.json");
 const insert_order_key = [
   "user_id",
   "recipient",
@@ -35,7 +35,7 @@ async function addToOrder(data) {
   const insert_key_str = insert_order_key.join(", ");
   try {
     let target = `INSERT INTO orderlist ( ${insert_key_str} ) VALUES (${values})`;
-    return await db.pool.query(target);
+    return await global.db_pool.query(target);
   } catch (error) {
     console.log(error);
     return error;
@@ -46,7 +46,7 @@ async function addToOrderDetail(values) {
   const insert_key_str = insert_order_detail_key.join(", ");
   try {
     let target = `INSERT INTO orderdetail ( ${insert_key_str} ) VALUES (${values})`;
-    return await db.pool.query(target);
+    return await global.db_pool.query(target);
   } catch (error) {
     console.log(error);
     return error;
@@ -56,7 +56,7 @@ async function addToOrderDetail(values) {
 async function getOrderList(user_id) {
   try {
     let target = `SELECT a.*, GROUP_CONCAT(b.product_name ) as product_list FROM (SELECT * FROM orderlist WHERE user_id=${user_id}) as a LEFT JOIN orderdetail as b on a.id=b.order_id GROUP BY b.order_id`;
-    const [result, fields] = await db.pool.query(target);
+    const [result, fields] = await global.db_pool.query(target);
     return result;
   } catch (error) {
     console.log(error);
@@ -67,7 +67,7 @@ async function getOrderList(user_id) {
 async function updateOrderList(order_id, type, state) {
   try {
     let target = `UPDATE orderlist SET ${type} = '${state}' WHERE id = ${order_id}`;
-    return await db.pool.query(target);
+    return await global.db_pool.query(target);
   } catch (error) {
     console.log(error);
     return error;
@@ -82,11 +82,6 @@ const test_obj = {
   order_amount: 3,
   order_number: "558886",
 };
-db.initSchema().then(() => {
-  ///addToOrder(test_obj);
-  //addTOCartItem(table.cart_item.columnName, [1, 1, 5]);
-  //getCartItem(1);
-});
 
 module.exports.addToOrder = addToOrder;
 module.exports.addToOrderDetail = addToOrderDetail;

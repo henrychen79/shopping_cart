@@ -1,20 +1,22 @@
-const db = require("../data/schema");
 // const db = require("../data/testDatabase");//測試單頁js用
-const table = require("../data/tables.json");
-const products = require("../data/fake_product.json");
-const productsDetail = require("../data/fake_productDetail.json");
+const table = require("../database/tables.json");
+const products = require("../database/fake_product.json");
+const productsDetail = require("../database/fake_productDetail.json");
 const pageLimit = 6;
 
 async function addProduct(tableColumns, values) {
   try {
     let target = `INSERT INTO product ( ${tableColumns} ) VALUES (${values})`;
-    await db.pool.query(target);
-  } catch (error) {}
+    console.log(target);
+    await global.db_pool.query(target);
+  } catch (error) {
+    console.log(error);
+  }
 }
 async function addProductDetail(tableColumns, values) {
   try {
     let target = `INSERT INTO productDetail ( ${tableColumns} ) VALUES (${values}) `;
-    await db.pool.query(target);
+    await global.db_pool.query(target);
   } catch (error) {}
 }
 
@@ -26,7 +28,7 @@ async function product_amount() {
         COUNT(*) AS product_amount, 
         COUNT(*)/${pageLimit} AS categoryPage 
       FROM product GROUP BY category`;
-    const [result, fields] = await db.pool.query(target);
+    const [result, fields] = await global.db_pool.query(target);
     console.log(result);
     return result;
   } catch (error) {
@@ -41,7 +43,7 @@ async function getProduct(category, page) {
     (page - 1) * pageLimit
   } , ${pageLimit}`;
   console.log(target);
-  const [result, fields] = await db.pool.query(target);
+  const [result, fields] = await global.db_pool.query(target);
   console.log(result);
   return result;
 }
@@ -52,7 +54,7 @@ async function getSpecificiProduct(product_id) {
   try {
     let target = `SELECT * FROM product LEFT JOIN productDetail USING(category,productNum) WHERE productDetail.product_id = '${product_id}'`;
     console.log(target);
-    const [result, fields] = await db.pool.query(target);
+    const [result, fields] = await global.db_pool.query(target);
     console.log(result);
     return result;
   } catch (error) {
@@ -64,7 +66,7 @@ async function getProductDetail(product_id) {
   try {
     let target = `SELECT product.*, productDetail.*,productDetail.product_id as id FROM product LEFT JOIN productDetail USING(category,productNum) WHERE product.product_id = '${product_id}'`;
     console.log(target);
-    const [result, fields] = await db.pool.query(target);
+    const [result, fields] = await global.db_pool.query(target);
     console.log(result);
     return result;
   } catch (error) {
@@ -81,7 +83,7 @@ async function getProduct_order(category, page, order) {
       (page - 1) * pageLimit
     },${pageLimit} `;
     console.log(target);
-    const [result, field] = await db.pool.query(target);
+    const [result, field] = await global.db_pool.query(target);
     console.log(result);
     return result;
   } catch (error) {
@@ -93,7 +95,7 @@ async function getProduct_order(category, page, order) {
 async function updateInventory(product_id, quantity) {
   try {
     let target = `UPDATE productDetail SET inventory = inventory - ${quantity} WHERE product_id=${product_id} `;
-    const ret = await db.pool.query(target);
+    const ret = await global.db_pool.query(target);
     console.log("updateInventory", ret);
     return ret;
   } catch (error) {

@@ -1,15 +1,20 @@
+//初始化資料庫
+require("./database");
+
 // 載入 dotenv
 require("dotenv").config();
 
 const express = require("express");
 const app = express();
+
+// 設定跨網域
 const cors = require("cors");
+app.use(cors());
+
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-// 設定跨網域
-app.use(cors());
 // 解析 cookie
-// app.use(cookieParser());
+app.use(cookieParser());
 // 解析 application/x-www-form-urlencoded
 app.use(
   bodyParser.urlencoded({
@@ -19,7 +24,7 @@ app.use(
 // 解析 application/json
 app.use(bodyParser.json());
 var path = require("path");
-// 設置路由
+// 設置API路由
 const api_route = require("./routes/api_route");
 app.use("/api", api_route);
 

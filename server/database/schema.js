@@ -1,61 +1,38 @@
 const mysql = require("mysql2/promise");
-const schemaName = "shopping_cart1111";
 const tables = require("./tables.json");
 
 //創建DB，檢測時請注意user名稱和密碼
-async function createDB() {
+async function createDB(dataBaseConnection, database) {
+  let connection = "";
   try {
-    const connection = await mysql.createConnection({
-      // host: "localhost",
-      user: "root",
-      password: "Aa3982145",
-      host: "localhost",
-      // user: "henrychen",
-      // password: "h6760903",
-    });
-    //console.log("connection", connection);
-    await connection.query(`CREATE DATABASE ${schemaName}`);
+    connection = await mysql.createConnection(dataBaseConnection);
+    await connection.query(`CREATE DATABASE ${database}`);
+    return connection;
   } catch (error) {
     console.log("error", error);
+    return connection;
   }
-}
-
-//創建連接池
-async function createPooL() {
-  const pool = await mysql.createPool({
-    // host: "localhost",
-    user: "root",
-    // password: "3345678",
-    password: "Aa3982145",
-    host: "localhost",
-    // user: "henrychen",
-    // password: "h6760903",
-    database: schemaName,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0,
-  });
-  return pool;
 }
 
 //創建表單
-async function createTable(tableName, columns) {
+async function createTable(tableName, columns, connection) {
   try {
     let target = `CREATE TABLE ${tableName} (${columns})`;
     //console.log(target);
-    await exports.pool.query(target);
+    await connection.query(target);
   } catch (error) {
-    console.log("create table error:", error);
+    //console.log("create table error:", error);
   }
 }
 
-//創建tables.json中的所有表單
-async function initSchema() {
-  await createDB();
-  module.exports.pool = await createPooL();
-  console.log("here");
+//初始化database
+async function initSchema(dataBaseConnection, database) {
+  const connection = await createDB(dataBaseConnection, database);
+  await connection.changeUser({
+    database: database,
+  });
   for (const key in tables) {
-    await createTable(tables[key].name, tables[key].columns);
+    await createTable(tables[key].name, tables[key].columns, connection);
   }
 }
 
@@ -83,6 +60,6 @@ function column({
     // column({tableName:'product',action:'MODIFY',old_columnName:'newcolumn',new_columnName:'',options:'VARCHAR(50)'});
   */
   let target = `ALTER TABLE ${tableName} ${action} ${old_columnName} ${new_columnName} ${options}`;
-  db.pool.query(target);
+  global.db_pool.query(target);
 }
 module.exports.initSchema = initSchema;

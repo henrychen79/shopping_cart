@@ -1,10 +1,10 @@
-const db = require("../data/schema");
-const table = require("../data/tables.json");
+const db = global.db_pool;
+const table = require("../database/tables.json");
 //新增訂單資訊到order,orderDetail
 async function addToCart(values) {
   try {
     let target = `INSERT INTO cart ( ${table.cart.columnName} ) VALUES (${values})`;
-    return await db.pool.query(target);
+    return await global.db_pool.query(target);
   } catch (error) {
     console.log(error);
     return error;
@@ -13,7 +13,7 @@ async function addToCart(values) {
 async function addToCartItem(values) {
   try {
     let target = `INSERT INTO cart_item ( ${table.cart_item.columnName} ) VALUES (${values})`;
-    return await db.pool.query(target);
+    return await global.db_pool.query(target);
   } catch (error) {
     console.log(error);
     return error;
@@ -22,11 +22,11 @@ async function addToCartItem(values) {
 async function delCartItem(cart_item_id) {
   try {
     let target1 = `DELETE FROM cart_item WHERE id = '${cart_item_id}'`;
-    await db.pool.query(target1);
+    await global.db_pool.query(target1);
     return "刪除商品成功";
 
     // let target2 = `SELECT SUM(price) AS totalPrice FROM product LEFT JOIN cart_item USING(product_id) WHERE cart_id = ${cart_item_id}`;
-    // const [result,field] = await db.pool.query(target2);
+    // const [result,field] = await global.db_pool.query(target2);
     // console.log(result);
     // return result;
   } catch (error) {
@@ -37,7 +37,7 @@ async function delCartItem(cart_item_id) {
 async function getCart(user_id) {
   try {
     let target = `select id from cart where user_id=${user_id}`;
-    const [result, fields] = await db.pool.query(target);
+    const [result, fields] = await global.db_pool.query(target);
     console.log(result);
     return result; //cart_id
   } catch (error) {
@@ -49,7 +49,7 @@ async function getCartItem(cart_id) {
   try {
     let target = `SELECT * FROM (select * from cart_item where cart_id= ${cart_id}) as a LEFT JOIN productDetail USING(product_id) LEFT JOIN product USING(category,productNum)`;
     // let target = `SELECT * FROM (select * from cart_item where cart_id=${cart_id}) as a LEFT JOIN productDetail as b ON a.product_id = b.product_id`;
-    const [result, fields] = await db.pool.query(target);
+    const [result, fields] = await global.db_pool.query(target);
     console.log(result);
     return result;
   } catch (error) {
@@ -62,7 +62,7 @@ async function getCartTotalPrice(cart_id) {
   try {
     let target = `SELECT SUM(price) AS totalPrice FROM (select * from cart_item where cart_id= ${cart_id}) as a LEFT JOIN productDetail USING(product_id) LEFT JOIN product USING(category,productNum)`;
     //let target = `SELECT SUM(price) AS totalPrice FROM product LEFT JOIN cart_item USING(product_id) WHERE cart_id = ${cart_id}`;
-    const [result, field] = await db.pool.query(target);
+    const [result, field] = await global.db_pool.query(target);
     if (result[0].totalPrice === null) {
       result[0].totalPrice = 0;
     }
@@ -75,7 +75,7 @@ async function getCartTotalPrice(cart_id) {
 async function delAllCartItem(cart_id) {
   try {
     let target = `DELETE FROM cart_item WHERE cart_id=${cart_id}`;
-    return await db.pool.query(target);
+    return await global.db_pool.query(target);
   } catch (error) {
     console.log(error);
     return error;
