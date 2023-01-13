@@ -3,6 +3,7 @@ import { reactive, ref } from "@vue/reactivity";
 import { useRoute } from "vue-router";
 import { watch } from "@vue/runtime-core";
 import { productImage, productDetail } from "../../apis/product_api";
+import { addToCart } from "../../apis/cart_api";
 const route = useRoute();
 const productInfoData = ref({});
 const showData = ref(false);
@@ -57,14 +58,7 @@ const productImg = async () => {
 const addCart = async () => {
   console.log("送出購物車", postData.product_id);
   postData.product_id = productInfoData.value[0].id;
-  let data = await fetch(addCatUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(postData),
-  })
-    .then((response) => response.json())
+  let data = await addToCart(JSON.stringify(postData))
     .then(function (res) {
       console.log(res);
       // 告訴她送出成功
