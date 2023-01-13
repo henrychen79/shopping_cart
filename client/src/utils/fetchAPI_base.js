@@ -11,7 +11,8 @@ const send_api = async (api_name, api_method, post_body) => {
       Accept: "application/json",
     },
   };
-  if (post_body) init.body = body;
+
+  if (post_body) init.body = post_body;
   let response = await fetch(url, init);
   let json = await response.json();
   return json;
