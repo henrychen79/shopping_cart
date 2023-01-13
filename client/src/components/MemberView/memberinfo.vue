@@ -6,15 +6,15 @@ import router from '../../router/index'
 
 const memberStore = useMemberStore();
 
-const token = document.cookie.replace(/(?:(?:^|.*;\s*)tokenStore\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-console.log('取得token測試',token)
+// const token = document.cookie.replace(/(?:(?:^|.*;\s*)access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+// console.log('取得token測試',token)
 
-// console.log(router.push)
-if(token===''){
-    router.push('/login')
-}else{
-    router.push('/member')
-}
+// // console.log(router.push)
+// if(token===''){
+//     router.push('/login')
+// }else{
+//     router.push('/member')
+// }
 
 
 
@@ -27,6 +27,7 @@ if(token===''){
 
 <h1>會員中心</h1>
     <Transition name="bounce" >
+        <!-- "memberStore.show" -->
         <p v-if="memberStore.show" class="textView">
             <modifyName/>
             <modifyPassWord/>
@@ -89,11 +90,11 @@ h1{
     }
 }
 .bounce-enter-active {
-  animation: bounce-in 0.5s;
+  animation: bounce-in 0.3s;
   
 }
 .bounce-leave-active {
-  animation: bounce-in 0.5s reverse;
+  animation: bounce-in 0.2s reverse;
 }
 @keyframes bounce-in {
     
@@ -108,7 +109,8 @@ h1{
   }
 }
 .textView{
-    border: 2px solid black;
+    border: 2px solid rgb(178, 176, 176);
+    box-shadow:3px 3px 2px 2px;
     position: absolute;
     // border: 1px solid black;
     border-radius: 5px;
