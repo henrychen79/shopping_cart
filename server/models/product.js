@@ -62,8 +62,7 @@ async function getSpecificiProduct(product_id) {
 
 async function getProductDetail(product_id) {
   try {
-    let target = `SELECT product.* ,pD.detail, pD.inventory, pD.img FROM product LEFT JOIN productDetail as pD USING(category,productNum) WHERE product.product_id = '${product_id}'`;
-    console.log(target);
+    let target = `SELECT product.*, productDetail.*,productDetail.product_id as id FROM product LEFT JOIN productDetail USING(category,productNum) WHERE product.product_id = '${product_id}'`;
     console.log(target);
     const [result, fields] = await global.db_pool.query(target);
     console.log(result);

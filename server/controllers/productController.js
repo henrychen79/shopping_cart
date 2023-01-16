@@ -46,10 +46,10 @@ const productController = {
   },
   getSpecificiProduct: async (req, res, next) => {
     try {
-      console.log("有收到");
+      // console.log("有收到");
       console.log(req.query);
       let product_id = req.query.product_id;
-      console.log("商品ID" + product_id);
+      // console.log("商品ID" + product_id);
       product_M.getSpecificiProduct(product_id).then((data) => {
         return res.json(data);
       });
@@ -60,7 +60,7 @@ const productController = {
   getProductDetail: async (req, res, next) => {
     try {
       console.log("有收到");
-      console.log(req.query);
+      // console.log(req.query);
       let product_id = req.query.product_id;
       console.log("商品ID" + product_id);
       product_M.getProductDetail(product_id).then((data) => {

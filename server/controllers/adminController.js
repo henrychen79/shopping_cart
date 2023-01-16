@@ -112,7 +112,7 @@ const adminController = {
     try {
       const data = req.body;
       console.log(data);
-      const result = await admin_M.update_inventory(data);
+      const result = await admin_M.update_deliver(data);
       return res.json(result);
     } catch (e) {
       return next(e);
@@ -122,7 +122,7 @@ const adminController = {
     try {
       const data = req.body;
       console.log(data);
-      const result = await admin_M.update_inventory(data);
+      const result = await admin_M.update_pay(data);
       return res.json(result);
     } catch (e) {
       return next(e);

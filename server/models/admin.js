@@ -1,5 +1,7 @@
-//const db = require("../data/testDatabase");//測試單頁js用
+// const db = require("../data/testDatabase");//測試單頁js用
 // const table = require("../database/tables.json");
+
+const { addAbortSignal } = require("nodemailer/lib/xoauth2");
 
 
 //根據商品ID查找特定商品ＯＫ0116
@@ -132,21 +134,35 @@ async function delete_product(product_id){
 
 
 
-//查找所有訂單(未測試)
+//查找所有訂單OK
 async function getAllOrders() {
   try {
+    
     //少給全部訂單總量，讓前端可以產生頁數
-    let target = `SELECT *, COUNT(*) AS total FROM orderList LEFT JOIN orderDetail USING(orderNum)`;
-    const [result, feild] = await global.db_pool.query(target);
-    console.log(result);
-    return result;
-  } catch (error) {}
+
+    //給全部訂單orderList的資料
+    
+    let target1 = `SELECT * FROM orderList`;
+    const [result1, feild] = await global.db_pool.query(target1);
+    console.log(result1);
+
+    for (let i = 0; i < result1.length; i++) {
+      let target2 = `SELECT order_id, product_name, prize, amount FROM orderDetail WHERE order_id = ${result1[i].id}`;
+      console.log(target2);
+
+      const [result2, feild2] = await global.db_pool.query(target2);
+      result1[i].items = result2;
+      console.log(result1);
+    }
+    return result1;
+  } catch (error) {console.log(error);}
 }
 
 //編輯訂單出貨狀態
-async function update_deliver(orderNum, deliver_status) {
+async function update_deliver(data) {
   try {
-    let target = `UPDATE orderList SET deliver_status = '${deliver_status}' WHERE orderNum = '${orderNum}'`;
+    let target = `UPDATE orderList SET deliver_status = '${data.deliver_status}' WHERE order_number = '${data.order_number}'`;
+    console.log('更新運送'+target);
     await global.db_pool.query(target);
     return "更新出貨狀態成功";
   } catch (error) {
@@ -154,9 +170,10 @@ async function update_deliver(orderNum, deliver_status) {
   }
 }
 //編輯訂單付款狀態
-async function update_pay(orderNum, pay_status) {
+async function update_pay(data) {
   try {
-    let target = `UPDATE orderList SET pay_status = '${pay_status}' WHERE orderNum = '${orderNum}'`;
+    let target = `UPDATE orderList SET pay_status = '${data.pay_status}' WHERE order_number = '${data.order_number}'`;
+    console.log('更新付款'+target);
     await global.db_pool.query(target);
     return "更新付款狀態成功";
   } catch (error) {
