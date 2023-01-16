@@ -2,20 +2,27 @@
 import { ref, reactive, computed } from 'vue';
 import { userOrderStore } from "../../stores/orderStore"
 const orderStore = userOrderStore();
+let show = ref(true)
 await orderStore.orederTest()
 // await orderStore.asyncFn(10)
 console.log(orderStore.orderList)
+if(orderStore.orderList===undefined){
+    show.value = false
+}else{
+    show.value = true
+}
+
 
 </script>
 
 <template>
     <!-- <h1>{{orderStore.testNum}}</h1> -->
     <div class="ordermain">
-        <div class="orderInfo">
+        <div v-if="show" class="orderInfo">
             <div class="Info" v-for="(item) in orderStore.orderList" v-bind:key="item.id">
                 <div class="content">
-                    <p>訂單編號:{{ item.order_amount }}</p>
-                    <p>訂單內容:{{ item.order_number }}</p>
+                    <p>訂單編號:{{ item.order_number }}</p>
+                    <p>訂單內容:{{ item.product_list }}</p>
                     <p>訂單時間:{{ item.order_time }}</p>
                     <p>訂單金額:${{ item.order_prize }}</p>
                 </div>
@@ -25,6 +32,7 @@ console.log(orderStore.orderList)
                 </div>
             </div>
         </div>
+        <div v-else>系統異常</div>
     </div>
 </template>
 

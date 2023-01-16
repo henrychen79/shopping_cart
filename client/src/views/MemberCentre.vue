@@ -3,7 +3,7 @@ import Header from '../components/Header.vue'
 import memberinfo from '../components/MemberView/memberinfo.vue'
 
 
-// const token = document.cookie.replace(/(?:(?:^|.*;\s*)tokenStore\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+// const token = document.cookie.replace(/(?:(?:^|.*;\s*)儲存cookie的名稱\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 // console.log(token)
 
 //          fetch('http://localhost:8080/api/user/login', {

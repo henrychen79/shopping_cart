@@ -38,13 +38,16 @@ const memberStore = useMemberStore();
         <h2>修改會員資料</h2>
         <div class="test"></div>
         <ul>
-            <li><a  v-on:click="memberStore.OpenPwFn">修改密碼</a></li>
-            <li><a  v-on:click="memberStore.OpenNameFn">修改暱稱</a></li>
+            <li v-on:click="memberStore.OpenPwFn">修改密碼</li>
+            <li v-on:click="memberStore.OpenNameFn">修改暱稱</li>
         </ul>
     </div>
     <div class="orderInfo">
         <h2>訂單查詢</h2>
         <div class="test"></div>
+        <ul>
+            <li><RouterLink to="/order">訂單紀錄</RouterLink></li>
+        </ul>
     </div>
 </div>
 
@@ -54,45 +57,95 @@ const memberStore = useMemberStore();
 </template>
 
 <style lang="scss" scoped>
-h1{
-    margin:10px 2rem;
-}
-.mainInfo{
-    // border: 2px solid red;
-    width: 80%;
-    height: 70%;
-    margin: auto 2rem;
-    display: flex;
-    flex-direction: column;
-    >.reviseInfo{
-        margin: auto 2rem;
-        flex:1;
-        >.test{
-            margin: 0px;
-            height: 1px;
-            width: 15%;
-            border: none;
-            border-bottom: 5px solid black;
-            box-shadow:0px 4px 3px 0px rgb(207, 202, 202)
-        }
-        >ul{
-            >li{
-                display: block;
-                cursor:pointer;
-            }
-            }
+@media screen and (min-width: 250px) {
+    h1{
+        margin:10px 2rem;
     }
-    >.orderInfo{
+    .mainInfo{
+        // border: 2px solid red;
+        width: 80%;
+        height: 70%;
         margin: auto 2rem;
-        flex:1; 
-         >.test{
-            margin: 0px;
-            height: 1px;
-            width: 10%;
-            border: none;
-            border-bottom: 5px solid black;
-            box-shadow:0px 4px 3px 0px rgb(207, 202, 202);
-         
+        display: flex;
+        flex-direction: column;
+        >.reviseInfo{
+            margin: auto 2rem;
+            flex:1;
+            >.test{
+                margin: 0px;
+                height: 1px;
+                width: 150px;
+                border: none;
+                border-bottom: 5px solid black;
+                box-shadow:0px 4px 3px 0px rgb(207, 202, 202)
+            }
+            >ul{
+                display: inline-flex;
+                flex-direction: column;
+                >li{
+                    margin: 10px;
+                    // border: 1px solid black;
+                    cursor:pointer;
+                }
+                }
+        }
+        >.orderInfo{
+            margin: auto 2rem;
+            flex:1; 
+            >.test{
+                margin: 0px;
+                height: 1px;
+                width: 120px;
+                border: none;
+                border-bottom: 5px solid black;
+                box-shadow:0px 4px 3px 0px rgb(207, 202, 202);
+            
+            }
+            >ul{
+                display: inline-flex;
+                flex-direction: column;
+                >li{
+                    margin: 10px;
+                    // border: 1px solid black;
+                    cursor:pointer;
+                }
+            }
+
+        }
+    }
+}
+@media screen and (max-width: 250px) {
+    .mainInfo{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        >.reviseInfo{
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            >ul{
+                display: inline-flex;
+                flex-direction: column;
+                >li{
+                    margin: 10px;
+                    // border: 1px solid black;
+                    cursor:pointer;
+                }
+            }
+        }
+        >.orderInfo{
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            >ul{
+                
+            }
         }
     }
 }

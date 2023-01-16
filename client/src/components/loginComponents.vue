@@ -36,7 +36,7 @@ const loginStore = useloginStore()
         </div>
     </div>
 <!-- <loginWarm/> -->
-<button class="btn" @click="loginStore.test">帶token測試</button>
+<!-- <button class="btn" @click="loginStore.test">帶token測試</button> -->
 </template>
 
 <style lang="scss" scoped>
