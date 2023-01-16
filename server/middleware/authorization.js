@@ -2,8 +2,10 @@ const user_M = require("../models/user");
 const jwt = require("jsonwebtoken");
 async function checkJWT(req, res, next) {
   try {
+    console.log(req.header("Authorization"));
     // 從來自客戶端請求的 header 取得和擷取JWT
     const token = req.header("Authorization").replace("Bearer ", "");
+    console.log("jwt", token);
     // 驗證 Token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     // 找尋符合用戶帳號名稱的使用者
@@ -20,7 +22,10 @@ async function checkJWT(req, res, next) {
     next();
   } catch (err) {
     console.log("chekout account err", err);
-    res.status(401).send({ error: "Please authenticate." });
+    res.json({
+      status: 401,
+      msg: "Unauthorized",
+    });
   }
 }
 async function checkIsAdmin(req, res, next) {
