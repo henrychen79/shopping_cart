@@ -21,7 +21,7 @@ function check(status,itemId) {
     status.show = true
 }
 const removeProduct=(product_id)=>{
-        const url =`http://127.0.0.1:8080/api/admin/delete_product?product_id=${product_id}`
+        const url =`http://172.20.10.4:8080/api/admin/delete_product?product_id=${product_id}`
         fetch(url, {
             method: 'GET', // or 'PUT'
             headers: {
@@ -44,7 +44,7 @@ const removeProduct=(product_id)=>{
 
     //渲染刪除後的列表，如果客戶在刪除前去動到選單，會有bug，可再修正
     const newList = async() =>{
-        const url =`http://127.0.0.1:8080/api/admin/getProducts?category=${aps.fetchCategory1}`
+        const url =`http://172.20.10.4:8080/api/admin/getProducts?category=${aps.fetchCategory1}`
         let data = await fetch(url, {
             method: 'GET', // or 'PUT'
             headers: {

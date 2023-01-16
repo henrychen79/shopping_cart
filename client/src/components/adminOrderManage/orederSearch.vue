@@ -10,8 +10,7 @@ const os = orderStore();
 <template>
     <p>訂單管理</p>
     <div class="search-bar">
-        <input v-model="os.orderInput" placeholder="請輸入訂單編號" >
-        <button @click="os.fetchOrder">搜尋</button>
+        <button @click="os.fetchOrder">顯示所有訂單</button>
     </div>
 
 

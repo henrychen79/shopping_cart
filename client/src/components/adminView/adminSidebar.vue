@@ -10,7 +10,7 @@
     <section id="side-title">功能</section>
     <a href="/admin"><section id="side-item">商品管理</section></a>
     <a href="/admin/ordermanage"><section id="side-item">訂單管理</section></a>
-    <a href="#"><section id="side-item-btm">用戶管理</section></a>
+    <a href="/admin/usermanage"><section id="side-item-btm">用戶管理</section></a>
 </aside>
 
 </template>

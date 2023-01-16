@@ -9,18 +9,31 @@ const os = orderStore();
     <div class="order">
         <div class="order-item" v-for="(item, index) in os.orderDetail" >
             <div class="item-detail">
-                <p>訂單編號:{{ item.orderNum }}</p>
-                <p>訂單內容:{{ item.priductNum }}</p>
-                <p>訂單金額:{{ item.totalPrice }}</p>
+                <p>訂單編號:{{ item.order_number }}</p>
+                <div class="order-product">
+                    <p>訂單內容:</p>
+                    <div class="products">
+                        <p v-for="(detail, index) in item.items">{{ detail.product_name }}</p>
+                    </div>
+                </div>
+                <p>訂單金額:{{ item.order_prize }}</p>
             </div>
             <div class="item-detail">
                 <div class="status">
                     <p>付款狀態:{{ item.pay_status }}</p>
-                    <p>編輯</p>
+                    <select v-model="item.pay_status_update">
+                    <option>已付款</option>
+                    <option>未付款</option>
+                    </select>
+                    <button @click="os.updatePayStatus(item)">儲存</button>
                 </div>
                 <div class="status">
                     <p>出貨狀態:{{ item.deliver_status }}</p>
-                    <p>編輯</p>
+                    <select v-model="item.deliver_status_update">
+                    <option>已出貨</option>
+                    <option>未出貨</option>
+                    </select>
+                    <button @click="os.updateDeliverStatus(item)">儲存</button>
                 </div>              
             </div>
         </div>
@@ -33,7 +46,7 @@ const os = orderStore();
     flex-direction: column;
 }
 .order-item{
-    height: 80px;
+    height: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -47,6 +60,14 @@ const os = orderStore();
     display: flex;
     flex-direction: row;
 
+}
+.order-product{
+    display: flex;
+    flex-direction: row;
+}
+.products{
+    display: flex;
+    flex-direction: column;
 }
 
 </style>

@@ -32,8 +32,7 @@ watch(()=>{
             </div>
             <div class="form_item">
                 <p>商品圖片</p>
-                <input v-model="addProduct.data.thumbnail" />
-                <button>瀏覽</button>
+                <input type="file" class="upload" name="imgUpload"   />
             </div>
             <div class="form_item">
                 <p>商品價格</p>

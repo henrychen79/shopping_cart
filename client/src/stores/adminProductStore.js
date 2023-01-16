@@ -6,7 +6,7 @@ export const adminProductStore = defineStore('adminProductStore',()=>{
     let fetchCategory2 = ref('');
     let fetchProductNum = ref('');
     const getDetail = async () => {
-        const url = `http://127.0.0.1:8080/api/admin/getProducts?category=${fetchCategory1.value}`
+        const url = `http://172.20.10.4:8080/api/admin/getProducts?category=${fetchCategory1.value}`
 
         // console.log(fetchCategory.value,fetchProductNum.value)
         try {
@@ -33,7 +33,7 @@ export const adminProductStore = defineStore('adminProductStore',()=>{
     
     }
     const getTwoDetails = async () => {
-        const url = `http://127.0.0.1:8080/api/admin/getProduct?category=${fetchCategory2.value}&productNum=${fetchProductNum.value}`
+        const url = `http://172.20.10.4:8080/api/admin/getProduct?category=${fetchCategory2.value}&productNum=${fetchProductNum.value}`
         // console.log(fetchCategory.value,fetchProductNum.value)
         try {
             let data = await fetch(url, {
