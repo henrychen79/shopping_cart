@@ -6,15 +6,16 @@ import router from '../../router/index'
 
 const memberStore = useMemberStore();
 
-// const token = document.cookie.replace(/(?:(?:^|.*;\s*)access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+const token = document.cookie.replace(/(?:(?:^|.*;\s*)_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 // console.log('取得token測試',token)
 
-// // console.log(router.push)
-// if(token===''){
-//     router.push('/login')
-// }else{
-//     router.push('/member')
-// }
+console.log(router.push)
+if(token===''){
+    alert('尚未登入')
+    router.push('/login')
+}else{
+    router.push('/member')
+}
 
 
 

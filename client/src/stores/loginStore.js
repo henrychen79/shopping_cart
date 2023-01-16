@@ -37,7 +37,7 @@ export const useloginStore = defineStore('loginStore',()=>{
             .catch(function(error){
                 console.error('Error:', error);
             });
-        console.log(resdata.accout)
+            console.log(resdata)
         if(resdata.msg==="登錄成功"){
             console.log('登錄成功')
             document.cookie=`_token=${resdata.data.token};`

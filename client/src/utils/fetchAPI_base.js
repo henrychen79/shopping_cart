@@ -1,6 +1,6 @@
 const protocol = "http://";
 const port = "8080";
-const base_url = `127.0.0.1:${port}/api`;
+const base_url = `192.168.85.160:${port}/api`;
 const send_api = async (api_name, api_method, post_body) => {
   const url = protocol + base_url + api_name;
   // const url = '../../newOrderTest.json'
