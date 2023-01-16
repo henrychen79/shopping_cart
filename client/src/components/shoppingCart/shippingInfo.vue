@@ -3,7 +3,7 @@ import { computed, ref, reactive } from "vue";
 import { cartStore } from "../../stores/cartStore";
 
 const cs = cartStore();
-console.log(reactive(cs.cartToOrderData));
+
 </script>
 
 <template>
@@ -22,9 +22,9 @@ console.log(reactive(cs.cartToOrderData));
     </div>
     <div>
       <router-link to="/shoppingCart" class="btn">回前頁</router-link>
-      <router-link to="/shoppingCart/paymentInfo" class="btn"
-        >下一步</router-link
-      >
+      <router-link to="/shoppingCart/paymentInfo" class="btn">下一步</router-link>
+      <button>下一步</button>
+
     </div>
   </form>
 </template>
@@ -53,6 +53,7 @@ form.shippingInfo-form {
     input {
       flex: 1;
       max-width: 100%;
+      line-height: 28px;
     }
   }
 
@@ -77,6 +78,7 @@ form.shippingInfo-form {
     background-color: var(--grey);
   }
 }
+
 
 @media only screen and (max-width: 452px) {
   form.shippingInfo-form {

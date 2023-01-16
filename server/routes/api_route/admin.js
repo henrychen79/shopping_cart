@@ -15,14 +15,14 @@ router.post(
 router.post("/update_product", adminController.update_product);
 router.post("/update_order", adminController.update_order);
 //編輯特定商品（前端給商品id）OK
-router.get("/edit_product", productController.getSpecificiProduct);
+router.get("/edit_product", adminController.getSpecificiProduct);
 //更新商品資訊 OK
 router.post("/update_product",adminController.update_product);
 //更新價格 OK
 router.post("/update_price", adminController.update_price);
 //更新庫存量 OK
 router.post("/update_inventory", adminController.update_inventory);
-//刪除商品
+//刪除商品 OK
 router.get("/delete_product", adminController.delete_product);
 
 
@@ -43,7 +43,7 @@ router.post("/addProduct", adminController.addProduct);
 
 
 
-//拿到所有訂單
+//拿到所有訂單 OK
 router.get("/getAllOrders", adminController.getAllOrders);
 //修改訂單中的運送狀態
 router.post("/update_deliver", adminController.update_deliver);

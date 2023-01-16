@@ -5,7 +5,7 @@ export const useMemberStore = defineStore('memberStore',()=>{
     // 'Authorization': 'Bearer ' + this.state.clientToken, //fetch端傳送token驗證
 
     let modifyNamedata=reactive({
-        account:'rec27@gmail.com',//登入後會存入
+        // account:'rec27@gmail.com',//登入後會存入
         newNickname:''
     })
     let modifyPassword=reactive({
@@ -24,6 +24,7 @@ export const useMemberStore = defineStore('memberStore',()=>{
     let fontColor = ref('')
 
     let show = ref(false)
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
     const OpenNameFn = ()=>{
         show.value = true
@@ -56,11 +57,12 @@ export const useMemberStore = defineStore('memberStore',()=>{
             // console.log('欄位不能為空')
             return
         }
-   
-        fetch('http://172.20.10.4:8080/api/member/update_nickname', {
+        console.log(token)
+        fetch(`${import.meta.env.VITE_APP_API}api/member/update_nickname`, {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token, //fetch端傳送token驗證
             },
             body: JSON.stringify(modifyNamedata),
             })
@@ -69,8 +71,12 @@ export const useMemberStore = defineStore('memberStore',()=>{
                 return res.json()
             })
             .then(function(res){
-                console.log('Success:', res);
-                // window.location.href='/'
+                console.log(res)
+                if(res.status===200){
+                    alert('修改成功')
+                }else{
+                    alert('修改失敗')
+                }
             })
             .catch(function(error){
                 console.error('Error:', error);
@@ -101,6 +107,36 @@ const checkPassword=()=>{
 }
 
 //修改密碼fetch串接
+   const modifyPwFn=()=>{
+    console.log(modifyPassword)
+    
+    fetch(`${import.meta.env.VITE_APP_API}api/member/modify_password`, {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token, //fetch端傳送token驗證
+        },
+        body:JSON.stringify(modifyPassword),
+        })
+        .then(function(res){
+            // console.log(res)
+            return res.json()
+        })
+        .then(function(res){
+            console.log(res);
+            if(res.status==200){
+                alert('修改成功')
+            }else{
+                alert('修改失敗')
+            }
+            
+        })
+        .catch(function(error){
+            console.error('Error:', error);
+        });
+
+   }
+
     const checkSend=()=>{
         if(modifyPassword.newPassword===''||modifyPassword.password===''||modifyPassword.checkPassword===''){
             alert('欄位不能為空')//有要另外刻畫面再說
@@ -112,6 +148,7 @@ const checkPassword=()=>{
             return
         }
         console.log('執行fetch')
+        modifyPwFn()
     }
 
     
@@ -119,7 +156,7 @@ const checkPassword=()=>{
 
     return{
         modifyNameOpen,modifyPwOpen,modifyNamedata,
-        show,password_error,passwordWarn,fontColor,modifyPassword,
-        OpenNameFn,OpenPwFn,modifyNickName,closeShowView,checkPassword,checkSend
+        show,password_error,passwordWarn,fontColor,modifyPassword,token,
+        OpenNameFn,OpenPwFn,modifyNickName,closeShowView,checkPassword,checkSend,modifyPwFn
     }
 })

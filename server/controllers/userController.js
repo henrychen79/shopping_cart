@@ -50,6 +50,7 @@ const userController = {
   login: async (req, res, next) => {
     try {
       const { account, password } = req.body;
+      console.log(account, password);
       const result = await user_M.login(account, password);
       //const result = [{ account: "ggggg" }];
       if (result.length != 0) {
@@ -57,11 +58,23 @@ const userController = {
         const token = jwt.sign(result[0], process.env.JWT_SECRET, {
           expiresIn: expires_in,
         });
-        res
-          .cookie("access_token", token)
-          .json({ accout: result[0].account, token: token });
+        res.cookie("access_token", token);
+        //.json({ accout: result[0].account, token: token });
+        return res.json({
+          status: 200,
+          msg: "登錄成功",
+          data: {
+            user_id: result[0].user_id,
+            account: result[0].account,
+            nick: result[0].nick_name,
+            role: result[0].role,
+            iat: parseInt(Date.now() / 1000, 10),
+            token_exp: expires_in,
+            token: token,
+          },
+        });
       } else {
-        res.json({ accout: [] });
+        res.json({});
       }
     } catch (e) {
       console.log("login err::", e);
@@ -81,7 +94,7 @@ const userController = {
 
       //如果帳號存在，則生成暫時密碼
       const result2 = await user_M.createTempPassword(account);
-      console.log('result2',result2);
+      console.log("result2", result2);
       sendMail(account, "忘記密碼驗證信", forgetPasswordMail(result2));
       res.json({ status: true });
       return;
@@ -97,13 +110,13 @@ const userController = {
       console.log(account, password, newPassword);
       const tableName = "tempInfo";
       const result = await user_M.check_password(tableName, account, password);
-      console.log('result',result);
+      console.log("result", result);
       if (result) {
         let update_result = await user_M.update_password(account, newPassword);
         console.log(update_result);
         res.json({ status: true });
-        return 
-      }else{
+        return;
+      } else {
         res.json({ status: false });
       }
     } catch (error) {
