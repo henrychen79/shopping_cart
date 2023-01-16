@@ -3,15 +3,31 @@ const port = "8080";
 const base_url = `127.0.0.1:${port}/api`;
 const send_api = async (api_name, api_method, post_body) => {
   const url = protocol + base_url + api_name;
-  // const url = '../../newOrderTest.json'
-  const init = {
-    method: api_method,
-    headers: {
-      "user-agent": "Mozilla/4.0 MDN Example",
-      "content-type": "application/json; charset=UTF-8",
-      Accept: "application/json",
-    },
-  };
+  const token = document.cookie.replace(
+    /(?:(?:^|.*;\s*)_token\s*\=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+  let init = {};
+  if (!token) {
+    init = {
+      method: api_method,
+      headers: {
+        "user-agent": "Mozilla/4.0 MDN Example",
+        "content-type": "application/json; charset=UTF-8",
+        Accept: "application/json",
+      },
+    };
+  } else {
+    init = {
+      method: api_method,
+      headers: {
+        "user-agent": "Mozilla/4.0 MDN Example",
+        "content-type": "application/json; charset=UTF-8",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+  }
 
   if (post_body) init.body = post_body;
   let response = await fetch(url, init);
