@@ -43,7 +43,7 @@ router.post("/addProduct", adminController.addProduct);
 
 
 
-//拿到所有訂單
+//拿到所有訂單 OK
 router.get("/getAllOrders", adminController.getAllOrders);
 //修改訂單中的運送狀態
 router.post("/update_deliver", adminController.update_deliver);

@@ -31,7 +31,7 @@
   },
   "orderList": {
     "name": "orderlist",
-    "columns": "`id` INT NOT NULL AUTO_INCREMENT, `user_id` INT NOT NULL, `recipient` VARCHAR(45) NOT NULL, `address` VARCHAR(45) NOT NULL, `phone` VARCHAR(45) NOT NULL,`order_time` DATETIME NULL DEFAULT CURRENT_TIMESTAMP, `pay_status` VARCHAR(45) NULL DEFAULT 'waiting', `deliver_status` VARCHAR(45) NOT NULL DEFAULT 'waiting', `pay_way` VARCHAR(45) NULL DEFAULT 'cash', `order_prize` INT NOT NULL, `dliver_way` VARCHAR(45) NOT NULL DEFAULT 'post', `order_amount` INT NOT NULL, `order_number` VARCHAR(45) NOT NULL,PRIMARY KEY (`id`), INDEX `user_id_idx` (`user_id` ASC) VISIBLE, CONSTRAINT `user_id_u` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION",
+    "columns": "`id` INT NOT NULL AUTO_INCREMENT, `user_id` INT NOT NULL, `recipient` VARCHAR(45) NOT NULL, `address` VARCHAR(45) NOT NULL, `phone` VARCHAR(45) NOT NULL,`order_time` DATETIME NULL DEFAULT CURRENT_TIMESTAMP, `pay_status` VARCHAR(45) NULL DEFAULT '未付款', `deliver_status` VARCHAR(45) NOT NULL DEFAULT '未出貨', `pay_way` VARCHAR(45) NULL DEFAULT 'cash', `order_prize` INT NOT NULL, `dliver_way` VARCHAR(45) NOT NULL DEFAULT 'post', `order_amount` INT NOT NULL, `order_number` VARCHAR(45) NOT NULL,PRIMARY KEY (`id`), INDEX `user_id_idx` (`user_id` ASC) VISIBLE, CONSTRAINT `user_id_u` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION",
     "columnName": "user_id, recipient, address, phone, pay_status, deliver_status, pay_way, order_prize, deliver_way, order_amount"
   },
   "orderDetail": {

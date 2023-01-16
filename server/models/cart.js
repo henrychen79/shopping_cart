@@ -21,6 +21,7 @@ async function addToCartItem(values) {
 async function delCartItem(cart_item_id) {
   try {
     let target1 = `DELETE FROM cart_item WHERE id = '${cart_item_id}'`;
+    console.log(target1);
     await global.db_pool.query(target1);
     return "刪除商品成功";
 
