@@ -2,7 +2,8 @@ import route from "../router";
 
 const protocol = "http://";
 const port = "8080";
-const base_url = `192.168.85.160:${port}/api`;
+// const base_url = `192.168.85.160:${port}/api`;
+const base_url = `172.20.10.4:${port}/api`;
 const send_api = async (api_name, api_method, post_body) => {
   const url = protocol + base_url + api_name;
   const token = document.cookie.replace(

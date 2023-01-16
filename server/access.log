@@ -1054,3 +1054,13 @@
 ::ffff:172.20.10.8 - POST /api/admin/update_deliver HTTP/1.1 200 26 - 18.396 ms
 ::ffff:172.20.10.8 - OPTIONS /api/admin/getAllOrders HTTP/1.1 204 0 - 0.285 ms
 ::ffff:172.20.10.8 - GET /api/admin/getAllOrders HTTP/1.1 200 1762 - 67.876 ms
+::1 - OPTIONS /api/user/login HTTP/1.1 204 0 - 6.791 ms
+::1 - POST /api/user/login HTTP/1.1 200 282 - 189.236 ms
+::1 - OPTIONS /api/user/login HTTP/1.1 204 0 - 1.726 ms
+::1 - POST /api/user/login HTTP/1.1 200 282 - 21.365 ms
+::1 - OPTIONS /api/user/login HTTP/1.1 204 0 - 1.965 ms
+::1 - POST /api/user/login HTTP/1.1 200 282 - 13.808 ms
+::1 - OPTIONS /api/user/login HTTP/1.1 204 0 - 0.757 ms
+::1 - POST /api/user/login HTTP/1.1 200 282 - 18.736 ms
+::1 - OPTIONS /api/user/login HTTP/1.1 204 0 - 0.963 ms
+::1 - POST /api/user/login HTTP/1.1 200 282 - 24.369 ms

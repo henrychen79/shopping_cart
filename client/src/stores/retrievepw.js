@@ -22,8 +22,8 @@ export const useRetrievepwStore = defineStore('Retrievepw',()=>{
     // const url='../../account.json'
     
     const sendEmail=async()=>{
-        const url = 'http://localhost:8080/api/user/forgetPassword'
-        // const url = 'http://172.20.10.7:8080/api/user/forgetPassword'
+        // const url = 'http://localhost:8080/api/user/forgetPassword'
+        const url = 'http://172.20.10.4:8080/api/user/forgetPassword'
         let control = await fetch(url, {
             method: 'POST', // or 'PUT'
             headers: {

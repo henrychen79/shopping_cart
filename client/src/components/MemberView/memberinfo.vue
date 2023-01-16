@@ -5,7 +5,6 @@ import {useMemberStore} from '../../stores/memberStore'
 import router from '../../router/index'
 
 const memberStore = useMemberStore();
-
 const token = document.cookie.replace(/(?:(?:^|.*;\s*)_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 // console.log('取得token測試',token)
 
@@ -16,6 +15,25 @@ if(token===''){
 }else{
     router.push('/member')
 }
+
+// fetch('http://192.168.85.160:8080/api/member/update_nickname', {
+//             method: 'POST', // or 'PUT'
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Authorization': 'Bearer ' + token, //fetch端傳送token驗證
+//             },
+//             // body: JSON.stringify(),
+//             })
+//             .then(function(res){
+//                 console.log(res)
+//                 return res.json()
+//             })
+//             .then(function(res){
+//                 console.log(res)
+//             })
+//             .catch(function(error){
+//                 console.error('Error:', error);
+//             });
 
 
 

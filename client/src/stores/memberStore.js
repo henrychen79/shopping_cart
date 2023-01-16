@@ -58,7 +58,7 @@ export const useMemberStore = defineStore('memberStore',()=>{
             return
         }
         console.log(token)
-        fetch('http://192.168.85.160:8080/api/member/update_nickname', {
+        fetch(`${import.meta.env.VITE_APP_API}api/member/update_nickname`, {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
@@ -71,7 +71,8 @@ export const useMemberStore = defineStore('memberStore',()=>{
                 return res.json()
             })
             .then(function(res){
-                if(res.status==200){
+                console.log(res)
+                if(res.status===200){
                     alert('修改成功')
                 }else{
                     alert('修改失敗')
@@ -109,7 +110,7 @@ const checkPassword=()=>{
    const modifyPwFn=()=>{
     console.log(modifyPassword)
     
-    fetch('http://192.168.85.160:8080/api/member/modify_password', {
+    fetch(`${import.meta.env.VITE_APP_API}api/member/modify_password`, {
         method: 'POST', // or 'PUT'
         headers: {
             'Content-Type': 'application/json',

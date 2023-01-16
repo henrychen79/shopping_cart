@@ -59,8 +59,8 @@ export const useVerifyStore = defineStore('VerifyStore',()=>{
             return
         }
         console.log('1212412512623631')
-        // const url = 'http://172.20.10.7:8080/api/user/updatePassword'
-        let url = 'http://localhost:8080/api/user/updatePassword'
+        const url = 'http://172.20.10.4:8080/api/user/updatePassword'
+        // let url = 'http://localhost:8080/api/user/updatePassword'
         let checkData = await fetch(url, {
             method: 'POST', // or 'PUT'
             headers: {

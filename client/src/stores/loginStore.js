@@ -19,7 +19,9 @@ export const useloginStore = defineStore('loginStore',()=>{
 
     const login = async ()=>{
         // const url = `http://localhost:8080/api/user/login`
-        const url = `http://192.168.85.160:8080/api/user/login`
+        
+        const url = `${import.meta.env.VITE_APP_API}api/user/login`
+        // console.log(url)
         let resdata = await fetch(url, {
             method: 'POST', // or 'PUT'
             headers: {
