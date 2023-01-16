@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import{ref,reactive,computed} from "vue"
+import router  from '../router'
 export const useloginStore = defineStore('loginStore',()=>{
     let userData=reactive({
         account:'',
@@ -17,7 +18,8 @@ export const useloginStore = defineStore('loginStore',()=>{
     }
 
     const login = async ()=>{
-        const url = `http://localhost:8080/api/user/login`
+        // const url = `http://localhost:8080/api/user/login`
+        const url = `http://192.168.85.160:8080/api/user/login`
         let resdata = await fetch(url, {
             method: 'POST', // or 'PUT'
             headers: {
@@ -36,22 +38,30 @@ export const useloginStore = defineStore('loginStore',()=>{
                 console.error('Error:', error);
             });
         console.log(resdata.accout)
-        
-        //回傳內容，
-        if(resdata.accout.length!=0){
-            console.log('登入成功')
-            console.log(resdata)
-            document.cookie=`access_token=${resdata.token};`
-
-            const token = document.cookie.replace(/(?:(?:^|.*;\s*)access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-            console.log('取得token測試',token)
-
-            window.location.href='/'
+        if(resdata.msg==="登錄成功"){
+            console.log('登錄成功')
+            document.cookie=`_token=${resdata.data.token};`
+            router.push('/')
         }else{
-            console.log('登入失敗')
+            console.log('登錄失敗')
             loginwarmText.value = '登入失敗'
             warmView()  
         }
+        
+        //回傳內容，
+        // if(resdata.accout.length!=0){
+        //     console.log('登入成功')
+        //     console.log(resdata)
+        //     document.cookie=`access_token=${resdata.token};`
+
+        //     const token = document.cookie.replace(/(?:(?:^|.*;\s*)access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        //     console.log('取得token測試',token)
+        //    router.push('/')
+        // }else{
+        //     console.log('登入失敗')
+        //     loginwarmText.value = '登入失敗'
+        //     warmView()  
+        // }
     }
 
 
