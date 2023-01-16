@@ -1,5 +1,6 @@
 const user_M = require("../models/user");
 const jwt = require("jsonwebtoken");
+const { res_data } = require("../config");
 async function checkJWT(req, res, next) {
   try {
     console.log(req.header("Authorization"));
@@ -22,10 +23,7 @@ async function checkJWT(req, res, next) {
     next();
   } catch (err) {
     console.log("chekout account err", err);
-    res.json({
-      status: 401,
-      msg: "Unauthorized",
-    });
+    res.json(res_data.login_fail);
   }
 }
 async function checkIsAdmin(req, res, next) {
