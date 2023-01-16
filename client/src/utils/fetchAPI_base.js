@@ -1,3 +1,5 @@
+import route from "../router";
+
 const protocol = "http://";
 const port = "8080";
 const base_url = `127.0.0.1:${port}/api`;
@@ -32,7 +34,10 @@ const send_api = async (api_name, api_method, post_body) => {
   if (post_body) init.body = post_body;
   let response = await fetch(url, init);
   let json = await response.json();
-  return json;
+  if (json.status === 401) {
+    alert("登錄逾時");
+    route.push("login");
+  } else return json;
 };
 const get_image_api = async (api_name, api_method, post_body) => {
   const url = protocol + base_url + api_name;
