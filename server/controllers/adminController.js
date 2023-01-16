@@ -63,6 +63,17 @@ const adminController = {
       return next(e);
     }
   },
+  getSpecificiProduct: async (req, res, next) => {
+    try {
+      const product_id = req.query.product_id;
+      console.log("ID：" + product_id);
+      const result = await admin_M.getSpecificiProduct(product_id);
+      console.log(result);
+      return res.json(result);
+    } catch (error) {
+      return next(e);
+    }
+  },
   addProduct: async (req, res, next) => {
     try {
       //前端給data
