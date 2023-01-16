@@ -47,7 +47,7 @@ async function getCart(user_id) {
 }
 async function getCartItem(cart_id) {
   try {
-    let target = `SELECT a.*, product.*,product.product_id as id, productDetail.* FROM (select *, id as cart_item_id from cart_item where cart_id= ${cart_id}) as a LEFT JOIN productDetail USING(product_id) LEFT JOIN product USING(category,productNum)`;
+    let target = `SELECT a.*, productDetail.*,productDetail.product_id as pdid,product.*FROM (select *, id as cart_item_id from cart_item where cart_id= ${cart_id}) as a LEFT JOIN product USING(product_id) LEFT JOIN productDetail USING(category,productNum)`;
     // let target = `SELECT * FROM (select * from cart_item where cart_id=${cart_id}) as a LEFT JOIN productDetail as b ON a.product_id = b.product_id`;
     const [result, fields] = await global.db_pool.query(target);
     console.log(result);
@@ -60,7 +60,7 @@ async function getCartItem(cart_id) {
 
 async function getCartTotalPrice(cart_id) {
   try {
-    let target = `SELECT SUM(price) AS totalPrice FROM (select * from cart_item where cart_id= ${cart_id}) as a LEFT JOIN productDetail USING(product_id) LEFT JOIN product USING(category,productNum)`;
+    let target = `SELECT SUM(price) AS totalPrice FROM (select * from cart_item where cart_id= ${cart_id}) as a LEFT JOIN product USING(product_id) LEFT JOIN productDetail USING(category,productNum)`;
     //let target = `SELECT SUM(price) AS totalPrice FROM product LEFT JOIN cart_item USING(product_id) WHERE cart_id = ${cart_id}`;
     const [result, field] = await global.db_pool.query(target);
     if (result[0].totalPrice === null) {

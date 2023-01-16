@@ -26,7 +26,7 @@
   },
   "cart_item": {
     "name": "cart_item",
-    "columns": "`id` INT NOT NULL AUTO_INCREMENT,`cart_id` INT NOT NULL,`product_id` INT NOT NULL,`quantity` INT NOT NULL DEFAULT 1,`create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY (`id`),INDEX `cart_id_idx` (`cart_id` ASC) VISIBLE,INDEX `product_id_idx` (`product_id` ASC) VISIBLE, CONSTRAINT `cart_id` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION, CONSTRAINT `product_id` FOREIGN KEY (`product_id`) REFERENCES `productDetail` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION",
+    "columns": "`id` INT NOT NULL AUTO_INCREMENT,`cart_id` INT NOT NULL,`product_id` INT NOT NULL,`quantity` INT NOT NULL DEFAULT 1,`create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY (`id`),INDEX `cart_id_idx` (`cart_id` ASC) VISIBLE,INDEX `product_id_idx` (`product_id` ASC) VISIBLE, CONSTRAINT `cart_id` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION, CONSTRAINT `product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION",
     "columnName": "cart_id, product_id, quantity"
   },
   "orderList": {

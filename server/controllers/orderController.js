@@ -72,9 +72,7 @@ const orderController = {
       for (let index = 0; index < cart_items.length; index++) {
         let item = cart_items[index];
         console.log("item", item);
-        let product_detail = await product_M.getSpecificiProduct(
-          item.product_id
-        );
+        let product_detail = await product_M.getSpecificiProduct(item.pdid);
         let inser_values = [
           order_ret[0].insertId,
           `'${product_detail[0].productName}'`,
