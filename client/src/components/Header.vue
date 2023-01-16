@@ -3,7 +3,6 @@ import { ref, watch } from "@vue/runtime-core";
 </script>
 
 <template>
-  {{ items }}
   <header>
     <div id="logo">
       <img src="" alt="" />
@@ -30,9 +29,7 @@ import { ref, watch } from "@vue/runtime-core";
         <a href="#"><font-awesome-icon icon="fas fa-clipboard-list" /></a>
       </li>
       <li>
-        <router-link to="/shoppingCart"
-          ><font-awesome-icon icon="fas fa-shopping-cart"
-        /></router-link>
+        <router-link to="/shoppingCart"><font-awesome-icon icon="fas fa-shopping-cart" /></router-link>
       </li>
     </ul>
   </header>

@@ -36,7 +36,6 @@ export const productStore = defineStore("product", () => {
 
   //監聽頁面切換
   watchEffect(() => {
-    console.log("i am work");
 
     const productAPI = async () => {
       productBrief(currentCategory.value, crrentPage.value, sortValue.value)

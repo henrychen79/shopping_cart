@@ -2,19 +2,18 @@
 import { computed, ref } from "vue"
 import { productStore } from '../../../stores/productStore'
 
-const pd = productStore();
-console.log('page here', pd.crrentPage);
+const ps = productStore();
+
 
 </script>
 
 <template>
-    {{ pd }}
     <ul class="pagination">
-        <li @click="pd.btnLeft"><a href="#">«</a></li>
-        <li v-for="pageNumber in pd.showPages" @click="pd.crrentPage = pageNumber">
-            <a href="#" :class="{ active: pageNumber === pd.crrentPage }"> {{ pageNumber }} </a>
+        <li @click="ps.btnLeft"><a href="#">«</a></li>
+        <li v-for="pageNumber in ps.showPages" @click="ps.crrentPage = pageNumber">
+            <a href="#" :class="{ active: pageNumber === ps.crrentPage }"> {{ pageNumber }} </a>
         </li>
-        <li @click="pd.btnRight"><a href="#">»</a></li>
+        <li @click="ps.btnRight"><a href="#">»</a></li>
     </ul>
 </template>
 

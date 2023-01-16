@@ -5,14 +5,14 @@ import cartItemVue from "./cartItem.vue";
 import { cartStore } from "../../stores/cartStore";
 import { userOrderStore } from "../../stores/orderStore";
 import { cartList } from "../../apis/cart_api";
+
 const productListData = ref({});
 const cs = cartStore();
 const showData = ref(false);
 
-//const fetchURL = "http://172.20.10.4:8080";
-const fetchURL = "http://127.0.0.1:8080";
-
-const productListUrl = `${fetchURL}/api/cart/1`;
+const showModal = ref(false);
+const pass = ref(false);
+const message = ref('');
 
 const productList = async (test) => {
   let data = await cartList(1)
@@ -29,13 +29,10 @@ const productList = async (test) => {
 };
 
 productList();
-const removeCartItem = function (index) {
-  this.productListData[0].splice(index, 1);
-};
+
 </script>
 
 <template>
-  {{ productListData }}
   <!-- <div v-if="!showData">尚未加入商品到購物車</div> -->
   <table class="cartList" v-if="showData">
     <thead>
@@ -48,21 +45,12 @@ const removeCartItem = function (index) {
       </tr>
     </thead>
     <tbody>
-      <cartItemVue
-        v-for="(item, index) in productListData[0]"
-        :key="item.id"
-        :imgData="{
-          category: `${item.category}`,
-          productInfoID: `${item.productNum}`,
-        }"
-        :itemId="item.id"
-        @delbtn="productList()"
-        :indexId="index"
-      >
-        <template #itemName
-          ><span>{{ item.id }}</span
-          >{{ item.productName }}</template
-        >
+      <cartItemVue v-for="(item, index) in productListData[0]" :key="item.cart_item_id" :imgData="{
+        category: `${item.category}`,
+        productInfoID: `${item.productNum}`,
+      }" :itemId="item.cart_item_id" @delbtn="productList()" :indexId="index">
+
+        <template #itemName>{{ item.productName }}</template>
         <template #itemQuantity>{{ item.quantity }}</template>
         <template #itemPrice>{{ item.price }}</template>
       </cartItemVue>
@@ -72,12 +60,7 @@ const removeCartItem = function (index) {
         <td colspan="5" class="total-price">
           <h3>總金額</h3>
           <p>{{ productListData[1][0].totalPrice }}</p>
-          <router-link
-            to="/shoppingCart/shippingInfo"
-            @click="addNum"
-            class="btn"
-            >結帳</router-link
-          >
+          <router-link to="/shoppingCart/shippingInfo" @click="addNum" class="btn">結帳</router-link>
         </td>
       </tr>
     </tfoot>
@@ -90,6 +73,7 @@ table.cartList {
   width: 90%;
   text-align: center;
   border: 1px solid var(--black);
+  margin-bottom: 2rem;
 
   thead {
     background-color: var(--grey);

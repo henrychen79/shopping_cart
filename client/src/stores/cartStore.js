@@ -4,6 +4,7 @@ import { fetchData } from "../stores/fetchData";
 import { createOrder } from "../apis/order_api";
 
 export const cartStore = defineStore("cart", () => {
+
   const data = reactive({
     user_id: 1,
     recipient: "",
@@ -14,10 +15,10 @@ export const cartStore = defineStore("cart", () => {
     order_prize: 1,
     order_amount: 0,
   });
+
+
   const cartToOrderData = reactive([]);
-  //const fetchURL = "http://172.20.10.4:8080";
-  const fetchURL = "http://127.0.0.1:8080";
-  const orderDoneUrl = `${fetchURL}/api/order/createOrder`;
+
   //完成訂單
   const orderDone = async (data, cartToOrderData) => {
     data.order_prize = cartToOrderData[1][0].totalPrice;

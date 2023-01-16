@@ -13,16 +13,21 @@ const ps = productStore();
             <font-awesome-icon icon="fas fa-bars" />
         </div>
     </label>
+
+
     <aside class="aside">
+
         <label for="aside-btn">
-            <div class="cancel-btn"><font-awesome-icon icon="fas fa-times" /></div>
+            <div class="cancel-btn"><font-awesome-icon icon="fas fa-times" class="icon" /></div>
         </label>
+
         <ul class="productBar">
             <li>
-                <p>商品分類</p>
+                <p class="classic">商品分類</p>
             </li>
-            <li v-for="item in ps.totalCategoryList" @click="ps.currentCategory = item"><a href="#">{{ item
-                    }}</a></li>
+            <li v-for="item in ps.totalCategoryList" @click="ps.currentCategory = item"><a href="#">{{
+                item
+            }}</a></li>
         </ul>
     </aside>
 
@@ -33,25 +38,30 @@ const ps = productStore();
     display: flex;
     justify-content: center;
 
-    ul.productBar {
-        display: flex;
-        flex-direction: column;
-        padding-top: 2rem;
+    ul {
+        background-color: #e5e5e5;
+        margin-top: 2rem;
+        width: 90%;
+        height: fit-content;
+        border-radius: 5px;
+
+        li:first-child {
+            border-bottom: 1px solid var(--black);
+        }
+
+        li:first-child~li:not(:last-child) {
+            border-bottom: 1px solid var(--grey-mute);
+        }
 
         li {
-            padding: 0 2rem;
-            background-color: var(--grey);
-
-            a {
-                text-decoration: none;
-                color: rgb(25, 25, 25);
-                font-size: 1rem;
-            }
+            font-size: 1.2rem;
+            padding: 0.5rem 1rem;
         }
-    }
 
-    ul>p {
-        font-size: var(--text-m);
+        li:not(:first-child):hover {
+            background-color: rgb(243, 242, 242);
+            cursor: pointer;
+        }
     }
 }
 
@@ -61,24 +71,31 @@ const ps = productStore();
     width: 1.6rem;
     height: 1.6rem;
     background-color: var(--grey);
-    // border-radius: 0 0 5px 5px;
     border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 2rem;
-
+    cursor: pointer;
 }
 
 .cancel-btn {
     text-align: right;
     padding-right: 0.5rem;
     margin-top: 0.4rem;
+
+    .icon {
+        cursor: pointer;
+    }
 }
 
 #aside-btn:checked~.aside {
+
     display: block;
     position: fixed;
+    min-width: 150px;
+    top: 0px;
+    z-index: 999;
     height: 100%;
     background-color: var(--white-soft);
 
@@ -86,11 +103,17 @@ const ps = productStore();
         display: block;
     }
 
-    ul.productBar {
 
+    ul.productBar {
         padding-top: 0;
+        margin: 3rem auto;
     }
 }
+
+#aside-btn:checked~label .aside-btn {
+    display: none;
+}
+
 
 #aside-btn,
 .aside-btn,
@@ -101,6 +124,7 @@ const ps = productStore();
 @media only screen and (max-width: 960px) {
     .aside {
         display: none;
+
     }
 
     .aside-btn {

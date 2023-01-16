@@ -2,10 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ProductView from '../views/ProductView.vue'
 import admin from '../views/admin.vue'
-import addproduct from  '../views/adminAddProduct.vue'
+import addproduct from '../views/adminAddProduct.vue'
 import shoppingCart from '../views/shoppingCart.vue'
 import editproduct from '../views/editProduct.vue'
-import ordermanage from '../views/adminOrderManage.vue'
+// import ordermanage from '../views/adminOrderManage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,16 +50,9 @@ const router = createRouter({
       component: () => import("../views/OrderView.vue"),
     },
     {
-
-      path: "/:category/:productInfoID",
-      name: "product",
-      component: ProductView,
-
       path: '/:category/:productInfoNum/:productInfoID',
       name: 'product',
       component: ProductView
-
-
     },
     {
       path: "/shoppingCart",
@@ -100,15 +93,16 @@ const router = createRouter({
 
     },
 
-    {
-      path: '/admin/ordermanage',
-      name: 'ordermanage',
-      component: ordermanage
+    // {
+    //   path: '/admin/ordermanage',
+    //   name: 'ordermanage',
+    //   component: ordermanage
 
-    }
-    
+    // }
 
-    ]},
-  )
+
+  ]
+},
+)
 
 export default router;

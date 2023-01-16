@@ -9,13 +9,13 @@ async function addProduct(tableColumns, values) {
     let target = `INSERT INTO product ( ${tableColumns} ) VALUES (${values})`;
     // console.log(target);
     await global.db_pool.query(target);
-  } catch (error) {}
+  } catch (error) { }
 }
 async function addProductDetail(tableColumns, values) {
   try {
     let target = `INSERT INTO productDetail ( ${tableColumns} ) VALUES (${values}) `;
     await global.db_pool.query(target);
-  } catch (error) {}
+  } catch (error) { }
 }
 
 //查找商品種類類型、各類型的總量******
@@ -37,9 +37,8 @@ async function product_amount() {
 //搜尋商品，按照頁數列出對應的資料筆數(測試OK)
 //select_where_order_limit
 async function getProduct(category, page) {
-  let target = `SELECT * FROM product WHERE category='${category}' ORDER BY productNum LIMIT ${
-    (page - 1) * pageLimit
-  } , ${pageLimit}`;
+  let target = `SELECT * FROM product WHERE category='${category}' ORDER BY productNum LIMIT ${(page - 1) * pageLimit
+    } , ${pageLimit}`;
   console.log(target);
   const [result, fields] = await global.db_pool.query(target);
   console.log(result);
@@ -79,9 +78,8 @@ async function getProductDetail(product_id) {
 //select_where_order_limit
 async function getProduct_order(category, page, order) {
   try {
-    let target = `SELECT * FROM product WHERE category='${category}' ORDER BY price ${order} LIMIT ${
-      (page - 1) * pageLimit
-    },${pageLimit} `;
+    let target = `SELECT * FROM product WHERE category='${category}' ORDER BY price ${order} LIMIT ${(page - 1) * pageLimit
+      },${pageLimit} `;
     console.log(target);
     const [result, field] = await global.db_pool.query(target);
     console.log(result);
@@ -126,7 +124,7 @@ function generateFakeData() {
         productsDetail[key].img,
       ]);
     }
-  } catch (error) {}
+  } catch (error) { }
 }
 
 //新增假資料DETAIL進去資料庫還沒做

@@ -3,7 +3,8 @@ import { defineProps, defineEmits } from 'vue';
 
 const props = defineProps({
     show: Boolean,
-    ifPass: Boolean
+    ifPass: Boolean,
+    message: String
 })
 const emit = defineEmits(["close"]);
 
@@ -17,12 +18,10 @@ const emit = defineEmits(["close"]);
                     <div class="meg-icon">
                         <font-awesome-icon v-if="!ifPass" id="no-pass" icon="fas-regular fa-circle-xmark" size="4x" />
                         <font-awesome-icon v-if="ifPass" id="pass" icon="fas-regular fa-circle-check" size="4x" />
-
-                        <slot name="icon"></slot>
                     </div>
 
                     <div class="message">
-                        <slot name="meg"></slot>
+                        {{ props.message }}
                     </div>
 
                     <div class="meg-btn">
