@@ -46,7 +46,7 @@ async function getCart(user_id) {
 }
 async function getCartItem(cart_id) {
   try {
-    let target = `SELECT * FROM (select * from cart_item where cart_id= ${cart_id}) as a LEFT JOIN productDetail USING(product_id) LEFT JOIN product USING(category,productNum)`;
+    let target = `SELECT *,product.*,product.product_id as id, productDetail.* FROM (select * from cart_item where cart_id= ${cart_id}) as a LEFT JOIN productDetail USING(product_id) LEFT JOIN product USING(category,productNum)`;
     // let target = `SELECT * FROM (select * from cart_item where cart_id=${cart_id}) as a LEFT JOIN productDetail as b ON a.product_id = b.product_id`;
     const [result, fields] = await global.db_pool.query(target);
     console.log(result);

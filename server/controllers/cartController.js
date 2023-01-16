@@ -29,6 +29,7 @@ const cartController = {
       const result2 = await cart_M.getCartTotalPrice(cart_id[0].id);
       console.log([result1, result2]); //[搜尋結果，總金額]
       res.json([result1, result2]);
+      //console.log([result1, result2]);
     } catch (error) {
       console.log(error);
       next(error);

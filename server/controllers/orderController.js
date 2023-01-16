@@ -57,6 +57,7 @@ const orderController = {
       console.log("cart_items", cart_items);
       // 確認各項內容物庫存
       const { check_result, inventory_cal } = checkInventory(cart_items);
+      //console.log("inventory_cal", inventory_cal);
       if (check_result.length != 0) {
         // 如果庫存不足回傳error code:500及相關資訊
         throw { message: "庫存不足", data: check_result };
