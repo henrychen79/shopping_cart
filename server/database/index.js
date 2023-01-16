@@ -6,6 +6,6 @@ const initilize = async () => {
   await initSchema(dataBaseConnection, dataBaseConfig.database);
   //創建連接池, 全局共用
   global.db_pool = mysql.createPool(dataBaseConfig);
-  //require("../models").initDatabase();
+  require("../models").initDatabase();
 };
 initilize();

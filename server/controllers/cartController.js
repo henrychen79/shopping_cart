@@ -3,7 +3,7 @@ const cartController = {
   addToCartItem: async (req, res, next) => {
     try {
       const { user_id, product_id, quantity } = req.body;
-      // console.log(req.body);
+      console.log('這裡'+req.body.product_id);
       console.log(user_id, product_id, quantity);
       const cart_id = await cart_M.getCart(user_id);
       console.log(cart_id);

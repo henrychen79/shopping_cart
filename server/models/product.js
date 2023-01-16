@@ -7,11 +7,9 @@ const pageLimit = 6;
 async function addProduct(tableColumns, values) {
   try {
     let target = `INSERT INTO product ( ${tableColumns} ) VALUES (${values})`;
-    console.log(target);
+    // console.log(target);
     await global.db_pool.query(target);
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {  }
 }
 async function addProductDetail(tableColumns, values) {
   try {
@@ -64,7 +62,8 @@ async function getSpecificiProduct(product_id) {
 
 async function getProductDetail(product_id) {
   try {
-    let target = `SELECT product.*, productDetail.*,productDetail.product_id as id FROM product LEFT JOIN productDetail USING(category,productNum) WHERE product.product_id = '${product_id}'`;
+    let target = `SELECT product.* ,pD.detail, pD.inventory, pD.img FROM product LEFT JOIN productDetail as pD USING(category,productNum) WHERE product.product_id = '${product_id}'`;
+    console.log(target);
     console.log(target);
     const [result, fields] = await global.db_pool.query(target);
     console.log(result);
@@ -107,6 +106,7 @@ async function updateInventory(product_id, quantity) {
 /**********************************以下為假資料**********************************************/
 //利用假資料新增進資料庫
 function generateFakeData() {
+  try {
   for (const key in products) {
     addProduct(table.product.columnName, [
       products[key].productNum,
@@ -125,7 +125,10 @@ function generateFakeData() {
       productsDetail[key].img,
     ]);
   }
+  } catch (error) {
+  }
 }
+
 
 //新增假資料DETAIL進去資料庫還沒做
 /**********************************以上為假資料**********************************************/

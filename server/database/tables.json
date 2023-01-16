@@ -36,7 +36,7 @@
   },
   "orderDetail": {
     "name": "orderdetail",
-    "columns": "`id` INT NOT NULL AUTO_INCREMENT, `order_id` INT NOT NULL, `product_name` VARCHAR(45) NOT NULL,`prize` INT NOT NULL,`amount` INT NOT NULL DEFAULT 1,PRIMARY KEY (`id`),INDEX `order_id_idx` (`order_id` ASC) VISIBLE,CONSTRAINT `order_id`FOREIGN KEY (`order_id`) REFERENCES `shopping_cart1111`.`orderlist` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION",
+    "columns": "`id` INT NOT NULL AUTO_INCREMENT, `order_id` INT NOT NULL, `product_name` VARCHAR(45) NOT NULL,`prize` INT NOT NULL,`amount` INT NOT NULL DEFAULT 1,PRIMARY KEY (`id`),INDEX `order_id_idx` (`order_id` ASC) VISIBLE,CONSTRAINT `order_id`FOREIGN KEY (`order_id`) REFERENCES `orderlist` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION",
     "columnName": "orderNum, productNum"
   }
 }
