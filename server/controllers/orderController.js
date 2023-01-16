@@ -31,12 +31,19 @@ function checkInventory(cart_items) {
   let inventory_cal = {};
   let check_result = cart_items.filter((val, idx) => {
     let inventory = 0;
-    if (inventory_cal[val.product_id])
-      inventory = inventory_cal[val.product_id];
-    inventory_cal[val.product_id] = inventory + val.quantity;
-    return inventory_cal[val.product_id] > val.inventory;
+    if (inventory_cal[val.pdid]) inventory = inventory_cal[val.pdid];
+    inventory_cal[val.pdid] = inventory + val.quantity;
+    return inventory_cal[val.pdid] > val.inventory;
   });
   return { check_result, inventory_cal };
+}
+
+function sendOrderInfoEmail(address, data) {
+  const email = address;
+  const subject = `[TEST]射射購物 訂單號碼:${data.order_number} 成立 請把握時間付款`;
+  const status = "未出貨 / 未付款";
+  const msg = "請點擊付款連結 ";
+  sendMail(email, subject, orderMail(data, status, msg));
 }
 const orderController = {
   createOrder: async (req, res, next) => {
@@ -90,11 +97,8 @@ const orderController = {
       // 清空購物車
       const delCart = await cart_M.delAllCartItem(cart_id[0].id);
       state = "delete_all_cart_item_done";
-      const email = "cindy81121116@gmail.com";
-      const subject = `[TEST]射射購物 訂單號碼:${data.order_number} 成立 請把握時間付款`;
-      const status = "未出貨 / 未付款";
-      const msg = "請點擊付款連結並使用測試信用卡付款! 感謝配合!";
-      sendMail(email, subject, orderMail(data, status, msg));
+      // 寄發訂單email
+      sendOrderInfoEmail("s1990050479@gmail.com", data);
       res.json({ message: "創建訂單成功", data: data });
     } catch (error) {
       next(error);

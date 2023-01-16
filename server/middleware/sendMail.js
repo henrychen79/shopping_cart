@@ -76,7 +76,7 @@ function orderMail(order, status, msg) {
             </tr>
           </tbody>
           </table>
-          <p>${msg}</p>
+          <p>${msg} <a href="http://localhost:8080">here</a> 感謝配合!</p>
         </div>
       </body>
     </html>
