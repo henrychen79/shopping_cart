@@ -8,15 +8,12 @@ const memberCenterController = {
       let newNickname = req.body.newNickname;
       console.log("帳號：" + accountName);
       console.log("新暱稱：" + newNickname);
-      memberCenter_M
-        .update_nickname(req.user.account, newNickname)
-        .then((ret) => {
-          if (ret.status === "false") {
-            res.json({ message: false });
-          } else {
-            res.json({ message: true });
-          }
-        });
+      const update_result = memberCenter_M.update_nickname(
+        req.user.account,
+        newNickname
+      );
+      if (!update_result) return res.json(res_data.modify_nickname_fail);
+      return res.json({ status: 200, msg: "修改暱稱成功" });
     } catch (e) {
       return next(e);
     }
@@ -43,8 +40,8 @@ const memberCenterController = {
         newPassword
       );
       console.log(update_result);
-      if (!update_result) res.res();
-      res.json({ status: 200, msg: "修改密碼成功" });
+      if (!update_result) return res.json(res_data.modify_password_fail);
+      return res.json({ status: 200, msg: "修改密碼成功" });
     } catch (error) {
       console.log("updatePassword err::", error);
       return next(error);
