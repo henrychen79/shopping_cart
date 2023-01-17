@@ -11,4 +11,17 @@ const loginAccount = async (body_data) => {
   return await send_api("/user/login", "POST", body_data);
 };
 
-export { registerAccount, checkAccountExist, loginAccount };
+const forgetPassword = async (body_data) => {
+  return await send_api("/user/forgetPassword", "POST", body_data);
+};
+
+const updatePassword = async (body_data) => {
+  return await send_api("/user/updatePassword", "POST", body_data);
+};
+export {
+  registerAccount,
+  checkAccountExist,
+  loginAccount,
+  forgetPassword,
+  updatePassword,
+};
