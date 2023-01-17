@@ -6,8 +6,6 @@ const paramData = defineProps({
   urlData: Object,
 });
 
-const fetchURL = "http://127.0.0.1:8080";
-
 const imgURL = ref("");
 
 watchEffect(() => {
@@ -15,7 +13,7 @@ watchEffect(() => {
     productImage(
       paramData.imgData.category,
       paramData.imgData.productInfoNum,
-      "thumbnail"
+      "original"
     )
       .then(function (res) {
         // 將 blog 物件轉為 url

@@ -1,18 +1,20 @@
 <script setup>
 import { computed, ref } from "vue"
+import { cartStore } from "../../stores/cartStore";
 
+const cs = cartStore();
 </script>
 
 <template>
     <div class="order">
         <div class="order-massage">
-            <p>您的訂單已成立,訂單編號為<span>00001</span>
+            <p>您的訂單已成立,訂單編號為<span>{{ cs.order_number }}</span>
                 <br>商品將於7-14個工作天內送達,
                 <br>我們將盡速為您安排出貨,謝謝
             </p>
         </div>
         <div>
-            <button>回首頁</button>
+            <router-link to="/" class="btn">回首頁</router-link>
         </div>
     </div>
 </template>
@@ -28,6 +30,10 @@ div.order {
 
     .order-massage {
         padding: 1rem 2rem;
+
+        p {
+            font-size: 1.5rem;
+        }
     }
 
     div {
@@ -37,7 +43,10 @@ div.order {
         justify-content: space-between;
     }
 
-    div button {
+    div .btn {
+        padding: 0.5rem;
+        border-radius: 5px;
+        background-color: var(--grey);
         margin-left: auto;
     }
 

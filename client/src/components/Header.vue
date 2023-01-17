@@ -7,7 +7,9 @@ const us = useloginStore();
 <template>
   <header>
     <div id="logo">
-      <img src="" alt="" />
+      <router-link to="/">
+        <h1>BOWA</h1>
+      </router-link>
     </div>
     <ul class="headerBar">
       <li v-if="!us.islogin">你好 顧客!</li>
@@ -67,6 +69,12 @@ header {
       color: rgb(25, 25, 25);
     }
   }
+}
+
+h1 {
+  margin: 0 1rem;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  cursor: pointer;
 }
 
 header ul.headerBar-mobile {
