@@ -23,8 +23,8 @@ if (orderStore.orderList === undefined) {
                 <div class="content">
                     <p>訂單編號:{{ item.order_number }}</p>
                     <div>
-                        訂單內容:<p class="ttt" v-for="(test) in item.product_list" product_name>{{ test.product_name }},
-                        </p>
+                        訂單內容:
+                        <p class="ttt" v-for="(test) in item.product_list" product_name>{{ `${test.product_name},`}}</p>
                     </div>
                     <p>訂單時間:{{ item.order_time }}</p>
                     <p>訂單金額:${{ item.order_prize }}</p>

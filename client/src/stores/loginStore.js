@@ -82,11 +82,33 @@ export const useloginStore = defineStore("loginStore", () => {
     //         console.error('Error:', error);
     //     });
   };
+  const logout = ()=>{
+    //會將cookie砍掉
+    let time = new Date();
+    let myCookie = document.cookie.replace(/(?:(?:^|.*;\s*)_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    time.setTime(time.getTime() - 1);
+    document.cookie = '_token' + "=" + myCookie + ";expires=" + time.toGMTString()+";path=/"
+    if(document.cookie===''){
+      alert('已登出')
+      islogin.value = false;
+    }
+  }
+  const loginShow = ()=>{
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    console.log(router.push)
+    if(token===''){
+      islogin.value = false;
+    }else{
+      islogin.value = true;
+    }
+  }
 
   return {
     login,
     warmView,
     test,
+    logout,
+loginShow,
     userData,
     loginwarmText,
     show,

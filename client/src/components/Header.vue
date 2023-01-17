@@ -2,6 +2,7 @@
 import { ref, watch } from "@vue/runtime-core";
 import { useloginStore } from "../stores/loginStore";
 const us = useloginStore();
+us.loginShow()
 </script>
 
 <template>
@@ -15,7 +16,7 @@ const us = useloginStore();
       <li v-if="!us.islogin">你好 顧客!</li>
       <li v-else>你好 {{ us.nickname }}!</li>
       <li v-if="!us.islogin"><router-link to="/login">登入</router-link></li>
-      <li v-else>登出</li>
+      <li v-else v-on:click="us.logout">登出</li>
       <li><router-link to="/register">註冊</router-link></li>
       <li><router-link to="/member">會員中心</router-link></li>
       <li><router-link to="/order">訂單查詢</router-link></li>
