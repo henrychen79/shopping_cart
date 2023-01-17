@@ -58,7 +58,7 @@ const orderController = {
         throw { message: error.details[0].message };
       }
       // 取得使用者對應的購物車ID
-      const cart_id = await cart_M.getCart(data.user_id);
+      const cart_id = await cart_M.getCart(req.user.user_id);
       // 取得上述購物車ID下所有的購物車內容物
       const cart_items = await cart_M.getCartItem(cart_id[0].id);
       // console.log("cart_items", cart_items);
@@ -98,7 +98,7 @@ const orderController = {
       const delCart = await cart_M.delAllCartItem(cart_id[0].id);
       state = "delete_all_cart_item_done";
       // 寄發訂單email
-      sendOrderInfoEmail("s1990050479@gmail.com", data);
+      sendOrderInfoEmail(req.user.account, data);
       res.json({ message: "創建訂單成功", data: data });
     } catch (error) {
       next(error);
@@ -107,7 +107,7 @@ const orderController = {
   getOrderList: async (req, res, next) => {
     try {
       const { user_id } = req.params;
-      const result = await order_M.getOrderList(user_id);
+      const result = await order_M.getOrderList(req.user.user_id);
       res.json(result);
     } catch (error) {
       next(error);
