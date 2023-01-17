@@ -2,8 +2,7 @@
 import { ref, reactive, defineProps, defineEmits } from "vue";
 import { cartStore } from "../../stores/cartStore";
 import { setCartImg, delFromCart } from "../../apis/cart_api";
-import popUp from "../popUp.vue"
-
+import popUp from "../popUp.vue";
 
 const cs = cartStore();
 
@@ -19,11 +18,14 @@ const imgURL = ref("");
 
 const showModal = ref(false);
 const pass = ref(false);
-const message = ref('');
-
+const message = ref("");
 
 const productImg = async () => {
-  let data = await setCartImg(paramData.imgData.category, paramData.imgData.productInfoID, "thumbnail")
+  let data = await setCartImg(
+    paramData.imgData.category,
+    paramData.imgData.productInfoID,
+    "original"
+  )
     .then(function (res) {
       imgURL.value = URL.createObjectURL(res);
       return res;
@@ -39,17 +41,16 @@ const delData = reactive({
 });
 //移除購物車
 const delCart = async () => {
-
   let data = await delFromCart(JSON.stringify(delData))
     .then(function (res) {
       showModal.value = true;
-      message.value = '移除購物車成功'
+      message.value = "移除購物車成功";
       pass.value = true;
 
       return res;
     })
     .catch((error) => {
-      message.value = '移除購物車失敗'
+      message.value = "移除購物車失敗";
       pass.value = false;
       showModal.value = true;
       console.error("delCartError:", error);
@@ -61,9 +62,7 @@ const deleteItem = () => {
   if (pass.value === true) {
     emit("delbtn");
   }
-}
-
-
+};
 </script>
 
 <template>
@@ -83,7 +82,12 @@ const deleteItem = () => {
     </td>
   </tr>
 
-  <popUp :show="showModal" :ifPass="pass" :message="message" @close="deleteItem" />
+  <popUp
+    :show="showModal"
+    :ifPass="pass"
+    :message="message"
+    @close="deleteItem"
+  />
 </template>
 
 <style scoped lang="scss">
