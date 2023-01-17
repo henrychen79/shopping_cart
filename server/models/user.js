@@ -1,6 +1,7 @@
 // const db = require("../data/testDatabase");//測試單頁js用
 const table = require("../database/tables.json");
 const users = require("../database/fake_user.json");
+const { object } = require("joi");
 /**********************************以下為假資料**********************************************/
 //（測試用OK）將假的用戶資料創建進去表單中
 async function insertFakeUser(tableColumns, values) {
@@ -8,9 +9,17 @@ async function insertFakeUser(tableColumns, values) {
     let target = `INSERT INTO user ( ${tableColumns} ) VALUES (${values}) `;
     await global.db_pool.query(target);
   } catch (error) {
-    // console.log(error);
+    console.log(error);
   }
-}
+};
+async function insertFakeCart(int) {
+  try {
+    let target = `INSERT INTO cart (user_id) VALUES ('${int}')`;
+    await global.db_pool.query(target);
+  } catch (error) {
+    console.log(error);
+  }
+};
 function creatFakeData() {
   try {
     for (const key in users) {
@@ -20,10 +29,13 @@ function creatFakeData() {
         users[key].password,
         users[key].nickname,
       ]);
+    };
+    console.log(Object.keys(users).length);
+    for (let i = 1; i < Object.keys(users).length+1; i++) {
+      insertFakeCart(i);
     }
   } catch (error) {}
-}
-// creatFakeData()
+};
 /**********************************以上為假資料**********************************************/
 
 /**********************************以下為串接ＯＫ**********************************************/
@@ -44,7 +56,7 @@ async function check_account(accountName) {
     console.log("fail", error);
     return { status: "fail", result: error };
   }
-}
+};
 
 async function get_user(accountName) {
   console.log("get_user測試", accountName);
@@ -57,7 +69,7 @@ async function get_user(accountName) {
     console.log("fail", error);
     return [];
   }
-}
+};
 // check_account("'rec@gmail.com'");//存在回傳[{account:'帳號名稱'}]  不存在回傳[]
 
 //成功註冊到會員表單DB（測試OK）
@@ -70,7 +82,7 @@ async function register(values, resolve, reject) {
   } catch (error) {
     return { status: "fail", result: error };
   }
-}
+};
 // signup(["'member'","'emma@gmail.com'", "'aaaa1111'", "'EMMA'"]);
 
 //登入會員（測試ＯＫ）

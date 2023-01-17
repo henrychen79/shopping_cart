@@ -1,135 +1,135 @@
 {
     "p00101":{
-        "productNum":"'001'",
+        "productNum":"'1'",
         "category":"'001'",
         "name":"張歆偊'",
-        "thumbnail":"'img001'",
+        "thumbnail":"'img00101'",
         "price":"'50000'"
     },
     "p00102":{
-        "productNum":"'002'",
+        "productNum":"'2'",
         "category":"'001'",
         "name":"'高煜軒'",
-        "thumbnail":"'img002'",
+        "thumbnail":"'img00102'",
         "price":"'3'"
     },
     "p00103":{
-        "productNum":"'003'",
+        "productNum":"'3'",
         "category":"'001'",
         "name":"'郭力源'",
-        "thumbnail":"'img003'",
+        "thumbnail":"'img00103'",
         "price":"'50000'"
     },
     "p00104":{
-        "productNum":"'004'",
+        "productNum":"'4'",
         "category":"'001'",
         "name":"'戴龍年'",
-        "thumbnail":"'img004'",
+        "thumbnail":"'img00104'",
         "price":"'50000'"
     },
     "p00105":{
-        "productNum":"'005'",
+        "productNum":"'5'",
         "category":"'001'",
         "name":"'陳建銘'",
-        "thumbnail":"'img005'",
+        "thumbnail":"'img00105'",
         "price":"'50000'"
     },
     "p00106":{
-        "productNum":"'006'",
+        "productNum":"'6'",
         "category":"'001'",
         "name":"'劉家翔'",
-        "thumbnail":"'img006'",
+        "thumbnail":"'img00106'",
         "price":"'9'"
     },
     "p00107":{
-        "productNum":"'007'",
+        "productNum":"'7'",
         "category":"'001'",
         "name":"'王延融'",
-        "thumbnail":"'img007'",
+        "thumbnail":"'img00107'",
         "price":"'50000'"
     },
     "p00108":{
-        "productNum":"'008'",
+        "productNum":"'8'",
         "category":"'001'",
         "name":"'陳思銘'",
-        "thumbnail":"'img008'",
+        "thumbnail":"'img00108'",
         "price":"'666'"
     },
     "p00109":{
-        "productNum":"'009'",
+        "productNum":"'9'",
         "category":"'001'",
         "name":"'劉昱駿'",
-        "thumbnail":"'img009'",
+        "thumbnail":"'img00109'",
         "price":"'50000'"
     },
     "p00110":{
-        "productNum":"'010'",
+        "productNum":"'10'",
         "category":"'001'",
         "name":"'黃永煌'",
-        "thumbnail":"'img010'",
+        "thumbnail":"'img00110'",
         "price":"'5999'"
     },
     "p00111":{
-        "productNum":"'011'",
+        "productNum":"'11'",
         "category":"'001'",
         "name":"'炫徵'",
-        "thumbnail":"'img011'",
+        "thumbnail":"'img00111'",
         "price":"'585'"
     },
     "p00201":{
-        "productNum":"'001'",
+        "productNum":"'1'",
         "category":"'002'",
         "name":"'亨利'",
-        "thumbnail":"'img016'",
+        "thumbnail":"'img00201'",
         "price":"'100000'"
     },
     "p00202":{
-        "productNum":"'002'",
+        "productNum":"'2'",
         "category":"'002'",
         "name":"'妹妹'",
-        "thumbnail":"'img017'",
+        "thumbnail":"'img00202'",
         "price":"'50000'"
     },
     "p00203":{
-        "productNum":"'003'",
+        "productNum":"'3'",
         "category":"'002'",
         "name":"'菘'",
-        "thumbnail":"'img018'",
+        "thumbnail":"'img00203'",
         "price":"'200000'"
     },
     "p00204":{
-        "productNum":"'004'",
+        "productNum":"'4'",
         "category":"'002'",
         "name":"'之梃'",
-        "thumbnail":"'img019'",
+        "thumbnail":"'img00204'",
         "price":"'55688'"
     },
     "p00205":{
-        "productNum":"'005'",
+        "productNum":"'5'",
         "category":"'002'",
         "name":"'Emma'",
-        "thumbnail":"'img019'",
+        "thumbnail":"'img00205'",
         "price":"'1'"
     },
     "p00301":{
-        "productNum":"'001'",
+        "productNum":"'1'",
         "category":"'003'",
         "name":"'J-Tien'",
-        "thumbnail":"'img019'",
+        "thumbnail":"'img00301'",
         "price":"'58585888'"
     },
     "p00302":{
-        "productNum":"'002'",
+        "productNum":"'2'",
         "category":"'003'",
         "name":"'PAUL'",
-        "thumbnail":"'img019'",
+        "thumbnail":"'img0302'",
         "price":"'66666666'"
     },
     "p00303":{
-        "productNum":"'003'",
+        "productNum":"'3'",
         "category":"'003'",
         "name":"'顯哥'",
-        "thumbnail":"'img019'",
+        "thumbnail":"'img00303'",
         "price":"'66666666'"
     }
 }

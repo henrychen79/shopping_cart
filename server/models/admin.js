@@ -59,8 +59,6 @@ async function addProduct(data){
   }
 };
 
-
-
 //更新商品ＯＫ0116
 async function update_product(data) {
   try {
@@ -104,7 +102,7 @@ async function update_price(product_id, newPrice) {
   } catch (error) {
     return "更新價格失敗";
   }
-}
+};
 //單純修改庫存量ＯＫ0116
 async function update_inventory(product_id, newInventory) {
   try {
@@ -134,7 +132,7 @@ async function delete_product(product_id){
 
 
 
-//查找所有訂單OK
+//查找所有訂單ＯＫ0116
 async function getAllOrders() {
   try {
     
@@ -156,9 +154,8 @@ async function getAllOrders() {
     }
     return result1;
   } catch (error) {console.log(error);}
-}
-
-//編輯訂單出貨狀態
+};
+//編輯訂單出貨狀態ＯＫ0116
 async function update_deliver(data) {
   try {
     let target = `UPDATE orderList SET deliver_status = '${data.deliver_status}' WHERE order_number = '${data.order_number}'`;
@@ -168,8 +165,8 @@ async function update_deliver(data) {
   } catch (error) {
     return "更新出貨狀態失敗";
   }
-}
-//編輯訂單付款狀態
+};
+//編輯訂單付款狀態ＯＫ0116
 async function update_pay(data) {
   try {
     let target = `UPDATE orderList SET pay_status = '${data.pay_status}' WHERE order_number = '${data.order_number}'`;
@@ -179,9 +176,12 @@ async function update_pay(data) {
   } catch (error) {
     return "更新付款狀態失敗";
   }
-}
+};
 
-//查找所有用戶
+
+
+
+//查找所有用戶ＯＫ0116
 async function getAllUsers() {
   try {
     //少給全部會員總量，讓前端可以產生頁數

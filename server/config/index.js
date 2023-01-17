@@ -1,14 +1,14 @@
 module.exports = {
   dataBaseConnection: {
     user: "root",
-    password: "3345678",
+    // password: "3345678",
     host: "localhost",
   },
   dataBaseConfig: {
     // host: "localhost",
     user: "root",
     // password: "3345678",
-    password: "3345678",
+    // password: "3345678",
     host: "localhost",
     // user: "henrychen",
     // password: "h6760903",
