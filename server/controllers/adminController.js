@@ -6,6 +6,7 @@ const THUMBNAIL_SIZE = process.env.THUMBNAIL_SIZE.split(",");
 const adminController = {
   uploadImage: async (req, res, next) => {
     try {
+      console.log(req.file);
       await sharp(req.file.path)
         .resize({
           width: parseInt(THUMBNAIL_SIZE[0]),
