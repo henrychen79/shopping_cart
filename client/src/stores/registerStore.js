@@ -149,6 +149,8 @@ export const useRegisterStore = defineStore("RegisterStore", () => {
       registOpen.value = true;
       console.log("不重複", accountError.value);
     }
+    AccountText();
+    AccountRe();
   };
   //將資料打進去後台server
   const registerButton = () => {
