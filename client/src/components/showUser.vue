@@ -9,7 +9,7 @@ us.fetchUser();
 <template>
     <h1>用戶管理</h1>
     <div class="user">
-        <div class="user-item" v-for="(item, index) in us.userDetail" >
+        <div class="user-item" v-for="(item, index) in us.userDetail" :key="item" >
             <div class="user-item-detail">
                 <p>用戶帳號:{{ item.account }}</p>
             </div>

@@ -7,13 +7,13 @@ const os = orderStore();
 
 <template>
     <div class="order">
-        <div class="order-item" v-for="(item, index) in os.orderDetail" >
+        <div class="order-item" v-for="(item, index) in os.orderDetail" :key="item" >
             <div class="item-detail">
                 <p>訂單編號:{{ item.order_number }}</p>
                 <div class="order-product">
                     <p>訂單內容:</p>
                     <div class="products">
-                        <p v-for="(detail, index) in item.items">{{ detail.product_name }}</p>
+                        <p v-for="(detail, index) in item.items" :key="detail">{{ detail.product_name }}</p>
                     </div>
                 </div>
                 <p>訂單金額:{{ item.order_prize }}</p>

@@ -1,9 +1,11 @@
 <script setup>
 import { ref, defineProps, defineEmits} from 'vue'
 import {adminProductStore} from "../stores/adminProductStore"
-const aps = adminProductStore()
+import {addProductStore} from "../stores/addProductStore"
+const addProduct = addProductStore();;
+addProduct.getCategory();
 
-
+const aps = adminProductStore();
 </script>
 
 <template>
@@ -15,8 +17,7 @@ const aps = adminProductStore()
                  <p>僅搜尋商品種類:</p>
                  <select v-model="aps.fetchCategory1">
                     <option disabled value="">商品類別</option>
-                    <option>001</option>
-                    <option>002</option>
+                    <option v-for="(item, index) in addProduct.productCategory" :key="item">{{ item.category }}</option>
                  </select>
                  <button @click="aps.getDetail">搜尋</button>
              </div>
@@ -24,8 +25,7 @@ const aps = adminProductStore()
                  <p>搜尋商品種類&編號:</p>
                  <select v-model="aps.fetchCategory2" >
                     <option disabled value="">商品類別</option>
-                    <option>001</option>
-                    <option>002</option>
+                    <option v-for="(item, index) in addProduct.productCategory" :key="item">{{ item.category }}</option>
                  </select>
                  <input v-model="aps.fetchProductNum" placeholder="請輸入商品編號" >
                  <button @click="aps.getTwoDetails" >搜尋</button>

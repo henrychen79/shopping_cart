@@ -1,9 +1,16 @@
 import { defineStore } from 'pinia'
 import{ref,reactive,computed} from "vue"
 import router from '../router/index'
+import axios from 'axios'
 
 
 export const editProductStore = defineStore('editProductStore',()=>{
+
+    let file = ref('')
+    const dealfilechange = (e) => {
+        file = e.target.files[0];
+      }
+
     console.log(router)
     //存取admin輸入的資料
     let data=reactive({
@@ -16,6 +23,17 @@ export const editProductStore = defineStore('editProductStore',()=>{
         detail:'',
         img:''
     })
+
+    const uploadImg=()=>{
+        let param = new FormData();
+        param.append("image", file);
+        console.log(param.get('file'));
+        let config = { headers: { "Content-Type": "multipart/form-data" } }
+        axios.post(`http://172.20.10.4:8080/api/admin/uploadImage?category_id=${data.category}&product_id=${data.productNum}`,param,config)
+                .then(response=>{
+                  console.log(response.data);
+                })
+    }
 
 
 
@@ -127,6 +145,6 @@ export const editProductStore = defineStore('editProductStore',()=>{
 
     return{
         data,
-        edit,update,updatePrice,updateInventory
+        edit,update,updatePrice,updateInventory,uploadImg
     }
 })

@@ -1,13 +1,18 @@
 <script setup>
-import { ref,reactive ,computed,watch} from 'vue';
+import { ref, reactive , computed, watch } from 'vue';
 import {addProductStore} from "../stores/addProductStore"
-const addProduct = addProductStore();
+const addProduct = addProductStore();;
+addProduct.getCategory();
 
 let canSubmit = true
 
 watch(()=>{
     canSubmit = Object.values(addProduct.data).some(i=>i==="")
 })
+
+
+
+
 </script>
 
 <template>
@@ -18,8 +23,7 @@ watch(()=>{
                 <p>商品類別</p>
                 <select v-model="addProduct.data.category" >
                 <option disabled value="">商品類別</option>
-                <option>001</option>
-                <option>002</option>
+                <option v-for="(item, index) in addProduct.productCategory" :key="item">{{ item.category }}</option>
                  </select>
             </div>
             <div class="form_item">
@@ -32,7 +36,8 @@ watch(()=>{
             </div>
             <div class="form_item">
                 <p>商品圖片</p>
-                <input type="file" class="upload" name="imgUpload"   />
+                <input type="file" class="upload" name="imgUpload" accept="image/png, image/jpeg"  @change="addProduct.dealfilechange" />
+                <button @click="addProduct.uploadImg">上傳</button>
             </div>
             <div class="form_item">
                 <p>商品價格</p>
@@ -48,7 +53,7 @@ watch(()=>{
             </div>
             <div class="form_item">
                 <button v-on:click="addProduct.add" :disabled="canSubmit">儲存</button>
-                <button>取消</button>
+                <a href="/admin"><button>回前頁</button></a>
             </div>
         </div>
     </div>

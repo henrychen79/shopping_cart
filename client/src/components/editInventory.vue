@@ -12,7 +12,6 @@ const props = defineProps(["value"]);
         <input v-model="eps.data.inventory" class="newInventInput" placeholder="請輸入新庫存" />
         <div class="save">
             <button @click="eps.updateInventory(props.value)">儲存</button>
-            <button>取消</button>
         </div>
     </div>
 

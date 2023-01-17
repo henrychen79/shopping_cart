@@ -3,6 +3,9 @@ import { ref, reactive, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { editProductStore } from "../stores/editProductStore"
 import router from '../router';
+import {addProductStore} from "../stores/addProductStore"
+const addProduct = addProductStore();;
+addProduct.getCategory();
 
 const editProduct = editProductStore()
 
@@ -19,8 +22,7 @@ console.log(editProduct.data)
                 <p>商品類別</p>
                 <select v-model="editProduct.data.category" disabled>
                     <option disabled value="">商品類別</option>
-                    <option>001</option>
-                    <option>002</option>
+                    <option v-for="(item, index) in addProduct.productCategory" :key="item">{{ item.category }}</option>
                 </select>
             </div>
             <div class="form_item">
@@ -33,7 +35,8 @@ console.log(editProduct.data)
             </div>
             <div class="form_item">
                 <p>商品圖片</p>
-                <input type="file" class="upload" name="imgUpload"   />
+                <input type="file" class="upload" name="imgUpload" accept="image/png, image/jpeg"  @change="editProduct.dealfilechange" />
+                <button @click="editProduct.uploadImg">上傳</button>
             </div>
             <div class="form_item">
                 <p>商品價格</p>
@@ -49,7 +52,7 @@ console.log(editProduct.data)
             </div>
             <div class="form_item">
                 <button v-on:click="editProduct.update">儲存</button>
-                <button>取消</button>
+                <a href="/admin"><button>回前頁</button></a>
             </div>
         </div>
     </div>

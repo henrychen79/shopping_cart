@@ -13,7 +13,6 @@ const props = defineProps(["value"]);
         <input v-model="eps.data.price" class="newPriceInput" placeholder="請輸入新價格" />
         <div class="save">
             <button @click="eps.updatePrice(props.value)">儲存</button>
-            <button>取消</button>
         </div>
     </div>
 
