@@ -113,30 +113,32 @@ export const useRegisterStore = defineStore("RegisterStore", () => {
     }
   };
 
-    // const url = '../../account.json' //假資料
-    const checkAccount= async ()=>{
-        if(data.account===''){
-            accountWarn.value='不能為空'
-            accountColor.value='red'
-            return
-        }
-        //連資料庫用
-        const url = `${import.meta.env.VITE_APP_API}api/user/checkAccountExist?account=${data.account}`
-        // const url = `http://172.20.10.7:8080/api/user/checkAccountExist?account=${data.account}`
-        let a = await fetch(url, {
-                method: 'GET', 
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                },
-                })
-                .then(function(res){
-                    return res.json()
-                })
-                .then(function(res){
-                    //假資料用
-                    // return res.userStore.some(function(item,index,array){
-                    //     return item.account === data.account
-                    //  })
+  // const url = '../../account.json' //假資料
+  const checkAccount = async () => {
+    if (data.account === "") {
+      accountWarn.value = "不能為空";
+      accountColor.value = "red";
+      return;
+    }
+    //連資料庫用
+    const url = `${
+      import.meta.env.VITE_APP_API
+    }api/user/checkAccountExist?account=${data.account}`;
+    // const url = `http://172.20.10.7:8080/api/user/checkAccountExist?account=${data.account}`
+    let a = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+    })
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (res) {
+        //假資料用
+        // return res.userStore.some(function(item,index,array){
+        //     return item.account === data.account
+        //  })
 
         //連資料庫用
         console.log("res.repeat", res.repeat);
@@ -155,31 +157,31 @@ export const useRegisterStore = defineStore("RegisterStore", () => {
       registOpen.value = true;
       console.log("不重複", accountError.value);
     }
- 
-    //將資料打進去後台server
-    const registerButton=()=>{
-        console.log(data)
-        fetch(`${import.meta.env.VITE_APP_API}api/user/registerAccount`, {
-            method: 'POST', // or 'PUT'
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-            })
-            .then(function(res){
-                console.log(res)
-                return res.json()
-            })
-            .then(function(res){
-                console.log('Success:', res);
-                //此次會再有個判斷 ，當註冊成功會跳轉到登入頁面，請user自己登入
-                alert('註冊成功') //有要另外刻畫面再說
-                router.push("/login");
-            })
-            .catch(function(error){
-                console.error('Error:', error);
-            });
-    }
+  };
+  //將資料打進去後台server
+  const registerButton = () => {
+    console.log(data);
+    fetch(`${import.meta.env.VITE_APP_API}api/user/registerAccount`, {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then(function (res) {
+        console.log(res);
+        return res.json();
+      })
+      .then(function (res) {
+        console.log("Success:", res);
+        //此次會再有個判斷 ，當註冊成功會跳轉到登入頁面，請user自己登入
+        alert("註冊成功"); //有要另外刻畫面再說
+        router.push("/login");
+      })
+      .catch(function (error) {
+        console.error("Error:", error);
+      });
+  };
 
   //使用者點擊 註冊 執行
   const checkRegisterInfo = () => {
@@ -211,11 +213,21 @@ export const useRegisterStore = defineStore("RegisterStore", () => {
   // }
 
   return {
-    checkRegisterInfo,
+    // checkRegisterInfo,
+    // checkPassword,
+    // checkAccount,
+    // AccountP,
+    // registControl,
+    // warmTextFn,
     checkPassword,
+    checkPasswordWarn,
+    passwordText,
+    registerButton,
     checkAccount,
+    AccountText,
+    AccountRe,
     AccountP,
-    registControl,
+    checkRegisterInfo,
     warmTextFn,
     data,
     regex,
