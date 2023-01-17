@@ -40,6 +40,16 @@ const getAllUsers = async () => {
 const add_product = async (body_data) => {
   return await send_api("/admin/addProduct", "POST", body_data);
 };
+const getAllOrders = async () => {
+  return await send_api("/admin/getAllOrders", "GET");
+};
+const update_pay = async (body_data) => {
+  return await send_api("/admin/update_pay", "POST", body_data);
+};
+const update_deliver = async (body_data) => {
+  return await send_api("/admin/update_deliver", "POST", body_data);
+};
+
 export {
   getProducts,
   getProduct,
@@ -50,4 +60,7 @@ export {
   update_inventory,
   getAllUsers,
   add_product,
+  getAllOrders,
+  update_pay,
+  update_deliver,
 };
