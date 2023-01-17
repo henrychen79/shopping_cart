@@ -7,7 +7,7 @@ import { cartList } from "../apis/cart_api";
 export const cartStore = defineStore("cart", () => {
 
   const data = reactive({
-    user_id: 1,
+    user_id: 6,
     recipient: "",
     phone: "",
     pay_way: "轉帳",
@@ -27,7 +27,7 @@ export const cartStore = defineStore("cart", () => {
   // 購物車商品清單
   const productList = async (test) => {
 
-    let data = await cartList(1)
+    let data = await cartList(6)
       .then(function (res) {
         console.log(res);
         return res;
@@ -61,7 +61,7 @@ export const cartStore = defineStore("cart", () => {
 
 
 
-  productList();
+
 
   return {
     data,

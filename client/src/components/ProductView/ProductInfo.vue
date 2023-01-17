@@ -18,7 +18,7 @@ const message = ref('');
 
 
 const postData = reactive({
-  'user_id': 1,
+  'user_id': 6,
   'product_id': '',
   'quantity': quentity
 })

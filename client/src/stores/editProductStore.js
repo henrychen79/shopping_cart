@@ -27,7 +27,7 @@ export const editProductStore = defineStore('editProductStore',()=>{
     const uploadImg=()=>{
         let param = new FormData();
         param.append("image", file);
-        console.log(param.get('file'));
+        console.log(param.get('image'));
         let config = { headers: { "Content-Type": "multipart/form-data" } }
         axios.post(`http://172.20.10.4:8080/api/admin/uploadImage?category_id=${data.category}&product_id=${data.productNum}`,param,config)
                 .then(response=>{
@@ -145,6 +145,6 @@ export const editProductStore = defineStore('editProductStore',()=>{
 
     return{
         data,
-        edit,update,updatePrice,updateInventory,uploadImg
+        edit,update,updatePrice,updateInventory,uploadImg,dealfilechange
     }
 })

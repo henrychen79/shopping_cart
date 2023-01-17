@@ -6,9 +6,9 @@ let show = ref(true)
 await orderStore.orederTest()
 // await orderStore.asyncFn(10)
 console.log(orderStore.orderList)
-if(orderStore.orderList===undefined){
+if (orderStore.orderList === undefined) {
     show.value = false
-}else{
+} else {
     show.value = true
 }
 
@@ -22,7 +22,10 @@ if(orderStore.orderList===undefined){
             <div class="Info" v-for="(item) in orderStore.orderList" v-bind:key="item.id">
                 <div class="content">
                     <p>訂單編號:{{ item.order_number }}</p>
-                    <p>訂單內容:{{ item.product_list }}</p>
+                    <div>
+                        訂單內容:<p class="ttt" v-for="(test) in item.product_list" product_name>{{ test.product_name }},
+                        </p>
+                    </div>
                     <p>訂單時間:{{ item.order_time }}</p>
                     <p>訂單金額:${{ item.order_prize }}</p>
                 </div>
@@ -39,6 +42,10 @@ if(orderStore.orderList===undefined){
 <style lang="scss" scoped>
 ::-webkit-scrollbar {
     display: none;
+}
+
+.ttt {
+    display: inline-block;
 }
 
 .ordermain {
