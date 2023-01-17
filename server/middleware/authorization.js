@@ -22,8 +22,8 @@ async function checkJWT(req, res, next) {
     req.user = user[0];
     next();
   } catch (err) {
-    console.log("chekout account err", err);
-    res.json(res_data.login_fail);
+    console.log("chekout account err", res_data.auth_fail);
+    res.json(res_data.auth_fail);
   }
 }
 async function checkIsAdmin(req, res, next) {
