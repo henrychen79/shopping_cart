@@ -1,9 +1,10 @@
 import route from "../router";
-
+import axios from "axios";
 const protocol = "http://";
 const port = "8080";
-// const base_url = `192.168.85.160:${port}/api`;
-const base_url = `172.20.10.4:${port}/api`;
+//const base_url = `192.168.85.160:${port}/api`;
+const base_url = `127.0.0.1:${port}/api`;
+//const base_url = `${window.location.host}/api`;
 const send_api = async (api_name, api_method, post_body) => {
   const url = protocol + base_url + api_name;
   const token = document.cookie.replace(
@@ -54,5 +55,15 @@ const get_image_api = async (api_name, api_method, post_body) => {
   let blob = await response.blob();
   return blob;
 };
+const upload_image_api = async (api_name, file) => {
+  const url = protocol + base_url + api_name;
+  let param = new FormData();
+  param.append("image", file);
+  console.log(param.get("file"));
+  let config = { headers: { "Content-Type": "multipart/form-data" } };
+  const response = await axios.post(url, param, config);
+  console.log(response.data);
+  return response.data;
+};
 
-export { send_api, get_image_api };
+export { send_api, get_image_api, upload_image_api };
