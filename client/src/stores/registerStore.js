@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref, reactive, computed } from "vue";
 import router from "../router";
+import { registerAccount, checkAccountExist } from "../apis/user_api";
 export const useRegisterStore = defineStore("RegisterStore", () => {
   //密碼警示 顯示開關
   let passControl = ref(false);
@@ -124,16 +125,7 @@ export const useRegisterStore = defineStore("RegisterStore", () => {
     const url = `${
       import.meta.env.VITE_APP_API
     }api/user/checkAccountExist?account=${data.account}`;
-    // const url = `http://172.20.10.7:8080/api/user/checkAccountExist?account=${data.account}`
-    let a = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-    })
-      .then(function (res) {
-        return res.json();
-      })
+    let a = await checkAccountExist(data.account)
       .then(function (res) {
         //假資料用
         // return res.userStore.some(function(item,index,array){
@@ -161,17 +153,7 @@ export const useRegisterStore = defineStore("RegisterStore", () => {
   //將資料打進去後台server
   const registerButton = () => {
     console.log(data);
-    fetch(`${import.meta.env.VITE_APP_API}api/user/registerAccount`, {
-      method: "POST", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then(function (res) {
-        console.log(res);
-        return res.json();
-      })
+    registerAccount(JSON.stringify(data))
       .then(function (res) {
         console.log("Success:", res);
         //此次會再有個判斷 ，當註冊成功會跳轉到登入頁面，請user自己登入
@@ -213,11 +195,11 @@ export const useRegisterStore = defineStore("RegisterStore", () => {
   // }
 
   return {
-    // checkRegisterInfo,
+    checkRegisterInfo,
     // checkPassword,
     // checkAccount,
     // AccountP,
-    // registControl,
+    registControl,
     // warmTextFn,
     checkPassword,
     checkPasswordWarn,
