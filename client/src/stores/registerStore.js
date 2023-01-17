@@ -174,7 +174,7 @@ export const useRegisterStore = defineStore("RegisterStore", () => {
                 console.log('Success:', res);
                 //此次會再有個判斷 ，當註冊成功會跳轉到登入頁面，請user自己登入
                 alert('註冊成功') //有要另外刻畫面再說
-                window.location.href = '/login'
+                router.push("/login");
             })
             .catch(function(error){
                 console.error('Error:', error);
