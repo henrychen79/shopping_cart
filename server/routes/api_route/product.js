@@ -6,7 +6,7 @@ router.use((req, res, next) => {
   next();
 });
 
-//取得特定商品詳細資訊 管理者
+//取得特定商品詳細資訊
 router.get("/", productController.getSpecificiProduct);
 //取得特定商品詳細資訊 使用者
 router.get("/detail", productController.getProductDetail);

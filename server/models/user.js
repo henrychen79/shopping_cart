@@ -9,7 +9,7 @@ async function insertFakeUser(tableColumns, values) {
     let target = `INSERT INTO user ( ${tableColumns} ) VALUES (${values}) `;
     await global.db_pool.query(target);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 async function insertFakeCart(int) {
@@ -17,7 +17,7 @@ async function insertFakeCart(int) {
     let target = `INSERT INTO cart (user_id) VALUES ('${int}')`;
     await global.db_pool.query(target);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 function creatFakeData() {
@@ -30,7 +30,7 @@ function creatFakeData() {
         users[key].nickname,
       ]);
     };
-    console.log(Object.keys(users).length);
+    // console.log(Object.keys(users).length);
     for (let i = 1; i < Object.keys(users).length+1; i++) {
       insertFakeCart(i);
     }
@@ -41,11 +41,11 @@ function creatFakeData() {
 /**********************************以下為串接ＯＫ**********************************************/
 //確認帳號是否已經存在（測試OK）
 async function check_account(accountName) {
-  console.log("check_account測試", accountName);
+  // console.log("check_account測試", accountName);
   try {
     let target = `SELECT account FROM user WHERE account = '${accountName}'`;
     const [result, fields] = await global.db_pool.query(target);
-    console.log("result", result);
+    // console.log("result", result);
     // return { status: "ok", result: result };
     if (result.length === 0) {
       return { status: false, result: result };
@@ -63,7 +63,7 @@ async function get_user(accountName) {
   try {
     let target = `SELECT * FROM user WHERE account = '${accountName}'`;
     const [result, fields] = await global.db_pool.query(target);
-    console.log("result", result);
+    // console.log("result", result);
     return result;
   } catch (error) {
     console.log("fail", error);
@@ -77,7 +77,7 @@ async function register(values, resolve, reject) {
   try {
     let target = `INSERT INTO user ( ${table.user.columnName} ) VALUES (${values})`;
     const [result, fields] = await global.db_pool.query(target);
-    console.log(result, fields);
+    // console.log(result, fields);
     return { status: "ok", result: result };
   } catch (error) {
     return { status: "fail", result: error };
@@ -90,7 +90,7 @@ async function login(accountName, password) {
   try {
     let target = `SELECT * FROM user WHERE account = '${accountName}' AND password = '${password}'`;
     const [result, fields] = await global.db_pool.query(target);
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {
     console.log("login ERR :" + error);
@@ -105,7 +105,7 @@ async function forgetPassword(accountName) {
   try {
     let target = `SELECT account FROM user WHERE account = '${accountName}'`;
     const [result, fields] = await global.db_pool.query(target);
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {
     console.log("forgetPassword ERR:" + error);
@@ -125,13 +125,13 @@ async function createTempPassword(accountName) {
 
   let target = `SELECT password FROM tempInfo WHERE password = '${tempPassword}'`;
   const [result, fields] = await global.db_pool.query(target);
-  console.log(result); //沒有重複會回傳[]，有重複會會傳重複的臨時密碼
+  // console.log(result); //沒有重複會回傳[]，有重複會會傳重複的臨時密碼
   if (result.length !== 0) {
     createTempPassword(accountName);
   }
   if (result.length === 0) {
     let time = new Date().toISOString().slice(0, 19).replace("T", " ");
-    console.log(time);
+    // console.log(time);
     insertTempPassword(`'${accountName}','${tempPassword}','${time}'`); //沒有重複，新增臨時密碼進入DB
     return tempPassword;
   }
@@ -140,7 +140,7 @@ async function createTempPassword(accountName) {
 async function insertTempPassword(values, resolve, reject) {
   try {
     let target = `INSERT INTO tempInfo ( ${table.tempInfo.columnName} ) VALUES (${values})`;
-    console.log(target);
+    // console.log(target);
     await global.db_pool.query(target);
   } catch (error) {
     console.log("insertTempPassword ERR:" + error);
@@ -154,7 +154,7 @@ async function check_password(tableName, accountName, password) {
     WHERE account = '${accountName}' AND
     password = '${password}'`;
     const [result, feild] = await global.db_pool.query(target);
-    console.log(result);
+    // console.log(result);
     if (result.length === 0) {
       return false;
     }

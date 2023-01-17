@@ -49,9 +49,9 @@ const orderController = {
   createOrder: async (req, res, next) => {
     try {
       let state = "initialize";
-      console.log(req.body);
+      // console.log(req.body);
       const { data } = req.body;
-      console.log(data);
+      // console.log(data);
       //const data_obj = JSON.parse(data);
       const { error } = validator.createOrderValidation(data);
       if (error) {
@@ -61,7 +61,7 @@ const orderController = {
       const cart_id = await cart_M.getCart(data.user_id);
       // 取得上述購物車ID下所有的購物車內容物
       const cart_items = await cart_M.getCartItem(cart_id[0].id);
-      console.log("cart_items", cart_items);
+      // console.log("cart_items", cart_items);
       // 確認各項內容物庫存
       const { check_result, inventory_cal } = checkInventory(cart_items);
       //console.log("inventory_cal", inventory_cal);
@@ -78,7 +78,7 @@ const orderController = {
 
       for (let index = 0; index < cart_items.length; index++) {
         let item = cart_items[index];
-        console.log("item", item);
+        // console.log("item", item);
         let product_detail = await product_M.getSpecificiProduct(item.pdid);
         let inser_values = [
           order_ret[0].insertId,

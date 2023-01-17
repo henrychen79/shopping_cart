@@ -2,7 +2,7 @@
 const table = require("../database/tables.json");
 const products = require("../database/fake_product.json");
 const productsDetail = require("../database/fake_productDetail.json");
-const pageLimit = 6;
+const pageLimit = 8;
 
 async function addProduct(tableColumns, values) {
   try {

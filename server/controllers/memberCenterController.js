@@ -6,8 +6,8 @@ const memberCenterController = {
     try {
       let accountName = req.body.account;
       let newNickname = req.body.newNickname;
-      console.log("帳號：" + accountName);
-      console.log("新暱稱：" + newNickname);
+      // console.log("帳號：" + accountName);
+      // console.log("新暱稱：" + newNickname);
       const update_result = memberCenter_M.update_nickname(
         req.user.account,
         newNickname
@@ -21,9 +21,9 @@ const memberCenterController = {
   allOrders: async (req, res, next) => {
     try {
       let accountName = req.query.account;
-      console.log(accountName);
+      // console.log(accountName);
       memberCenter_M.allOrders(accountName).then((data) => {
-        console.log(data);
+        // console.log(data);
         return res.json(data);
       });
     } catch (e) {
@@ -34,12 +34,12 @@ const memberCenterController = {
     try {
       //如果是臨時密碼，tableName = tempInfo；如果是修改密碼，tableName = user
       const { account, password, newPassword } = req.body;
-      console.log(account, newPassword);
+      // console.log(account, newPassword);
       let update_result = await user_M.update_password(
         req.user.account,
         newPassword
       );
-      console.log(update_result);
+      // console.log(update_result);
       if (!update_result) return res.json(res_data.modify_password_fail);
       return res.json({ status: 200, msg: "修改密碼成功" });
     } catch (error) {

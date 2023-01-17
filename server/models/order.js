@@ -72,15 +72,15 @@ async function updateOrderList(order_id, type, state) {
     return error;
   }
 }
-const test_obj = {
-  user_id: 1,
-  recipient: "陳韋廷",
-  address: "高雄市前鎮區",
-  phone: "0988525321",
-  order_prize: 48000,
-  order_amount: 3,
-  order_number: "558886",
-};
+// const test_obj = {
+//   user_id: 1,
+//   recipient: "陳韋廷",
+//   address: "高雄市前鎮區",
+//   phone: "0988525321",
+//   order_prize: 48000,
+//   order_amount: 3,
+//   order_number: "558886",
+// };
 
 module.exports.addToOrder = addToOrder;
 module.exports.addToOrderDetail = addToOrderDetail;

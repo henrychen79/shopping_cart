@@ -7,9 +7,9 @@ const productController = {
       let category_id = req.params.category_id;
       let page = req.query.page;
       let order = req.query.order;
-      console.log("種類：" + category_id);
-      console.log("頁數：" + page);
-      console.log("排序類型：" + order);
+      // console.log("種類："+ category_id);
+      // console.log("頁數：" + page);
+      // console.log("排序類型：" + order);
 
       //價格由小到大排序
       if (order === "up") {
@@ -47,7 +47,7 @@ const productController = {
   getSpecificiProduct: async (req, res, next) => {
     try {
       // console.log("有收到");
-      console.log(req.query);
+      // console.log(req.query);
       let product_id = req.query.product_id;
       // console.log("商品ID" + product_id);
       product_M.getSpecificiProduct(product_id).then((data) => {
@@ -59,10 +59,10 @@ const productController = {
   },
   getProductDetail: async (req, res, next) => {
     try {
-      console.log("有收到");
+      // console.log("有收到");
       // console.log(req.query);
       let product_id = req.query.product_id;
-      console.log("商品ID" + product_id);
+      // console.log("商品ID" + product_id);
       product_M.getProductDetail(product_id).then((data) => {
         return res.json(data);
       });

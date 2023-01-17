@@ -67,14 +67,14 @@
         "category":"'001'",
         "name":"'黃永煌'",
         "thumbnail":"'img00110'",
-        "price":"'5999'"
+        "price":"'50000'"
     },
     "p00111":{
         "productNum":"'11'",
         "category":"'001'",
         "name":"'炫徵'",
         "thumbnail":"'img00111'",
-        "price":"'585'"
+        "price":"'50000'"
     },
     "p00201":{
         "productNum":"'1'",
@@ -114,7 +114,7 @@
     "p00301":{
         "productNum":"'1'",
         "category":"'003'",
-        "name":"'J-Tien'",
+        "name":"'J.Ten'",
         "thumbnail":"'img00301'",
         "price":"'58585888'"
     },
