@@ -8,9 +8,9 @@ const { addAbortSignal } = require("nodemailer/lib/xoauth2");
 async function getSpecificiProduct(product_id) {
   try {
     let target = `SELECT p.*, pD.detail, pD.inventory, pD.img FROM product AS p LEFT JOIN productDetail AS pD USING(category,productNum) WHERE p.product_id = '${product_id}'`;
-    console.log(target);
+    // console.log(target);
     const [result, fields] = await global.db_pool.query(target);
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {
     console.log("getSpecificiProduct ERR:" + error);
@@ -21,10 +21,9 @@ async function getProducts(category) {
   try {
     //查找該種類的所有商品
     let target = `SELECT p.*, pD.detail, pD.inventory, pD.img FROM product AS p LEFT JOIN productDetail AS pD USING(category,productNum) WHERE p.category = '${category}'`;
-    console.log(target);
-    console.log(target);
+    // console.log(target);
     const [result, field] = await global.db_pool.query(target);
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {}
 }
@@ -33,9 +32,9 @@ async function getProducts(category) {
 async function getProduct(category, productNum) {
   try {
     let target = `SELECT p.*, pD.detail, pD.inventory, pD.img FROM product AS p LEFT JOIN productDetail AS pD USING(category,productNum) WHERE p.category = '${category}' AND p.productNum = '${productNum}'`
-    console.log(target);
+    // console.log(target);
     const [result, field] = await global.db_pool.query(target);
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {}
 }
@@ -55,6 +54,7 @@ async function addProduct(data){
       return '新增商品成功';
       
   } catch (error) {
+      console.log('addProduct'+error);
       return 'ERR:新增商品失敗'
   }
 };
@@ -96,7 +96,7 @@ async function update_product(data) {
 async function update_price(product_id, newPrice) {
   try {
     let target = `UPDATE product SET price = '${newPrice}' WHERE product_id = '${product_id}'`;
-    console.log(target);
+    // console.log(target);
     await global.db_pool.query(target);
     return "更新價格成功";
   } catch (error) {
@@ -110,7 +110,7 @@ async function update_inventory(product_id, newInventory) {
           newInventory}' WHERE pD.category = (SELECT category FROM product WHERE product_id = ${
               product_id}) AND pD.productNum = (SELECT productNum FROM product WHERE product_id = ${
                   product_id})`;
-      console.log(target);
+      // console.log(target);
       await global.db_pool.query(target);
       return "更新庫存量成功";
   } catch (error) {
@@ -122,7 +122,7 @@ async function update_inventory(product_id, newInventory) {
 async function delete_product(product_id){
   try {
       let target = `DELETE p,pD FROM product p LEFT JOIN productDetail pD on pD.category = p.category AND pD.productNum = p.productNum WHERE p.product_id = '${product_id}'`;
-      console.log(target);
+      // console.log(target);
       await global.db_pool.query(target);
       return "刪除商品成功";
   } catch (error) {
@@ -142,15 +142,15 @@ async function getAllOrders() {
     
     let target1 = `SELECT * FROM orderList`;
     const [result1, feild] = await global.db_pool.query(target1);
-    console.log(result1);
+    // console.log(result1);
 
     for (let i = 0; i < result1.length; i++) {
       let target2 = `SELECT order_id, product_name, prize, amount FROM orderDetail WHERE order_id = ${result1[i].id}`;
-      console.log(target2);
+      // console.log(target2);
 
       const [result2, feild2] = await global.db_pool.query(target2);
       result1[i].items = result2;
-      console.log(result1);
+      // console.log(result1);
     }
     return result1;
   } catch (error) {console.log(error);}
@@ -159,7 +159,7 @@ async function getAllOrders() {
 async function update_deliver(data) {
   try {
     let target = `UPDATE orderList SET deliver_status = '${data.deliver_status}' WHERE order_number = '${data.order_number}'`;
-    console.log('更新運送'+target);
+    // console.log('更新運送'+target);
     await global.db_pool.query(target);
     return "更新出貨狀態成功";
   } catch (error) {
@@ -170,7 +170,7 @@ async function update_deliver(data) {
 async function update_pay(data) {
   try {
     let target = `UPDATE orderList SET pay_status = '${data.pay_status}' WHERE order_number = '${data.order_number}'`;
-    console.log('更新付款'+target);
+    // console.log('更新付款'+target);
     await global.db_pool.query(target);
     return "更新付款狀態成功";
   } catch (error) {
@@ -187,7 +187,7 @@ async function getAllUsers() {
     //少給全部會員總量，讓前端可以產生頁數
     let target = `SELECT * FROM user`;
     const [result, feild] = await global.db_pool.query(target);
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {}
 }

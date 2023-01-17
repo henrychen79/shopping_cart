@@ -6,7 +6,7 @@ import { cartStore } from "../../stores/cartStore";
 import { userOrderStore } from "../../stores/orderStore";
 
 const cs = cartStore();
-
+cs.productList();
 </script>
 
 <template>

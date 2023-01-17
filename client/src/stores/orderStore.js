@@ -73,7 +73,7 @@ export const userOrderStore = defineStore("orderStore", () => {
     // const aaa = 'rec27@gmail.com'
     // const url = `http://172.20.10.4:8080/api/member/getAllOrders?account=${aaa}`
     try {
-      let data = await listOrder(1)
+      let data = await listOrder(6)
         .then(function (res) {
           console.log(res);
           res.filter(function (item) {

@@ -7,7 +7,7 @@ async function memberInfo(accountName) {
   try {
     let target = `SELECT role, account, nickname FROM user WHERE account = '${accountName}'`;
     const [result, field] = await global.db_pool.query(target);
-    console.log(result); //回傳：[ { role: 'member', account: 'rec27@gmail.com', nickname: '長方形' } ]
+    // console.log(result); //回傳：[ { role: 'member', account: 'rec27@gmail.com', nickname: '長方形' } ]
     return result;
   } catch (error) {
     console.log("memberInfo ERR: " + error);
@@ -20,7 +20,7 @@ async function update_nickname(accountName, newNickname) {
   try {
     let target = `UPDATE user SET nickname = '${newNickname}' WHERE account = '${accountName}'`;
     await global.db_pool.query(target);
-    console.log("修改暱稱成功");
+    // console.log("修改暱稱成功");
     return "update nickname success"; //更新暱稱成功
   } catch (error) {
     console.log("update_nickname ERR: " + error);
@@ -40,7 +40,7 @@ async function allOrders(accountName) {
                 AND oD.category = p.category 
                 AND oD.productNum = p.productNum`;
     const [result, field] = await global.db_pool.query(target);
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {
     console.log("allOrders ERR:" + error);

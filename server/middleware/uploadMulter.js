@@ -8,7 +8,7 @@ if (!fs.existsSync(dir)) {
 
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
-    //console.log(file);
+    console.log(file);
     let { category_id, product_id } = req.query;
     let imgPath = dir + category_id + "/" + product_id;
     req.imgPath = imgPath;

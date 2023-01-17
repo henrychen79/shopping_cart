@@ -36,7 +36,7 @@ const userController = {
         // if (ret.status === "ok") {
         //   res.json(account);
         // } else res.status(400).json({ message: "這個Email被註冊過了!" });
-        console.log("ret", ret);
+        // console.log("ret", ret);
         if (ret.status === false) {
           res.json({ repeat: false });
         } else {
@@ -50,7 +50,7 @@ const userController = {
   login: async (req, res, next) => {
     try {
       const { account, password } = req.body;
-      console.log(account, password);
+      // console.log(account, password);
       const result = await user_M.login(account, password);
       //const result = [{ account: "ggggg" }];
       if (result.length != 0) {
@@ -94,7 +94,7 @@ const userController = {
 
       //如果帳號存在，則生成暫時密碼
       const result2 = await user_M.createTempPassword(account);
-      console.log("result2", result2);
+      // console.log("result2", result2);
       sendMail(account, "忘記密碼驗證信", forgetPasswordMail(result2));
       res.json({ status: true });
       return;
@@ -107,13 +107,13 @@ const userController = {
     try {
       //如果是臨時密碼，tableName = tempInfo；如果是修改密碼，tableName = user
       const { account, password, newPassword } = req.body;
-      console.log(account, password, newPassword);
+      // console.log(account, password, newPassword);
       const tableName = "tempInfo";
       const result = await user_M.check_password(tableName, account, password);
-      console.log("result", result);
+      // console.log("result", result);
       if (result) {
         let update_result = await user_M.update_password(account, newPassword);
-        console.log(update_result);
+        // console.log(update_result);
         res.json({ status: true });
         return;
       } else {

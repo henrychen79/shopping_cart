@@ -54,13 +54,25 @@ async function addToOrderDetail(values) {
 
 async function getOrderList(user_id) {
   try {
-    let target = `SELECT a.*, GROUP_CONCAT(b.product_name ) as product_list FROM (SELECT * FROM orderlist WHERE user_id=${user_id}) as a LEFT JOIN orderdetail as b on a.id=b.order_id GROUP BY b.order_id`;
-    const [result, fields] = await global.db_pool.query(target);
-    return result;
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
+    let target1 = `SELECT * FROM orderList WHERE user_id = '${user_id}'`;
+    const [result1, feild] = await global.db_pool.query(target1);
+    for (let i = 0; i < result1.length; i++) {
+      let target2 = `SELECT product_name, prize, amount FROM orderDetail WHERE order_id = ${result1[i].id}`;
+      const [result2, feild2] = await global.db_pool.query(target2);
+      result1[i].product_list = result2;
+    }
+    // console.log(result1);
+    return result1;
+  } catch (error) {console.log(error);}
+
+  // try {
+  //   let target = `SELECT a.*, GROUP_CONCAT(b.product_name ) as product_list FROM (SELECT * FROM orderlist WHERE user_id=${user_id}) as a LEFT JOIN orderdetail as b on a.id=b.order_id GROUP BY b.order_id`;
+  //   const [result, fields] = await global.db_pool.query(target);
+  //   return result;
+  // } catch (error) {
+  //   console.log(error);
+  //   return error;
+  // }
 }
 
 async function updateOrderList(order_id, type, state) {
@@ -72,15 +84,15 @@ async function updateOrderList(order_id, type, state) {
     return error;
   }
 }
-const test_obj = {
-  user_id: 1,
-  recipient: "陳韋廷",
-  address: "高雄市前鎮區",
-  phone: "0988525321",
-  order_prize: 48000,
-  order_amount: 3,
-  order_number: "558886",
-};
+// const test_obj = {
+//   user_id: 1,
+//   recipient: "陳韋廷",
+//   address: "高雄市前鎮區",
+//   phone: "0988525321",
+//   order_prize: 48000,
+//   order_amount: 3,
+//   order_number: "558886",
+// };
 
 module.exports.addToOrder = addToOrder;
 module.exports.addToOrderDetail = addToOrderDetail;
