@@ -37,7 +37,9 @@ const update_inventory = async (product_id, body_data) => {
 const getAllUsers = async () => {
   return await send_api("/admin/getAllUsers", "GET");
 };
-admin / getAllUsers;
+const add_product = async (body_data) => {
+  return await send_api("/admin/addProduct", "POST", body_data);
+};
 export {
   getProducts,
   getProduct,
@@ -47,4 +49,5 @@ export {
   update_price,
   update_inventory,
   getAllUsers,
+  add_product,
 };

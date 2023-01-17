@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
 import { ref, reactive, computed } from "vue";
 import axios from "axios";
-import { uploadImage } from "../apis/admin_api";
+import { uploadImage, add_product } from "../apis/admin_api";
+import { allCategory } from "../apis/product_api";
 export const addProductStore = defineStore("addProductStore", () => {
   let file = ref("");
   const dealfilechange = (e) => {
@@ -45,17 +46,7 @@ export const addProductStore = defineStore("addProductStore", () => {
   const add = () => {
     console.log(data);
     const url = `http://172.20.10.4:8080/api/admin/addProduct`;
-    fetch(url, {
-      method: "POST", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then(function (res) {
-        console.log(res);
-        return res.json();
-      })
+    add_product(JSON.stringify(data))
       .then(function (res) {
         console.log("Success:", res);
       })
@@ -67,15 +58,7 @@ export const addProductStore = defineStore("addProductStore", () => {
   const getCategory = async () => {
     const url = `http://172.20.10.4:8080/api/product/allCategory`;
     try {
-      let data = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json;charset=UTF-8",
-        },
-      })
-        .then(function (res) {
-          return res.json();
-        })
+      let data = await allCategory()
         .then(function (res) {
           return res;
         })
