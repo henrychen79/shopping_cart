@@ -58,7 +58,7 @@ const userController = {
         const token = jwt.sign(result[0], process.env.JWT_SECRET, {
           expiresIn: expires_in,
         });
-        res.cookie("access_token", token);
+        //res.cookie("access_token", token);
         //.json({ accout: result[0].account, token: token });
         return res.json({
           status: 200,
