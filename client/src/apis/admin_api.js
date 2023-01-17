@@ -34,6 +34,10 @@ const update_inventory = async (product_id, body_data) => {
     body_data
   );
 };
+const getAllUsers = async () => {
+  return await send_api("/admin/getAllUsers", "GET");
+};
+admin / getAllUsers;
 export {
   getProducts,
   getProduct,
@@ -42,4 +46,5 @@ export {
   update_product,
   update_price,
   update_inventory,
+  getAllUsers,
 };
