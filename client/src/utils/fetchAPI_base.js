@@ -3,8 +3,8 @@ import axios from "axios";
 const protocol = "http://";
 const port = "8080";
 //const base_url = `192.168.85.160:${port}/api`;
-const base_url = `127.0.0.1:${port}/api`;
-//const base_url = `${window.location.host}/api`;
+//const base_url = `127.0.0.1:${port}/api`;
+const base_url = `${window.location.hostname}:${port}/api`;
 const send_api = async (api_name, api_method, post_body) => {
   const url = protocol + base_url + api_name;
   const token = document.cookie.replace(
@@ -37,7 +37,7 @@ const send_api = async (api_name, api_method, post_body) => {
   let response = await fetch(url, init);
   let json = await response.json();
   if (json.status === 401) {
-    alert("登錄逾時");
+    alert("請重新登錄");
     route.push("login");
   } else return json;
 };
