@@ -76,7 +76,7 @@ async function register(values, resolve, reject) {
 //登入會員（測試ＯＫ）
 async function login(accountName, password) {
   try {
-    let target = `SELECT account FROM user WHERE account = '${accountName}' AND password = '${password}'`;
+    let target = `SELECT * FROM user WHERE account = '${accountName}' AND password = '${password}'`;
     const [result, fields] = await global.db_pool.query(target);
     console.log(result);
     return result;
