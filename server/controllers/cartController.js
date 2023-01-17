@@ -2,7 +2,8 @@ const cart_M = require("../models/cart");
 const cartController = {
   addToCartItem: async (req, res, next) => {
     try {
-      const { user_id, product_id, quantity } = req.body;
+      const { product_id, quantity } = req.body;
+      const user_id = req.user.user_id;
       // console.log("這裡" + req.body.product_id);
       // console.log(user_id, product_id, quantity);
       const cart_id = await cart_M.getCart(user_id);
@@ -23,7 +24,8 @@ const cartController = {
   getCartItem: async (req, res, next) => {
     try {
       // console.log(req);
-      const { user_id } = req.params;
+      //const { user_id } = req.params;
+      const user_id = req.user.user_id;
       const cart_id = await cart_M.getCart(user_id);
       const result1 = await cart_M.getCartItem(cart_id[0].id);
       const result2 = await cart_M.getCartTotalPrice(cart_id[0].id);
