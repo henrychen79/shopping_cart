@@ -1,15 +1,21 @@
 <script setup>
 import { ref, watch } from "@vue/runtime-core";
+import { useloginStore } from "../stores/loginStore";
+const us = useloginStore();
 </script>
 
 <template>
   <header>
     <div id="logo">
-      <img src="" alt="" />
+      <router-link to="/">
+        <h1>BOWA</h1>
+      </router-link>
     </div>
     <ul class="headerBar">
-      <li>你好!</li>
-      <li><router-link to="/login">登入</router-link></li>
+      <li v-if="!us.islogin">你好 顧客!</li>
+      <li v-else>你好 {{ us.nickname }}!</li>
+      <li v-if="!us.islogin"><router-link to="/login">登入</router-link></li>
+      <li v-else>登出</li>
       <li><router-link to="/register">註冊</router-link></li>
       <li><router-link to="/member">會員中心</router-link></li>
       <li><router-link to="/order">訂單查詢</router-link></li>
@@ -29,7 +35,9 @@ import { ref, watch } from "@vue/runtime-core";
         <a href="#"><font-awesome-icon icon="fas fa-clipboard-list" /></a>
       </li>
       <li>
-        <router-link to="/shoppingCart"><font-awesome-icon icon="fas fa-shopping-cart" /></router-link>
+        <router-link to="/shoppingCart"
+          ><font-awesome-icon icon="fas fa-shopping-cart"
+        /></router-link>
       </li>
     </ul>
   </header>
@@ -61,6 +69,12 @@ header {
       color: rgb(25, 25, 25);
     }
   }
+}
+
+h1 {
+  margin: 0 1rem;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  cursor: pointer;
 }
 
 header ul.headerBar-mobile {

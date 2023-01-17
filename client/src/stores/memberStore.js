@@ -73,8 +73,11 @@ export const useMemberStore = defineStore('memberStore',()=>{
             .then(function(res){
                 console.log(res)
                 if(res.status===200){
+                    show.value = false
+                    modifyNamedata.newNickname=''
                     alert('修改成功')
                 }else{
+                    modifyNamedata.newNickname=''
                     alert('修改失敗')
                 }
             })
@@ -125,9 +128,17 @@ const checkPassword=()=>{
         .then(function(res){
             console.log(res);
             if(res.status==200){
+                show.value = false
+                modifyPassword.password=''
+                modifyPassword.newPassword=''
+                modifyPassword.checkPassword=''
                 alert('修改成功')
             }else{
+                modifyPassword.password=''
+                modifyPassword.newPassword=''
+                modifyPassword.checkPassword=''
                 alert('修改失敗')
+                
             }
             
         })
@@ -149,6 +160,7 @@ const checkPassword=()=>{
         }
         console.log('執行fetch')
         modifyPwFn()
+        
     }
 
     

@@ -1,9 +1,25 @@
 <script setup>
-import { computed, ref, reactive } from "vue";
+import { computed, ref, reactive, watch, watchEffect } from "vue";
+import router from "../../router";
 import { cartStore } from "../../stores/cartStore";
 
 const cs = cartStore();
 
+const confirm = ref(false);
+
+function phoneType(val) {
+  const validate = /09\d{2}(\d{6}|-\d{3}-\d{3})/
+  return validate.test(val)
+}
+
+watchEffect(() => {
+  if (phoneType(cs.data.phone) && cs.data.recipient !== '' && cs.data.address != '') {
+    confirm.value = true;
+  } else {
+    confirm.value = false;
+  }
+
+})
 </script>
 
 <template>
@@ -22,9 +38,8 @@ const cs = cartStore();
     </div>
     <div>
       <router-link to="/shoppingCart" class="btn">回前頁</router-link>
-      <router-link to="/shoppingCart/paymentInfo" class="btn">下一步</router-link>
-      <button>下一步</button>
-
+      <router-link to="" class="dissbtn" v-if='!confirm'>下一步</router-link>
+      <router-link to="/shoppingCart/paymentInfo" class="btn" v-if='confirm'>下一步</router-link>
     </div>
   </form>
 </template>
@@ -76,6 +91,21 @@ form.shippingInfo-form {
     padding: 0.5rem;
     border-radius: 5px;
     background-color: var(--grey);
+  }
+
+  .dissbtn {
+    padding: 0.5rem;
+    border-radius: 5px;
+    background-color: var(--grey);
+    color: #bebbbb;
+  }
+
+  button.btn {
+    padding: 0.5rem;
+    border-radius: 5px;
+    background-color: var(--grey);
+    border: none;
+    cursor: pointer;
   }
 }
 

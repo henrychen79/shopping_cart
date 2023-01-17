@@ -25,9 +25,12 @@ const ps = productStore();
             <li>
                 <p class="classic">商品分類</p>
             </li>
-            <li v-for="item in ps.totalCategoryList" @click="ps.currentCategory = item"><a href="#">{{
-                item
-            }}</a></li>
+            <router-link to="/">
+                <li v-for="item in ps.totalCategoryList" @click="ps.productAPI(item, ps.crrentPage, ps.sortValue)"
+                    key="item"> {{
+    item
+                    }}</li>
+            </router-link>
         </ul>
     </aside>
 
@@ -45,11 +48,11 @@ const ps = productStore();
         height: fit-content;
         border-radius: 5px;
 
-        li:first-child {
+        &>li {
             border-bottom: 1px solid var(--black);
         }
 
-        li:first-child~li:not(:last-child) {
+        a li:not(:last-child) {
             border-bottom: 1px solid var(--grey-mute);
         }
 
@@ -58,7 +61,7 @@ const ps = productStore();
             padding: 0.5rem 1rem;
         }
 
-        li:not(:first-child):hover {
+        a li:hover {
             background-color: rgb(243, 242, 242);
             cursor: pointer;
         }

@@ -66,7 +66,7 @@ const userController = {
           data: {
             user_id: result[0].user_id,
             account: result[0].account,
-            nick: result[0].nick_name,
+            nickname: result[0].nickname,
             role: result[0].role,
             iat: parseInt(Date.now() / 1000, 10),
             token_exp: expires_in,

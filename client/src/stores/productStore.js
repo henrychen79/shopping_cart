@@ -17,8 +17,7 @@ export const productStore = defineStore("product", () => {
   const fetchURL = "http://127.0.0.1:8080";
 
   // /* 測試成功--有頁數跟商品連動 ↓↓↓↓↓↓↓↓↓↓↓*
-  //const allCategoryAPI = fetchData(`${fetchURL}/api/product/allCategory`);
-  console.log("test123");
+
   allCategory().then((res) => {
     //監聽點擊類別
     watchEffect(() => {
@@ -35,20 +34,24 @@ export const productStore = defineStore("product", () => {
   });
 
   //監聽頁面切換
-  watchEffect(() => {
+  // watchEffect(() => {
 
-    const productAPI = async () => {
-      productBrief(currentCategory.value, crrentPage.value, sortValue.value)
-        .then(function (res) {
-          productData.value = res;
-          return res;
-        })
-        .catch((error) => {
-          console.error("productAPIError:", error);
-        });
-    };
-    productAPI();
-  });
+  const productAPI = async (cat, page, sort) => {
+
+    sortValue.value = sort
+    currentCategory.value = cat
+    crrentPage.value = page
+    productBrief(cat, page, sort)
+      .then(function (res) {
+        productData.value = res;
+        return res;
+      })
+      .catch((error) => {
+        console.error("productAPIError:", error);
+      });
+  };
+  productAPI(currentCategory.value, crrentPage.value, sortValue.value);
+  // });
 
   // /* 測試成功--有頁數跟商品連動 ↑↑↑↑↑↑↑↑↑↑↑↑*/
 
@@ -82,33 +85,21 @@ export const productStore = defineStore("product", () => {
 
   // 左右頁按鈕
   const btnRight = () => {
+    const temp = crrentPage.value
     crrentPage.value >= totalPageNum.value
       ? totalPageNum.value
       : crrentPage.value++;
+    if (temp != crrentPage.value) {
+      productAPI(currentCategory.value, crrentPage.value, sortValue.value);
+    }
+
   };
   const btnLeft = () => {
+    const temp = crrentPage.value
     crrentPage.value <= 1 ? 1 : crrentPage.value--;
-  };
-
-  const productAPI2 = async () => {
-    console.log("test");
-    let P = await fetch(
-      `${fetchURL}/api/product/category/002?page=${crrentPage.value}&order=${sortValue.value}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then(function (res) {
-        productData.value = res;
-        return res;
-      })
-      .catch((error) => {
-        console.error("productAPIError:", error);
-      });
+    if (temp != crrentPage.value) {
+      productAPI(currentCategory.value, crrentPage.value, sortValue.value);
+    }
   };
 
   return {
@@ -122,6 +113,6 @@ export const productStore = defineStore("product", () => {
     currentCategory,
     productInfoData,
     sortValue,
-    productAPI2,
+    productAPI,
   };
 });

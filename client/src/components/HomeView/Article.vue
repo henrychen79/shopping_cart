@@ -12,9 +12,12 @@ const ps = productStore();
         <div class="productSort">
             <p>商品排序</p>
             <span>價格</span>
-            <input type="radio" name='price' value="" checked v-model="ps.sortValue"> <span>預設</span>
-            <input type="radio" name='price' value="up" v-model="ps.sortValue"> <span>由低到高</span>
-            <input type="radio" name='price' value="down" v-model="ps.sortValue"> <span>由高到低</span>
+            <input type="radio" name='price' checked @click="ps.productAPI(ps.currentCategory, ps.crrentPage, '')">
+            <span>預設</span>
+            <input type="radio" name='price' @click="ps.productAPI(ps.currentCategory, ps.crrentPage, 'up')">
+            <span>由低到高</span>
+            <input type="radio" name='price' @click="ps.productAPI(ps.currentCategory, ps.crrentPage, 'down')">
+            <span>由高到低</span>
         </div>
         <div class="cards">
             <Product v-for="item in ps.productData" :key="item.product_id"

@@ -10,7 +10,7 @@ const ps = productStore();
 <template>
     <ul class="pagination">
         <li @click="ps.btnLeft"><a href="#">«</a></li>
-        <li v-for="pageNumber in ps.showPages" @click="ps.crrentPage = pageNumber">
+        <li v-for="pageNumber in ps.showPages" @click="ps.productAPI(ps.currentCategory, pageNumber, ps.sortValue)">
             <a href="#" :class="{ active: pageNumber === ps.crrentPage }"> {{ pageNumber }} </a>
         </li>
         <li @click="ps.btnRight"><a href="#">»</a></li>

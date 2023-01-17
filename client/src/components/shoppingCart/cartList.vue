@@ -4,37 +4,14 @@ import router from "../../router";
 import cartItemVue from "./cartItem.vue";
 import { cartStore } from "../../stores/cartStore";
 import { userOrderStore } from "../../stores/orderStore";
-import { cartList } from "../../apis/cart_api";
 
-const productListData = ref({});
 const cs = cartStore();
-const showData = ref(false);
-
-const showModal = ref(false);
-const pass = ref(false);
-const message = ref('');
-
-const productList = async (test) => {
-  let data = await cartList(1)
-    .then(function (res) {
-      console.log(res);
-      return res;
-    })
-    .catch((error) => {
-      console.error("productInfoUrlError:", error);
-    });
-  productListData.value = data;
-  cs.cartToOrderData = data;
-  showData.value = true;
-};
-
-productList();
 
 </script>
 
 <template>
   <!-- <div v-if="!showData">尚未加入商品到購物車</div> -->
-  <table class="cartList" v-if="showData">
+  <table class="cartList" v-if="cs.showData">
     <thead>
       <tr>
         <th>商品圖片</th>
@@ -45,10 +22,10 @@ productList();
       </tr>
     </thead>
     <tbody>
-      <cartItemVue v-for="(item, index) in productListData[0]" :key="item.cart_item_id" :imgData="{
+      <cartItemVue v-for="(item, index) in cs.productListData[0]" :key="item.cart_item_id" :imgData="{
         category: `${item.category}`,
         productInfoID: `${item.productNum}`,
-      }" :itemId="item.cart_item_id" @delbtn="productList()" :indexId="index">
+      }" :itemId="item.cart_item_id" @delbtn="cs.productList()" :indexId="index">
 
         <template #itemName>{{ item.productName }}</template>
         <template #itemQuantity>{{ item.quantity }}</template>
@@ -59,8 +36,8 @@ productList();
       <tr>
         <td colspan="5" class="total-price">
           <h3>總金額</h3>
-          <p>{{ productListData[1][0].totalPrice }}</p>
-          <router-link to="/shoppingCart/shippingInfo" @click="addNum" class="btn">結帳</router-link>
+          <p>{{ cs.productListData[1][0].totalPrice }}</p>
+          <router-link to="/shoppingCart/shippingInfo" class="btn">結帳</router-link>
         </td>
       </tr>
     </tfoot>
