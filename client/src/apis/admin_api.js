@@ -50,6 +50,12 @@ const update_deliver = async (body_data) => {
   return await send_api("/admin/update_deliver", "POST", body_data);
 };
 
+const delete_product = async (product_id) => {
+  return await send_api(
+    `/admin/delete_product?product_id=${product_id}`,
+    "GET"
+  );
+};
 export {
   getProducts,
   getProduct,
@@ -63,4 +69,5 @@ export {
   getAllOrders,
   update_pay,
   update_deliver,
+  delete_product,
 };
