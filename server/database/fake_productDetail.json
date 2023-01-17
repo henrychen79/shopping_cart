@@ -1,135 +1,135 @@
 {
-    "p001":{
+    "p00101":{
         "category":"'001'",
         "productNum":"'1'",
-        "detail": "'我是編號1號'",
-        "inventory": "'10'",
+        "detail": "'最厲害的前端美麗小組長，歐耶！'",
+        "inventory": "'3'",
         "img": "'img001'"
     },
-    "p002":{
+    "p00102":{
         "category":"'001'",
         "productNum":"'2'",
-        "detail": "'我是編號2號'",
-        "inventory": "'10'",
+        "detail": "'KO，又名『貝塔Ｋ』，是最愛喝麻古的Ｋ'",
+        "inventory": "'100'",
         "img": "'img002'"
     },
-    "p003":{
+    "p00103":{
         "category":"'001'",
         "productNum":"'3'",
-        "detail": "'我是編號3號'",
-        "inventory": "'10'",
+        "detail": "'BOWA第一屆身高代表'",
+        "inventory": "'190'",
         "img": "'img003'"
     },
-    "p004":{
+    "p00104":{
         "category":"'001'",
         "productNum":"'4'",
-        "detail": "'我是編號4號'",
-        "inventory": "'10'",
+        "detail": "'ROGAN，BOWA忙內'",
+        "inventory": "'2'",
         "img": "'img004'"
     },
-    "p005":{
+    "p00105":{
         "category":"'001'",
         "productNum":"'5'",
-        "detail": "'我是編號5號'",
-        "inventory": "'10'",
+        "detail": "'住在美術館附近，快找我唱歌！'",
+        "inventory": "'99'",
         "img": "'img005'"
     },
-    "p006":{
+    "p00106":{
         "category":"'001'",
         "productNum":"'6'",
-        "detail": "'我是編號6號'",
+        "detail": "'60塊的高粱慢慢喝'",
         "inventory": "'10'",
         "img": "'img006'"
     },
-    "p007":{
+    "p00107":{
         "category":"'001'",
         "productNum":"'7'",
-        "detail": "'我是編號7號'",
-        "inventory": "'10'",
+        "detail": "'煞氣團長 AKA 可愛小毛帽'",
+        "inventory": "'666'",
         "img": "'img007'"
     },
-    "p008":{
+    "p00108":{
         "category":"'001'",
         "productNum":"'8'",
-        "detail": "'我是編號8號'",
-        "inventory": "'10'",
+        "detail": "'能躺就不坐，有外送就不走（單押skr）'",
+        "inventory": "'5888'",
         "img": "'img008'"
     },
-    "p009":{
+    "p00109":{
         "category":"'001'",
         "productNum":"'9'",
-        "detail": "'我是編號9號'",
-        "inventory": "'10'",
+        "detail": "'屏東地頭蛇代表'",
+        "inventory": "'333'",
         "img": "'img009'"
     },
-    "p010":{
+    "p00110":{
         "category":"'001'",
         "productNum":"'10'",
-        "detail": "'我是編號10號'",
-        "inventory": "'10'",
+        "detail": "'我們還想更認識你～'",
+        "inventory": "'100'",
         "img": "'img010'"
     },
-    "p011":{
+    "p00111":{
         "category":"'001'",
         "productNum":"'11'",
-        "detail": "'我是編號11號'",
-        "inventory": "'10'",
+        "detail": "'有禮貌的小伙子'",
+        "inventory": "'18'",
         "img": "'img011'"
     },
-    "p012":{
-        "category":"'001'",
-        "productNum":"'12'",
-        "detail": "'我是編號12號'",
-        "inventory": "'10'",
-        "img": "'img012'"
-    },
-    "p013":{
-        "category":"'001'",
-        "productNum":"'13'",
-        "detail": "'我是編號13號'",
-        "inventory": "'10'",
-        "img": "'img013'"
-    },
-    "p014":{
-        "category":"'001'",
-        "productNum":"'14'",
-        "detail": "'我是編號14號'",
-        "inventory": "'10'",
-        "img": "'img014'"
-    },
-    "p015":{
-        "category":"'001'",
-        "productNum":"'15'",
-        "detail": "'我是編號15號'",
-        "inventory": "'10'",
-        "img": "'img015'"
-    },
-    "p016":{
+    "p00201":{
         "category":"'002'",
         "productNum":"'1'",
-        "detail": "'我是第002種類的編號1號'",
-        "inventory": "'10'",
+        "detail": "'常忍不住讚嘆自己天才，凡事都搞定！'",
+        "inventory": "'101'",
         "img": "'img001'"
     },
-    "p017":{
+    "p00202":{
         "category":"'002'",
         "productNum":"'2'",
-        "detail": "'我是第002種類的編號2號'",
-        "inventory": "'10'",
+        "detail": "'無限多隱藏資料夾，到底哪個是真的我呢？請購買就知道啦'",
+        "inventory": "'888'",
         "img": "'img002'"
     },
-    "p018":{
+    "p00203":{
         "category":"'002'",
         "productNum":"'3'",
-        "detail": "'我是第002種類的編號3號'",
+        "detail": "'珍重再見，我們永遠愛你，你會想我們對吧～（說對！）'",
         "inventory": "'10'",
         "img": "'img003'"
     },
-    "p019":{
+    "p00204":{
         "category":"'002'",
         "productNum":"'4'",
-        "detail": "'我是第002種類的編號4號'",
-        "inventory": "'10'",
+        "detail": "'可愛又迷人的正派角色，之之'",
+        "inventory": "'777'",
+        "img": "'img004'"
+    },
+    "p00205":{
+        "category":"'002'",
+        "productNum":"'5'",
+        "detail": "'艾瑪'",
+        "inventory": "'1000000'",
+        "img": "'img004'"
+    },
+    "p00301":{
+        "category":"'003'",
+        "productNum":"'1'",
+        "detail": "'最可愛的鮑柏頭'",
+        "inventory": "'777'",
+        "img": "'img004'"
+    },
+    "p00302":{
+        "category":"'003'",
+        "productNum":"'2'",
+        "detail": "'我兒子很帥很乖愛吃牛肉，但是池上沒有賣牛肉只好吃雞肉'",
+        "inventory": "'999'",
+        "img": "'img004'"
+    },
+    "p00303":{
+        "category":"'003'",
+        "productNum":"'3'",
+        "detail": "'不多說，code神'",
+        "inventory": "'1'",
         "img": "'img004'"
     }
 }
