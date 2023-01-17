@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref, reactive, computed } from "vue";
 import router from "../router";
+import { loginAccount } from "../apis/user_api";
 export const useloginStore = defineStore("loginStore", () => {
   let userData = reactive({
     account: "",
@@ -19,20 +20,11 @@ export const useloginStore = defineStore("loginStore", () => {
   };
 
   const login = async () => {
-    // const url = `http://localhost:8080/api/user/login`
+    const url = `http://172.20.10.7:8080/api/user/login`;
 
-    const url = `${import.meta.env.VITE_APP_API}api/user/login`;
-    // console.log(url)
-    let resdata = await fetch(url, {
-      method: "POST", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-      body: JSON.stringify(userData),
-    })
-      .then(function (res) {
-        return res.json();
-      })
+    //const url = `${import.meta.env.VITE_APP_API}api/user/login`;
+    // console.log(url);
+    let resdata = await loginAccount(JSON.stringify(userData))
       .then(function (res) {
         console.log(res);
         return res;

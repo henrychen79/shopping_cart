@@ -6,4 +6,9 @@ const registerAccount = async (body_data) => {
 const checkAccountExist = async (account) => {
   return await send_api(`/user/checkAccountExist?account=${account}`, "GET");
 };
-export { registerAccount, checkAccountExist };
+
+const loginAccount = async (body_data) => {
+  return await send_api("/user/login", "POST", body_data);
+};
+
+export { registerAccount, checkAccountExist, loginAccount };
