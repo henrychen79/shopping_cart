@@ -116,7 +116,7 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
         }
     }
 
-    const url = '../../account.json' //假資料
+    // const url = '../../account.json' //假資料
     const checkAccount= async ()=>{
         if(data.account===''){
             accountWarn.value='不能為空'
@@ -124,7 +124,7 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
             return
         }
         //連資料庫用
-        const url = `http://localhost:8080/api/user/checkAccountExist?account=${data.account}`
+        const url = `${import.meta.env.VITE_APP_API}api/user/checkAccountExist?account=${data.account}`
         // const url = `http://172.20.10.7:8080/api/user/checkAccountExist?account=${data.account}`
         let a = await fetch(url, {
                 method: 'GET', 
@@ -165,7 +165,7 @@ export const useRegisterStore = defineStore('RegisterStore',()=>{
     //將資料打進去後台server
     const registerButton=()=>{
         console.log(data)
-        fetch('http://localhost:8080/api/user/registerAccount', {
+        fetch(`${import.meta.env.VITE_APP_API}api/user/registerAccount`, {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
