@@ -11,6 +11,7 @@ export const useloginStore = defineStore("loginStore", () => {
   let show = ref(false);
   let islogin = ref(false);
   let nickname = ref("");
+  let role = ref("");
   const warmView = () => {
     if (show.value) {
       show.value = false;
@@ -39,6 +40,7 @@ export const useloginStore = defineStore("loginStore", () => {
       router.push("/");
       islogin.value = true;
       nickname.value = resdata.data.nickname;
+      role.value = resdata.data.role;
     } else {
       console.log("登錄失敗");
       loginwarmText.value = "登入失敗";
@@ -84,17 +86,21 @@ export const useloginStore = defineStore("loginStore", () => {
   };
   const logout = () => {
     //會將cookie砍掉
+    console.log("logout!!!!");
     let time = new Date();
     let myCookie = document.cookie.replace(
       /(?:(?:^|.*;\s*)_token\s*\=\s*([^;]*).*$)|^.*$/,
       "$1"
     );
+    console.log(myCookie);
     time.setTime(time.getTime() - 1);
     document.cookie =
       "_token" + "=" + myCookie + ";expires=" + time.toGMTString() + ";path=/";
+    console.log(document.cookie, time, time.toGMTString());
     if (document.cookie === "") {
       alert("已登出");
       islogin.value = false;
+      role.value = "";
     }
   };
   const loginShow = () => {
@@ -121,5 +127,6 @@ export const useloginStore = defineStore("loginStore", () => {
     show,
     islogin,
     nickname,
+    role,
   };
 });
