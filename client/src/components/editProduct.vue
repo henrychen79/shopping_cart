@@ -3,7 +3,7 @@ import { ref, reactive, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { editProductStore } from "../stores/editProductStore"
 import router from '../router';
-import {addProductStore} from "../stores/addProductStore"
+import { addProductStore } from "../stores/addProductStore"
 const addProduct = addProductStore();;
 addProduct.getCategory();
 
@@ -27,7 +27,7 @@ console.log(editProduct.data)
             </div>
             <div class="form_item">
                 <p>商品編號</p>
-                <input v-model="editProduct.data.productNum" disabled/>
+                <input v-model="editProduct.data.productNum" disabled />
             </div>
             <div class="form_item">
                 <p>商品名稱</p>
@@ -35,7 +35,8 @@ console.log(editProduct.data)
             </div>
             <div class="form_item">
                 <p>商品圖片</p>
-                <input type="file" class="upload" name="imgUpload" accept="image/png, image/jpeg"  @change="editProduct.dealfilechange" />
+                <input type="file" class="upload" name="imgUpload" accept="image/png, image/jpeg"
+                    @change="editProduct.dealfilechange" />
                 <button @click="editProduct.uploadImg">上傳</button>
             </div>
             <div class="form_item">
@@ -52,7 +53,7 @@ console.log(editProduct.data)
             </div>
             <div class="form_item">
                 <button v-on:click="editProduct.update">儲存</button>
-                <a href="/admin"><button>回前頁</button></a>
+                <router-link to="/admin"><button>回前頁</button></router-link>
             </div>
         </div>
     </div>

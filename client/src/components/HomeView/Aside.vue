@@ -26,10 +26,9 @@ const ps = productStore();
                 <p class="classic">商品分類</p>
             </li>
             <router-link to="/">
-                <li v-for="item in ps.totalCategoryList" @click="ps.productAPI(item, ps.crrentPage, ps.sortValue)"
-                    key="item"> {{
-    item
-                    }}</li>
+                <li v-for="item in ps.totalCategoryList" @click="ps.productAPI(item, 1, ps.sortValue)" key="item"> {{
+                    item
+                }}</li>
             </router-link>
         </ul>
     </aside>

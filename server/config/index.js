@@ -1,7 +1,7 @@
 module.exports = {
   dataBaseConnection: {
     user: "root",
-    // password: "0000",
+    password: "Aa3982145",
     host: "localhost",
   },
   dataBaseConfig: {
@@ -11,8 +11,8 @@ module.exports = {
     // password: "3345678",
     host: "localhost",
     // user: "henrychen",
-    // password: "h6760903",
-    database: "shopping_cart0117",
+    password: "Aa3982145",
+    database: "shopping_cart0118",
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,

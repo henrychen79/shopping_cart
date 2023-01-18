@@ -71,6 +71,7 @@ const orderController = {
       }
       // 產生訂單編號
       data.order_number = randomNumber();
+      data.user_id = req.user.user_id;
       // 產生訂單
       const order_ret = await order_M.addToOrder(data);
       state = "create_order_done";

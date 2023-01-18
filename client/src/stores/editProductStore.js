@@ -87,16 +87,19 @@ export const editProductStore = defineStore("editProductStore", () => {
   };
 
   const updatePrice = (product_id) => {
+    
     // console.log(data)
     const url = `http://172.20.10.4:8080/api/admin/update_price?product_id=${product_id}`;
     console.log(data.price);
     update_price(product_id, JSON.stringify({ price: data.price }))
       .then(function (res) {
         console.log("Success:", res);
+        data.price ='';
       })
       .catch(function (error) {
         console.error("Error:", error);
       });
+
   };
 
   const updateInventory = (product_id) => {
@@ -105,6 +108,7 @@ export const editProductStore = defineStore("editProductStore", () => {
     update_inventory(product_id, JSON.stringify({ inventory: data.inventory }))
       .then(function (res) {
         console.log("Success:", res);
+        data.inventory ='';
       })
       .catch(function (error) {
         console.error("Error:", error);

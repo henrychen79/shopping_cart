@@ -1,13 +1,13 @@
 <script setup>
-import { ref, reactive , computed, watch } from 'vue';
-import {addProductStore} from "../stores/addProductStore"
+import { ref, reactive, computed, watch } from 'vue';
+import { addProductStore } from "../stores/addProductStore"
 const addProduct = addProductStore();;
 addProduct.getCategory();
 
 let canSubmit = true
 
-watch(()=>{
-    canSubmit = Object.values(addProduct.data).some(i=>i==="")
+watch(() => {
+    canSubmit = Object.values(addProduct.data).some(i => i === "")
 })
 
 
@@ -21,10 +21,10 @@ watch(()=>{
         <div class="add_form">
             <div class="form_item">
                 <p>商品類別</p>
-                <select v-model="addProduct.data.category" >
-                <option disabled value="">商品類別</option>
-                <option v-for="(item, index) in addProduct.productCategory" :key="item">{{ item.category }}</option>
-                 </select>
+                <select v-model="addProduct.data.category">
+                    <option disabled value="">商品類別</option>
+                    <option v-for="(item, index) in addProduct.productCategory" :key="item">{{ item.category }}</option>
+                </select>
             </div>
             <div class="form_item">
                 <p>商品編號</p>
@@ -36,7 +36,8 @@ watch(()=>{
             </div>
             <div class="form_item">
                 <p>商品圖片</p>
-                <input type="file" class="upload" name="imgUpload" accept="image/png, image/jpeg"  @change="addProduct.dealfilechange" />
+                <input type="file" class="upload" name="imgUpload" accept="image/png, image/jpeg"
+                    @change="addProduct.dealfilechange" />
                 <button @click="addProduct.uploadImg">上傳</button>
             </div>
             <div class="form_item">
@@ -53,7 +54,7 @@ watch(()=>{
             </div>
             <div class="form_item">
                 <button v-on:click="addProduct.add" :disabled="canSubmit">儲存</button>
-                <a href="/admin"><button>回前頁</button></a>
+                <router-link to="/admin"><button>回前頁</button></router-link>
             </div>
         </div>
     </div>
@@ -61,21 +62,23 @@ watch(()=>{
 
 </template>
 <style scoped>
-.admin_content{
+.admin_content {
     display: flex;
     flex-direction: column;
 }
-p{
+
+p {
     font-size: 1.5rem;
 }
-.add_form{
+
+.add_form {
     width: 100%;
     height: 500px;
     border-style: solid;
 }
-.form_item{
+
+.form_item {
     display: flex;
     flex-direction: row;
 }
-
 </style>

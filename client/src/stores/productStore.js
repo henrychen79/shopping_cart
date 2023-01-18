@@ -34,7 +34,6 @@ export const productStore = defineStore("product", () => {
   });
 
   //監聽頁面切換
-  // watchEffect(() => {
 
   const productAPI = async (cat, page, sort) => {
 
@@ -51,7 +50,7 @@ export const productStore = defineStore("product", () => {
       });
   };
   productAPI(currentCategory.value, crrentPage.value, sortValue.value);
-  // });
+
 
   // /* 測試成功--有頁數跟商品連動 ↑↑↑↑↑↑↑↑↑↑↑↑*/
 

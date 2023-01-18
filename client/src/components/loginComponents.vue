@@ -27,7 +27,7 @@ const loginStore = useloginStore()
             </div>
             <div class="special_req">
                 <RouterLink to="/register" class="test">點我註冊</RouterLink>
-                <RouterLink to="/retrieve" class="test">忘記密碼</RouterLink>
+                <RouterLink to="/retrieve" class="test">忘記密碼?</RouterLink>
             </div>
             <div class="btn-group">
                 <button class="btn" @click="loginStore.login">登入</button>
@@ -66,9 +66,14 @@ const loginStore = useloginStore()
             }
         }
         >.special_req{
+            position: relative;
+            left: 20px;
             >.test{
                 margin: 10px;
-                font-size: 12px;
+                font-size: 15px;
+                color: #0039CB;
+                text-decoration:underline;
+                font-weight: bolder;
             }
         }
         >.btn-group{

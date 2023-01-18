@@ -8,8 +8,7 @@
       </router-link>
     </div>
     <ul class="headerBar">
-      <li><a href="#">你好!</a></li>
-      <li><a href="#">登出</a></li>
+      <li>你好! 管理員</li>
     </ul>
   </header>
 </template>
@@ -38,5 +37,11 @@ ul.headerBar li {
 ul li:not(:nth-child(1)) {
   /* background-color: aqua; */
   border-left: 1px solid rgb(25, 25, 25);
+}
+
+h1 {
+  margin: 0 1rem;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  cursor: pointer;
 }
 </style>
