@@ -26,6 +26,7 @@ export const useloginStore = defineStore("loginStore", () => {
     //const url = `${import.meta.env.VITE_APP_API}api/user/login`;
     // console.log(url);
     let resdata = await loginAccount(JSON.stringify(userData))
+    // let resdata = fetch(`../../account.json`)
       .then(function (res) {
         console.log(res);
         return res;

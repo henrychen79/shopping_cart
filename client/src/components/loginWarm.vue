@@ -20,11 +20,34 @@ const loginStore = useloginStore()
 <style lang="scss" scoped>
 .warmMain{
     // border: 2px solid black;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
- 
+}
+.warmBtn{
+    margin-top: 20px; 
+    >button{
+        // margin-right: 30px;
+        margin-bottom: 20px;
+        width: 80px;
+        height: 30px;
+        border-radius: 5px;
+        border: none;
+    }
+    >button:hover{
+            //移動到上面放大按鈕
+            transform: scale(1.1);
+        }
+        >.btn_check:active{
+            //點下去 還原大小
+            transform: scale(1);
+        }
+   
+   
+
 }
 
 
