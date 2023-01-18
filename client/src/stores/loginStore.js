@@ -117,12 +117,17 @@ export const useloginStore = defineStore("loginStore", () => {
     }
   };
 
+  const cancel =()=>{
+    router.push('/')
+  }
+
   return {
     login,
     warmView,
     test,
     logout,
     loginShow,
+    cancel,
     userData,
     loginwarmText,
     show,

@@ -51,7 +51,7 @@ const registerStore = useRegisterStore()
             <div class="btn-group">
                 <!-- <button class="btn" :disabled='registerStore.isDisabled' v-on:click="registerStore.registerButton">註冊</button> -->
                 <button class="btn"  v-on:click="registerStore.checkRegisterInfo">註冊</button>
-                <button class="btn">取消</button>
+                <button class="btn" v-on:click="registerStore.cancel">取消</button>
             </div>
         </div>
     </div>

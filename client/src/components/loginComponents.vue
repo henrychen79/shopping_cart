@@ -31,7 +31,7 @@ const loginStore = useloginStore()
             </div>
             <div class="btn-group">
                 <button class="btn" @click="loginStore.login">登入</button>
-                <button class="btn">取消</button>
+                <button class="btn" @click="loginStore.cancel">取消</button>
             </div>
         </div>
     </div>

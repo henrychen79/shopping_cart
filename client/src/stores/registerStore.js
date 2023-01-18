@@ -190,6 +190,9 @@ export const useRegisterStore = defineStore("RegisterStore", () => {
       warmTextFn();
     }
   };
+  const cancel =()=>{
+    router.push('/')
+  }
 
   // return{
   //     checkPassword,checkPasswordWarn,passwordText,registerButton,checkAccount,AccountText,AccountRe,AccountP,checkRegisterInfo,test2,warmTextFn,
@@ -213,6 +216,7 @@ export const useRegisterStore = defineStore("RegisterStore", () => {
     AccountP,
     checkRegisterInfo,
     warmTextFn,
+    cancel,
     data,
     regex,
     passControl,
